@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="veh-XC-KDj">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="ALf-RD-BzK">
+            <objects>
+                <navigationController id="veh-XC-KDj" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="0lu-ho-g8i">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Nos-Ta-YdO" kind="relationship" relationship="rootViewController" id="rKF-wo-XMF"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="a9N-2I-Bdl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-302" y="485"/>
+        </scene>
+        <!--Material Power View Controller-->
+        <scene sceneID="ZPD-Ru-gn5">
+            <objects>
+                <viewController storyboardIdentifier="MaterialPowerViewController" id="Nos-Ta-YdO" customClass="MaterialPowerViewController" customModule="WISData_JunZheng" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="H8P-6h-kXY"/>
+                        <viewControllerLayoutGuide type="bottom" id="g9r-w4-DFd"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="D1b-YK-QCH">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HTo-oX-9dN">
+                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="HTo-oX-9dN" secondAttribute="trailing" id="0Gg-4R-ok5"/>
+                            <constraint firstItem="HTo-oX-9dN" firstAttribute="top" secondItem="H8P-6h-kXY" secondAttribute="bottom" id="9sC-Af-DDw"/>
+                            <constraint firstItem="HTo-oX-9dN" firstAttribute="leading" secondItem="D1b-YK-QCH" secondAttribute="leading" id="XnH-QB-li2"/>
+                            <constraint firstItem="HTo-oX-9dN" firstAttribute="centerX" secondItem="D1b-YK-QCH" secondAttribute="centerX" id="Y23-Lx-3Zp"/>
+                            <constraint firstItem="g9r-w4-DFd" firstAttribute="top" secondItem="HTo-oX-9dN" secondAttribute="bottom" id="wRU-Cq-PQm"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="H4O-dO-GIL"/>
+                    <connections>
+                        <outlet property="dataTextView" destination="HTo-oX-9dN" id="Y1x-YC-z5v"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qbz-ee-LWU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="488" y="485"/>
+        </scene>
+    </scenes>
+</document>

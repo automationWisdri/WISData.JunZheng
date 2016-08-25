@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="gzN-Ok-gRm">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="p9E-JX-Hyz">
+            <objects>
+                <navigationController id="gzN-Ok-gRm" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="hNP-nG-6OE">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="ub3-59-Pca" kind="relationship" relationship="rootViewController" id="w7d-MY-nbp"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Nsc-m4-hu9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-407" y="202"/>
+        </scene>
+        <!--Boiler Purify View Controller-->
+        <scene sceneID="oBT-ke-LN5">
+            <objects>
+                <viewController storyboardIdentifier="BoilerPurifyViewController" id="ub3-59-Pca" customClass="BoilerPurifyViewController" customModule="WISData_JunZheng" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="wRR-0x-uYi"/>
+                        <viewControllerLayoutGuide type="bottom" id="0uL-e0-Eg7"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Jtv-S8-553">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Zri-Qf-Fnd">
+                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Zri-Qf-Fnd" firstAttribute="top" secondItem="wRR-0x-uYi" secondAttribute="bottom" id="K89-tX-7MN"/>
+                            <constraint firstItem="Zri-Qf-Fnd" firstAttribute="leading" secondItem="Jtv-S8-553" secondAttribute="leading" id="ZJQ-wI-NhK"/>
+                            <constraint firstItem="0uL-e0-Eg7" firstAttribute="top" secondItem="Zri-Qf-Fnd" secondAttribute="bottom" id="nyY-rQ-M4k"/>
+                            <constraint firstAttribute="trailing" secondItem="Zri-Qf-Fnd" secondAttribute="trailing" id="zYz-ve-aWc"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="dqQ-ex-mH4"/>
+                    <connections>
+                        <outlet property="dataTextView" destination="Zri-Qf-Fnd" id="trj-2O-lKK"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="b8o-G2-BWc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="301" y="202"/>
+        </scene>
+    </scenes>
+</document>

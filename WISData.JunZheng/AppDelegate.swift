@@ -3,23 +3,61 @@
 //  WISData.JunZheng
 //
 //  Created by Jingwei Wu on 8/15/16.
-//  Copyright © 2016 wisdri. All rights reserved.
+//  Copyright © 2016 Wisdri. All rights reserved.
 //
 
 import UIKit
+import DrawerController
+import SVProgressHUD
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
         // Override point for customization after application launch.
         self.window!.backgroundColor = UIColor.whiteColor()
         self.window!.makeKeyAndVisible()
+
+        SVProgressHUD.setForegroundColor(UIColor(white: 1, alpha: 1))
+        SVProgressHUD.setBackgroundColor(UIColor(white: 0.15, alpha: 0.85))
+        SVProgressHUD.setDefaultStyle(.Custom)
+        SVProgressHUD.setMinimumDismissTimeInterval(1.5)
+        SVProgressHUD.setDefaultMaskType(.Clear)
+        SVProgressHUD.setDefaultAnimationType(.Native)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(didDisappearProgressHUD), name: SVProgressHUDDidDisappearNotification, object: nil)
+        
+        self.window?.rootViewController = LoginViewController()
+        
         return true
+    }
+    
+    // Mark: Function
+    
+    func didDisappearProgressHUD() {
+        SVProgressHUD.setDefaultMaskType(.Clear)
+    }
+    
+    func startMainStory() {
+
+        let centerNav = WISNavigationController(rootViewController: DataHomeViewController())
+        let leftViewController = LeftMenuViewController()
+        let drawerController = DrawerController(centerViewController: centerNav, leftDrawerViewController: leftViewController)
+        
+        drawerController.maximumLeftDrawerWidth = 150
+        drawerController.openDrawerGestureModeMask = OpenDrawerGestureMode.PanningCenterView
+        drawerController.closeDrawerGestureModeMask = CloseDrawerGestureMode.All
+        drawerController.animationVelocity = 420.0
+        
+        self.window?.rootViewController = drawerController
+        
+        WISClient.sharedInstance.drawerController = drawerController
+        WISClient.sharedInstance.centerViewController = centerNav.viewControllers[0] as? DataHomeViewController
+        WISClient.sharedInstance.centerNavigation = centerNav
+
     }
 
     func applicationWillResignActive(application: UIApplication) {
