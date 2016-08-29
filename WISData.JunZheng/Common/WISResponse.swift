@@ -6,7 +6,7 @@
 //  Copyright © 2016 Wisdri. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 class WISResponse: NSObject {
     

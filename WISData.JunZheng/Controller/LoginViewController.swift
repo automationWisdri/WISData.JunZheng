@@ -12,7 +12,13 @@ import SnapKit
 import KeyboardMan
 import Ruler
 
-class LoginViewController: UIViewController {
+import RxSwift
+import RxCocoa
+
+let minimalUserNameLength = 4
+let minimalPasswordLength = 4
+
+class LoginViewController: ViewController {
 
     var backgroundImageView: UIImageView?
     var frostedView: UIVisualEffectView?
@@ -22,6 +28,8 @@ class LoginViewController: UIViewController {
     
     var singleTap: UITapGestureRecognizer?
     let keyboardMan = KeyboardMan()
+    
+    var viewModel: LoginViewModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -143,7 +151,7 @@ class LoginViewController: UIViewController {
             make.height.equalTo(38)
         }
         
-        self.loginButton?.addTarget(self, action: #selector(LoginViewController.loginClick(_:)), forControlEvents: .TouchUpInside)
+        // self.loginButton?.addTarget(self, action: #selector(LoginViewController.loginClick(_:)), forControlEvents: .TouchUpInside)
         
         let forgetPasswordLabel = UILabel()
         forgetPasswordLabel.alpha = 0.5
@@ -171,9 +179,6 @@ class LoginViewController: UIViewController {
         
         self.view.userInteractionEnabled = true
         
-        singleTap = UITapGestureRecognizer.init(target: self, action: #selector(LoginViewController.singleTapped(_:)))
-        self.view.addGestureRecognizer(singleTap!)
-        
         #if (arch(x86_64) || arch(i386)) && os(iOS)
             
         #else
@@ -198,7 +203,79 @@ class LoginViewController: UIViewController {
         }
         
         #endif
+        
+        // validating inputs
+        let userNameValid = userNameTextField!.rx_text
+            .map { $0.characters.count >= minimalUserNameLength }
+            .shareReplay(1) // without this map would be executed once for each binding, rx is stateless by default
+        
+        userNameValid.subscribeNext{ valid in
+            if valid {
+                self.passwordTextField!.backgroundColor = UIColor(white: 1, alpha: 0.1)
+            } else {
+                self.passwordTextField!.backgroundColor = UIColor(white: 0.8, alpha: 1)
+            }
+        }.addDisposableTo(disposeBag)
+        
+        let passwordValid = passwordTextField!.rx_text
+            .map { $0.characters.count >= minimalPasswordLength }
+            .shareReplay(1)
+        
+        let allValid = Observable.combineLatest(userNameValid, passwordValid) { $0 && $1 }
+            .shareReplay(1)
+        
+        allValid.subscribeNext { valid in
+            if valid {
+                self.loginButton!.backgroundColor = UIColor(white: 1, alpha: 0.1)
+            } else {
+                self.loginButton!.backgroundColor = UIColor(white: 0.8, alpha: 1)
+            }
+        }.addDisposableTo(disposeBag)
+        
+        // Binding enabled property
+        userNameValid
+            .bindTo(passwordTextField!.rx_enabled)
+            .addDisposableTo(disposeBag)
+        
+        allValid
+            .bindTo(loginButton!.rx_enabled)
+            .addDisposableTo(disposeBag)
+        
+        // initial view model
+        self.viewModel = LoginViewModel(input: (userNameTextField!.rx_text.asObservable(), passwordTextField!.rx_text.asObservable(), loginButton!.rx_tap.asObservable()))
+        
+        self.viewModel?.loginPhase?.subscribeNext{ phase in
+            switch phase {
+            case .StandBy:
+                // do nothing
+                break
+            case .InProgress:
+                SVProgressHUD.showWithStatus("正在登录")
+                
+            case .Success(_):
+                SVProgressHUD.showSuccessWithStatus("登录成功")
+                delay(0.25, work: {
+                    WISCommon.currentAppDelegate.startMainStory()
+                    SearchParameter["date"] = dateFormatterForSearch(NSDate())
+                })
+                break
+                
+            case .Failure(let errorString):
+                wisError(errorString)
+                break
+            }
+        }.addDisposableTo(disposeBag)
+        
+        singleTap = UITapGestureRecognizer()
+        
+        singleTap!.rx_event
+            .subscribeNext { [weak self] _ in
+                self?.view.endEditing(true)
+            }
+            .addDisposableTo(disposeBag)
+        view.addGestureRecognizer(singleTap!)
     }
+    
     
     override func viewDidAppear(animated: Bool) {
         UIView.animateWithDuration(2) { () -> Void in
@@ -209,10 +286,7 @@ class LoginViewController: UIViewController {
         }
     }
     
-    func singleTapped(gesture: UITapGestureRecognizer) {
-        self.view.endEditing(true)
-    }
-    
+    /*
     func loginClick(sender: UIButton){
         
         var username: String?
@@ -253,11 +327,12 @@ class LoginViewController: UIViewController {
             }
         }
     }
-    
+    */
 }
 
+
 extension LoginViewController: UITextFieldDelegate {
-    
+    // The "next" button doesn't work till now.
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         
         if (textField == self.userNameTextField) {
@@ -266,7 +341,7 @@ extension LoginViewController: UITextFieldDelegate {
         }
         else if (textField == self.passwordTextField) {
             self.passwordTextField!.resignFirstResponder()
-            loginClick(self.loginButton!)
+            self.viewModel?.loginWith(userName: (self.viewModel?.validatedUserName)!, password: (self.viewModel?.validatedPassword)!)
             return true
         } else {
             return false

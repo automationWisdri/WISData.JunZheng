@@ -169,7 +169,6 @@ class DataHomeViewController: UIViewController {
         
         // observing notifications
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.handleNotification(_:)), name: DataSearchNotification, object: nil)
-        
     }
 
     override func didReceiveMemoryWarning() {
