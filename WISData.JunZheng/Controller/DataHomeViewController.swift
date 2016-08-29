@@ -30,7 +30,7 @@ struct MaterialPowerItem: MenuItemViewCustomizable {}
 private let font = UIFont.systemFontOfSize(15)
 private let selectedFont = UIFont.boldSystemFontOfSize(16)
 private let color = UIColor.wisGrayColor()
-private let selectedColor = UIColor.globalDefaultTintColor()
+private let selectedColor = UIColor.wisLogoColor()
 
 struct PagingMenuOptions: PagingMenuControllerCustomizable {
     
@@ -45,7 +45,7 @@ struct PagingMenuOptions: PagingMenuControllerCustomizable {
             return .SegmentedControl
         }
         var focusMode: MenuFocusMode {
-            return .Underline(height: 1.5, color: UIColor.wisTintColor(), horizontalPadding: 1.5, verticalPadding: 1.5)
+            return .Underline(height: 1.5, color: UIColor.wisLogoColor(), horizontalPadding: 1.5, verticalPadding: 1.5)
         }
         var height: CGFloat {
             return 35
@@ -131,7 +131,6 @@ class DataHomeViewController: UIViewController {
         
         // Layout Setup
         self.navigationItem.title = SearchParameter["lNo"]! + "#" + baseTitle
-        self.automaticallyAdjustsScrollViewInsets = false
         
         let leftBarItem = UIBarButtonItem.init(image: UIImage(named: "icon_menu")!, style: .Plain, target: self, action: #selector(self.toggleLeftDrawer(_:)))
         self.navigationItem.leftBarButtonItem = leftBarItem

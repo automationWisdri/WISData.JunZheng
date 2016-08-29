@@ -26,7 +26,7 @@ extension MaterialPower {
                 if let value = response.result.value {
                     let json = JSON(value)
 //                    debugPrint("JSON: \(json)")
-                    debugPrint(json.rawString())
+//                    debugPrint(json.rawString())
                     
                     let t = WISValueResponse<String>(value: json.rawString()!, success: response.result.isSuccess)
                     completionHandler(t)

@@ -16,13 +16,13 @@ class LeftUserHeadCell: UITableViewCell {
         imageView.layer.borderWidth = 1.5
         imageView.layer.borderColor = UIColor(white: 1, alpha: 0.6).CGColor
         imageView.layer.masksToBounds = true
-        imageView.layer.cornerRadius = 38
+        imageView.layer.cornerRadius = 25
         return imageView
     }()
     /// 用户名
     var userNameLabel: UILabel = {
         let label = UILabel()
-        label.font = wisFont(16)
+        label.font = wisFont(15)
         return label
     }()
     
@@ -44,14 +44,19 @@ class LeftUserHeadCell: UITableViewCell {
         self.contentView.addSubview(self.userNameLabel)
         
         self.avatarImageView.snp_makeConstraints{ (make) -> Void in
-            make.centerX.equalTo(self.contentView)
-            make.centerY.equalTo(self.contentView).offset(-8)
+//            make.centerX.equalTo(self.contentView)
+//            make.centerY.equalTo(self.contentView).offset(-8)
+//            make.width.height.equalTo(self.avatarImageView.layer.cornerRadius * 2)
+            make.left.equalTo(self.contentView).offset(10)
+            make.top.equalTo(self.contentView).offset(20)
             make.width.height.equalTo(self.avatarImageView.layer.cornerRadius * 2)
         }
         
         self.userNameLabel.snp_makeConstraints{ (make) -> Void in
-            make.top.equalTo(self.avatarImageView.snp_bottom).offset(10)
-            make.centerX.equalTo(self.avatarImageView)
+//            make.top.equalTo(self.avatarImageView.snp_bottom).offset(10)
+//            make.centerX.equalTo(self.avatarImageView)
+            make.left.equalTo(self.avatarImageView.snp_right).offset(10)
+            make.centerY.equalTo(self.avatarImageView)
         }
 
         self.userNameLabel.textColor = UIColor.lightTextColor()

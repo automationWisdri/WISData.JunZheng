@@ -20,3 +20,6 @@ let SEPARATOR_HEIGHT = 1.0 / UIScreen.mainScreen().scale
 
 var SearchParameter: Dictionary = ["date": "", "shiftNo": "1", "lNo": "1"]
 
+let DataTableBeginColumnRect = CGRectMake (0, 0, 95, 45)
+
+

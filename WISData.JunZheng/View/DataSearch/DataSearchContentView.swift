@@ -104,7 +104,7 @@ class DataSearchContentView: UIView {
         
         let okButton = UIButton(type: .System)
         okButton.frame = CGRectMake(self.dataSearchButtonView!.frame.size.width / 2, 0.0, self.dataSearchButtonView!.frame.size.width / 2, dataSearchButtonViewHeight)
-        okButton.backgroundColor = UIColor.redColor()
+        okButton.backgroundColor = UIColor.wisLogoColor().colorWithAlphaComponent(0.8)
         okButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
         okButton.setTitle(NSLocalizedString("OK", comment: ""), forState: .Normal)
         okButton.titleLabel?.font = UIFont.systemFontOfSize(17)

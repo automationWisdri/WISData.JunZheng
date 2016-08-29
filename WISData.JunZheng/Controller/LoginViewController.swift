@@ -15,7 +15,6 @@ import Ruler
 class LoginViewController: UIViewController {
 
     var backgroundImageView: UIImageView?
-    var frostedView: UIVisualEffectView?
     var userNameTextField: UITextField?
     var passwordTextField: UITextField?
     var loginButton: UIButton?
@@ -25,52 +24,47 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.blackColor()
-        self.backgroundImageView = UIImageView(image: UIImage(named: "login-bg-iphone.jpg"))
+
+        self.backgroundImageView = UIImageView(image: UIImage(named: "login_background"))
         self.backgroundImageView!.frame = self.view.frame
         self.backgroundImageView!.contentMode = .ScaleToFill
         self.view.addSubview(self.backgroundImageView!)
-        backgroundImageView!.alpha = 0
+        backgroundImageView!.alpha = 1
         
-        frostedView = UIVisualEffectView(effect: UIBlurEffect(style: .Dark))
-        frostedView!.frame = self.view.frame
-        self.view.addSubview(frostedView!)
-        
-        let vibrancy = UIVibrancyEffect(forBlurEffect: UIBlurEffect(style: .Dark))
-        let vibrancyView = UIVisualEffectView(effect: vibrancy)
-        vibrancyView.userInteractionEnabled = true
-        vibrancyView.frame = frostedView!.frame
-        frostedView!.contentView.addSubview(vibrancyView)
+        let contentView = UIView(frame: self.view.frame)
+        self.view.addSubview(contentView)
         
         let topPartTopConstraint = Ruler.iPhoneVertical(70, 130, 130, 130).value
         
         let wisLabel = UILabel()
         wisLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 40)!
         wisLabel.text = "WISDRI"
-        vibrancyView.contentView.addSubview(wisLabel)
+        wisLabel.textColor = UIColor.wisLogoColor()
+        contentView.addSubview(wisLabel)
         wisLabel.snp_makeConstraints{ (make) -> Void in
-            make.centerX.equalTo(vibrancyView)
-            make.top.equalTo(vibrancyView).offset(topPartTopConstraint)
+            make.centerX.equalTo(contentView)
+            make.top.equalTo(contentView).offset(topPartTopConstraint)
         }
         
         let wisSummaryLabel = UILabel()
         wisSummaryLabel.font = wisFont(23)
-        wisSummaryLabel.text = "生产数据"
-        vibrancyView.contentView.addSubview(wisSummaryLabel)
+        wisSummaryLabel.text = "生产数据管理"
+        wisSummaryLabel.textColor = UIColor.wisLogoColor()
+        contentView.addSubview(wisSummaryLabel)
         wisSummaryLabel.snp_makeConstraints{ (make) -> Void in
-            make.centerX.equalTo(vibrancyView)
+            make.centerX.equalTo(contentView)
             make.top.equalTo(wisLabel.snp_bottom).offset(8)
         }
         
         self.userNameTextField = UITextField()
-        self.userNameTextField!.textColor = UIColor.whiteColor()
+        self.userNameTextField!.textColor = UIColor.wisLogoColor()
         self.userNameTextField!.backgroundColor = UIColor(white: 1, alpha: 0.1)
         self.userNameTextField!.font = wisFont(15)
         self.userNameTextField!.layer.cornerRadius = 3
         self.userNameTextField!.layer.borderWidth = 0.5
         self.userNameTextField!.keyboardType = .ASCIICapable
         self.userNameTextField!.returnKeyType = .Next
-        self.userNameTextField!.layer.borderColor = UIColor(white: 1, alpha: 0.8).CGColor
+        self.userNameTextField!.layer.borderColor = UIColor.wisLogoColor().CGColor
         self.userNameTextField!.placeholder = "用户名"
         self.userNameTextField!.clearButtonMode = .Always
         self.userNameTextField!.autocapitalizationType = .None
@@ -80,25 +74,25 @@ class LoginViewController: UIViewController {
         
         let userNameIconImageView = UIImageView(image: UIImage(named: "icon_account")!.imageWithRenderingMode(.AlwaysTemplate))
         userNameIconImageView.frame = CGRectMake(0, 0, 34, 22)
-        userNameIconImageView.tintColor = UIColor.whiteColor()
+        userNameIconImageView.tintColor = UIColor.wisLogoColor()
         userNameIconImageView.contentMode = .ScaleAspectFit
         self.userNameTextField!.leftView = userNameIconImageView
         self.userNameTextField!.leftViewMode = .Always
         
-        vibrancyView.contentView.addSubview(self.userNameTextField!)
+        contentView.addSubview(self.userNameTextField!)
         
-        let bottomPartTopConstraint = Ruler.iPhoneVertical(100, 125, 200, 240).value
+        let bottomPartTopConstraint = Ruler.iPhoneVertical(100, 120, 200, 240).value
         let bottomPartWidthConstraint = Ruler.iPhoneVertical(250, 270, 300, 300).value
         
         self.userNameTextField!.snp_makeConstraints{ (make) -> Void in
             make.top.equalTo(wisSummaryLabel.snp_bottom).offset(bottomPartTopConstraint)
-            make.centerX.equalTo(vibrancyView)
+            make.centerX.equalTo(contentView)
             make.width.equalTo(bottomPartWidthConstraint)
             make.height.equalTo(38)
         }
 
         self.passwordTextField = UITextField()
-        self.passwordTextField!.textColor = UIColor.whiteColor()
+        self.passwordTextField!.textColor = UIColor.wisLogoColor()
         self.passwordTextField!.backgroundColor = UIColor(white: 1, alpha: 0.1)
         self.passwordTextField!.font = wisFont(15)
         self.passwordTextField!.layer.cornerRadius = 3
@@ -106,7 +100,7 @@ class LoginViewController: UIViewController {
         self.passwordTextField!.keyboardType = .ASCIICapable
         self.passwordTextField!.returnKeyType = .Done
         self.passwordTextField!.secureTextEntry = true
-        self.passwordTextField!.layer.borderColor = UIColor(white: 1, alpha: 0.8).CGColor
+        self.passwordTextField!.layer.borderColor = UIColor.wisLogoColor().CGColor
         self.passwordTextField!.placeholder = "密码"
         self.passwordTextField!.clearButtonMode = .Always
         self.passwordTextField!.tag = 2
@@ -114,43 +108,44 @@ class LoginViewController: UIViewController {
         let passwordIconImageView = UIImageView(image: UIImage(named: "icon_lock")!.imageWithRenderingMode(.AlwaysTemplate))
         passwordIconImageView.frame = CGRectMake(0, 0, 34, 22)
         passwordIconImageView.contentMode = .ScaleAspectFit
-        userNameIconImageView.tintColor = UIColor.whiteColor()
+        passwordIconImageView.tintColor = UIColor.wisLogoColor()
         self.passwordTextField!.leftView = passwordIconImageView
         self.passwordTextField!.leftViewMode = .Always
         self.passwordTextField?.delegate = self
         
-        vibrancyView.contentView.addSubview(self.passwordTextField!)
+        contentView.addSubview(self.passwordTextField!)
         
         self.passwordTextField!.snp_makeConstraints{ (make) -> Void in
             make.top.equalTo(self.userNameTextField!.snp_bottom).offset(15)
-            make.centerX.equalTo(vibrancyView)
+            make.centerX.equalTo(contentView)
             make.width.equalTo(bottomPartWidthConstraint)
             make.height.equalTo(38)
         }
         
         self.loginButton = UIButton()
         self.loginButton!.setTitle("登  录", forState: .Normal)
+        self.loginButton!.backgroundColor = UIColor.wisLogoColor()
         self.loginButton!.titleLabel!.font = wisFont(20)
         self.loginButton!.layer.cornerRadius = 3
         self.loginButton!.layer.borderWidth = 0.5
-        self.loginButton!.layer.borderColor = UIColor(white: 1, alpha: 0.8).CGColor
-        vibrancyView.contentView.addSubview(self.loginButton!)
+        self.loginButton!.layer.borderColor = UIColor.wisLogoColor().CGColor
+        contentView.addSubview(self.loginButton!)
         
         self.loginButton!.snp_makeConstraints { (make) -> Void in
             make.top.equalTo(self.passwordTextField!.snp_bottom).offset(20)
-            make.centerX.equalTo(vibrancyView)
+            make.centerX.equalTo(contentView)
             make.width.equalTo(bottomPartWidthConstraint)
             make.height.equalTo(38)
         }
         
         self.loginButton?.addTarget(self, action: #selector(LoginViewController.loginClick(_:)), forControlEvents: .TouchUpInside)
         
-        let forgetPasswordLabel = UILabel()
-        forgetPasswordLabel.alpha = 0.5
-        forgetPasswordLabel.font = wisFont(12)
-        forgetPasswordLabel.text = "忘记密码了?"
+//        let forgetPasswordLabel = UILabel()
+//        forgetPasswordLabel.alpha = 0.8
+//        forgetPasswordLabel.font = wisFont(12)
+//        forgetPasswordLabel.text = "忘记密码了?"
         
-//        vibrancyView.contentView.addSubview(forgetPasswordLabel)
+//        contentView.contentView.addSubview(forgetPasswordLabel)
         
 //        forgetPasswordLabel.snp_makeConstraints { (make) -> Void in
 //            make.top.equalTo(self.loginButton!.snp_bottom).offset(14)
@@ -158,15 +153,16 @@ class LoginViewController: UIViewController {
 //        }
         
         let footLabel = UILabel()
-        footLabel.alpha = 0.5
+        footLabel.alpha = 0.8
         footLabel.font = wisFont(12)
         footLabel.text = "© 2016 WISDRI"
+        footLabel.textColor = UIColor.wisLogoColor()
         
-        vibrancyView.contentView.addSubview(footLabel)
+        contentView.addSubview(footLabel)
         
         footLabel.snp_makeConstraints{ (make) -> Void in
-            make.bottom.equalTo(vibrancyView).offset(-20)
-            make.centerX.equalTo(vibrancyView)
+            make.bottom.equalTo(contentView).offset(-20)
+            make.centerX.equalTo(contentView)
         }
         
         self.view.userInteractionEnabled = true
@@ -198,15 +194,6 @@ class LoginViewController: UIViewController {
         }
         
         #endif
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        UIView.animateWithDuration(2) { () -> Void in
-            self.backgroundImageView!.alpha = 1
-        }
-        UIView.animateWithDuration(20) { () -> Void in
-            self.backgroundImageView?.frame = CGRectMake(-1*( 1000 - SCREEN_WIDTH )/2, 0, SCREEN_HEIGHT+500, SCREEN_HEIGHT+500)
-        }
     }
     
     func singleTapped(gesture: UITapGestureRecognizer) {
@@ -242,10 +229,15 @@ class LoginViewController: UIViewController {
             if response.success {
                 SVProgressHUD.showSuccessWithStatus("登录成功")
                 
+                debugPrint("登录成功 %@", username)
+                //保存下用户名
+                WISUserSettings.sharedInstance[kUserName] = username
+                
+                SearchParameter["date"] = dateFormatterForSearch(NSDate())
+                
                 if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
                     delay(0.25, work: {
                         appDelegate.startMainStory()
-                        SearchParameter["date"] = dateFormatterForSearch(NSDate())
                     })
                 }
             } else {

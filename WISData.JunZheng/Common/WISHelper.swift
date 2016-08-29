@@ -81,8 +81,8 @@ func dateFormatterForSearch(date: NSDate) -> String {
  
  - returns: 传入Cell类型的 实例对象
  */
-func getCell<T: UITableViewCell>(tableView:UITableView ,cell: T.Type ,indexPath:NSIndexPath) -> T {
-    return tableView.dequeueReusableCellWithIdentifier("\(cell)", forIndexPath: indexPath) as! T ;
+func getCell<T: UITableViewCell>(tableView: UITableView, cell: T.Type, indexPath:NSIndexPath) -> T {
+    return tableView.dequeueReusableCellWithIdentifier("\(cell)", forIndexPath: indexPath) as! T
 }
 
 func getShiftName(shiftNo: String) -> String {
@@ -96,4 +96,24 @@ func getShiftName(shiftNo: String) -> String {
     default:
         return "参数错误"
     }
+}
+
+func dispatch_sync_safely_main_queue(block: ()->()) {
+    if NSThread.isMainThread() {
+        block()
+    } else {
+        dispatch_sync(dispatch_get_main_queue()) {
+            block()
+        }
+    }
+}
+
+func alignTextVerticalInTextView(textView: UITextView) {
+    
+    let size = textView.sizeThatFits(CGSizeMake(CGRectGetWidth(textView.bounds), CGFloat(MAXFLOAT)))
+    
+    var topoffset = (textView.bounds.size.height - size.height * textView.zoomScale) / 2.0
+    topoffset = topoffset < 0.0 ? 0.0 : topoffset
+    
+    textView.contentOffset = CGPointMake(0, -topoffset)
 }

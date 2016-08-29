@@ -20,7 +20,7 @@ class DataSearchButtonView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        okButton.backgroundColor = UIColor.redColor()
+        okButton.backgroundColor = UIColor.wisLogoColor().colorWithAlphaComponent(0.8)
         okButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
         okButton.setTitle(NSLocalizedString("OK", comment: ""), forState: .Normal)
         okButton.autoresizingMask = .FlexibleWidth

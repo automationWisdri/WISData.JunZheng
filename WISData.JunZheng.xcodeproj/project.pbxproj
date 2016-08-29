@@ -11,8 +11,19 @@
 		38B91EFF1D615EBE00EFD37E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 38B91EFE1D615EBE00EFD37E /* Assets.xcassets */; };
 		38B91F0D1D615EBE00EFD37E /* WISData_JunZhengTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B91F0C1D615EBE00EFD37E /* WISData_JunZhengTests.swift */; };
 		38B91F181D615EBE00EFD37E /* WISData_JunZhengUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B91F171D615EBE00EFD37E /* WISData_JunZhengUITests.swift */; };
+		9F0221A41D7021220056DDF5 /* DataTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F0221A31D7021220056DDF5 /* DataTableView.swift */; };
+		9F0221A61D731BD10056DDF5 /* PropertyNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F0221A51D731BD10056DDF5 /* PropertyNames.swift */; };
+		9F0221A91D731F190056DDF5 /* FurnaceTitle.json in Resources */ = {isa = PBXBuildFile; fileRef = 9F0221A81D731F190056DDF5 /* FurnaceTitle.json */; };
 		9F1618BC1D6E89900063B772 /* LeftMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1618BB1D6E89900063B772 /* LeftMenuViewController.swift */; };
 		9F1618BE1D6F18710063B772 /* WISClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1618BD1D6F18710063B772 /* WISClient.swift */; };
+		9F1B56E81D73CF1A0013D239 /* LeftMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1B56E61D73CF1A0013D239 /* LeftMenuCell.swift */; };
+		9F1B56E91D73CF1A0013D239 /* LeftMenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9F1B56E71D73CF1A0013D239 /* LeftMenuCell.xib */; };
+		9F1B56EC1D74084A0013D239 /* WISUserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1B56EA1D74084A0013D239 /* WISUserSettings.swift */; };
+		9F1B56ED1D74084A0013D239 /* WISUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1B56EB1D74084A0013D239 /* WISUser.swift */; };
+		9F1B57031D7472B30013D239 /* DataTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1B57011D7472B30013D239 /* DataTableCell.swift */; };
+		9F1B57041D7472B30013D239 /* DataTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9F1B57021D7472B30013D239 /* DataTableCell.xib */; };
+		9F1B57071D7474B00013D239 /* HorizontalLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1B57061D7474B00013D239 /* HorizontalLineView.swift */; };
+		9F1F1D011D6FD2FA009A9780 /* UIImage+WIS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1F1D001D6FD2FA009A9780 /* UIImage+WIS.swift */; };
 		9F2823C21D6DDC4F00E0FF1A /* login-bg-iphone.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9F2823C11D6DDC4F00E0FF1A /* login-bg-iphone.jpg */; };
 		9F2823C41D6DE8DC00E0FF1A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9F2823C31D6DE8DC00E0FF1A /* Localizable.strings */; };
 		9FED66BD1D6ADE8E00F42992 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FED66BC1D6ADE8E00F42992 /* User.swift */; };
@@ -21,12 +32,10 @@
 		9FED66C31D6AE39000F42992 /* WISHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FED66C21D6AE39000F42992 /* WISHelper.swift */; };
 		9FED66C51D6AE6FC00F42992 /* DataHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FED66C41D6AE6FC00F42992 /* DataHomeViewController.swift */; };
 		9FED66C71D6AEF6000F42992 /* MaterialPower.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FED66C61D6AEF6000F42992 /* MaterialPower.swift */; };
-		9FED66C91D6B490800F42992 /* WISNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FED66C81D6B490800F42992 /* WISNavigationController.swift */; };
 		9FED66CD1D6B4CED00F42992 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FED66CC1D6B4CED00F42992 /* LoginViewController.swift */; };
 		9FED66CF1D6B51D900F42992 /* Image.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9FED66CE1D6B51D900F42992 /* Image.xcassets */; };
 		9FED66D71D6C482C00F42992 /* UIColor+WIS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FED66D51D6C482C00F42992 /* UIColor+WIS.swift */; };
 		9FED66D81D6C482C00F42992 /* String+WIS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FED66D61D6C482C00F42992 /* String+WIS.swift */; };
-		9FED66DC1D6C4E2800F42992 /* LeftNodeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FED66DA1D6C4E2800F42992 /* LeftNodeTableViewCell.swift */; };
 		9FED66DD1D6C4E2800F42992 /* LeftUserHeadCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FED66DB1D6C4E2800F42992 /* LeftUserHeadCell.swift */; };
 		9FED66DF1D6C7C2E00F42992 /* NSObject+WIS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FED66DE1D6C7C2E00F42992 /* NSObject+WIS.swift */; };
 		9FED66E61D6CAE4200F42992 /* MaterialPowerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FED66E51D6CAE4200F42992 /* MaterialPowerViewController.swift */; };
@@ -78,8 +87,19 @@
 		38B91F171D615EBE00EFD37E /* WISData_JunZhengUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WISData_JunZhengUITests.swift; sourceTree = "<group>"; };
 		38B91F191D615EBE00EFD37E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		78AE207EADF7187B33449098 /* Pods-WISData.JunZheng.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WISData.JunZheng.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WISData.JunZheng/Pods-WISData.JunZheng.debug.xcconfig"; sourceTree = "<group>"; };
+		9F0221A31D7021220056DDF5 /* DataTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataTableView.swift; sourceTree = "<group>"; };
+		9F0221A51D731BD10056DDF5 /* PropertyNames.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyNames.swift; sourceTree = "<group>"; };
+		9F0221A81D731F190056DDF5 /* FurnaceTitle.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FurnaceTitle.json; sourceTree = "<group>"; };
 		9F1618BB1D6E89900063B772 /* LeftMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftMenuViewController.swift; sourceTree = "<group>"; };
 		9F1618BD1D6F18710063B772 /* WISClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WISClient.swift; sourceTree = "<group>"; };
+		9F1B56E61D73CF1A0013D239 /* LeftMenuCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftMenuCell.swift; sourceTree = "<group>"; };
+		9F1B56E71D73CF1A0013D239 /* LeftMenuCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LeftMenuCell.xib; sourceTree = "<group>"; };
+		9F1B56EA1D74084A0013D239 /* WISUserSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WISUserSettings.swift; sourceTree = "<group>"; };
+		9F1B56EB1D74084A0013D239 /* WISUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WISUser.swift; sourceTree = "<group>"; };
+		9F1B57011D7472B30013D239 /* DataTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataTableCell.swift; sourceTree = "<group>"; };
+		9F1B57021D7472B30013D239 /* DataTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DataTableCell.xib; sourceTree = "<group>"; };
+		9F1B57061D7474B00013D239 /* HorizontalLineView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HorizontalLineView.swift; sourceTree = "<group>"; };
+		9F1F1D001D6FD2FA009A9780 /* UIImage+WIS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+WIS.swift"; sourceTree = "<group>"; };
 		9F2823C11D6DDC4F00E0FF1A /* login-bg-iphone.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "login-bg-iphone.jpg"; sourceTree = "<group>"; };
 		9F2823C31D6DE8DC00E0FF1A /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		9FED66BC1D6ADE8E00F42992 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -88,12 +108,10 @@
 		9FED66C21D6AE39000F42992 /* WISHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WISHelper.swift; sourceTree = "<group>"; };
 		9FED66C41D6AE6FC00F42992 /* DataHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataHomeViewController.swift; sourceTree = "<group>"; };
 		9FED66C61D6AEF6000F42992 /* MaterialPower.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaterialPower.swift; sourceTree = "<group>"; };
-		9FED66C81D6B490800F42992 /* WISNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WISNavigationController.swift; sourceTree = "<group>"; };
 		9FED66CC1D6B4CED00F42992 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		9FED66CE1D6B51D900F42992 /* Image.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Image.xcassets; sourceTree = "<group>"; };
 		9FED66D51D6C482C00F42992 /* UIColor+WIS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+WIS.swift"; sourceTree = "<group>"; };
 		9FED66D61D6C482C00F42992 /* String+WIS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+WIS.swift"; sourceTree = "<group>"; };
-		9FED66DA1D6C4E2800F42992 /* LeftNodeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftNodeTableViewCell.swift; sourceTree = "<group>"; };
 		9FED66DB1D6C4E2800F42992 /* LeftUserHeadCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftUserHeadCell.swift; sourceTree = "<group>"; };
 		9FED66DE1D6C7C2E00F42992 /* NSObject+WIS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSObject+WIS.swift"; sourceTree = "<group>"; };
 		9FED66E51D6CAE4200F42992 /* MaterialPowerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaterialPowerViewController.swift; sourceTree = "<group>"; };
@@ -199,9 +217,36 @@
 			path = WISData.JunZhengUITests;
 			sourceTree = "<group>";
 		};
+		9F0221A21D7021220056DDF5 /* DataTable */ = {
+			isa = PBXGroup;
+			children = (
+				9F0221A31D7021220056DDF5 /* DataTableView.swift */,
+				9F1B57011D7472B30013D239 /* DataTableCell.swift */,
+				9F1B57021D7472B30013D239 /* DataTableCell.xib */,
+			);
+			path = DataTable;
+			sourceTree = "<group>";
+		};
+		9F0221A71D731F190056DDF5 /* TableTitle */ = {
+			isa = PBXGroup;
+			children = (
+				9F0221A81D731F190056DDF5 /* FurnaceTitle.json */,
+			);
+			path = TableTitle;
+			sourceTree = "<group>";
+		};
+		9F1B57051D7474B00013D239 /* HorizontalLine */ = {
+			isa = PBXGroup;
+			children = (
+				9F1B57061D7474B00013D239 /* HorizontalLineView.swift */,
+			);
+			path = HorizontalLine;
+			sourceTree = "<group>";
+		};
 		9FED66B21D6ADE0C00F42992 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				9F0221A71D731F190056DDF5 /* TableTitle */,
 				9FED66BC1D6ADE8E00F42992 /* User.swift */,
 				9FED66C61D6AEF6000F42992 /* MaterialPower.swift */,
 				9FED66F01D6D4C4700F42992 /* Furnace.swift */,
@@ -223,8 +268,10 @@
 		9FED66B61D6ADE3B00F42992 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				9FED66F91D6D83D300F42992 /* DataSearch */,
 				9FED66D91D6C4E2800F42992 /* LeftView */,
+				9F0221A21D7021220056DDF5 /* DataTable */,
+				9FED66F91D6D83D300F42992 /* DataSearch */,
+				9F1B57051D7474B00013D239 /* HorizontalLine */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -233,10 +280,13 @@
 			isa = PBXGroup;
 			children = (
 				9FED66D41D6C482C00F42992 /* Extension */,
-				9F1618BD1D6F18710063B772 /* WISClient.swift */,
-				9FED66BE1D6ADFB500F42992 /* WISResponse.swift */,
+				9F1B56EB1D74084A0013D239 /* WISUser.swift */,
 				9FED66C01D6AE18800F42992 /* WISDefine.swift */,
+				9F1618BD1D6F18710063B772 /* WISClient.swift */,
+				9F1B56EA1D74084A0013D239 /* WISUserSettings.swift */,
+				9FED66BE1D6ADFB500F42992 /* WISResponse.swift */,
 				9FED66C21D6AE39000F42992 /* WISHelper.swift */,
+				9F0221A51D731BD10056DDF5 /* PropertyNames.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -249,7 +299,6 @@
 				9FED66E41D6CAE4200F42992 /* MaterialPower */,
 				9FED66CC1D6B4CED00F42992 /* LoginViewController.swift */,
 				9F1618BB1D6E89900063B772 /* LeftMenuViewController.swift */,
-				9FED66C81D6B490800F42992 /* WISNavigationController.swift */,
 				9FED66C41D6AE6FC00F42992 /* DataHomeViewController.swift */,
 			);
 			path = Controller;
@@ -262,6 +311,7 @@
 				9FED66D61D6C482C00F42992 /* String+WIS.swift */,
 				9FED66DE1D6C7C2E00F42992 /* NSObject+WIS.swift */,
 				9FED67041D6D85B100F42992 /* UIView+WIS.swift */,
+				9F1F1D001D6FD2FA009A9780 /* UIImage+WIS.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -269,7 +319,8 @@
 		9FED66D91D6C4E2800F42992 /* LeftView */ = {
 			isa = PBXGroup;
 			children = (
-				9FED66DA1D6C4E2800F42992 /* LeftNodeTableViewCell.swift */,
+				9F1B56E61D73CF1A0013D239 /* LeftMenuCell.swift */,
+				9F1B56E71D73CF1A0013D239 /* LeftMenuCell.xib */,
 				9FED66DB1D6C4E2800F42992 /* LeftUserHeadCell.swift */,
 			);
 			path = LeftView;
@@ -441,17 +492,20 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F1B56E91D73CF1A0013D239 /* LeftMenuCell.xib in Resources */,
 				9FED66E81D6CAE5900F42992 /* MaterialPower.storyboard in Resources */,
 				9F2823C41D6DE8DC00E0FF1A /* Localizable.strings in Resources */,
 				9FED66F41D6D70BE00F42992 /* BoilerPurify.storyboard in Resources */,
 				9FED66CF1D6B51D900F42992 /* Image.xcassets in Resources */,
 				9FED66EA1D6D382500F42992 /* LaunchScreen.storyboard in Resources */,
+				9F1B57041D7472B30013D239 /* DataTableCell.xib in Resources */,
 				9FED66ED1D6D4B8400F42992 /* Furnace.storyboard in Resources */,
 				9F2823C21D6DDC4F00E0FF1A /* login-bg-iphone.jpg in Resources */,
 				38B91EFF1D615EBE00EFD37E /* Assets.xcassets in Resources */,
 				9FED67071D6D967100F42992 /* DatePickerView.xib in Resources */,
 				9FED67001D6D83D300F42992 /* DataSearchButtonView.xib in Resources */,
 				9FED67031D6D83D300F42992 /* ShiftPickerContentView.xib in Resources */,
+				9F0221A91D731F190056DDF5 /* FurnaceTitle.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -524,9 +578,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F1B57071D7474B00013D239 /* HorizontalLineView.swift in Sources */,
 				9FED66FF1D6D83D300F42992 /* DataSearchButtonView.swift in Sources */,
-				9FED66DC1D6C4E2800F42992 /* LeftNodeTableViewCell.swift in Sources */,
+				9F0221A61D731BD10056DDF5 /* PropertyNames.swift in Sources */,
 				9F1618BE1D6F18710063B772 /* WISClient.swift in Sources */,
+				9F0221A41D7021220056DDF5 /* DataTableView.swift in Sources */,
 				9FED67051D6D85B100F42992 /* UIView+WIS.swift in Sources */,
 				9FED66DF1D6C7C2E00F42992 /* NSObject+WIS.swift in Sources */,
 				9FED67091D6D96BA00F42992 /* DatePickerView.swift in Sources */,
@@ -534,10 +590,11 @@
 				9F1618BC1D6E89900063B772 /* LeftMenuViewController.swift in Sources */,
 				9FED66C51D6AE6FC00F42992 /* DataHomeViewController.swift in Sources */,
 				9FED66E61D6CAE4200F42992 /* MaterialPowerViewController.swift in Sources */,
+				9F1F1D011D6FD2FA009A9780 /* UIImage+WIS.swift in Sources */,
 				9FED66C31D6AE39000F42992 /* WISHelper.swift in Sources */,
+				9F1B56ED1D74084A0013D239 /* WISUser.swift in Sources */,
 				9FED67021D6D83D300F42992 /* ShiftPickerContentView.swift in Sources */,
 				9FED67011D6D83D300F42992 /* DataSearchContentView.swift in Sources */,
-				9FED66C91D6B490800F42992 /* WISNavigationController.swift in Sources */,
 				9FED66C71D6AEF6000F42992 /* MaterialPower.swift in Sources */,
 				9FED66C11D6AE18800F42992 /* WISDefine.swift in Sources */,
 				9FED66BF1D6ADFB500F42992 /* WISResponse.swift in Sources */,
@@ -546,9 +603,12 @@
 				9FED66D71D6C482C00F42992 /* UIColor+WIS.swift in Sources */,
 				9FED66F81D6D71D200F42992 /* BoilerPurify.swift in Sources */,
 				9FED66D81D6C482C00F42992 /* String+WIS.swift in Sources */,
+				9F1B57031D7472B30013D239 /* DataTableCell.swift in Sources */,
 				9FED66DD1D6C4E2800F42992 /* LeftUserHeadCell.swift in Sources */,
 				9FED66BD1D6ADE8E00F42992 /* User.swift in Sources */,
+				9F1B56EC1D74084A0013D239 /* WISUserSettings.swift in Sources */,
 				9FED66CD1D6B4CED00F42992 /* LoginViewController.swift in Sources */,
+				9F1B56E81D73CF1A0013D239 /* LeftMenuCell.swift in Sources */,
 				38B91EFD1D615EBE00EFD37E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

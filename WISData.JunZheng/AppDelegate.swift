@@ -17,10 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        // Override point for customization after application launch.
-        self.window!.backgroundColor = UIColor.whiteColor()
-        self.window!.makeKeyAndVisible()
-
+        
+        // Setup HUD
         SVProgressHUD.setForegroundColor(UIColor(white: 1, alpha: 1))
         SVProgressHUD.setBackgroundColor(UIColor(white: 0.15, alpha: 0.85))
         SVProgressHUD.setDefaultStyle(.Custom)
@@ -28,7 +26,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         SVProgressHUD.setDefaultMaskType(.Clear)
         SVProgressHUD.setDefaultAnimationType(.Native)
         
+        // Observe notification for HUD
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(didDisappearProgressHUD), name: SVProgressHUDDidDisappearNotification, object: nil)
+        
+        // Config global window appearance
+        UINavigationBar.appearance().barTintColor = UIColor.wisLogoColor()
+        UINavigationBar.appearance().tintColor = UIColor.whiteColor()
+        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+        
+        self.window!.backgroundColor = UIColor.whiteColor()
+        self.window!.makeKeyAndVisible()
         
         self.window?.rootViewController = LoginViewController()
         
@@ -43,7 +50,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func startMainStory() {
 
-        let centerNav = WISNavigationController(rootViewController: DataHomeViewController())
+        let centerNav = UINavigationController(rootViewController: DataHomeViewController())
         let leftViewController = LeftMenuViewController()
         let drawerController = DrawerController(centerViewController: centerNav, leftDrawerViewController: leftViewController)
         

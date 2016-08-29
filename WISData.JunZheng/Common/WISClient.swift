@@ -15,7 +15,7 @@ class WISClient: NSObject {
     
     var drawerController: DrawerController? = nil
     var centerViewController: DataHomeViewController? = nil
-    var centerNavigation: WISNavigationController? = nil
+    var centerNavigation: UINavigationController? = nil
     
     // 当前程序中，最上层的 NavigationController
     var topNavigationController : UINavigationController {

@@ -12,7 +12,7 @@ def pods
     pod 'FXBlurView'
     pod 'LMDropdownView'
     pod 'PagingMenuController'
-    pod 'SlideMenuControllerSwift'
+    pod 'MJExtension'
 end
 
 target ‘WISData.JunZheng’ do
