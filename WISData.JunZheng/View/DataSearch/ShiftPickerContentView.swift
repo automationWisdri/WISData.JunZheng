@@ -44,7 +44,7 @@ class ShiftPickerContentView: UIView {
         shiftSelectionTableView.setEditing(false, animated: true)
         shiftSelectionTableView.scrollsToTop = false
         
-        shiftSelectionTableView.tableHeaderView?.tintColor = UIColor.wisTintColor()
+//        shiftSelectionTableView.tableHeaderView?.tintColor = UIColor.wisTintColor()
     }
     
     func bindData(initialShiftType: ShiftType) {

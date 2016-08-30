@@ -78,7 +78,11 @@ class LoginViewController: ViewController {
         self.userNameTextField!.autocapitalizationType = .None
         self.userNameTextField!.autocorrectionType = .No
         self.userNameTextField!.tag = 1
-        self.userNameTextField?.delegate = self
+        self.userNameTextField!.delegate = self
+        
+        if let username = NSUserDefaults.standardUserDefaults().objectForKey("username") {
+            self.userNameTextField!.text = (username as! String)
+        }
         
         let userNameIconImageView = UIImageView(image: UIImage(named: "icon_account")!.imageWithRenderingMode(.AlwaysTemplate))
         userNameIconImageView.frame = CGRectMake(0, 0, 34, 22)
@@ -222,8 +226,10 @@ class LoginViewController: ViewController {
         
         allValid.subscribeNext { valid in
             if valid {
+                self.loginButton!.setTitleColor(UIColor.whiteColor(), forState: .Normal)
                 self.loginButton!.backgroundColor = UIColor.wisLogoColor()
             } else {
+                self.loginButton!.setTitleColor(UIColor.lightGrayColor(), forState: .Normal)
                 self.loginButton!.backgroundColor = UIColor.wisLogoColor().colorWithAlphaComponent(0.3)
             }
         }.addDisposableTo(disposeBag)
@@ -250,9 +256,10 @@ class LoginViewController: ViewController {
                 
             case .Success(_):
                 SVProgressHUD.showSuccessWithStatus("登录成功")
+                NSUserDefaults.standardUserDefaults().setObject(self.userNameTextField!.text, forKey: "username")
+                SearchParameter["date"] = dateFormatterForSearch(NSDate())
                 delay(0.25, work: {
                     WISCommon.currentAppDelegate.startMainStory()
-                    SearchParameter["date"] = dateFormatterForSearch(NSDate())
                 })
                 break
                 

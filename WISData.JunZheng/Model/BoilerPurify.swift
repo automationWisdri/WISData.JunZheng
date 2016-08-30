@@ -12,10 +12,35 @@ import SwiftyJSON
 /// 锅炉及净化系统状态
 class BoilerPurify {
     
+    var Id: String?
     /// 汽包水位
     var YRGL_QBSW: String?
     /// 汽包压力
     var YRGL_QBYL: String?
+    
+    var YRGL_ZQLL: String?
+    var YRGL_YKWD: String?
+    var YRGL_CKWD: String?
+    
+    var JHXT_A_CO: String?
+    var JHXT_A_CO2: String?
+    var JHXT_A_H2: String?
+    var JHXT_A_O2: String?
+    
+    var JHXT_B_CO: String?
+    var JHXT_B_H2: String?
+    var JHXT_B_O2: String?
+    
+    var JHXT_CKWD: String?
+    var JHXT_FCHL: String?
+    var JHXT_GDYL: String?
+    var JHXT_HQWD: String?
+    var JHXT_JKWD: String?
+    var JHXT_JQWD: String?
+    var JHXT_LY: String?
+    
+    var JQFJPL: String?
+    var YQFJPL: String?
 }
 
 extension BoilerPurify {

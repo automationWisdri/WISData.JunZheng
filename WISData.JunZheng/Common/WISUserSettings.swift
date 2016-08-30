@@ -18,7 +18,7 @@ class WISUserSettings: NSObject {
         super.init()
     }
     
-    subscript(key:String) -> String? {
+    subscript(key: String) -> String? {
         
         get {
             return NSUserDefaults.standardUserDefaults().objectForKey(keyPrefix + key) as? String

@@ -83,16 +83,16 @@ func getCell<T: UITableViewCell>(tableView: UITableView, cell: T.Type, indexPath
     return tableView.dequeueReusableCellWithIdentifier("\(cell)", forIndexPath: indexPath) as! T
 }
 
-func getShiftName(shiftNo: String) -> String {
+func getShiftName(shiftNo: String) -> [String] {
     switch shiftNo {
     case "1":
-        return "早班"
+        return ["早班", "0:00", "1:00", "2:00", "3:00", "4:00", "5:00", "6:00", "7:00"]
     case "2":
-        return "中班"
+        return ["中班", "8:00", "9:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00"]
     case "3":
-        return "晚班"
+        return ["晚班", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00"]
     default:
-        return "参数错误"
+        return ["参数错误"]
     }
 }
 

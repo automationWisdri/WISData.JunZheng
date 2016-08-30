@@ -14,11 +14,69 @@ import MJExtension
 
 class Furnace: NSObject, PropertyNames {
     
+    /// JSON List Order Id
+    var Id: String?
     /// 发气量
     var FQL: String?
-    var Id: String?
+    /// 出炉时间
     var CLSJ: String?
+    /// 出炉数量
     var CLSL: String?
+    
+    var BYQDWBa: String?
+    var BYQDWBb: String?
+    var BYQDWBc: String?
+    
+    var BYQWDAX: String?
+    var BYQWDBX: String?
+    var BYQWDCX: String?
+    
+    var CJDYVa: String?
+    var CJDYVb: String?
+    var CJDYVc: String?
+    
+    var CZDLIa: String?
+    var CZDLIb: String?
+    var CZDLIc: String?
+    
+    var CZDZRa: String?
+    var CZDZRb: String?
+    var CZDZRc: String?
+    
+    var DJDYVa: String?
+    var DJDYVb: String?
+    var DJDYVc: String?
+    
+    var DJWZ1: String?
+    var DJWZ2: String?
+    var DJWZ3: String?
+    
+    var DL: String?
+    var GLYS: String?
+    
+    var LDWD1: String?
+    var LDWD2: String?
+    var LDWD3: String?
+    var LDWD4: String?
+    var LDWD5: String?
+    var LDWD6: String?
+    var LDWD7: String?
+    
+    var LQWD: String?
+    
+    var YCDLIa: String?
+    var YCDLIb: String?
+    var YCDLIc: String?
+    
+    var YCDYVa: String?
+    var YCDYVb: String?
+    var YCDYVc: String?
+    
+    var LYH: String?
+    var WGGL: String?
+    var XHSCSWD: String?
+    var XHSJSWD: String?
+    var YGGL: String?
 
 }
 

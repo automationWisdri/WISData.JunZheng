@@ -2,8 +2,8 @@
 //  DataTableCell.swift
 //  WISData.JunZheng
 //
-//  Created by 任韬 on 16/8/29.
-//  Copyright © 2016年 Wisdri. All rights reserved.
+//  Created by Allen on 16/8/29.
+//  Copyright © 2016 Wisdri. All rights reserved.
 //
 
 import UIKit
@@ -16,6 +16,7 @@ class DataTableCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         alignTextVerticalInTextView(self.dataTextView)
+        userInteractionEnabled = false
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

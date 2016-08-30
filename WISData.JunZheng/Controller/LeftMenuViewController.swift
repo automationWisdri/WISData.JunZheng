@@ -7,17 +7,12 @@
 //
 
 import UIKit
-import FXBlurView
 
 class LeftMenuViewController: UIViewController {
     
-    var selectedMenuItem : Int = 0
-    
+    private var selectedMenuItem : Int = 0
     private let leftMenuCellID = "LeftMenuCell"
-    
-    var backgroundImageView: UIImageView?
-    var frostedView = FXBlurView()
-    
+
     private var _tableView: UITableView!
     private var tableView: UITableView {
         get{
@@ -43,32 +38,16 @@ class LeftMenuViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         self.view.backgroundColor = UIColor.wisLogoColor().colorWithAlphaComponent(0.7)
-        self.backgroundImageView = UIImageView()
-        self.backgroundImageView!.frame = self.view.frame
-        self.backgroundImageView!.contentMode = .ScaleToFill
-        view.addSubview(self.backgroundImageView!)
         
-        frostedView.underlyingView = self.backgroundImageView!
-        frostedView.dynamic = false
-        frostedView.tintColor = UIColor.clearColor()
-        frostedView.frame = self.view.frame
-        self.view.addSubview(frostedView)
-        
-        self.view.addSubview(self.tableView);
+        self.view.addSubview(self.tableView)
         self.tableView.snp_makeConstraints{ (make) -> Void in
             make.right.bottom.left.equalTo(self.view)
             make.top.equalTo(self.view).offset(15)
         }
         
-        // Preserve selection between presentations
-//        self.clearsSelectionOnViewWillAppear = false
-        
-//        tableView.selectRowAtIndexPath(NSIndexPath(forRow: selectedMenuItem, inSection: 0), animated: false, scrollPosition: .Middle)
-        
-        
-
+        // Select first row of section one by default
+        self.tableView.selectRowAtIndexPath(NSIndexPath(forRow: selectedMenuItem, inSection: 1), animated: false, scrollPosition: .None)
     }
 
     override func didReceiveMemoryWarning() {
@@ -106,7 +85,7 @@ extension LeftMenuViewController: UITableViewDelegate, UITableViewDataSource {
             let cell = getCell(tableView, cell: LeftUserHeadCell.self, indexPath: indexPath)
             
             cell.avatarImageView.image = UIImage(named: "default_avatar_60")
-            cell.userNameLabel.text = "admin"
+            cell.userNameLabel.text = (NSUserDefaults.standardUserDefaults().objectForKey("username") as! String)
             
             return cell
         
@@ -116,7 +95,7 @@ extension LeftMenuViewController: UITableViewDelegate, UITableViewDataSource {
             
             cell.annotationLabel.text = "\(indexPath.row + 1)#炉"
             cell.menuIconImageView.image = UIImage.imageUsedTemplateMode("icon_house")
-        
+            
             return cell
             
         case 2:

@@ -8,19 +8,22 @@
 
 import UIKit
 import SwiftyJSON
-import MJExtension
+import SVProgressHUD
 
 public let DataSearchNotification = "DataSearchNotification"
+public let DataTableColumnWidth: CGFloat = 70.0
 
 class FurnaceViewController: UIViewController {
 
     @IBOutlet weak var dataView: UIView!
-    @IBOutlet weak var dataCommentLabel: UILabel!
     
-    var arrY: Array = [JSON]()
-    private var headerView: UIView!
+    private var firstColumnView: UIView!
     private var scrollView: UIScrollView!
-    var tableTitleJSON = JSON.null
+    private var firstColumnTableView: DataTableView!
+    private var columnTableView = [DataTableView]()
+    
+    private var tableContentJSON: Array = [JSON]()
+    private var tableTitleJSON = JSON.null
     
     class func instantiateFromStoryboard() -> FurnaceViewController {
         let storyboard = UIStoryboard(name: "Furnace", bundle: nil)
@@ -33,119 +36,64 @@ class FurnaceViewController: UIViewController {
         // Observing notifications
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.handleNotification(_:)), name: DataSearchNotification, object: nil)
         
-        let path = NSBundle.mainBundle().pathForResource("FurnaceTitle", ofType: "json")
-        if (path != nil) {
-            let data = NSData(contentsOfFile: path!)
-            let json = JSON(data:data!)
-            tableTitleJSON = json
-            print("tableTitleJSON = \(tableTitleJSON)")
+        // Get table column title
+        if let path = NSBundle.mainBundle().pathForResource("FurnaceTitle", ofType: "json") {
+            let data = NSData(contentsOfFile: path)
+            tableTitleJSON = JSON(data: data!)
         } else {
             tableTitleJSON = JSON.null
         }
         
+        // Define the table dimensions
+        // 
+        // TBC: handle screen rotation!!!!!
+        //
         let dataViewWidth = SCREEN_WIDTH
-        let dataViewHeight = SCREEN_HEIGHT - 20 - 64 - 35
-        let headerViewWidth: CGFloat = 95
+        let dataViewHeight = SCREEN_HEIGHT - 64 - 35
+        let firstColumnViewWidth: CGFloat = 95
+        // 
+        // TBC: how to get row count?
+        //
         let rowCount = 8
-        let columnCount = 3
+        let columnCount = Furnace().propertyNames().count - 1
         
-        // Draw row header
-        headerView = UIView(frame: CGRectMake(0, 0, headerViewWidth, dataViewHeight))
-        headerView.backgroundColor = UIColor.clearColor()
-        headerView.userInteractionEnabled = true
-        // 设置边框，形成表格
-//        headerView.layer.borderWidth = 0.5
-//        headerView.layer.borderColor = UIColor.clearColor().CGColor
-        self.dataView.addSubview(headerView)
+        // Draw view for first column
+        firstColumnView = UIView(frame: CGRectMake(0, 0, firstColumnViewWidth, dataViewHeight))
+        firstColumnView.backgroundColor = UIColor.clearColor()
+//        headerView.userInteractionEnabled = true
+        self.dataView.addSubview(firstColumnView)
         
-        // 可左右滑动 tableView 父视图
-        scrollView = UIScrollView(frame: CGRectMake (headerViewWidth, 0, dataViewWidth - headerViewWidth, dataViewHeight))
-        scrollView.contentSize = CGSizeMake((CGFloat)(columnCount) * 95, CGFloat(rowCount * 30))
+        // Draw first column table
+        firstColumnTableView = DataTableView(frame: firstColumnView.bounds, style: .Plain)
+        firstColumnTableView.dataTableDelegate = self
+        firstColumnView.addSubview(firstColumnTableView)
+        
+        // Draw view for data table
+        scrollView = UIScrollView(frame: CGRectMake (firstColumnViewWidth, 0, dataViewWidth - firstColumnViewWidth, dataViewHeight))
+        scrollView.contentSize = CGSizeMake(CGFloat(columnCount) * DataTableColumnWidth, CGFloat(rowCount) * DataTableRowHeight)
         scrollView.showsHorizontalScrollIndicator = true
         scrollView.showsVerticalScrollIndicator = true
         scrollView.bounces = false
         scrollView.delegate = self
         scrollView.backgroundColor = UIColor.clearColor()
-        //设置边框，形成表格
-//        scrollView.layer.borderColor = UIColor.clearColor().CGColor
-//        scrollView.layer.borderWidth = 0.5
         self.dataView.addSubview(scrollView)
-        
-        // 第一列表
-        let tableView: DataTableView = DataTableView(frame: headerView.bounds, style: .Plain)
-        
-        let titleArr1 = NSMutableArray()
-//        let levels = NSMutableArray()
-        for i in 0 ..< rowCount {
-            titleArr1.addObject("\(i)")
-        }
-//        for var dic in arrY {
-//            let titleStr = dic["date1"].stringValue
-//            titleArr1.addObject(titleStr)
-//            
-//            let level = dic["table_level"].stringValue
-//            levels.addObject(level)
-//        }
-//        
-        tableView.titleArray = titleArr1
-//        tableView.levels = levels
-        
-        tableView.headerString = SearchParameter["date"]! + "\n" + getShiftName(SearchParameter["shiftNo"]!)
-        
-        tableView.dataTableDelegate = self
-        headerView.addSubview(tableView)
-        
-//        var furnaceArray = [Furnace]()
-        
-//        let tableColumns = Furnace().propertyNames().count
-        // Get data
-        Furnace.get(date: SearchParameter["date"]!, shiftNo: SearchParameter["shiftNo"]!, lNo: SearchParameter["lNo"]!) { (response: WISValueResponse<[JSON]>) in
-            if response.success {
-                self.dataCommentLabel.text = "查询参数：" + SearchParameter["date"]! + " | " + getShiftName(SearchParameter["shiftNo"]!) + " | " + SearchParameter["lNo"]! + "#炉"
-                //                self.dataTextView.text = response.value
-                self.arrY = response.value!
-                //                debugPrint(self.arrY)
-                
-                var tableColumns = 0
-                
-                for p in Furnace().propertyNames() {
-                    
-                    if p == "Id" {
-                        continue
-                    } else {
 
-                        let tableV: DataTableView = DataTableView(frame: CGRectMake(CGFloat(95 * tableColumns), 0, 95, SCREEN_HEIGHT - 20 - 64), style: .Plain)
-                        
-                        //x方向 取出key对应的字符串名字
-                        let xkey: String = p
-                        let xname: String = self.tableTitleJSON["title"][xkey].stringValue
-                        
-                        debugPrint(xname)
-                        
-                        //y方向
-                        let titleArr2 = NSMutableArray()
-                        for j in 0 ..< self.arrY.count {
-                            let ykey = p
-                            let yname = self.arrY[j][ykey].stringValue
-                            debugPrint(yname)
-                            titleArr2.addObject(yname)
-                        }
-                        
-                        tableV.titleArray = titleArr2
-                        tableV.headerString = xname
-                        tableV.dataTableDelegate = self
-//                        tableV.reloadData()
-                        self.scrollView.addSubview(tableV)
-                        
-                        tableColumns += 1
-                    }
-                }
-                
-                
+        // Draw data table
+        var tableColumnsCount = 0
+        for p in Furnace().propertyNames() {
+            if p == "Id" {
+                continue
             } else {
-                wisError(response.message)
+                let tempColumnTableView = DataTableView(frame: CGRectMake(CGFloat(tableColumnsCount) * DataTableColumnWidth, 0, DataTableColumnWidth, dataViewHeight), style: .Plain)
+                self.columnTableView.append(tempColumnTableView)
+                self.columnTableView[tableColumnsCount].dataTableDelegate = self
+                self.scrollView.addSubview(self.columnTableView[tableColumnsCount])
+                tableColumnsCount += 1
             }
         }
+        
+        // Get data for data table
+        getData()
         
     }
 
@@ -156,12 +104,41 @@ class FurnaceViewController: UIViewController {
     
     func getData() {
         
+        SVProgressHUD.show()
+        
+        firstColumnTableView.headerString = SearchParameter["date"]! + "\n" + getShiftName(SearchParameter["shiftNo"]!)[0]
+        let firstColumnTitleArray = NSMutableArray()
+        for i in 0 ..< 8 {
+            firstColumnTitleArray.addObject(getShiftName(SearchParameter["shiftNo"]!)[i + 1])
+        }
+        firstColumnTableView.titleArray = firstColumnTitleArray
+        
         Furnace.get(date: SearchParameter["date"]!, shiftNo: SearchParameter["shiftNo"]!, lNo: SearchParameter["lNo"]!) { (response: WISValueResponse<[JSON]>) in
             if response.success {
-                self.dataCommentLabel.text = "查询参数：" + SearchParameter["date"]! + " | " + getShiftName(SearchParameter["shiftNo"]!) + " | " + SearchParameter["lNo"]! + "#炉"
-//                self.dataTextView.text = response.value
-                self.arrY = response.value!
-//                debugPrint(self.arrY)
+                SVProgressHUD.dismiss()
+                self.tableContentJSON = response.value!
+                self.firstColumnTableView.reloadData()
+                
+                var tableColumnsCount = 0
+                for p in Furnace().propertyNames() {
+                    if p == "Id" {
+                        continue
+                    } else {
+                        // header
+                        let columnTitle: String = self.tableTitleJSON["title"][p].stringValue
+                        self.columnTableView[tableColumnsCount].headerString = columnTitle
+                        // content
+                        let contentArray = NSMutableArray()
+                        for j in 0 ..< self.tableContentJSON.count {
+                            let content = self.tableContentJSON[j][p].stringValue
+                            contentArray.addObject(content)
+                        }
+                        self.columnTableView[tableColumnsCount].titleArray = contentArray
+                        
+                        self.columnTableView[tableColumnsCount].reloadData()
+                        tableColumnsCount += 1
+                    }
+                }
             } else {
                 wisError(response.message)
             }
@@ -169,7 +146,7 @@ class FurnaceViewController: UIViewController {
     }
     
     func handleNotification(notification: NSNotification) -> Void {
-//        getData()
+        getData()
     }
     
 
@@ -195,7 +172,7 @@ extension FurnaceViewController: DataTableViewDelegate {
             }
         }
         
-        for subView in headerView.subviews {
+        for subView in firstColumnView.subviews {
             (subView as! DataTableView).setTableViewContentOffSet(contentOffSet)
         }
     }

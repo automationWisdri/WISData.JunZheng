@@ -11,8 +11,32 @@ import SwiftyJSON
 
 class MaterialPower {
     
-    // 工艺电
+    /// 工艺电
     var GYD: String?
+    var BQCL: String?
+    var JHHZL: String?
+    var JTZH: String?
+    var LTGDT: String?
+    var LTHF: String?
+    var LTHFF: String?
+    var LTSF: String?
+    var LTZH: String?
+    var PJPB: String?
+    var SHCaO: String?
+    var SHGS: String?
+    var SHSS: String?
+    var SHZH: String?
+    
+    var WYMGDT: String?
+    var WYMHF: String?
+    var WYMHFF: String?
+    var WYMSF: String?
+    var WYMZH: String?
+    var YQPS: String?
+    var YQZL: String?
+    
+    var Remark: String?
+    var SwithTimeReasons: String?
 }
 
 extension MaterialPower {
