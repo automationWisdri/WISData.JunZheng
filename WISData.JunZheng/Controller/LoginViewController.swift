@@ -209,7 +209,7 @@ class LoginViewController: ViewController {
             if valid {
                 self.passwordTextField!.backgroundColor = UIColor(white: 1, alpha: 0.1)
             } else {
-                self.passwordTextField!.backgroundColor = UIColor(white: 0.8, alpha: 1)
+                self.passwordTextField!.backgroundColor = UIColor.wisLogoColor().colorWithAlphaComponent(0.3)
             }
         }.addDisposableTo(disposeBag)
         
@@ -222,9 +222,9 @@ class LoginViewController: ViewController {
         
         allValid.subscribeNext { valid in
             if valid {
-                self.loginButton!.backgroundColor = UIColor(white: 1, alpha: 0.1)
+                self.loginButton!.backgroundColor = UIColor.wisLogoColor()
             } else {
-                self.loginButton!.backgroundColor = UIColor(white: 0.8, alpha: 1)
+                self.loginButton!.backgroundColor = UIColor.wisLogoColor().colorWithAlphaComponent(0.3)
             }
         }.addDisposableTo(disposeBag)
         
@@ -272,10 +272,17 @@ class LoginViewController: ViewController {
         view.addGestureRecognizer(singleTap!)
     }
     
-    func singleTapped(gesture: UITapGestureRecognizer) {
-        self.view.endEditing(true)
-    }
     
+//    override func viewDidAppear(animated: Bool) {
+//        UIView.animateWithDuration(2) { () -> Void in
+//            self.backgroundImageView!.alpha = 1
+//        }
+//        UIView.animateWithDuration(20) { () -> Void in
+//            self.backgroundImageView?.frame = CGRectMake(-1*( 1000 - SCREEN_WIDTH )/2, 0, SCREEN_HEIGHT+500, SCREEN_HEIGHT+500)
+//        }
+//    }
+    
+    /*
     func loginClick(sender: UIButton){
         
         var username: String?

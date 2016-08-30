@@ -34,7 +34,9 @@ extension User {
             case .Success:
                 if let value = response.result.value {
                     let json = JSON(value)
-//                    debugPrint("JSON: \(json)")
+                    if #available(iOS 9.0, *) {
+                        debugPrint("JSON: \(json)")
+                    }
                     if json.stringValue == "1" {
                         completionHandler(WISValueResponse(value: username, success: true))
                     } else {

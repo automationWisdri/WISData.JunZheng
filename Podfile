@@ -14,6 +14,12 @@ def pods
     pod 'LMDropdownView'
     pod 'PagingMenuController'
     pod 'MJExtension'
+    pod 'RxSwift', '~> 2.6.0'
+    pod 'RxCocoa', '~> 2.6.0'
+end
+
+target 'WISData.JunZheng' do
+    pods
 end
 
 target 'WISData.JunZhengTests' do

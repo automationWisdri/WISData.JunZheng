@@ -20,6 +20,18 @@ let SEPARATOR_HEIGHT = 1.0 / UIScreen.mainScreen().scale
 
 var SearchParameter: Dictionary = ["date": "", "shiftNo": "1", "lNo": "1"]
 
-let DataTableBeginColumnRect = CGRectMake (0, 0, 95, 45)
+///---------
+/// App Info
+///---------
+let APP_NAME = NSBundle.mainBundle().infoDictionary!["CFBundleName"]
+let APP_VERSION = NSBundle.mainBundle().infoDictionary!["CFBundleShortVersionString"]
+let APP_BUILD = NSBundle.mainBundle().infoDictionary!["CFBundleVersion"]
 
+let APP_NAME_ENU = "WISData"
+let APP_NAME_CHN = ""
+
+
+class WISCommon {
+    static let currentAppDelegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+}
 
