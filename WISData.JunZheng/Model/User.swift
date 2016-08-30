@@ -18,10 +18,10 @@ class User {
 
 extension User {
     
-    class func login(username username: String, password: String, completionHandler: WISValueResponse<String> -> Void) {
+    class func login(username username: String, password: String, completionHandler: WISValueResponse<String> -> Void) -> Request {
         
         let loginURL = BaseURL + "/LogIn?userName=\(username)&passWord=\(password)"
-        Alamofire.request(.POST, loginURL).responseJSON { response in
+        return Alamofire.request(.POST, loginURL).responseJSON { response in
             /*
              * For test
             
@@ -37,6 +37,8 @@ extension User {
 //                    debugPrint("JSON: \(json)")
                     if json.stringValue == "1" {
                         completionHandler(WISValueResponse(value: username, success: true))
+                    } else {
+                        completionHandler(WISValueResponse(success: false, message: "登录失败"))
                     }
                 }
             case .Failure(let error):
@@ -45,5 +47,4 @@ extension User {
             }
         }
     }
-    
 }

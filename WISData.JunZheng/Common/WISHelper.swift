@@ -6,7 +6,7 @@
 //  Copyright © 2016 Wisdri. All rights reserved.
 //
 
-import UIKit
+import Foundation
 import SVProgressHUD
 
 func println(@autoclosure item: () -> Any) {
@@ -24,10 +24,8 @@ func wisFont(fontSize: CGFloat) -> UIFont {
 }
 
 func wisError(customInformation: String) {
-    
     SVProgressHUD.setDefaultMaskType(.None)
     SVProgressHUD.showErrorWithStatus(customInformation)
-
 }
 
 typealias CancelableTask = (cancel: Bool) -> Void

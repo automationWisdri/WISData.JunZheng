@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		233750F1475E6D1571784AA6 /* Pods_WISData_JunZhengTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 910DA158BC71010D9A619915 /* Pods_WISData_JunZhengTests.framework */; };
+		383995C01D7045A7002221F5 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383995BE1D7045A7002221F5 /* ViewModel.swift */; };
+		383995C11D7045A7002221F5 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383995BF1D7045A7002221F5 /* LoginViewModel.swift */; };
+		383995C61D7046D7002221F5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383995C51D7046D7002221F5 /* ViewController.swift */; };
 		38B91EFD1D615EBE00EFD37E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B91EFC1D615EBE00EFD37E /* AppDelegate.swift */; };
 		38B91EFF1D615EBE00EFD37E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 38B91EFE1D615EBE00EFD37E /* Assets.xcassets */; };
 		38B91F0D1D615EBE00EFD37E /* WISData_JunZhengTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B91F0C1D615EBE00EFD37E /* WISData_JunZhengTests.swift */; };
@@ -75,6 +79,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3806A02E3BDEA71BCDC4957E /* Pods-WISData.JunZhengTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WISData.JunZhengTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WISData.JunZhengTests/Pods-WISData.JunZhengTests.debug.xcconfig"; sourceTree = "<group>"; };
+		383995BE1D7045A7002221F5 /* ViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		383995BF1D7045A7002221F5 /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		383995C51D7046D7002221F5 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		38B91EF91D615EBE00EFD37E /* WISData.JunZheng.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WISData.JunZheng.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		38B91EFC1D615EBE00EFD37E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		38B91EFE1D615EBE00EFD37E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -85,6 +93,7 @@
 		38B91F131D615EBE00EFD37E /* WISData.JunZhengUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WISData.JunZhengUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		38B91F171D615EBE00EFD37E /* WISData_JunZhengUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WISData_JunZhengUITests.swift; sourceTree = "<group>"; };
 		38B91F191D615EBE00EFD37E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		38C6345C1D72D79D00F64312 /* UserTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTestCase.swift; sourceTree = "<group>"; };
 		78AE207EADF7187B33449098 /* Pods-WISData.JunZheng.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WISData.JunZheng.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WISData.JunZheng/Pods-WISData.JunZheng.debug.xcconfig"; sourceTree = "<group>"; };
 		9F0221A31D7021220056DDF5 /* DataTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataTableView.swift; sourceTree = "<group>"; };
 		9F0221A51D731BD10056DDF5 /* PropertyNames.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyNames.swift; sourceTree = "<group>"; };
@@ -130,6 +139,7 @@
 		9FED67061D6D967100F42992 /* DatePickerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DatePickerView.xib; sourceTree = "<group>"; };
 		9FED67081D6D96BA00F42992 /* DatePickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
 		C05CCE18AF842DB075B7A656 /* Pods-WISData.JunZheng.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WISData.JunZheng.release.xcconfig"; path = "Pods/Target Support Files/Pods-WISData.JunZheng/Pods-WISData.JunZheng.release.xcconfig"; sourceTree = "<group>"; };
+		EBC7D84A9CFA2E2613FB91E6 /* Pods-WISData.JunZhengTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WISData.JunZhengTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-WISData.JunZhengTests/Pods-WISData.JunZhengTests.release.xcconfig"; sourceTree = "<group>"; };
 		F32A1FFCEBCDF112D1F824E4 /* Pods_WISData_JunZheng.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WISData_JunZheng.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -146,6 +156,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				233750F1475E6D1571784AA6 /* Pods_WISData_JunZhengTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -159,6 +170,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		383995BC1D7045A7002221F5 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				383995BD1D7045A7002221F5 /* BaseViewModel */,
+				383995BF1D7045A7002221F5 /* LoginViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		383995BD1D7045A7002221F5 /* BaseViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				383995BE1D7045A7002221F5 /* ViewModel.swift */,
+			);
+			path = BaseViewModel;
+			sourceTree = "<group>";
+		};
+		383995C41D7046D7002221F5 /* BaseViewController */ = {
+			isa = PBXGroup;
+			children = (
+				383995C51D7046D7002221F5 /* ViewController.swift */,
+			);
+			path = BaseViewController;
+			sourceTree = "<group>";
+		};
 		38B91EF01D615EBE00EFD37E = {
 			isa = PBXGroup;
 			children = (
@@ -184,6 +220,7 @@
 		38B91EFB1D615EBE00EFD37E /* WISData.JunZheng */ = {
 			isa = PBXGroup;
 			children = (
+				383995BC1D7045A7002221F5 /* ViewModel */,
 				9FED66BA1D6ADE5C00F42992 /* Common */,
 				9FED66B21D6ADE0C00F42992 /* Model */,
 				9FED66B61D6ADE3B00F42992 /* View */,
@@ -202,6 +239,7 @@
 			children = (
 				38B91F0C1D615EBE00EFD37E /* WISData_JunZhengTests.swift */,
 				38B91F0E1D615EBE00EFD37E /* Info.plist */,
+				38C6345C1D72D79D00F64312 /* UserTestCase.swift */,
 			);
 			path = WISData.JunZhengTests;
 			sourceTree = "<group>";
@@ -291,6 +329,7 @@
 		9FED66BB1D6ADE6300F42992 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				383995C41D7046D7002221F5 /* BaseViewController */,
 				9FED66EB1D6D4B6500F42992 /* Furnace */,
 				9FED66F21D6D707900F42992 /* BoilerPurify */,
 				9FED66E41D6CAE4200F42992 /* MaterialPower */,
@@ -368,6 +407,7 @@
 			isa = PBXGroup;
 			children = (
 				F32A1FFCEBCDF112D1F824E4 /* Pods_WISData_JunZheng.framework */,
+				910DA158BC71010D9A619915 /* Pods_WISData_JunZhengTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -377,6 +417,8 @@
 			children = (
 				78AE207EADF7187B33449098 /* Pods-WISData.JunZheng.debug.xcconfig */,
 				C05CCE18AF842DB075B7A656 /* Pods-WISData.JunZheng.release.xcconfig */,
+				3806A02E3BDEA71BCDC4957E /* Pods-WISData.JunZhengTests.debug.xcconfig */,
+				EBC7D84A9CFA2E2613FB91E6 /* Pods-WISData.JunZhengTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -388,12 +430,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 38B91F1C1D615EBE00EFD37E /* Build configuration list for PBXNativeTarget "WISData.JunZheng" */;
 			buildPhases = (
-				D09FA8AA4B406BEB4A598522 /* Check Pods Manifest.lock */,
+				D09FA8AA4B406BEB4A598522 /* [CP] Check Pods Manifest.lock */,
 				38B91EF51D615EBE00EFD37E /* Sources */,
 				38B91EF61D615EBE00EFD37E /* Frameworks */,
 				38B91EF71D615EBE00EFD37E /* Resources */,
-				299DB845BDACF3CE41CD28FF /* Embed Pods Frameworks */,
-				2F88035B3A3285F17CA5DBFC /* Copy Pods Resources */,
+				299DB845BDACF3CE41CD28FF /* [CP] Embed Pods Frameworks */,
+				2F88035B3A3285F17CA5DBFC /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -408,9 +450,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 38B91F1F1D615EBE00EFD37E /* Build configuration list for PBXNativeTarget "WISData.JunZhengTests" */;
 			buildPhases = (
+				32AEFFFD32309DF27139CCEE /* [CP] Check Pods Manifest.lock */,
 				38B91F041D615EBE00EFD37E /* Sources */,
 				38B91F051D615EBE00EFD37E /* Frameworks */,
 				38B91F061D615EBE00EFD37E /* Resources */,
+				0A1CF3AB900C178974CC7E7E /* [CP] Embed Pods Frameworks */,
+				5B85D722F0D813DF7C398D97 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -522,14 +567,29 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		299DB845BDACF3CE41CD28FF /* Embed Pods Frameworks */ = {
+		0A1CF3AB900C178974CC7E7E /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WISData.JunZhengTests/Pods-WISData.JunZhengTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		299DB845BDACF3CE41CD28FF /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -537,14 +597,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WISData.JunZheng/Pods-WISData.JunZheng-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		2F88035B3A3285F17CA5DBFC /* Copy Pods Resources */ = {
+		2F88035B3A3285F17CA5DBFC /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -552,14 +612,44 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WISData.JunZheng/Pods-WISData.JunZheng-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		D09FA8AA4B406BEB4A598522 /* Check Pods Manifest.lock */ = {
+		32AEFFFD32309DF27139CCEE /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		5B85D722F0D813DF7C398D97 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WISData.JunZhengTests/Pods-WISData.JunZhengTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D09FA8AA4B406BEB4A598522 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -596,6 +686,8 @@
 				9FED66BF1D6ADFB500F42992 /* WISResponse.swift in Sources */,
 				9FED66F11D6D4C4700F42992 /* Furnace.swift in Sources */,
 				9FED66F61D6D70F800F42992 /* BoilerPurifyViewController.swift in Sources */,
+				383995C61D7046D7002221F5 /* ViewController.swift in Sources */,
+				383995C11D7045A7002221F5 /* LoginViewModel.swift in Sources */,
 				9FED66D71D6C482C00F42992 /* UIColor+WIS.swift in Sources */,
 				9FED66F81D6D71D200F42992 /* BoilerPurify.swift in Sources */,
 				9FED66D81D6C482C00F42992 /* String+WIS.swift in Sources */,
@@ -613,6 +705,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				38C6345D1D72D79D00F64312 /* UserTestCase.swift in Sources */,
 				38B91F0D1D615EBE00EFD37E /* WISData_JunZhengTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -760,6 +853,7 @@
 		};
 		38B91F201D615EBE00EFD37E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3806A02E3BDEA71BCDC4957E /* Pods-WISData.JunZhengTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = WISData.JunZhengTests/Info.plist;
@@ -772,6 +866,7 @@
 		};
 		38B91F211D615EBE00EFD37E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EBC7D84A9CFA2E2613FB91E6 /* Pods-WISData.JunZhengTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = WISData.JunZhengTests/Info.plist;

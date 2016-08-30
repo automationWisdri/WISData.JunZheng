@@ -1,6 +1,7 @@
 platform :ios, '8.0'
 use_frameworks!
 
+
 def pods
     pod 'Alamofire', '~> 3.4.0'
     pod 'SwiftyJSON'
@@ -15,7 +16,19 @@ def pods
     pod 'MJExtension'
 end
 
-target ‘WISData.JunZheng’ do
+target 'WISData.JunZhengTests' do
     pods
+end
+
+post_install do |installer|
+    installer.pods_project.targets.each do |target|
+        if target.name == 'RxSwift'
+            target.build_configurations.each do |config|
+                if config.name == 'Debug'
+                    config.build_settings['OTHER_SWIFT_FLAGS'] ||= ['-D', 'TRACE_RESOURCES']
+                end
+            end
+        end
+    end
 end
 

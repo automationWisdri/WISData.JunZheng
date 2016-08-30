@@ -19,7 +19,6 @@ class WISClient: NSObject {
     
     // 当前程序中，最上层的 NavigationController
     var topNavigationController : UINavigationController {
-        
         get{
             return WISClient.getTopNavigationController(WISClient.sharedInstance.centerNavigation!)
         }
