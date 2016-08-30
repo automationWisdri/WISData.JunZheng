@@ -24,7 +24,6 @@
 		9F1B57041D7472B30013D239 /* DataTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9F1B57021D7472B30013D239 /* DataTableCell.xib */; };
 		9F1B57071D7474B00013D239 /* HorizontalLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1B57061D7474B00013D239 /* HorizontalLineView.swift */; };
 		9F1F1D011D6FD2FA009A9780 /* UIImage+WIS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1F1D001D6FD2FA009A9780 /* UIImage+WIS.swift */; };
-		9F2823C21D6DDC4F00E0FF1A /* login-bg-iphone.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9F2823C11D6DDC4F00E0FF1A /* login-bg-iphone.jpg */; };
 		9F2823C41D6DE8DC00E0FF1A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9F2823C31D6DE8DC00E0FF1A /* Localizable.strings */; };
 		9FED66BD1D6ADE8E00F42992 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FED66BC1D6ADE8E00F42992 /* User.swift */; };
 		9FED66BF1D6ADFB500F42992 /* WISResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FED66BE1D6ADFB500F42992 /* WISResponse.swift */; };
@@ -100,7 +99,6 @@
 		9F1B57021D7472B30013D239 /* DataTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DataTableCell.xib; sourceTree = "<group>"; };
 		9F1B57061D7474B00013D239 /* HorizontalLineView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HorizontalLineView.swift; sourceTree = "<group>"; };
 		9F1F1D001D6FD2FA009A9780 /* UIImage+WIS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+WIS.swift"; sourceTree = "<group>"; };
-		9F2823C11D6DDC4F00E0FF1A /* login-bg-iphone.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "login-bg-iphone.jpg"; sourceTree = "<group>"; };
 		9F2823C31D6DE8DC00E0FF1A /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		9FED66BC1D6ADE8E00F42992 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		9FED66BE1D6ADFB500F42992 /* WISResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WISResponse.swift; sourceTree = "<group>"; };
@@ -258,7 +256,6 @@
 		9FED66B31D6ADE1800F42992 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				9F2823C11D6DDC4F00E0FF1A /* login-bg-iphone.jpg */,
 				38B91EFE1D615EBE00EFD37E /* Assets.xcassets */,
 				9FED66CE1D6B51D900F42992 /* Image.xcassets */,
 			);
@@ -500,7 +497,6 @@
 				9FED66EA1D6D382500F42992 /* LaunchScreen.storyboard in Resources */,
 				9F1B57041D7472B30013D239 /* DataTableCell.xib in Resources */,
 				9FED66ED1D6D4B8400F42992 /* Furnace.storyboard in Resources */,
-				9F2823C21D6DDC4F00E0FF1A /* login-bg-iphone.jpg in Resources */,
 				38B91EFF1D615EBE00EFD37E /* Assets.xcassets in Resources */,
 				9FED67071D6D967100F42992 /* DatePickerView.xib in Resources */,
 				9FED67001D6D83D300F42992 /* DataSearchButtonView.xib in Resources */,
