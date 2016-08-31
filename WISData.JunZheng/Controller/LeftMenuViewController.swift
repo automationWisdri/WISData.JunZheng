@@ -7,10 +7,11 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class LeftMenuViewController: UIViewController {
     
-    private var selectedMenuItem : Int = 0
+    private var selectedMenuItem = Int(SearchParameter["lNo"]!)! - 1
     private let leftMenuCellID = "LeftMenuCell"
 
     private var _tableView: UITableView!
@@ -45,8 +46,11 @@ class LeftMenuViewController: UIViewController {
             make.right.bottom.left.equalTo(self.view)
             make.top.equalTo(self.view).offset(15)
         }
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         
-        // Select first row of section one by default
         self.tableView.selectRowAtIndexPath(NSIndexPath(forRow: selectedMenuItem, inSection: 1), animated: false, scrollPosition: .None)
     }
 
@@ -69,6 +73,12 @@ class LeftMenuViewController: UIViewController {
     // MARK: - Table view data source
 
 extension LeftMenuViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    private enum Section: Int {
+        case User
+        case Plant
+        case Info
+    }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 3
@@ -104,6 +114,7 @@ extension LeftMenuViewController: UITableViewDelegate, UITableViewDataSource {
             cell.annotationLabel.text = ["关于", "退出"][indexPath.row]
             let names = ["icon_about", "icon_logout"]
             cell.menuIconImageView.image = UIImage.imageUsedTemplateMode(names[indexPath.row])
+            cell.accessoryImageView.hidden = (indexPath.row == 1) ? true : false
             return cell
             
         default:
@@ -142,7 +153,12 @@ extension LeftMenuViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        if indexPath.section == 1 {
+        switch indexPath.section {
+            
+        case Section.User.rawValue:
+            return
+            
+        case Section.Plant.rawValue:
             
             print("did select row: \(indexPath.row)")
             
@@ -159,8 +175,43 @@ extension LeftMenuViewController: UITableViewDelegate, UITableViewDataSource {
             NSNotificationCenter.defaultCenter().postNotification(notification)
             
             WISClient.sharedInstance.drawerController?.closeDrawerAnimated(true, completion: nil)
+            
+        case Section.Info.rawValue:
+            
+            defer {
+                tableView.deselectRowAtIndexPath(indexPath, animated: true)
+            }
+            
+            switch indexPath.row {
+                
+            case 0:
+                // Push 后导航栏的透明度变了，待解决
+                let aboutStoryboard = UIStoryboard(name: "About", bundle: nil)
+                let aboutViewController = aboutStoryboard.instantiateInitialViewController()!
+                WISClient.sharedInstance.centerNavigation?.pushViewController(aboutViewController, animated: true)
+                WISClient.sharedInstance.drawerController?.closeDrawerAnimated(true, completion: nil)
+                
+            case 1:
+                WISAlert.confirmOrCancel(title: "通知", message: "您确定要退出吗？", confirmTitle: "是的", cancelTitle: "取消", inViewController: self, withConfirmAction: { () -> Void in
+                    // HUD 弹出有延时，待解决
+                    SVProgressHUD.show()
+                    delay(0.5, work: {
+                        WISCommon.currentAppDelegate.window?.rootViewController = LoginViewController()
+                        SVProgressHUD.dismiss()
+                    })
+                    
+                    }, cancelAction: {
+                        // 抽屉收回动画有延时，待解决
+                        WISClient.sharedInstance.drawerController?.closeDrawerAnimated(true, completion: nil)
+                })
+                
+            default:
+                return
+            }
+            
+        default:
+            return
         }
     }
-    
-
+        
 }

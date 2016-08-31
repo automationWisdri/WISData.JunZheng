@@ -28,6 +28,10 @@
 		9F1B57031D7472B30013D239 /* DataTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1B57011D7472B30013D239 /* DataTableCell.swift */; };
 		9F1B57041D7472B30013D239 /* DataTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9F1B57021D7472B30013D239 /* DataTableCell.xib */; };
 		9F1B57071D7474B00013D239 /* HorizontalLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1B57061D7474B00013D239 /* HorizontalLineView.swift */; };
+		9F1B70AB1D76EC7B007304F9 /* BoilerPurifyTitle.json in Resources */ = {isa = PBXBuildFile; fileRef = 9F1B70AA1D76EC7B007304F9 /* BoilerPurifyTitle.json */; };
+		9F1B70AD1D76F804007304F9 /* WISAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1B70AC1D76F804007304F9 /* WISAlert.swift */; };
+		9F1B70B11D76FC80007304F9 /* About.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F1B70AF1D76FC80007304F9 /* About.storyboard */; };
+		9F1B70B21D76FC80007304F9 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1B70B01D76FC80007304F9 /* AboutViewController.swift */; };
 		9F1F1D011D6FD2FA009A9780 /* UIImage+WIS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1F1D001D6FD2FA009A9780 /* UIImage+WIS.swift */; };
 		9F2823C41D6DE8DC00E0FF1A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9F2823C31D6DE8DC00E0FF1A /* Localizable.strings */; };
 		9FED66BD1D6ADE8E00F42992 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FED66BC1D6ADE8E00F42992 /* User.swift */; };
@@ -109,6 +113,10 @@
 		9F1B57011D7472B30013D239 /* DataTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataTableCell.swift; sourceTree = "<group>"; };
 		9F1B57021D7472B30013D239 /* DataTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DataTableCell.xib; sourceTree = "<group>"; };
 		9F1B57061D7474B00013D239 /* HorizontalLineView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HorizontalLineView.swift; sourceTree = "<group>"; };
+		9F1B70AA1D76EC7B007304F9 /* BoilerPurifyTitle.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = BoilerPurifyTitle.json; sourceTree = "<group>"; };
+		9F1B70AC1D76F804007304F9 /* WISAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WISAlert.swift; sourceTree = "<group>"; };
+		9F1B70AF1D76FC80007304F9 /* About.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = About.storyboard; sourceTree = "<group>"; };
+		9F1B70B01D76FC80007304F9 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		9F1F1D001D6FD2FA009A9780 /* UIImage+WIS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+WIS.swift"; sourceTree = "<group>"; };
 		9F2823C31D6DE8DC00E0FF1A /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		9FED66BC1D6ADE8E00F42992 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -268,6 +276,7 @@
 		9F0221A71D731F190056DDF5 /* TableTitle */ = {
 			isa = PBXGroup;
 			children = (
+				9F1B70AA1D76EC7B007304F9 /* BoilerPurifyTitle.json */,
 				9F0221A81D731F190056DDF5 /* FurnaceTitle.json */,
 			);
 			path = TableTitle;
@@ -279,6 +288,15 @@
 				9F1B57061D7474B00013D239 /* HorizontalLineView.swift */,
 			);
 			path = HorizontalLine;
+			sourceTree = "<group>";
+		};
+		9F1B70AE1D76FC80007304F9 /* About */ = {
+			isa = PBXGroup;
+			children = (
+				9F1B70AF1D76FC80007304F9 /* About.storyboard */,
+				9F1B70B01D76FC80007304F9 /* AboutViewController.swift */,
+			);
+			path = About;
 			sourceTree = "<group>";
 		};
 		9FED66B21D6ADE0C00F42992 /* Model */ = {
@@ -320,6 +338,7 @@
 				9F1B56EB1D74084A0013D239 /* WISUser.swift */,
 				9FED66C01D6AE18800F42992 /* WISDefine.swift */,
 				9F1618BD1D6F18710063B772 /* WISClient.swift */,
+				9F1B70AC1D76F804007304F9 /* WISAlert.swift */,
 				9F1B56EA1D74084A0013D239 /* WISUserSettings.swift */,
 				9FED66BE1D6ADFB500F42992 /* WISResponse.swift */,
 				9FED66C21D6AE39000F42992 /* WISHelper.swift */,
@@ -331,6 +350,7 @@
 		9FED66BB1D6ADE6300F42992 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				9F1B70AE1D76FC80007304F9 /* About */,
 				383995C41D7046D7002221F5 /* BaseViewController */,
 				9FED66EB1D6D4B6500F42992 /* Furnace */,
 				9FED66F21D6D707900F42992 /* BoilerPurify */,
@@ -548,6 +568,8 @@
 				9FED66ED1D6D4B8400F42992 /* Furnace.storyboard in Resources */,
 				38B91EFF1D615EBE00EFD37E /* Assets.xcassets in Resources */,
 				9FED67071D6D967100F42992 /* DatePickerView.xib in Resources */,
+				9F1B70AB1D76EC7B007304F9 /* BoilerPurifyTitle.json in Resources */,
+				9F1B70B11D76FC80007304F9 /* About.storyboard in Resources */,
 				9FED67001D6D83D300F42992 /* DataSearchButtonView.xib in Resources */,
 				9FED67031D6D83D300F42992 /* ShiftPickerContentView.xib in Resources */,
 				9F0221A91D731F190056DDF5 /* FurnaceTitle.json in Resources */,
@@ -706,6 +728,7 @@
 				9FED67051D6D85B100F42992 /* UIView+WIS.swift in Sources */,
 				9FED66DF1D6C7C2E00F42992 /* NSObject+WIS.swift in Sources */,
 				9FED67091D6D96BA00F42992 /* DatePickerView.swift in Sources */,
+				9F1B70AD1D76F804007304F9 /* WISAlert.swift in Sources */,
 				9FED66EF1D6D4B9A00F42992 /* FurnaceViewController.swift in Sources */,
 				9F1618BC1D6E89900063B772 /* LeftMenuViewController.swift in Sources */,
 				9FED66C51D6AE6FC00F42992 /* DataHomeViewController.swift in Sources */,
@@ -731,6 +754,7 @@
 				9FED66BD1D6ADE8E00F42992 /* User.swift in Sources */,
 				9F1B56EC1D74084A0013D239 /* WISUserSettings.swift in Sources */,
 				9FED66CD1D6B4CED00F42992 /* LoginViewController.swift in Sources */,
+				9F1B70B21D76FC80007304F9 /* AboutViewController.swift in Sources */,
 				9F1B56E81D73CF1A0013D239 /* LeftMenuCell.swift in Sources */,
 				38B91EFD1D615EBE00EFD37E /* AppDelegate.swift in Sources */,
 			);

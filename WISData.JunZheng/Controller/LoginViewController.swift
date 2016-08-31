@@ -213,7 +213,7 @@ class LoginViewController: ViewController {
             if valid {
                 self.passwordTextField!.backgroundColor = UIColor(white: 1, alpha: 0.1)
             } else {
-                self.passwordTextField!.backgroundColor = UIColor.wisLogoColor().colorWithAlphaComponent(0.3)
+                self.passwordTextField!.backgroundColor = UIColor.wisLogoColor().colorWithAlphaComponent(0.4)
             }
         }.addDisposableTo(disposeBag)
         
@@ -229,8 +229,8 @@ class LoginViewController: ViewController {
                 self.loginButton!.setTitleColor(UIColor.whiteColor(), forState: .Normal)
                 self.loginButton!.backgroundColor = UIColor.wisLogoColor()
             } else {
-                self.loginButton!.setTitleColor(UIColor.lightGrayColor(), forState: .Normal)
-                self.loginButton!.backgroundColor = UIColor.wisLogoColor().colorWithAlphaComponent(0.3)
+                self.loginButton!.setTitleColor(UIColor.lightGrayColor().colorWithAlphaComponent(0.8), forState: .Normal)
+                self.loginButton!.backgroundColor = UIColor.wisLogoColor().colorWithAlphaComponent(0.4)
             }
         }.addDisposableTo(disposeBag)
         
@@ -288,56 +288,8 @@ class LoginViewController: ViewController {
 //            self.backgroundImageView?.frame = CGRectMake(-1*( 1000 - SCREEN_WIDTH )/2, 0, SCREEN_HEIGHT+500, SCREEN_HEIGHT+500)
 //        }
 //    }
-    
-    /*
-    func loginClick(sender: UIButton){
-        
-        var username: String?
-        var password: String?
-        
-        if self.userNameTextField!.text?.length > 0 {
-            username = self.userNameTextField!.text!
-        }
-        else{
-            self.userNameTextField!.becomeFirstResponder()
-            return
-        }
-        
-        if self.passwordTextField!.text?.length > 0 {
-            password = self.passwordTextField!.text!
-        }
-        else{
-            self.passwordTextField!.becomeFirstResponder()
-            return
-        }
-        
-        self.userNameTextField?.resignFirstResponder()
-        self.passwordTextField?.resignFirstResponder()
-        SVProgressHUD.showWithStatus("正在登录")
-        
-        User.login(username: username!, password: password!) { (response: WISValueResponse<String>) -> Void in
-            if response.success {
-                SVProgressHUD.showSuccessWithStatus("登录成功")
-                
-                debugPrint("登录成功 %@", username)
-                //保存下用户名
-                WISUserSettings.sharedInstance[kUserName] = username
-                
-                SearchParameter["date"] = dateFormatterForSearch(NSDate())
-                
-                if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
-                    delay(0.25, work: {
-                        appDelegate.startMainStory()
-                    })
-                }
-            } else {
-                wisError(response.message)
-            }
-        }
-    }
-    */
-}
 
+}
 
 extension LoginViewController: UITextFieldDelegate {
     // The "next" button doesn't work till now.

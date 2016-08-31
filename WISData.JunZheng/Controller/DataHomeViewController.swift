@@ -10,7 +10,6 @@ import UIKit
 import PagingMenuController
 import LMDropdownView
 import SVProgressHUD
-import SlideMenuControllerSwift
 import DrawerController
 
 // MARK: - Paging Menu Configuration
@@ -106,6 +105,17 @@ enum ShiftType: Int {
             return "晚班"
         }
     }
+    
+    var getShiftNoForSearch: String {
+        switch self {
+        case .MorningShift:
+            return "2"
+        case .MiddleShift:
+            return "3"
+        case .NightShift:
+            return "1"
+        }
+    }
 }
 
 // MARK: - DataHomeViewController
@@ -131,6 +141,10 @@ class DataHomeViewController: UIViewController {
         
         // Layout Setup
         self.navigationItem.title = SearchParameter["lNo"]! + "#" + baseTitle
+        
+        let navigationBackButton = UIBarButtonItem()
+        navigationBackButton.title = EMPTY_STRING
+        self.navigationItem.backBarButtonItem = navigationBackButton
         
         let leftBarItem = UIBarButtonItem.init(image: UIImage(named: "icon_menu")!, style: .Plain, target: self, action: #selector(self.toggleLeftDrawer(_:)))
         self.navigationItem.leftBarButtonItem = leftBarItem

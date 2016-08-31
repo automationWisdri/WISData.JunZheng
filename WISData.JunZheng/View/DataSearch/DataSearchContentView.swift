@@ -163,7 +163,7 @@ class DataSearchContentView: UIView {
         switch buttonType {
         case .OK:
             SearchParameter["date"] = dateFormatterForSearch(self.datePickerView.searchDatePicker.date)
-            SearchParameter["shiftNo"] = String(self.shiftPickerContentView.currentSelectedIndexPath.row + 1)
+            SearchParameter["shiftNo"] = ShiftType(rawValue: shiftPickerContentView.currentSelectedIndexPath.row)!.getShiftNoForSearch
             print(SearchParameter)
             let notification = NSNotification(name: DataSearchNotification, object: nil)
             NSNotificationCenter.defaultCenter().postNotification(notification)

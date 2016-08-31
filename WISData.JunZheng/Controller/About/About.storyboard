@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="B7e-qT-n3V">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <scenes>
+        <!--About View Controller-->
+        <scene sceneID="BoP-eo-dVd">
+            <objects>
+                <viewController storyboardIdentifier="AboutViewController" automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" id="B7e-qT-n3V" customClass="AboutViewController" customModule="WISData_JunZheng" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="3gP-F0-Md3"/>
+                        <viewControllerLayoutGuide type="bottom" id="DBV-iO-pWY"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="EZp-Kz-Rn6">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="中冶南方生产数据平台借助移动互联网技术，让生产管理人员更便捷的获取生产数据，提高管理效率。" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lUp-YN-szW">
+                                <rect key="frame" x="30" y="222" width="540" height="300"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="300" id="KMP-OK-CXA"/>
+                                </constraints>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="生产数据平台" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="STw-iV-6mk">
+                                <rect key="frame" x="232" y="119" width="138" height="28"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="23"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version 0.5.1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YGt-Mh-BQL">
+                                <rect key="frame" x="261" y="155" width="80" height="17"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
+                                <color key="textColor" red="0.60000002379999995" green="0.60000002379999995" blue="0.60000002379999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Copyright © 2016 Wisdri." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rHG-mc-O86">
+                                <rect key="frame" x="229" y="570" width="142" height="15"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
+                                <color key="textColor" red="0.60000002379999995" green="0.60000002379999995" blue="0.60000002379999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_wisdri_logo" translatesAutoresizingMaskIntoConstraints="NO" id="gjf-PL-dZm">
+                                <rect key="frame" x="199" y="40" width="203" height="60"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="lUp-YN-szW" firstAttribute="leading" secondItem="EZp-Kz-Rn6" secondAttribute="leading" constant="30" id="3k6-nL-x9l"/>
+                            <constraint firstItem="YGt-Mh-BQL" firstAttribute="centerX" secondItem="STw-iV-6mk" secondAttribute="centerX" id="AiP-6p-eVX"/>
+                            <constraint firstItem="YGt-Mh-BQL" firstAttribute="top" secondItem="STw-iV-6mk" secondAttribute="bottom" constant="8" id="GeV-CJ-x86"/>
+                            <constraint firstItem="gjf-PL-dZm" firstAttribute="top" secondItem="3gP-F0-Md3" secondAttribute="bottom" constant="20" id="Vkq-1i-06m"/>
+                            <constraint firstItem="DBV-iO-pWY" firstAttribute="top" secondItem="rHG-mc-O86" secondAttribute="bottom" constant="15" id="fNe-iK-rJq"/>
+                            <constraint firstAttribute="centerX" secondItem="rHG-mc-O86" secondAttribute="centerX" id="hSy-Fg-9yg"/>
+                            <constraint firstItem="STw-iV-6mk" firstAttribute="centerX" secondItem="gjf-PL-dZm" secondAttribute="centerX" constant="0.5" id="oa7-44-D2a"/>
+                            <constraint firstItem="lUp-YN-szW" firstAttribute="centerX" secondItem="EZp-Kz-Rn6" secondAttribute="centerX" id="r1Z-Af-aGB"/>
+                            <constraint firstAttribute="trailing" secondItem="lUp-YN-szW" secondAttribute="trailing" constant="30" id="xht-J4-iQ1"/>
+                            <constraint firstAttribute="centerX" secondItem="gjf-PL-dZm" secondAttribute="centerX" id="yZr-p4-Cz5"/>
+                            <constraint firstItem="lUp-YN-szW" firstAttribute="top" secondItem="YGt-Mh-BQL" secondAttribute="bottom" constant="50" id="zDy-sX-W5O"/>
+                            <constraint firstItem="STw-iV-6mk" firstAttribute="top" secondItem="gjf-PL-dZm" secondAttribute="bottom" constant="19" id="zqS-j4-rlV"/>
+                        </constraints>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout" top="YES"/>
+                    <connections>
+                        <outlet property="aboutTextView" destination="lUp-YN-szW" id="CeB-BP-hcn"/>
+                        <outlet property="aboutTextViewHeightConstraint" destination="KMP-OK-CXA" id="NHh-FX-hF0"/>
+                        <outlet property="appLogoImageView" destination="gjf-PL-dZm" id="AW5-AD-adp"/>
+                        <outlet property="appLogoImageViewTopConstraint" destination="Vkq-1i-06m" id="09g-hB-T64"/>
+                        <outlet property="appNameLabel" destination="STw-iV-6mk" id="647-u7-H7H"/>
+                        <outlet property="appNameLabelTopConstraint" destination="zqS-j4-rlV" id="qpT-S9-J8m"/>
+                        <outlet property="appVersionLabel" destination="YGt-Mh-BQL" id="a3Z-VW-vYX"/>
+                        <outlet property="copyrightLabel" destination="rHG-mc-O86" id="dp1-ib-h6d"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1FF-09-HTp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3727" y="797"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="icon_wisdri_logo" width="203" height="60"/>
+    </resources>
+</document>

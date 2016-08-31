@@ -18,7 +18,7 @@ let SCREEN_HEIGHT = UIScreen.mainScreen().bounds.size.height
 let EMPTY_STRING = ""
 let SEPARATOR_HEIGHT = 1.0 / UIScreen.mainScreen().scale
 
-var SearchParameter: Dictionary = ["date": "", "shiftNo": "1", "lNo": "1"]
+var SearchParameter: Dictionary = ["date": "", "shiftNo": "2", "lNo": "2"]
 
 ///---------
 /// App Info

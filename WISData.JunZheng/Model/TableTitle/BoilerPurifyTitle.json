@@ -1,0 +1,25 @@
+{
+  "title": {
+	"JHXT_A_CO"		:	"净化分析\nA | CO\n(%)",
+	"JHXT_A_CO2"	:	"净化分析\nA | CO2\n(%)",
+	"JHXT_A_H2"		:	"净化分析\nA | H2\n(%)",
+	"JHXT_A_O2"		:	"净化分析\nA | O2\n(%)",
+	"JHXT_B_CO"		:	"净化分析\nB | CO\n(%)",
+	"JHXT_B_H2"		:	"净化分析\nB | H2\n(%)",
+	"JHXT_B_O2"		:	"净化分析\nB | O2\n(%)",
+	"JHXT_CKWD"		:	"净化\n出口温度\n(°C)",
+	"JHXT_FCHL"		:	"净化\n粉尘含量\n(g/cm3)",
+	"JHXT_GDYL"		:	"净化\n管道压力\n(KPa)",
+	"JHXT_HQWD"		:	"净化\n后气温度\n(°C)",
+	"JHXT_JKWD"		:	"净化\n进口温度\n(°C)",
+	"JHXT_JQWD"		:	"净化\n进气温度\n(°C)",
+	"JHXT_LY"		:	"净化\n炉压\n(Pa)",
+	"JQFJPL"		:	"净气\n风机频率\n(Hz)",
+	"YQFJPL"		:	"原气\n风机频率\n(Hz)",
+	"YRGL_CKWD"		:	"锅炉\n出口温度\n(°C)",
+	"YRGL_JKWD"		:	"锅炉\n进口温度\n(°C)",
+	"YRGL_QBSW"		:	"锅炉\n汽包水位\n(m)",
+	"YRGL_QBYL"		:	"锅炉\n汽包压力\n(MPa)",
+	"YRGL_ZQLL"		:	"锅炉\n蒸汽流量\n(T/h)"
+  }
+}
