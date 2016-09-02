@@ -10,7 +10,7 @@ import UIKit
 import SwiftyJSON
 import SVProgressHUD
 
-public let DataSearchNotification = "DataSearchNotification"
+
 public let DataTableColumnWidth: CGFloat = 70.0
 
 class FurnaceViewController: UIViewController {
@@ -24,6 +24,8 @@ class FurnaceViewController: UIViewController {
     
     private var tableContentJSON: Array = [JSON]()
     private var tableTitleJSON = JSON.null
+    
+    private static let firstColumnViewWidth: CGFloat = 95
     
     class func instantiateFromStoryboard() -> FurnaceViewController {
         let storyboard = UIStoryboard(name: "Furnace", bundle: nil)
@@ -48,9 +50,15 @@ class FurnaceViewController: UIViewController {
         // 
         // TBC: handle screen rotation!!!!!
         //
-        let dataViewWidth = SCREEN_WIDTH
-        let dataViewHeight = SCREEN_HEIGHT - 64 - 35
-        let firstColumnViewWidth: CGFloat = 95
+        let navigationBarHeight = self.navigationController?.navigationBar.bounds.height ?? CGFloat(40.0)
+        let statusBarHeight = STATUS_BAR_HEIGHT
+        let menuHeaderHeight = CGFloat(35.0)
+        
+        let dataViewWidth = CURRENT_SCREEN_WIDTH
+        let dataViewHeight = CURRENT_SCREEN_HEIGHT - navigationBarHeight - statusBarHeight - menuHeaderHeight
+        
+        self.dataView.frame = CGRectMake(0, 0, dataViewWidth, dataViewHeight)
+        
         // 
         // TBC: how to get row count?
         //
@@ -58,7 +66,7 @@ class FurnaceViewController: UIViewController {
         let columnCount = Furnace().propertyNames().count - 1
         
         // Draw view for first column
-        firstColumnView = UIView(frame: CGRectMake(0, 0, firstColumnViewWidth, dataViewHeight))
+        firstColumnView = UIView(frame: CGRectMake(0, 0, FurnaceViewController.firstColumnViewWidth, dataViewHeight))
         firstColumnView.backgroundColor = UIColor.clearColor()
 //        headerView.userInteractionEnabled = true
         self.dataView.addSubview(firstColumnView)
@@ -69,11 +77,11 @@ class FurnaceViewController: UIViewController {
         firstColumnView.addSubview(firstColumnTableView)
         
         // Draw view for data table
-        scrollView = UIScrollView(frame: CGRectMake (firstColumnViewWidth, 0, dataViewWidth - firstColumnViewWidth, dataViewHeight))
+        scrollView = UIScrollView(frame: CGRectMake (FurnaceViewController.firstColumnViewWidth, 0, dataViewWidth - FurnaceViewController.firstColumnViewWidth, dataViewHeight))
         scrollView.contentSize = CGSizeMake(CGFloat(columnCount) * DataTableColumnWidth, CGFloat(rowCount) * DataTableRowHeight)
         scrollView.showsHorizontalScrollIndicator = true
         scrollView.showsVerticalScrollIndicator = true
-        scrollView.bounces = false
+        scrollView.bounces = true
         scrollView.delegate = self
         scrollView.backgroundColor = UIColor.clearColor()
         self.dataView.addSubview(scrollView)
@@ -102,10 +110,43 @@ class FurnaceViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    override func shouldAutorotate() -> Bool {
+        return true
+    }
+    
+    override func willAnimateRotationToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
+        arrangeFurnaceView(self).layoutIfNeeded()
+    }
+    
+    private func arrangeFurnaceView(furnaceViewController: FurnaceViewController) -> UIView {
+        let navigationBarHeight = self.navigationController?.navigationBar.bounds.height ?? CGFloat(40.0)
+        let statusBarHeight = STATUS_BAR_HEIGHT
+        let menuHeaderHeight = CGFloat(35.0)
+        
+        let dataViewWidth = CURRENT_SCREEN_WIDTH
+        let dataViewHeight = CURRENT_SCREEN_HEIGHT - navigationBarHeight - statusBarHeight - menuHeaderHeight
+        
+        furnaceViewController.dataView.frame = CGRectMake(0, 0, dataViewWidth, dataViewHeight)
+
+        furnaceViewController.firstColumnView.frame = CGRectMake(0, 0, FurnaceViewController.firstColumnViewWidth, dataViewHeight)
+        furnaceViewController.firstColumnTableView.frame = firstColumnView.bounds
+        
+        furnaceViewController.scrollView.frame = CGRectMake(FurnaceViewController.firstColumnViewWidth, 0, dataViewWidth - FurnaceViewController.firstColumnViewWidth, dataViewHeight)
+        
+        // Draw data table
+        var tableColumnsCount = 0
+        for view in self.columnTableView {
+            view.frame = CGRectMake(CGFloat(tableColumnsCount) * DataTableColumnWidth, 0, DataTableColumnWidth, dataViewHeight)
+            tableColumnsCount += 1
+        }
+        
+        return furnaceViewController.view
+    }
+    
+    
     func getData() {
         
         SVProgressHUD.show()
-        
         firstColumnTableView.headerString = SearchParameter["date"]! + "\n" + getShiftName(SearchParameter["shiftNo"]!)[0]
         let firstColumnTitleArray = NSMutableArray()
         for i in 0 ..< 8 {

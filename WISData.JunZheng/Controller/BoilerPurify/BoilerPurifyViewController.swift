@@ -10,6 +10,7 @@ import UIKit
 import SwiftyJSON
 import SVProgressHUD
 
+
 class BoilerPurifyViewController: UIViewController {
 
     @IBOutlet weak var dataView: UIView!
@@ -21,6 +22,8 @@ class BoilerPurifyViewController: UIViewController {
     
     private var tableContentJSON: Array = [JSON]()
     private var tableTitleJSON = JSON.null
+    
+    private static let firstColumnViewWidth: CGFloat = 90
     
     class func instantiateFromStoryboard() -> BoilerPurifyViewController {
         let storyboard = UIStoryboard(name: "BoilerPurify", bundle: nil)
@@ -45,9 +48,13 @@ class BoilerPurifyViewController: UIViewController {
         //
         // TBC: handle screen rotation!!!!!
         //
-        let dataViewWidth = SCREEN_WIDTH
-        let dataViewHeight = SCREEN_HEIGHT - 64 - 35
-        let firstColumnViewWidth: CGFloat = 90
+        let navigationBarHeight = self.navigationController?.navigationBar.bounds.height ?? CGFloat(40.0)
+        let statusBarHeight = STATUS_BAR_HEIGHT
+        let menuHeaderHeight = CGFloat(35.0)
+        
+        let dataViewWidth = CURRENT_SCREEN_WIDTH
+        let dataViewHeight = CURRENT_SCREEN_HEIGHT - navigationBarHeight - statusBarHeight - menuHeaderHeight
+        
         //
         // TBC: how to get row count?
         //
@@ -55,7 +62,7 @@ class BoilerPurifyViewController: UIViewController {
         let columnCount = BoilerPurify().propertyNames().count - 1
         
         // Draw view for first column
-        firstColumnView = UIView(frame: CGRectMake(0, 0, firstColumnViewWidth, dataViewHeight))
+        firstColumnView = UIView(frame: CGRectMake(0, 0, BoilerPurifyViewController.firstColumnViewWidth, dataViewHeight))
         firstColumnView.backgroundColor = UIColor.clearColor()
         //        headerView.userInteractionEnabled = true
         self.dataView.addSubview(firstColumnView)
@@ -66,11 +73,11 @@ class BoilerPurifyViewController: UIViewController {
         firstColumnView.addSubview(firstColumnTableView)
         
         // Draw view for data table
-        scrollView = UIScrollView(frame: CGRectMake (firstColumnViewWidth, 0, dataViewWidth - firstColumnViewWidth, dataViewHeight))
+        scrollView = UIScrollView(frame: CGRectMake (BoilerPurifyViewController.firstColumnViewWidth, 0, dataViewWidth - BoilerPurifyViewController.firstColumnViewWidth, dataViewHeight))
         scrollView.contentSize = CGSizeMake(CGFloat(columnCount) * DataTableColumnWidth, CGFloat(rowCount) * DataTableRowHeight)
         scrollView.showsHorizontalScrollIndicator = true
         scrollView.showsVerticalScrollIndicator = true
-        scrollView.bounces = false
+        scrollView.bounces = true
         scrollView.delegate = self
         scrollView.backgroundColor = UIColor.clearColor()
         self.dataView.addSubview(scrollView)
@@ -91,14 +98,46 @@ class BoilerPurifyViewController: UIViewController {
         
         // Get data for data table
         getData()
-        
-        
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    override func shouldAutorotate() -> Bool {
+        return true
+    }
+    
+    override func willAnimateRotationToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
+        arrangeBoilerPurifyView(self).layoutIfNeeded()
+    }
+    
+    private func arrangeBoilerPurifyView(boilerPurifyViewController: BoilerPurifyViewController) -> UIView {
+        let navigationBarHeight = self.navigationController?.navigationBar.bounds.height ?? CGFloat(40.0)
+        let statusBarHeight = STATUS_BAR_HEIGHT
+        let menuHeaderHeight = CGFloat(35.0)
+        
+        let dataViewWidth = CURRENT_SCREEN_WIDTH
+        let dataViewHeight = CURRENT_SCREEN_HEIGHT - navigationBarHeight - statusBarHeight - menuHeaderHeight
+        
+        boilerPurifyViewController.dataView.frame = CGRectMake(0, 0, dataViewWidth, dataViewHeight)
+        
+        boilerPurifyViewController.firstColumnView.frame = CGRectMake(0, 0, BoilerPurifyViewController.firstColumnViewWidth, dataViewHeight)
+        boilerPurifyViewController.firstColumnTableView.frame = firstColumnView.bounds
+        
+        boilerPurifyViewController.scrollView.frame = CGRectMake(BoilerPurifyViewController.firstColumnViewWidth, 0, dataViewWidth - BoilerPurifyViewController.firstColumnViewWidth, dataViewHeight)
+        
+        // Draw data table
+        var tableColumnsCount = 0
+        for view in self.columnTableView {
+            view.frame = CGRectMake(CGFloat(tableColumnsCount) * DataTableColumnWidth, 0, DataTableColumnWidth, dataViewHeight)
+            tableColumnsCount += 1
+        }
+        
+        return boilerPurifyViewController.view
+    }
+
     
     func getData() {
         

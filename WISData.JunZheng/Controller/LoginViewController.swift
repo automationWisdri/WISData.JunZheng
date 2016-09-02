@@ -15,12 +15,15 @@ import Ruler
 import RxSwift
 import RxCocoa
 
+import DeviceKit
+
 let minimalUserNameLength = 4
 let minimalPasswordLength = 4
 
 class LoginViewController: ViewController {
 
     var backgroundImageView: UIImageView?
+    var contentView: UIView?
     var userNameTextField: UITextField?
     var passwordTextField: UITextField?
     var loginButton: UIButton?
@@ -39,8 +42,8 @@ class LoginViewController: ViewController {
         self.view.addSubview(self.backgroundImageView!)
         backgroundImageView!.alpha = 1
         
-        let contentView = UIView(frame: self.view.frame)
-        self.view.addSubview(contentView)
+        contentView = UIView(frame: self.view.frame)
+        self.view.addSubview(contentView!)
         
         let topPartTopConstraint = Ruler.iPhoneVertical(70, 130, 130, 130).value
         
@@ -48,19 +51,19 @@ class LoginViewController: ViewController {
         wisLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 40)!
         wisLabel.text = "WISDRI"
         wisLabel.textColor = UIColor.wisLogoColor()
-        contentView.addSubview(wisLabel)
+        contentView!.addSubview(wisLabel)
         wisLabel.snp_makeConstraints{ (make) -> Void in
-            make.centerX.equalTo(contentView)
-            make.top.equalTo(contentView).offset(topPartTopConstraint)
+            make.centerX.equalTo(contentView!)
+            make.top.equalTo(contentView!).offset(topPartTopConstraint)
         }
         
         let wisSummaryLabel = UILabel()
         wisSummaryLabel.font = wisFont(23)
         wisSummaryLabel.text = "生产数据管理"
         wisSummaryLabel.textColor = UIColor.wisLogoColor()
-        contentView.addSubview(wisSummaryLabel)
+        contentView!.addSubview(wisSummaryLabel)
         wisSummaryLabel.snp_makeConstraints{ (make) -> Void in
-            make.centerX.equalTo(contentView)
+            make.centerX.equalTo(contentView!)
             make.top.equalTo(wisLabel.snp_bottom).offset(8)
         }
         
@@ -91,14 +94,14 @@ class LoginViewController: ViewController {
         self.userNameTextField!.leftView = userNameIconImageView
         self.userNameTextField!.leftViewMode = .Always
         
-        contentView.addSubview(self.userNameTextField!)
+        contentView!.addSubview(self.userNameTextField!)
         
         let bottomPartTopConstraint = Ruler.iPhoneVertical(100, 120, 200, 240).value
         let bottomPartWidthConstraint = Ruler.iPhoneVertical(250, 270, 300, 300).value
         
         self.userNameTextField!.snp_makeConstraints{ (make) -> Void in
             make.top.equalTo(wisSummaryLabel.snp_bottom).offset(bottomPartTopConstraint)
-            make.centerX.equalTo(contentView)
+            make.centerX.equalTo(contentView!)
             make.width.equalTo(bottomPartWidthConstraint)
             make.height.equalTo(38)
         }
@@ -125,11 +128,11 @@ class LoginViewController: ViewController {
         self.passwordTextField!.leftViewMode = .Always
         self.passwordTextField?.delegate = self
         
-        contentView.addSubview(self.passwordTextField!)
+        contentView!.addSubview(self.passwordTextField!)
         
         self.passwordTextField!.snp_makeConstraints{ (make) -> Void in
             make.top.equalTo(self.userNameTextField!.snp_bottom).offset(15)
-            make.centerX.equalTo(contentView)
+            make.centerX.equalTo(contentView!)
             make.width.equalTo(bottomPartWidthConstraint)
             make.height.equalTo(38)
         }
@@ -141,11 +144,11 @@ class LoginViewController: ViewController {
         self.loginButton!.layer.cornerRadius = 3
         self.loginButton!.layer.borderWidth = 0.5
         self.loginButton!.layer.borderColor = UIColor.wisLogoColor().CGColor
-        contentView.addSubview(self.loginButton!)
+        contentView!.addSubview(self.loginButton!)
         
         self.loginButton!.snp_makeConstraints { (make) -> Void in
             make.top.equalTo(self.passwordTextField!.snp_bottom).offset(20)
-            make.centerX.equalTo(contentView)
+            make.centerX.equalTo(contentView!)
             make.width.equalTo(bottomPartWidthConstraint)
             make.height.equalTo(38)
         }
@@ -170,11 +173,11 @@ class LoginViewController: ViewController {
         footLabel.text = "© 2016 WISDRI"
         footLabel.textColor = UIColor.wisLogoColor()
         
-        contentView.addSubview(footLabel)
+        contentView!.addSubview(footLabel)
         
         footLabel.snp_makeConstraints{ (make) -> Void in
-            make.bottom.equalTo(contentView).offset(-20)
-            make.centerX.equalTo(contentView)
+            make.bottom.equalTo(contentView!).offset(-20)
+            make.centerX.equalTo(contentView!)
         }
         
         self.view.userInteractionEnabled = true
@@ -277,6 +280,17 @@ class LoginViewController: ViewController {
             }
             .addDisposableTo(disposeBag)
         view.addGestureRecognizer(singleTap!)
+    }
+    
+    override func shouldAutorotate() -> Bool {
+        return Device().isPad
+    }
+    
+    override func willRotateToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
+        self.view.frame = CGRectMake(0, 0, CURRENT_SCREEN_HEIGHT, CURRENT_SCREEN_WIDTH)
+        self.backgroundImageView!.frame = self.view.frame
+        contentView!.frame = self.view.frame
+        self.view.layoutIfNeeded()
     }
     
     

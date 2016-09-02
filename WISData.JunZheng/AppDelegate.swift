@@ -54,7 +54,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let leftViewController = LeftMenuViewController()
         let drawerController = DrawerController(centerViewController: centerNav, leftDrawerViewController: leftViewController)
         
-        drawerController.maximumLeftDrawerWidth = 150
+        drawerController.maximumLeftDrawerWidth = 200
         drawerController.openDrawerGestureModeMask = OpenDrawerGestureMode.PanningCenterView
         drawerController.closeDrawerGestureModeMask = CloseDrawerGestureMode.All
         drawerController.animationVelocity = 420.0

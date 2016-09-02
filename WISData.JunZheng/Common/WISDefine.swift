@@ -7,14 +7,28 @@
 //
 
 import UIKit
+import DeviceKit
 
 ///---------
 /// Common
 ///---------
 let BaseURL = "http://service.wisdriis.com:9090/MyService.svc"
 
-let SCREEN_WIDTH = UIScreen.mainScreen().bounds.size.width
-let SCREEN_HEIGHT = UIScreen.mainScreen().bounds.size.height
+var CURRENT_SCREEN_WIDTH: CGFloat {
+    return UIScreen.mainScreen().bounds.size.width
+}
+
+var CURRENT_SCREEN_HEIGHT: CGFloat {
+    return UIScreen.mainScreen().bounds.size.height
+}
+
+var STATUS_BAR_HEIGHT: CGFloat {
+    if UIDevice.currentDevice().orientation.isPortrait {
+        return UIApplication.sharedApplication().statusBarFrame.height
+    } else {
+        return Device().isPad ? UIApplication.sharedApplication().statusBarFrame.height : CGFloat(0.0)
+    }
+}
 let EMPTY_STRING = ""
 let SEPARATOR_HEIGHT = 1.0 / UIScreen.mainScreen().scale
 

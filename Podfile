@@ -15,6 +15,7 @@ def pods
     pod 'MJExtension'
     pod 'RxSwift', '~> 2.6.0'
     pod 'RxCocoa', '~> 2.6.0'
+    pod 'DeviceKit', '~> 0.3.0'
 end
 
 target 'WISData.JunZheng' do

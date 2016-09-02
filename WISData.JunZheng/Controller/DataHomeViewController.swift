@@ -12,10 +12,10 @@ import LMDropdownView
 import SVProgressHUD
 import DrawerController
 
-// MARK: - Paging Menu Configuration
+public let DataSearchNotification = "DataSearchNotification"
 
+// MARK: - Paging Menu Configuration
 private var pagingControllers: [UIViewController] {
-    
     let furnaceViewController = FurnaceViewController.instantiateFromStoryboard()
     let boilerPurifyPowerViewController = BoilerPurifyViewController.instantiateFromStoryboard()
     let materialPowerViewController = MaterialPowerViewController.instantiateFromStoryboard()
@@ -34,8 +34,11 @@ private let selectedColor = UIColor.wisLogoColor()
 struct PagingMenuOptions: PagingMenuControllerCustomizable {
     
     var componentType: ComponentType {
-        
         return .All(menuOptions: MenuOptions(), pagingControllers: pagingControllers)
+    }
+    
+    var scrollEnabled: Bool {
+        return false
     }
     
     struct MenuOptions: MenuViewCustomizable {
@@ -155,8 +158,8 @@ class DataHomeViewController: UIViewController {
         // Call Paging Menu
         let pagingMenuController = PagingMenuController(options: PagingMenuOptions())
         pagingMenuController.delegate = self
-        pagingMenuController.view.frame.origin.y += 64
-        pagingMenuController.view.frame.size.height -= 64
+        
+        arrangePagingMenuView(pagingMenuController)
         
         addChildViewController(pagingMenuController)
         view.addSubview(pagingMenuController.view)
@@ -187,6 +190,27 @@ class DataHomeViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func shouldAutorotate() -> Bool {
+        return true
+    }
+    
+    override func willAnimateRotationToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
+        let pagingMenuController = self.childViewControllers[0] as! PagingMenuController
+        arrangePagingMenuView(pagingMenuController).layoutIfNeeded()
+    }
+    
+    func arrangePagingMenuView(pagingMenuController: UIViewController) -> UIView {
+        let navigationBarHeight = self.navigationController?.navigationBar.bounds.height
+        let statusBarHeight = STATUS_BAR_HEIGHT
+        
+        let pageWidth = CURRENT_SCREEN_WIDTH
+        let pageHeight = CURRENT_SCREEN_HEIGHT - navigationBarHeight! - statusBarHeight
+        
+        pagingMenuController.view.frame = CGRectMake(0, navigationBarHeight! + statusBarHeight, pageWidth, pageHeight)
+        
+        return pagingMenuController.view
     }
     
     func toggleLeftDrawer(sender: UIBarButtonItem) -> Void {
