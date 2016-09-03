@@ -18,16 +18,30 @@ protocol DataTableViewDelegate {
 class DataTableView: UITableView {
 
     var dataTableDelegate: DataTableViewDelegate!
-    var titleArray = NSMutableArray()
-    var headerString: String = EMPTY_STRING
+    // var titleArray: [String] = []
+    // var headerString: String = EMPTY_STRING
+    
+    var viewModel: DataTableViewModel!
     
     private let DataTableCellID = "DataTableCell"
     
     override init(frame: CGRect, style: UITableViewStyle) {
         super.init(frame: frame, style:style)
         
+        self.viewModel = DataTableViewModel(sourceTableView: self)
         setupViews()
         self.registerNib(UINib(nibName: DataTableCellID, bundle: nil), forCellReuseIdentifier: DataTableCellID)
+        
+        // bind data
+        self.rx_setDelegate(self)
+            .addDisposableTo(viewModel.disposeBag)
+        
+        self.viewModel.dataSource
+            .configureCell = { [unowned self] (_, tableView, indexPath, element) in
+            let cell = getCell(tableView, cell: DataTableCell.self, indexPath: indexPath)
+            cell.dataTextView.text = self.viewModel.titleArray[indexPath.row]
+            return cell
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -35,8 +49,8 @@ class DataTableView: UITableView {
     }
     
     func setupViews() {
-        self.delegate = self
-        self.dataSource = self
+        // self.delegate = self
+        // self.dataSource = self
         self.showsVerticalScrollIndicator = false
         self.backgroundColor = UIColor.clearColor()
         self.separatorStyle = .None
@@ -51,8 +65,8 @@ class DataTableView: UITableView {
 
 // MARK: - UITableView Delegate & DataSource
 
-extension DataTableView: UITableViewDelegate, UITableViewDataSource {
-    
+extension DataTableView: UITableViewDelegate {
+    /*
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return titleArray.count
     }
@@ -60,18 +74,18 @@ extension DataTableView: UITableViewDelegate, UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = getCell(tableView, cell: DataTableCell.self, indexPath: indexPath)
-        cell.dataTextView.text = titleArray[indexPath.row] as? String
+        cell.dataTextView.text = titleArray[indexPath.row]
 
         return cell
     }
+    */
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        
         let headerView = UITableViewHeaderFooterView(frame: CGRectMake (0, 0, self.frame.width, DataTableHeaderRowHeight))
         headerView.contentView.backgroundColor = UIColor.wisGroupHeaderColor()
 
         let headerTextView = UITextView(frame: CGRect(x: 0, y: 0, width: headerView.bounds.width, height: headerView.bounds.height - 1))
-        headerTextView.text = self.headerString
+        headerTextView.text = self.viewModel.headerString
         headerTextView.textColor = UIColor.blackColor()
         headerTextView.font = wisFont(12)
         headerTextView.backgroundColor = UIColor.clearColor()

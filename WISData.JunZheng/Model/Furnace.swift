@@ -86,6 +86,7 @@ extension Furnace {
     class func get(date date: String, shiftNo: String, lNo: String, completionHandler: WISValueResponse<[JSON]> -> Void) -> Void {
         
         let getURL = BaseURL + "/GetDSLState?date=\(date)&shiftNo=\(shiftNo)&lNo=\(lNo)"
+        
         Alamofire.request(.POST, getURL).responseJSON { response in
             switch response.result {
             case .Success:
@@ -94,7 +95,7 @@ extension Furnace {
                     
                     if let furnaceArray = Furnace.mj_objectArrayWithKeyValuesArray(json["Infos"].rawString()) {
                         for furnace in furnaceArray {
-//                            debugPrint(furnace.Id)
+                            //                            debugPrint(furnace.Id)
                         }
                     }
                     let t = WISValueResponse<[JSON]>(value: json["Infos"].arrayValue, success: response.result.isSuccess)

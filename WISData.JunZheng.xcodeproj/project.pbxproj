@@ -11,6 +11,7 @@
 		383995C01D7045A7002221F5 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383995BE1D7045A7002221F5 /* ViewModel.swift */; };
 		383995C11D7045A7002221F5 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383995BF1D7045A7002221F5 /* LoginViewModel.swift */; };
 		383995C61D7046D7002221F5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383995C51D7046D7002221F5 /* ViewController.swift */; };
+		38AE580C1D796DE900B596E4 /* DataTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AE580B1D796DE900B596E4 /* DataTableViewModel.swift */; };
 		38B91EFD1D615EBE00EFD37E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B91EFC1D615EBE00EFD37E /* AppDelegate.swift */; };
 		38B91EFF1D615EBE00EFD37E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 38B91EFE1D615EBE00EFD37E /* Assets.xcassets */; };
 		38B91F0D1D615EBE00EFD37E /* WISData_JunZhengTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B91F0C1D615EBE00EFD37E /* WISData_JunZhengTests.swift */; };
@@ -88,6 +89,7 @@
 		383995BE1D7045A7002221F5 /* ViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		383995BF1D7045A7002221F5 /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		383995C51D7046D7002221F5 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		38AE580B1D796DE900B596E4 /* DataTableViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataTableViewModel.swift; sourceTree = "<group>"; };
 		38B91EF91D615EBE00EFD37E /* WISData.JunZheng.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WISData.JunZheng.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		38B91EFC1D615EBE00EFD37E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		38B91EFE1D615EBE00EFD37E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -185,6 +187,7 @@
 			children = (
 				383995BD1D7045A7002221F5 /* BaseViewModel */,
 				383995BF1D7045A7002221F5 /* LoginViewModel.swift */,
+				38AE580B1D796DE900B596E4 /* DataTableViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -731,6 +734,7 @@
 				9F1B70AD1D76F804007304F9 /* WISAlert.swift in Sources */,
 				9FED66EF1D6D4B9A00F42992 /* FurnaceViewController.swift in Sources */,
 				9F1618BC1D6E89900063B772 /* LeftMenuViewController.swift in Sources */,
+				38AE580C1D796DE900B596E4 /* DataTableViewModel.swift in Sources */,
 				9FED66C51D6AE6FC00F42992 /* DataHomeViewController.swift in Sources */,
 				9FED66E61D6CAE4200F42992 /* MaterialPowerViewController.swift in Sources */,
 				383995C01D7045A7002221F5 /* ViewModel.swift in Sources */,

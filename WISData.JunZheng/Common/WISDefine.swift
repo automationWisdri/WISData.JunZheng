@@ -13,17 +13,28 @@ import DeviceKit
 /// Common
 ///---------
 let BaseURL = "http://service.wisdriis.com:9090/MyService.svc"
+let currentDevice = Device()
 
 var CURRENT_SCREEN_WIDTH: CGFloat {
-    return UIScreen.mainScreen().bounds.size.width
+    // I really don't not the reason, but on simulators, the code below works exactly right~ 2016.09.03
+//    if currentDevice.isPad/*device.isOneOf([.Simulator(.iPad2), .iPadAir, .iPadAir2, .iPadPro])*/ {
+//        return UIScreen.mainScreen().bounds.size.height
+//    } else {
+        return UIScreen.mainScreen().bounds.size.width
+    //}
 }
 
 var CURRENT_SCREEN_HEIGHT: CGFloat {
-    return UIScreen.mainScreen().bounds.size.height
+//    if currentDevice.isPad/*device.isOneOf([.Simulator(.iPad2), .iPadAir, .iPadAir2, .iPadPro])*/ {
+//        return UIScreen.mainScreen().bounds.size.width
+//    } else {
+        return UIScreen.mainScreen().bounds.size.height
+    //}
 }
 
 var STATUS_BAR_HEIGHT: CGFloat {
-    if UIDevice.currentDevice().orientation.isPortrait {
+    let orientation = UIApplication.sharedApplication().statusBarOrientation
+    if  orientation == .Portrait || orientation == .PortraitUpsideDown {
         return UIApplication.sharedApplication().statusBarFrame.height
     } else {
         return Device().isPad ? UIApplication.sharedApplication().statusBarFrame.height : CGFloat(0.0)

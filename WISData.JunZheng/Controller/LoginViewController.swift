@@ -35,7 +35,21 @@ class LoginViewController: ViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        if !Device().isPad {
+            UIApplication.sharedApplication().setStatusBarOrientation(.Portrait, animated: false)
+        }
+        
+        // self.interfaceOrientation has deprecated on iOS 8 and later version of iOS.
+        // should find a better way to solve this.
+        if !Device().isPad {
+        self.view.frame = self.interfaceOrientation == .Portrait ?
+            CGRectMake(0, 0, CURRENT_SCREEN_WIDTH, CURRENT_SCREEN_HEIGHT)
+            : CGRectMake(0, 0, CURRENT_SCREEN_HEIGHT, CURRENT_SCREEN_WIDTH)
+        } else {
+            //
+        }
+        
         self.backgroundImageView = UIImageView(image: UIImage(named: "login_background"))
         self.backgroundImageView!.frame = self.view.frame
         self.backgroundImageView!.contentMode = .ScaleToFill
@@ -286,10 +300,15 @@ class LoginViewController: ViewController {
         return Device().isPad
     }
     
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return Device().isPad ? .All : .Portrait
+    }
+    
     override func willRotateToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
-        self.view.frame = CGRectMake(0, 0, CURRENT_SCREEN_HEIGHT, CURRENT_SCREEN_WIDTH)
+        self.view.frame = CGRectMake(0, 0, CURRENT_SCREEN_WIDTH, CURRENT_SCREEN_HEIGHT)
         self.backgroundImageView!.frame = self.view.frame
         contentView!.frame = self.view.frame
+        print(self.view.frame)
         self.view.layoutIfNeeded()
     }
     

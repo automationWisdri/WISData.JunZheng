@@ -10,8 +10,12 @@ import UIKit
 import SwiftyJSON
 import SVProgressHUD
 
+#if !RX_NO_MODULE
+    import RxSwift
+    import RxCocoa
+#endif
 
-class BoilerPurifyViewController: UIViewController {
+class BoilerPurifyViewController: ViewController {
 
     @IBOutlet weak var dataView: UIView!
     
@@ -19,6 +23,8 @@ class BoilerPurifyViewController: UIViewController {
     private var scrollView: UIScrollView!
     private var firstColumnTableView: DataTableView!
     private var columnTableView = [DataTableView]()
+    
+    private let rowCount: Int = 8
     
     private var tableContentJSON: Array = [JSON]()
     private var tableTitleJSON = JSON.null
@@ -58,7 +64,6 @@ class BoilerPurifyViewController: UIViewController {
         //
         // TBC: how to get row count?
         //
-        let rowCount = 8
         let columnCount = BoilerPurify().propertyNames().count - 1
         
         // Draw view for first column
@@ -99,7 +104,7 @@ class BoilerPurifyViewController: UIViewController {
         // Get data for data table
         getData()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -140,44 +145,63 @@ class BoilerPurifyViewController: UIViewController {
 
     
     func getData() {
-        
         SVProgressHUD.show()
         
-        firstColumnTableView.headerString = SearchParameter["date"]! + "\n" + getShiftName(SearchParameter["shiftNo"]!)[0]
-        let firstColumnTitleArray = NSMutableArray()
-        for i in 0 ..< 8 {
-            firstColumnTitleArray.addObject(getShiftName(SearchParameter["shiftNo"]!)[i + 1])
+        dispatch_async(dispatch_get_main_queue()) {
+            self.firstColumnTableView.viewModel.headerString = SearchParameter["date"]! + "\n" + getShiftName(SearchParameter["shiftNo"]!)[0]
+            var firstColumnTitleArray: [String] = []
+            for i in 0 ..< 8 {
+                firstColumnTitleArray.append(getShiftName(SearchParameter["shiftNo"]!)[i + 1])
+            }
+            self.firstColumnTableView.viewModel.titleArray = firstColumnTitleArray
+            self.firstColumnTableView.viewModel.titleArraySubject
+                .onNext(firstColumnTitleArray)
+            // self.firstColumnTableView.reloadData()
         }
-        firstColumnTableView.titleArray = firstColumnTitleArray
         
-        BoilerPurify.get(date: SearchParameter["date"]!, shiftNo: SearchParameter["shiftNo"]!, lNo: SearchParameter["lNo"]!) { (response: WISValueResponse<[JSON]>) in
-            if response.success {
-                SVProgressHUD.dismiss()
-                self.tableContentJSON = response.value!
-                self.firstColumnTableView.reloadData()
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+            BoilerPurify.get(date: SearchParameter["date"]!, shiftNo: SearchParameter["shiftNo"]!, lNo: SearchParameter["lNo"]!) { (response: WISValueResponse<[JSON]>) in
                 
-                var tableColumnsCount = 0
-                for p in BoilerPurify().propertyNames() {
-                    if p == "Id" {
-                        continue
-                    } else {
-                        // header
-                        let columnTitle: String = self.tableTitleJSON["title"][p].stringValue
-                        self.columnTableView[tableColumnsCount].headerString = columnTitle
-                        // content
-                        let contentArray = NSMutableArray()
-                        for j in 0 ..< self.tableContentJSON.count {
-                            let content = self.tableContentJSON[j][p].stringValue
-                            contentArray.addObject(content)
-                        }
-                        self.columnTableView[tableColumnsCount].titleArray = contentArray
+                dispatch_async(dispatch_get_main_queue()) {
+                    if response.success {
+                        SVProgressHUD.dismiss()
+                        self.tableContentJSON = response.value!
+                        // self.firstColumnTableView.reloadData()
                         
-                        self.columnTableView[tableColumnsCount].reloadData()
-                        tableColumnsCount += 1
+                        var tableColumnsCount = 0
+                        for p in BoilerPurify().propertyNames() {
+                            if p == "Id" {
+                                continue
+                            } else {
+                                // header
+                                let columnTitle: String = self.tableTitleJSON["title"][p].stringValue
+                                self.columnTableView[tableColumnsCount].viewModel.headerString = columnTitle
+                                self.columnTableView[tableColumnsCount].viewModel.headerStringSubject
+                                    .onNext(columnTitle)
+                                // content
+                                var contentArray: [String] = []
+                                for j in 0 ..< self.tableContentJSON.count {
+                                    let content = self.tableContentJSON[j][p].stringValue
+                                    contentArray.append(content)
+                                }
+                                if self.tableContentJSON.count < self.rowCount {
+                                    for _ in self.tableContentJSON.count...(self.rowCount - 1) {
+                                        contentArray.append("")
+                                    }
+                                }
+                                
+                                self.columnTableView[tableColumnsCount].viewModel.titleArray = contentArray
+                                self.columnTableView[tableColumnsCount].viewModel.titleArraySubject
+                                    .onNext(contentArray)
+                                
+                                // self.columnTableView[tableColumnsCount].reloadData()
+                                tableColumnsCount += 1
+                            }
+                        }
+                    } else {
+                        wisError(response.message)
                     }
                 }
-            } else {
-                wisError(response.message)
             }
         }
     }

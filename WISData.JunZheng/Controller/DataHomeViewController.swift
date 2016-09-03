@@ -201,7 +201,7 @@ class DataHomeViewController: UIViewController {
         arrangePagingMenuView(pagingMenuController).layoutIfNeeded()
     }
     
-    func arrangePagingMenuView(pagingMenuController: UIViewController) -> UIView {
+    private func arrangePagingMenuView(pagingMenuController: UIViewController) -> UIView {
         let navigationBarHeight = self.navigationController?.navigationBar.bounds.height
         let statusBarHeight = STATUS_BAR_HEIGHT
         
@@ -313,7 +313,6 @@ extension DataHomeViewController: DataSearchContentViewDelegate {
         print("Cancel Button pressed")
         if self.searchDropDownView.isOpen {
             self.searchDropDownView.hide()
-            
         }
     }
 }
