@@ -11,6 +11,7 @@
 		383995C01D7045A7002221F5 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383995BE1D7045A7002221F5 /* ViewModel.swift */; };
 		383995C11D7045A7002221F5 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383995BF1D7045A7002221F5 /* LoginViewModel.swift */; };
 		383995C61D7046D7002221F5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383995C51D7046D7002221F5 /* ViewController.swift */; };
+		387377401D7C1D6800AA2425 /* SearchPopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3873773F1D7C1D6800AA2425 /* SearchPopoverViewController.swift */; };
 		38AE580C1D796DE900B596E4 /* DataTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AE580B1D796DE900B596E4 /* DataTableViewModel.swift */; };
 		38B91EFD1D615EBE00EFD37E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B91EFC1D615EBE00EFD37E /* AppDelegate.swift */; };
 		38B91EFF1D615EBE00EFD37E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 38B91EFE1D615EBE00EFD37E /* Assets.xcassets */; };
@@ -89,6 +90,7 @@
 		383995BE1D7045A7002221F5 /* ViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		383995BF1D7045A7002221F5 /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		383995C51D7046D7002221F5 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		3873773F1D7C1D6800AA2425 /* SearchPopoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchPopoverViewController.swift; sourceTree = "<group>"; };
 		38AE580B1D796DE900B596E4 /* DataTableViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataTableViewModel.swift; sourceTree = "<group>"; };
 		38B91EF91D615EBE00EFD37E /* WISData.JunZheng.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WISData.JunZheng.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		38B91EFC1D615EBE00EFD37E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -361,6 +363,7 @@
 				9FED66CC1D6B4CED00F42992 /* LoginViewController.swift */,
 				9F1618BB1D6E89900063B772 /* LeftMenuViewController.swift */,
 				9FED66C41D6AE6FC00F42992 /* DataHomeViewController.swift */,
+				3873773F1D7C1D6800AA2425 /* SearchPopoverViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -751,6 +754,7 @@
 				383995C61D7046D7002221F5 /* ViewController.swift in Sources */,
 				383995C11D7045A7002221F5 /* LoginViewModel.swift in Sources */,
 				9FED66D71D6C482C00F42992 /* UIColor+WIS.swift in Sources */,
+				387377401D7C1D6800AA2425 /* SearchPopoverViewController.swift in Sources */,
 				9FED66F81D6D71D200F42992 /* BoilerPurify.swift in Sources */,
 				9FED66D81D6C482C00F42992 /* String+WIS.swift in Sources */,
 				9F1B57031D7472B30013D239 /* DataTableCell.swift in Sources */,

@@ -118,6 +118,10 @@ class BoilerPurifyViewController: ViewController {
         arrangeBoilerPurifyView(self).layoutIfNeeded()
     }
     
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: DataSearchNotification, object: nil)
+    }
+    
     private func arrangeBoilerPurifyView(boilerPurifyViewController: BoilerPurifyViewController) -> UIView {
         let navigationBarHeight = self.navigationController?.navigationBar.bounds.height ?? CGFloat(40.0)
         let statusBarHeight = STATUS_BAR_HEIGHT

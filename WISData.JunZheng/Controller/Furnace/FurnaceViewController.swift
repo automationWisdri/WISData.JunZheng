@@ -110,7 +110,6 @@ class FurnaceViewController: ViewController {
         self.getData()
     }
     
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -122,6 +121,10 @@ class FurnaceViewController: ViewController {
     
     override func willAnimateRotationToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
         arrangeFurnaceView(self).layoutIfNeeded()
+    }
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: DataSearchNotification, object: nil)
     }
     
     private func arrangeFurnaceView(furnaceViewController: FurnaceViewController) -> UIView {
