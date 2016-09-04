@@ -37,7 +37,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window!.backgroundColor = UIColor.whiteColor()
         self.window!.makeKeyAndVisible()
         
-        self.window?.rootViewController = LoginViewController()
+        if User.obtainRecentUserName() == nil {
+            self.window!.rootViewController = LoginViewController()
+        } else {
+            startMainStory()
+        }
+        
         
         return true
     }
@@ -49,7 +54,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func startMainStory() {
-
+        SearchParameter["date"] = dateFormatterForSearch(NSDate())
+        
         let centerNav = UINavigationController(rootViewController: DataHomeViewController())
         let leftViewController = LeftMenuViewController()
         let drawerController = DrawerController(centerViewController: centerNav, leftDrawerViewController: leftViewController)
@@ -59,12 +65,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         drawerController.closeDrawerGestureModeMask = CloseDrawerGestureMode.All
         drawerController.animationVelocity = 420.0
         
-        self.window?.rootViewController = drawerController
+        self.window!.rootViewController = drawerController
         
         WISClient.sharedInstance.drawerController = drawerController
         WISClient.sharedInstance.centerViewController = centerNav.viewControllers[0] as? DataHomeViewController
         WISClient.sharedInstance.centerNavigation = centerNav
-
     }
 
     func applicationWillResignActive(application: UIApplication) {

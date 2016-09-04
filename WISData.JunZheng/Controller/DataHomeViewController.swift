@@ -272,7 +272,6 @@ extension DataHomeViewController {
             default:
                 break
             }
-            
         }
     }
 }
