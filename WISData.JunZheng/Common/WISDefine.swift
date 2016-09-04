@@ -7,14 +7,39 @@
 //
 
 import UIKit
+import DeviceKit
 
 ///---------
 /// Common
 ///---------
 let BaseURL = "http://service.wisdriis.com:9090/MyService.svc"
+let currentDevice = Device()
 
-let SCREEN_WIDTH = UIScreen.mainScreen().bounds.size.width
-let SCREEN_HEIGHT = UIScreen.mainScreen().bounds.size.height
+var CURRENT_SCREEN_WIDTH: CGFloat {
+    // I really don't not the reason, but on simulators, the code below works exactly right~ 2016.09.03
+//    if currentDevice.isPad/*device.isOneOf([.Simulator(.iPad2), .iPadAir, .iPadAir2, .iPadPro])*/ {
+//        return UIScreen.mainScreen().bounds.size.height
+//    } else {
+        return UIScreen.mainScreen().bounds.size.width
+    //}
+}
+
+var CURRENT_SCREEN_HEIGHT: CGFloat {
+//    if currentDevice.isPad/*device.isOneOf([.Simulator(.iPad2), .iPadAir, .iPadAir2, .iPadPro])*/ {
+//        return UIScreen.mainScreen().bounds.size.width
+//    } else {
+        return UIScreen.mainScreen().bounds.size.height
+    //}
+}
+
+var STATUS_BAR_HEIGHT: CGFloat {
+    let orientation = UIApplication.sharedApplication().statusBarOrientation
+    if  orientation == .Portrait || orientation == .PortraitUpsideDown {
+        return UIApplication.sharedApplication().statusBarFrame.height
+    } else {
+        return Device().isPad ? UIApplication.sharedApplication().statusBarFrame.height : CGFloat(0.0)
+    }
+}
 let EMPTY_STRING = ""
 let SEPARATOR_HEIGHT = 1.0 / UIScreen.mainScreen().scale
 

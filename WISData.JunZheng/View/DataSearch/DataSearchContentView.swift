@@ -20,7 +20,7 @@ class DataSearchContentView: UIView {
     
     var dataSearchButtonView: UIView!
     
-    weak var parentViewController: UIViewController!
+    weak var parentViewController: UIViewController?
     var delegate: DataSearchContentViewDelegate?
     
     var currentShiftSelection: ShiftType!
@@ -28,9 +28,7 @@ class DataSearchContentView: UIView {
     init(frame: CGRect, parentViewController: UIViewController!) {
         super.init(frame: CGRectZero)
         
-        self.parentViewController = parentViewController
-//        self.currentGroupSelection = initialGroupSelection
-        
+        self.parentViewController = currentDevice.isPad ? nil : parentViewController
         self.prepareView()
     }
     
@@ -43,22 +41,25 @@ class DataSearchContentView: UIView {
         let dataSearchButtonViewHeight: CGFloat = 50
         
         let mainScreenBound = UIScreen.mainScreen().applicationFrame
-        let navigationBarHeight = self.parentViewController.navigationController?.navigationBar.bounds.height
+        let navigationBarHeight = self.parentViewController?.navigationController?.navigationBar.bounds.height ?? CGFloat(40.0)
 //        let tabBarHeight = self.parentViewController.tabBarController?.tabBar.frame.size.height
         let statusBarHeight = UIApplication.sharedApplication().statusBarFrame.height
         
-        let filterContentViewMaxHeight = mainScreenBound.height - (statusBarHeight + navigationBarHeight!) - dataSearchButtonViewHeight
+        let filterContentViewMaxHeight = mainScreenBound.height - (statusBarHeight + navigationBarHeight) - dataSearchButtonViewHeight
         let itemGapHeight: CGFloat = 2
         
-        let refFrame = CGRectMake(0.0,
-                                  statusBarHeight + navigationBarHeight!,
-                                  mainScreenBound.width,
-                                  filterContentViewMaxHeight)
+        
+        let refFrame = currentDevice.isPad ? CGRectMake(0.0, 0.0, 360.0, filterContentViewMaxHeight)
+            : CGRectMake(0.0,
+                         statusBarHeight + navigationBarHeight,
+                         mainScreenBound.width,
+                         filterContentViewMaxHeight)
+        
         
         //
         // initial contents - in wrapper view
         //
-        // ** Group selection
+        // ** Shift selection
         if self.shiftPickerContentView == nil {
             self.shiftPickerContentView = NSBundle.mainBundle().loadNibNamed(self.ShiftPickerContentViewID, owner: self, options: nil).last as! ShiftPickerContentView
         }
@@ -66,7 +67,6 @@ class DataSearchContentView: UIView {
 //        self.shiftPickerContentView.bindData(currentGroupSelection)
         
         // add date picker
-        
         if self.datePickerView == nil {
             let datePickerViewHeight: CGFloat = 180
             self.datePickerView = NSBundle.mainBundle().loadNibNamed(self.DatePickerViewID, owner: self, options: nil).last as! DatePickerView
@@ -74,8 +74,10 @@ class DataSearchContentView: UIView {
         }
         
         // ** content wrapper
-        let contentHeight = self.shiftPickerContentView.frame.origin.x + self.shiftPickerContentView.bounds.size.height + self.datePickerView.bounds.size.height
-        let wrapperHeight = min(contentHeight, filterContentViewMaxHeight)
+        let contentHeight = currentDevice.isPad ? (self.shiftPickerContentView.bounds.size.height + self.datePickerView.bounds.size.height)
+            : (self.shiftPickerContentView.frame.origin.x + self.shiftPickerContentView.bounds.size.height + self.datePickerView.bounds.size.height)
+        
+        let wrapperHeight = currentDevice.isPad ? contentHeight : min(contentHeight, filterContentViewMaxHeight)
         
         if self.dataSearchWrapperView == nil {
             self.dataSearchWrapperView = UIScrollView.init(frame: CGRectZero)
@@ -126,7 +128,8 @@ class DataSearchContentView: UIView {
         //
         // initial content view
         //
-        self.frame = CGRectMake(0.0, 0.0, refFrame.size.width, (self.dataSearchWrapperView?.frame.size.height)! + itemGapHeight + dataSearchButtonViewHeight + statusBarHeight + navigationBarHeight!)
+        let additionHeight = currentDevice.isPad ? CGFloat(0.0) : (statusBarHeight + navigationBarHeight)
+        self.frame = CGRectMake(0.0, 0.0, refFrame.size.width, (self.dataSearchWrapperView?.frame.size.height)! + itemGapHeight + dataSearchButtonViewHeight + additionHeight)
         self.backgroundColor = UIColor.whiteColor()
         
         // add views

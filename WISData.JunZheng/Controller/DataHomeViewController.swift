@@ -12,10 +12,10 @@ import LMDropdownView
 import SVProgressHUD
 import DrawerController
 
-// MARK: - Paging Menu Configuration
+public let DataSearchNotification = "DataSearchNotification"
 
+// MARK: - Paging Menu Configuration
 private var pagingControllers: [UIViewController] {
-    
     let furnaceViewController = FurnaceViewController.instantiateFromStoryboard()
     let boilerPurifyPowerViewController = BoilerPurifyViewController.instantiateFromStoryboard()
     let materialPowerViewController = MaterialPowerViewController.instantiateFromStoryboard()
@@ -35,6 +35,10 @@ struct PagingMenuOptions: PagingMenuControllerCustomizable {
     
     var componentType: ComponentType {
         return .All(menuOptions: MenuOptions(), pagingControllers: pagingControllers)
+    }
+    
+    var scrollEnabled: Bool {
+        return false
     }
     
     struct MenuOptions: MenuViewCustomizable {
@@ -124,8 +128,10 @@ class DataHomeViewController: UIViewController {
     var baseTitle = "电石炉生产数据"
     
     // for drop down search view
-    var searchDropDownView: LMDropdownView = LMDropdownView()
+    var searchDropDownView: LMDropdownView = LMDropdownView()   // For iPhone and iPod
     var searchContentView: DataSearchContentView?
+    
+    var searchPopoverViewController: SearchPopoverViewController? // Available on an iPad
     
 //    @IBAction func popSearchPanelAction(sender: UIBarButtonItem) {
 //        showDropDownViewFromDirection(.Top)
@@ -149,6 +155,12 @@ class DataHomeViewController: UIViewController {
         self.navigationItem.leftBarButtonItem = leftBarItem
         
         let rightBarItem = UIBarButtonItem.init(barButtonSystemItem: .Search, target: self, action: #selector(self.dropDownDataSearchContent(_:)))
+        if !currentDevice.isPad {
+            rightBarItem.action = #selector(self.dropDownDataSearchContent(_:))
+        } else {
+            rightBarItem.action = #selector(self.popoverDataSearchContent(_:))
+        }
+        
         self.navigationItem.rightBarButtonItem = rightBarItem
 
         // Call Filter View
@@ -187,6 +199,39 @@ class DataHomeViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    override func shouldAutorotate() -> Bool {
+        return true
+    }
+    
+    override func willAnimateRotationToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
+        if currentDevice.isPad {
+            self.searchPopoverViewController?.dismissPopoverSearchContent(animated: false)
+        } else {
+            if self.searchDropDownView.isOpen {
+                self.searchDropDownView.forceHide()
+            }
+        }
+        
+        let pagingMenuController = self.childViewControllers[0] as! PagingMenuController
+        arrangePagingMenuView(pagingMenuController).layoutIfNeeded()
+    }
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: DataSearchNotification, object: nil)
+    }
+    
+    private func arrangePagingMenuView(pagingMenuController: UIViewController) -> UIView {
+        let navigationBarHeight = self.navigationController?.navigationBar.bounds.height
+        let statusBarHeight = STATUS_BAR_HEIGHT
+        
+        let pageWidth = CURRENT_SCREEN_WIDTH
+        let pageHeight = CURRENT_SCREEN_HEIGHT - navigationBarHeight! - statusBarHeight
+        
+        pagingMenuController.view.frame = CGRectMake(0, navigationBarHeight! + statusBarHeight, pageWidth, pageHeight)
+        
+        return pagingMenuController.view
+    }
+    
     func toggleLeftDrawer(sender: UIBarButtonItem) -> Void {
         WISClient.sharedInstance.drawerController?.toggleLeftDrawerSideAnimated(true, completion: nil)
     }
@@ -223,7 +268,7 @@ extension DataHomeViewController: PagingMenuControllerDelegate {
     
 }
 
-// MARK: - Drop Down Control
+// MARK: - Drop Down Control / for iPhone
 
 extension DataHomeViewController {
     
@@ -237,7 +282,6 @@ extension DataHomeViewController {
         if self.searchDropDownView.isOpen {
             self.searchDropDownView.hide()
         } else {
-            
             switch direction {
             case .Top:
                 self.searchDropDownView.showFromNavigationController(self.navigationController, withContentView: self.searchContentView)
@@ -246,7 +290,6 @@ extension DataHomeViewController {
             default:
                 break
             }
-            
         }
     }
 }
@@ -256,7 +299,33 @@ extension DataHomeViewController: LMDropdownViewDelegate {
     func dropdownViewWillShow(dropdownView: LMDropdownView!) {
         self.searchContentView?.prepareView()
     }
-    
+}
+
+// MARK: - Popover Control / for iPad
+
+extension DataHomeViewController {
+    func popoverDataSearchContent(sender: UIBarButtonItem) -> () {
+        let popoverPresentationController = searchPopoverViewController!.popoverPresentationController
+        popoverPresentationController!.permittedArrowDirections = .Up
+        
+        self.searchContentView?.prepareView()
+        
+        /// MARK: expression below use the position of barButtonItem to locate the Popover
+        ///
+        // inspectionPopoverPresentationController!.barButtonItem = sender
+        popoverPresentationController!.delegate = self
+        popoverPresentationController!.sourceView = self.view
+        var frame:CGRect = sender.valueForKey("view")!.frame
+        frame.origin.y += 20
+        frame.origin.x -= 7
+        popoverPresentationController!.sourceRect = frame
+        
+        print("searchContentView frame when poped over: \(self.searchContentView!.frame)")
+        print("Presentation Style: \(popoverPresentationController?.presentationStyle.rawValue)")
+        self.presentViewController(searchPopoverViewController!, animated: true) {
+            // do nothing
+        }
+    }
 }
 
 // MARK: - extension - Drop down data delivery
@@ -266,8 +335,12 @@ extension DataHomeViewController: DataSearchContentViewDelegate {
     func contentViewConfirmed() {
         print("OK Button pressed")
         
-        if self.searchDropDownView.isOpen {
-            self.searchDropDownView.hide()
+        if currentDevice.isPad {
+            self.searchPopoverViewController?.dismissPopoverSearchContent(animated: true)
+        } else {
+            if self.searchDropDownView.isOpen {
+                self.searchDropDownView.hide()
+            }
         }
         
 //        for viewController in self.viewControllers {
@@ -280,14 +353,34 @@ extension DataHomeViewController: DataSearchContentViewDelegate {
 //        currentViewController.groupTaskList(groupType)
 //        currentViewController.sortTaskList()
 //        currentViewController.updateTableViewInfo()
-        
     }
     
     func contentViewCancelled() {
         print("Cancel Button pressed")
-        if self.searchDropDownView.isOpen {
-            self.searchDropDownView.hide()
-            
+        if currentDevice.isPad {
+            self.searchPopoverViewController?.dismissPopoverSearchContent(animated: true)
+        } else {
+            if self.searchDropDownView.isOpen {
+                self.searchDropDownView.hide()
+            }
         }
+    }
+}
+
+
+extension DataHomeViewController: UIPopoverPresentationControllerDelegate {
+
+    // don't need this function on an iPad
+    // func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
+    //    return UIModalPresentationStyle.None
+    // }
+    
+    func popoverPresentationControllerShouldDismissPopover(popoverPresentationController: UIPopoverPresentationController) -> Bool {
+        print("popoverPresentationControllerShouldDismissPopover")
+        return true
+    }
+    
+    func popoverPresentationControllerDidDismissPopover(popoverPresentationController: UIPopoverPresentationController) {
+        print("popoverPresentationControllerDidDismissPopover")
     }
 }

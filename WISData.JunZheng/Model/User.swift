@@ -11,9 +11,7 @@ import Alamofire
 import SwiftyJSON
 
 class User {
-    
     var username: String?
-    
 }
 
 extension User {
@@ -48,5 +46,17 @@ extension User {
                 completionHandler(WISValueResponse(success: false, message: "登录失败"))
             }
         }
+    }
+}
+
+extension User {
+    private static let userNameKey = "username"
+    
+    class func obtainRecentUserName() -> String? {
+        return NSUserDefaults.standardUserDefaults().objectForKey(userNameKey) as? String
+    }
+    
+    class func storeRecentUserName(userName: String) -> () {
+        NSUserDefaults.standardUserDefaults().setObject(userName, forKey: userNameKey)
     }
 }

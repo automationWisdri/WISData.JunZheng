@@ -15,6 +15,8 @@ import Ruler
 import RxSwift
 import RxCocoa
 
+import DeviceKit
+
 let minimalUserNameLength = 4
 let minimalPasswordLength = 4
 
@@ -33,7 +35,21 @@ class LoginViewController: ViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        if !Device().isPad {
+            UIApplication.sharedApplication().setStatusBarOrientation(.Portrait, animated: false)
+        }
+        
+        // self.interfaceOrientation has been deprecated on iOS 8 and later version of iOS.
+        // should find a better way to solve this.
+        if !Device().isPad {
+        self.view.frame = self.interfaceOrientation == .Portrait ?
+            CGRectMake(0, 0, CURRENT_SCREEN_WIDTH, CURRENT_SCREEN_HEIGHT)
+            : CGRectMake(0, 0, CURRENT_SCREEN_HEIGHT, CURRENT_SCREEN_WIDTH)
+        } else {
+            //
+        }
+        
         self.backgroundImageView = UIImageView(image: UIImage(named: "login_background"))
         self.backgroundImageView!.frame = self.view.frame
         self.backgroundImageView!.contentMode = .ScaleToFill
@@ -81,8 +97,8 @@ class LoginViewController: ViewController {
         self.userNameTextField!.tag = 1
         self.userNameTextField!.delegate = self
         
-        if let username = NSUserDefaults.standardUserDefaults().objectForKey("username") {
-            self.userNameTextField!.text = (username as! String)
+        if let username = User.obtainRecentUserName() {
+            self.userNameTextField!.text = username
         }
         
         let userNameIconImageView = UIImageView(image: UIImage(named: "icon_account")!.imageWithRenderingMode(.AlwaysTemplate))
@@ -181,28 +197,26 @@ class LoginViewController: ViewController {
         self.view.userInteractionEnabled = true
         
         #if (arch(x86_64) || arch(i386)) && os(iOS)
-            
+            // do nothing
         #else
+            keyboardMan.animateWhenKeyboardAppear = { [weak self] appearPostIndex, keyboardHeight, keyboardHeightIncrement in
+                print("appear \(appearPostIndex), \(keyboardHeight), \(keyboardHeightIncrement)")
+                if let strongSelf = self {
+                    
+                    strongSelf.view.frame.origin.y -= keyboardHeightIncrement
+                    strongSelf.view.frame.size.height += keyboardHeightIncrement
+                    strongSelf.view.layoutIfNeeded()
+                }
+            }
             
-        keyboardMan.animateWhenKeyboardAppear = { [weak self] appearPostIndex, keyboardHeight, keyboardHeightIncrement in
-            print("appear \(appearPostIndex), \(keyboardHeight), \(keyboardHeightIncrement)")
-            if let strongSelf = self {
-                
-                strongSelf.view.frame.origin.y -= keyboardHeightIncrement
-                strongSelf.view.frame.size.height += keyboardHeightIncrement
-                strongSelf.view.layoutIfNeeded()
+            keyboardMan.animateWhenKeyboardDisappear = { [weak self] keyboardHeight in
+                print("disappear \(keyboardHeight)\n")
+                if let strongSelf = self {
+                    strongSelf.view.frame.origin.y += keyboardHeight
+                    strongSelf.view.frame.size.height -= keyboardHeight
+                    strongSelf.view.layoutIfNeeded()
+                }
             }
-        }
-        
-        keyboardMan.animateWhenKeyboardDisappear = { [weak self] keyboardHeight in
-            print("disappear \(keyboardHeight)\n")
-            if let strongSelf = self {
-                strongSelf.view.frame.origin.y += keyboardHeight
-                strongSelf.view.frame.size.height -= keyboardHeight
-                strongSelf.view.layoutIfNeeded()
-            }
-        }
-        
         #endif
         
         // validating inputs
@@ -226,14 +240,14 @@ class LoginViewController: ViewController {
             .shareReplay(1)
         
         allValid.subscribeNext { valid in
-            if valid {
-                self.loginButton!.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-                self.loginButton!.backgroundColor = UIColor.wisLogoColor()
-            } else {
-                self.loginButton!.setTitleColor(UIColor.lightGrayColor().colorWithAlphaComponent(0.8), forState: .Normal)
-                self.loginButton!.backgroundColor = UIColor.wisLogoColor().colorWithAlphaComponent(0.4)
-            }
-        }.addDisposableTo(disposeBag)
+                if valid {
+                    self.loginButton!.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+                    self.loginButton!.backgroundColor = UIColor.wisLogoColor()
+                } else {
+                    self.loginButton!.setTitleColor(UIColor.lightGrayColor().colorWithAlphaComponent(0.8), forState: .Normal)
+                    self.loginButton!.backgroundColor = UIColor.wisLogoColor().colorWithAlphaComponent(0.4)
+                }
+            }.addDisposableTo(disposeBag)
         
         // Binding enabled property
         userNameValid
@@ -283,6 +297,22 @@ class LoginViewController: ViewController {
             }
             .addDisposableTo(disposeBag)
         view.addGestureRecognizer(singleTap!)
+    }
+    
+    override func shouldAutorotate() -> Bool {
+        return Device().isPad
+    }
+    
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return Device().isPad ? .All : .Portrait
+    }
+    
+    override func willAnimateRotationToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
+        self.view.frame = CGRectMake(0, 0, CURRENT_SCREEN_WIDTH, CURRENT_SCREEN_HEIGHT)
+        self.backgroundImageView!.frame = self.view.frame
+        contentView!.frame = self.view.frame
+        print(self.view.frame)
+        self.view.layoutIfNeeded()
     }
     
     
