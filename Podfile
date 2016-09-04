@@ -15,7 +15,7 @@ def pods
     pod 'MJExtension'
     pod 'RxSwift', '~> 2.6.0'
     pod 'RxCocoa', '~> 2.6.0'
-    pod 'RxDataSources', '~> 0.9.0'
+    pod 'RxDataSources'
     pod 'DeviceKit', '~> 0.3.0'
 end
 

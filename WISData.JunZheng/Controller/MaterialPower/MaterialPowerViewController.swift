@@ -27,7 +27,7 @@ class MaterialPowerViewController: UIViewController {
             self.dailyMaterialPowerView = (NSBundle.mainBundle().loadNibNamed("DailyMaterialPowerView", owner: self, options: nil).last as! DailyMaterialPowerView
             )
         }
-        self.dailyMaterialPowerView!.frame = CGRectMake(0.0, 0.0, SCREEN_WIDTH, 185)
+        self.dailyMaterialPowerView!.frame = CGRectMake(0.0, 0.0, CURRENT_SCREEN_WIDTH, 185)
         
         self.view.addSubview(dailyMaterialPowerView!)
         

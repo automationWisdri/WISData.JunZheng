@@ -793,6 +793,7 @@
 				383995C11D7045A7002221F5 /* LoginViewModel.swift in Sources */,
 				9FED66D71D6C482C00F42992 /* UIColor+WIS.swift in Sources */,
 				9F1B85651D77FE0C00AF7108 /* Operation.swift in Sources */,
+				387377401D7C1D6800AA2425 /* SearchPopoverViewController.swift in Sources */,
 				9FED66F81D6D71D200F42992 /* BoilerPurify.swift in Sources */,
 				9FED66D81D6C482C00F42992 /* String+WIS.swift in Sources */,
 				9F1B856D1D780F1B00AF7108 /* DailyMaterialPowerView.swift in Sources */,

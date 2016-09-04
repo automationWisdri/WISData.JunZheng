@@ -271,7 +271,7 @@ class LoginViewController: ViewController {
                 
             case .Success(_):
                 SVProgressHUD.showSuccessWithStatus("登录成功")
-                NSUserDefaults.standardUserDefaults().setObject(self.userNameTextField!.text, forKey: "username")
+                User.storeRecentUserName((self.userNameTextField?.text)!)
                 
                 let now = NSDate()
                 SearchParameter["date"] = dateFormatterForSearch(now)

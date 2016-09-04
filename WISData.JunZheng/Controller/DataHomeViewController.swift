@@ -162,36 +162,55 @@ class DataHomeViewController: UIViewController {
         }
         
         self.navigationItem.rightBarButtonItem = rightBarItem
-
-        // Call Filter View
-        self.searchContentView = DataSearchContentView(frame: CGRectMake(0.0, 0.0, CGRectGetWidth(self.view.bounds), min(CGRectGetHeight(self.view.bounds) - 50, 450)), parentViewController: self)
-        
-        self.searchDropDownView.delegate = self
-        
-        // Customize Dropdown Style
-        self.searchDropDownView.closedScale = 1.0
-        self.searchDropDownView.blurRadius = 3
-        self.searchDropDownView.blackMaskAlpha = 0.2
-        self.searchDropDownView.animationDuration = 0.45
-        self.searchDropDownView.animationBounceHeight = 0.0
-        
-        self.searchDropDownView.contentBackgroundColor = UIColor.whiteColor()
-        
-        self.searchDropDownView.delegate = self
-        self.searchContentView?.delegate = self
-        
-        // Observing notifications
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.handleNotification(_:)), name: DataSearchNotification, object: nil)
         
         // Call Paging Menu
         let pagingMenuController = PagingMenuController(options: PagingMenuOptions())
         pagingMenuController.delegate = self
-        pagingMenuController.view.frame.origin.y += 64
-        pagingMenuController.view.frame.size.height -= 64
+        
+        arrangePagingMenuView(pagingMenuController)
         
         addChildViewController(pagingMenuController)
         view.addSubview(pagingMenuController.view)
         pagingMenuController.didMoveToParentViewController(self)
+        
+        // Call Filter View
+        
+        if currentDevice.isPad {
+            searchPopoverViewController = SearchPopoverViewController()
+            searchPopoverViewController!.modalPresentationStyle = .Popover
+            // inspectionPopoverMenuController!.color
+            // inspectionPopoverMenuController!.preferredStatusBarUpdateAnimation()
+            searchPopoverViewController!.PopoverSuperController = self
+
+            self.searchContentView = DataSearchContentView(frame: CGRectMake(0.0, 0.0, CGRectGetWidth(self.view.bounds), min(CGRectGetHeight(self.view.bounds) - 50, 450)), parentViewController: self)
+            
+            self.searchContentView?.delegate = self
+            
+            // searchPopoverViewController?.view.frame = self.searchContentView!.frame
+            print("searchContentView frame: \(self.searchContentView!.frame)")
+            searchPopoverViewController?.view = self.searchContentView!
+            searchPopoverViewController?.preferredContentSize = (self.searchContentView?.bounds.size)!
+            searchPopoverViewController?.view.sizeToFit()
+        
+        } else {
+            self.searchContentView = DataSearchContentView(frame: CGRectMake(0.0, 0.0, CGRectGetWidth(self.view.bounds), min(CGRectGetHeight(self.view.bounds) - 50, 450)), parentViewController: self)
+            
+            self.searchDropDownView.delegate = self
+            
+            // Customize Dropdown Style
+            self.searchDropDownView.closedScale = 1.0
+            self.searchDropDownView.blurRadius = 3
+            self.searchDropDownView.blackMaskAlpha = 0.2
+            self.searchDropDownView.animationDuration = 0.45
+            self.searchDropDownView.animationBounceHeight = 0.0
+            
+            self.searchDropDownView.contentBackgroundColor = UIColor.whiteColor()
+            
+            self.searchDropDownView.delegate = self
+            self.searchContentView?.delegate = self
+        }
+        // observing notifications
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.handleNotification(_:)), name: DataSearchNotification, object: nil)
     }
 
     override func didReceiveMemoryWarning() {
