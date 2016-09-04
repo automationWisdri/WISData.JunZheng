@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class MaterialPowerViewController: UIViewController {
     
@@ -17,20 +18,40 @@ class MaterialPowerViewController: UIViewController {
         return storyboard.instantiateViewControllerWithIdentifier(String(self)) as! MaterialPowerViewController
     }
 
+    private var dailyMaterialPowerView: DailyMaterialPowerView?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
         
-        MaterialPower.get(date: "2016/8/15", shiftNo: "1", lNo: "1") { (response: WISValueResponse<String>) in
-            if response.success {
-//                SVProgressHUD.showSuccessWithStatus("登录成功")
-                
-                self.dataTextView.text = response.value
-            } else {
-                wisError(response.message)
-            }
+        if self.dailyMaterialPowerView == nil {
+            self.dailyMaterialPowerView = (NSBundle.mainBundle().loadNibNamed("DailyMaterialPowerView", owner: self, options: nil).last as! DailyMaterialPowerView
+            )
         }
+        self.dailyMaterialPowerView!.frame = CGRectMake(0.0, 0.0, SCREEN_WIDTH, 185)
+        
+        self.view.addSubview(dailyMaterialPowerView!)
+        
+        
+        
+//        MaterialPower.get(date: "2016/8/15", shiftNo: "1", lNo: "1") { (response: WISValueResponse<String>) in
+//            if response.success {
+////                SVProgressHUD.showSuccessWithStatus("登录成功")
+//                
+//                self.dataTextView.text = response.value
+//            } else {
+//                wisError(response.message)
+//            }
+//        }
+        
+        
+//        Operation.get(date: "2016/8/31", shiftNo: "1", lNo: "2") { (response: WISValueResponse<String>) in
+//            if response.success {
+//                self.dataTextView.text = response.value
+//            } else {
+//                wisError(response.message)
+//            }
+//        }
+
     }
 
     override func didReceiveMemoryWarning() {

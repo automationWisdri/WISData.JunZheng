@@ -1,0 +1,33 @@
+{
+  "title": {
+  	"BQCL"				:	"标前产量\n(t)",
+	"GYD"				:	"工艺电\n(KWh)",
+	"JHHZL"				:	"净化灰重量\n(t)",
+	"JTZH"				:	"焦炭总耗\n(t)",
+	"LTGDT"				:	"兰碳成分\n固定碳\n(%)",
+	"LTHF"				:	"兰碳成分\n灰分\n(%)",
+	"LTHFF"				:	"兰碳成分\n挥发份\n(%)",
+	"LTSF"				:	"兰碳成分\n水份\n(%)",
+	"LTZH"				:	"兰炭总耗\n(t)",
+	"PJPB"				:	"平均配比\n(%)",
+	"Remark"			:	"备注",
+	"SHCaO"				:	"石灰成分\nCaO\n(%)",
+	"SHGS"				:	"石灰成分\n过烧\n(%)",
+	"SHSS"				:	"石灰成分\n生烧\n(%)",
+	"SHZH"				:	"石灰总耗\n(t)",
+	"SwithTimeReasons":[{
+		"CutHour"		:	"停电时间\n时",
+		"CutMinute"		:	"停电时间\n分",
+		"OnHour"		:	"送电时间\n时",
+		"OnMinute"		:	"送电时间\n分",
+		"Reason"		:	"停电原因"
+		}],
+	"WYMGDT"			:	"无烟煤成分\n固定碳\n(%)",
+	"WYMHF"				:	"无烟煤成分\n灰分\n(%)",
+	"WYMHFF"			:	"无烟煤成分\n挥发份\n(%)",
+	"WYMSF"				:	"无烟煤成分\n水份\n(%)",
+	"WYMZH"				:	"无烟煤总耗\n(t)",
+	"YQPS"				:	"压球批数\n(批)",
+	"YQZL"				:	"压球重量\n(t)"
+  }
+}

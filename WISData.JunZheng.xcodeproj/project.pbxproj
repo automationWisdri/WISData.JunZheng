@@ -32,8 +32,16 @@
 		9F1B70AD1D76F804007304F9 /* WISAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1B70AC1D76F804007304F9 /* WISAlert.swift */; };
 		9F1B70B11D76FC80007304F9 /* About.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F1B70AF1D76FC80007304F9 /* About.storyboard */; };
 		9F1B70B21D76FC80007304F9 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1B70B01D76FC80007304F9 /* AboutViewController.swift */; };
+		9F1B85621D77D2B500AF7108 /* MaterialPowerTitle.json in Resources */ = {isa = PBXBuildFile; fileRef = 9F1B85601D77D2B500AF7108 /* MaterialPowerTitle.json */; };
+		9F1B85631D77D2B500AF7108 /* OperationTitle.json in Resources */ = {isa = PBXBuildFile; fileRef = 9F1B85611D77D2B500AF7108 /* OperationTitle.json */; };
+		9F1B85651D77FE0C00AF7108 /* Operation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1B85641D77FE0C00AF7108 /* Operation.swift */; };
+		9F1B85691D780CAE00AF7108 /* DailyMaterialPowerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1B85671D780CAE00AF7108 /* DailyMaterialPowerCell.swift */; };
+		9F1B856A1D780CAE00AF7108 /* DailyMaterialPowerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9F1B85681D780CAE00AF7108 /* DailyMaterialPowerCell.xib */; };
+		9F1B856D1D780F1B00AF7108 /* DailyMaterialPowerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1B856C1D780F1B00AF7108 /* DailyMaterialPowerView.swift */; };
 		9F1F1D011D6FD2FA009A9780 /* UIImage+WIS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1F1D001D6FD2FA009A9780 /* UIImage+WIS.swift */; };
 		9F2823C41D6DE8DC00E0FF1A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9F2823C31D6DE8DC00E0FF1A /* Localizable.strings */; };
+		9F6733E81D7C6EF600AB6C89 /* UITextView+WIS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6733E71D7C6EF600AB6C89 /* UITextView+WIS.swift */; };
+		9F6733EA1D7C74C300AB6C89 /* DailyMaterialPowerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9F6733E91D7C74C300AB6C89 /* DailyMaterialPowerView.xib */; };
 		9FED66BD1D6ADE8E00F42992 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FED66BC1D6ADE8E00F42992 /* User.swift */; };
 		9FED66BF1D6ADFB500F42992 /* WISResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FED66BE1D6ADFB500F42992 /* WISResponse.swift */; };
 		9FED66C11D6AE18800F42992 /* WISDefine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FED66C01D6AE18800F42992 /* WISDefine.swift */; };
@@ -117,8 +125,16 @@
 		9F1B70AC1D76F804007304F9 /* WISAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WISAlert.swift; sourceTree = "<group>"; };
 		9F1B70AF1D76FC80007304F9 /* About.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = About.storyboard; sourceTree = "<group>"; };
 		9F1B70B01D76FC80007304F9 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
+		9F1B85601D77D2B500AF7108 /* MaterialPowerTitle.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MaterialPowerTitle.json; sourceTree = "<group>"; };
+		9F1B85611D77D2B500AF7108 /* OperationTitle.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = OperationTitle.json; sourceTree = "<group>"; };
+		9F1B85641D77FE0C00AF7108 /* Operation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Operation.swift; sourceTree = "<group>"; };
+		9F1B85671D780CAE00AF7108 /* DailyMaterialPowerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyMaterialPowerCell.swift; sourceTree = "<group>"; };
+		9F1B85681D780CAE00AF7108 /* DailyMaterialPowerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DailyMaterialPowerCell.xib; sourceTree = "<group>"; };
+		9F1B856C1D780F1B00AF7108 /* DailyMaterialPowerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyMaterialPowerView.swift; sourceTree = "<group>"; };
 		9F1F1D001D6FD2FA009A9780 /* UIImage+WIS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+WIS.swift"; sourceTree = "<group>"; };
 		9F2823C31D6DE8DC00E0FF1A /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		9F6733E71D7C6EF600AB6C89 /* UITextView+WIS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextView+WIS.swift"; sourceTree = "<group>"; };
+		9F6733E91D7C74C300AB6C89 /* DailyMaterialPowerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DailyMaterialPowerView.xib; sourceTree = "<group>"; };
 		9FED66BC1D6ADE8E00F42992 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		9FED66BE1D6ADFB500F42992 /* WISResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WISResponse.swift; sourceTree = "<group>"; };
 		9FED66C01D6AE18800F42992 /* WISDefine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WISDefine.swift; sourceTree = "<group>"; };
@@ -276,6 +292,8 @@
 		9F0221A71D731F190056DDF5 /* TableTitle */ = {
 			isa = PBXGroup;
 			children = (
+				9F1B85601D77D2B500AF7108 /* MaterialPowerTitle.json */,
+				9F1B85611D77D2B500AF7108 /* OperationTitle.json */,
 				9F1B70AA1D76EC7B007304F9 /* BoilerPurifyTitle.json */,
 				9F0221A81D731F190056DDF5 /* FurnaceTitle.json */,
 			);
@@ -299,6 +317,17 @@
 			path = About;
 			sourceTree = "<group>";
 		};
+		9F1B85661D780C8200AF7108 /* DailyMaterialPower */ = {
+			isa = PBXGroup;
+			children = (
+				9F1B856C1D780F1B00AF7108 /* DailyMaterialPowerView.swift */,
+				9F6733E91D7C74C300AB6C89 /* DailyMaterialPowerView.xib */,
+				9F1B85671D780CAE00AF7108 /* DailyMaterialPowerCell.swift */,
+				9F1B85681D780CAE00AF7108 /* DailyMaterialPowerCell.xib */,
+			);
+			path = DailyMaterialPower;
+			sourceTree = "<group>";
+		};
 		9FED66B21D6ADE0C00F42992 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -307,6 +336,7 @@
 				9FED66C61D6AEF6000F42992 /* MaterialPower.swift */,
 				9FED66F01D6D4C4700F42992 /* Furnace.swift */,
 				9FED66F71D6D71D200F42992 /* BoilerPurify.swift */,
+				9F1B85641D77FE0C00AF7108 /* Operation.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -327,6 +357,7 @@
 				9F0221A21D7021220056DDF5 /* DataTable */,
 				9FED66F91D6D83D300F42992 /* DataSearch */,
 				9F1B57051D7474B00013D239 /* HorizontalLine */,
+				9F1B85661D780C8200AF7108 /* DailyMaterialPower */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -370,6 +401,7 @@
 				9FED66DE1D6C7C2E00F42992 /* NSObject+WIS.swift */,
 				9FED67041D6D85B100F42992 /* UIView+WIS.swift */,
 				9F1F1D001D6FD2FA009A9780 /* UIImage+WIS.swift */,
+				9F6733E71D7C6EF600AB6C89 /* UITextView+WIS.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -558,9 +590,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F1B856A1D780CAE00AF7108 /* DailyMaterialPowerCell.xib in Resources */,
 				9F1B56E91D73CF1A0013D239 /* LeftMenuCell.xib in Resources */,
 				9FED66E81D6CAE5900F42992 /* MaterialPower.storyboard in Resources */,
 				9F2823C41D6DE8DC00E0FF1A /* Localizable.strings in Resources */,
+				9F1B85631D77D2B500AF7108 /* OperationTitle.json in Resources */,
 				9FED66F41D6D70BE00F42992 /* BoilerPurify.storyboard in Resources */,
 				9FED66CF1D6B51D900F42992 /* Image.xcassets in Resources */,
 				9FED66EA1D6D382500F42992 /* LaunchScreen.storyboard in Resources */,
@@ -571,6 +605,8 @@
 				9F1B70AB1D76EC7B007304F9 /* BoilerPurifyTitle.json in Resources */,
 				9F1B70B11D76FC80007304F9 /* About.storyboard in Resources */,
 				9FED67001D6D83D300F42992 /* DataSearchButtonView.xib in Resources */,
+				9F1B85621D77D2B500AF7108 /* MaterialPowerTitle.json in Resources */,
+				9F6733EA1D7C74C300AB6C89 /* DailyMaterialPowerView.xib in Resources */,
 				9FED67031D6D83D300F42992 /* ShiftPickerContentView.xib in Resources */,
 				9F0221A91D731F190056DDF5 /* FurnaceTitle.json in Resources */,
 			);
@@ -733,6 +769,7 @@
 				9F1618BC1D6E89900063B772 /* LeftMenuViewController.swift in Sources */,
 				9FED66C51D6AE6FC00F42992 /* DataHomeViewController.swift in Sources */,
 				9FED66E61D6CAE4200F42992 /* MaterialPowerViewController.swift in Sources */,
+				9F6733E81D7C6EF600AB6C89 /* UITextView+WIS.swift in Sources */,
 				383995C01D7045A7002221F5 /* ViewModel.swift in Sources */,
 				9F1F1D011D6FD2FA009A9780 /* UIImage+WIS.swift in Sources */,
 				9FED66C31D6AE39000F42992 /* WISHelper.swift in Sources */,
@@ -745,10 +782,13 @@
 				9FED66F11D6D4C4700F42992 /* Furnace.swift in Sources */,
 				9FED66F61D6D70F800F42992 /* BoilerPurifyViewController.swift in Sources */,
 				383995C61D7046D7002221F5 /* ViewController.swift in Sources */,
+				9F1B85691D780CAE00AF7108 /* DailyMaterialPowerCell.swift in Sources */,
 				383995C11D7045A7002221F5 /* LoginViewModel.swift in Sources */,
 				9FED66D71D6C482C00F42992 /* UIColor+WIS.swift in Sources */,
+				9F1B85651D77FE0C00AF7108 /* Operation.swift in Sources */,
 				9FED66F81D6D71D200F42992 /* BoilerPurify.swift in Sources */,
 				9FED66D81D6C482C00F42992 /* String+WIS.swift in Sources */,
+				9F1B856D1D780F1B00AF7108 /* DailyMaterialPowerView.swift in Sources */,
 				9F1B57031D7472B30013D239 /* DataTableCell.swift in Sources */,
 				9FED66DD1D6C4E2800F42992 /* LeftUserHeadCell.swift in Sources */,
 				9FED66BD1D6ADE8E00F42992 /* User.swift in Sources */,

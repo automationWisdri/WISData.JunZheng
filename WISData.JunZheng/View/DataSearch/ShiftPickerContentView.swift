@@ -69,7 +69,7 @@ extension ShiftPickerContentView: UITableViewDataSource, UITableViewDelegate {
     
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-            return cellHeight
+        return cellHeight
     }
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {

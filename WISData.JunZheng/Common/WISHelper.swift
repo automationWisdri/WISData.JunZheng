@@ -60,6 +60,12 @@ func dateFormatterForSearch(date: NSDate) -> String {
     return formatter.stringFromDate(date)
 }
 
+func dateFormatterGetHour(date: NSDate) -> String {
+    let formatter = NSDateFormatter()
+    formatter.dateFormat = "HH"
+    return formatter.stringFromDate(date)
+}
+
 /**
  向tableView 注册 UITableViewCell
  
@@ -96,7 +102,15 @@ func getShiftName(shiftNo: String) -> [String] {
     }
 }
 
-func dispatch_sync_safely_main_queue(block: ()->()) {
+func getShiftNo(hour: String) -> String {
+    let hour: Int = Int(hour)!
+    
+    if hour < 8 { return "1" }
+    else if hour >= 8 && hour < 16 { return "2" }
+    else { return "3"}
+}
+
+func dispatch_sync_safely_main_queue(block: () -> ()) {
     if NSThread.isMainThread() {
         block()
     } else {

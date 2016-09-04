@@ -21,6 +21,7 @@ let minimalPasswordLength = 4
 class LoginViewController: ViewController {
 
     var backgroundImageView: UIImageView?
+    var contentView: UIView?
     var userNameTextField: UITextField?
     var passwordTextField: UITextField?
     var loginButton: UIButton?
@@ -37,10 +38,10 @@ class LoginViewController: ViewController {
         self.backgroundImageView!.frame = self.view.frame
         self.backgroundImageView!.contentMode = .ScaleToFill
         self.view.addSubview(self.backgroundImageView!)
-        backgroundImageView!.alpha = 1
         
-        let contentView = UIView(frame: self.view.frame)
-        self.view.addSubview(contentView)
+        self.contentView = UIView(frame: self.view.frame)
+        self.contentView!.alpha = 0
+        self.view.addSubview(contentView!)
         
         let topPartTopConstraint = Ruler.iPhoneVertical(70, 130, 130, 130).value
         
@@ -48,19 +49,19 @@ class LoginViewController: ViewController {
         wisLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 40)!
         wisLabel.text = "WISDRI"
         wisLabel.textColor = UIColor.wisLogoColor()
-        contentView.addSubview(wisLabel)
+        contentView!.addSubview(wisLabel)
         wisLabel.snp_makeConstraints{ (make) -> Void in
-            make.centerX.equalTo(contentView)
-            make.top.equalTo(contentView).offset(topPartTopConstraint)
+            make.centerX.equalTo(contentView!)
+            make.top.equalTo(contentView!).offset(topPartTopConstraint)
         }
         
         let wisSummaryLabel = UILabel()
         wisSummaryLabel.font = wisFont(23)
         wisSummaryLabel.text = "生产数据管理"
         wisSummaryLabel.textColor = UIColor.wisLogoColor()
-        contentView.addSubview(wisSummaryLabel)
+        contentView!.addSubview(wisSummaryLabel)
         wisSummaryLabel.snp_makeConstraints{ (make) -> Void in
-            make.centerX.equalTo(contentView)
+            make.centerX.equalTo(contentView!)
             make.top.equalTo(wisLabel.snp_bottom).offset(8)
         }
         
@@ -91,14 +92,14 @@ class LoginViewController: ViewController {
         self.userNameTextField!.leftView = userNameIconImageView
         self.userNameTextField!.leftViewMode = .Always
         
-        contentView.addSubview(self.userNameTextField!)
+        contentView!.addSubview(self.userNameTextField!)
         
         let bottomPartTopConstraint = Ruler.iPhoneVertical(100, 120, 200, 240).value
         let bottomPartWidthConstraint = Ruler.iPhoneVertical(250, 270, 300, 300).value
         
         self.userNameTextField!.snp_makeConstraints{ (make) -> Void in
             make.top.equalTo(wisSummaryLabel.snp_bottom).offset(bottomPartTopConstraint)
-            make.centerX.equalTo(contentView)
+            make.centerX.equalTo(contentView!)
             make.width.equalTo(bottomPartWidthConstraint)
             make.height.equalTo(38)
         }
@@ -125,11 +126,11 @@ class LoginViewController: ViewController {
         self.passwordTextField!.leftViewMode = .Always
         self.passwordTextField?.delegate = self
         
-        contentView.addSubview(self.passwordTextField!)
+        contentView!.addSubview(self.passwordTextField!)
         
         self.passwordTextField!.snp_makeConstraints{ (make) -> Void in
             make.top.equalTo(self.userNameTextField!.snp_bottom).offset(15)
-            make.centerX.equalTo(contentView)
+            make.centerX.equalTo(contentView!)
             make.width.equalTo(bottomPartWidthConstraint)
             make.height.equalTo(38)
         }
@@ -141,11 +142,11 @@ class LoginViewController: ViewController {
         self.loginButton!.layer.cornerRadius = 3
         self.loginButton!.layer.borderWidth = 0.5
         self.loginButton!.layer.borderColor = UIColor.wisLogoColor().CGColor
-        contentView.addSubview(self.loginButton!)
+        contentView!.addSubview(self.loginButton!)
         
         self.loginButton!.snp_makeConstraints { (make) -> Void in
             make.top.equalTo(self.passwordTextField!.snp_bottom).offset(20)
-            make.centerX.equalTo(contentView)
+            make.centerX.equalTo(contentView!)
             make.width.equalTo(bottomPartWidthConstraint)
             make.height.equalTo(38)
         }
@@ -157,7 +158,7 @@ class LoginViewController: ViewController {
 //        forgetPasswordLabel.font = wisFont(12)
 //        forgetPasswordLabel.text = "忘记密码了?"
         
-//        contentView.contentView.addSubview(forgetPasswordLabel)
+//        contentView!.addSubview(forgetPasswordLabel)
         
 //        forgetPasswordLabel.snp_makeConstraints { (make) -> Void in
 //            make.top.equalTo(self.loginButton!.snp_bottom).offset(14)
@@ -170,11 +171,11 @@ class LoginViewController: ViewController {
         footLabel.text = "© 2016 WISDRI"
         footLabel.textColor = UIColor.wisLogoColor()
         
-        contentView.addSubview(footLabel)
+        contentView!.addSubview(footLabel)
         
         footLabel.snp_makeConstraints{ (make) -> Void in
-            make.bottom.equalTo(contentView).offset(-20)
-            make.centerX.equalTo(contentView)
+            make.bottom.equalTo(contentView!).offset(-20)
+            make.centerX.equalTo(contentView!)
         }
         
         self.view.userInteractionEnabled = true
@@ -257,7 +258,12 @@ class LoginViewController: ViewController {
             case .Success(_):
                 SVProgressHUD.showSuccessWithStatus("登录成功")
                 NSUserDefaults.standardUserDefaults().setObject(self.userNameTextField!.text, forKey: "username")
-                SearchParameter["date"] = dateFormatterForSearch(NSDate())
+                
+                let now = NSDate()
+                SearchParameter["date"] = dateFormatterForSearch(now)
+                let hour = dateFormatterGetHour(now)
+                SearchParameter["shiftNo"] = getShiftNo(hour)
+                
                 delay(0.25, work: {
                     WISCommon.currentAppDelegate.startMainStory()
                 })
@@ -280,14 +286,14 @@ class LoginViewController: ViewController {
     }
     
     
-//    override func viewDidAppear(animated: Bool) {
-//        UIView.animateWithDuration(2) { () -> Void in
-//            self.backgroundImageView!.alpha = 1
-//        }
+    override func viewDidAppear(animated: Bool) {
+        UIView.animateWithDuration(1) { () -> Void in
+            self.contentView!.alpha = 1
+        }
 //        UIView.animateWithDuration(20) { () -> Void in
 //            self.backgroundImageView?.frame = CGRectMake(-1*( 1000 - SCREEN_WIDTH )/2, 0, SCREEN_HEIGHT+500, SCREEN_HEIGHT+500)
 //        }
-//    }
+    }
 
 }
 

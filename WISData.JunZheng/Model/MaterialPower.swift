@@ -8,8 +8,9 @@
 
 import Alamofire
 import SwiftyJSON
+import MJExtension
 
-class MaterialPower {
+class MaterialPower: NSObject, PropertyNames {
     
     /// 工艺电
     var GYD: String?
@@ -36,7 +37,30 @@ class MaterialPower {
     var YQZL: String?
     
     var Remark: String?
-    var SwithTimeReasons: String?
+    var SwithTimeReasons: SwitchTimeReason?
+}
+
+class SwitchTimeReason: NSObject, PropertyNames {
+    
+    var CutHour: String?
+    var CutMinute: String?
+    var OnHour: String?
+    var OnMinute: String?
+    var Reason: String?
+}
+
+class DailyMaterialPower: NSObject, PropertyNames {
+    
+    var GYD: String?
+    var BQCL: String?
+    var JHHZL: String?
+    var LTZH: String?
+    var WYMZH: String?
+    var PJPB: String?
+    var JTZH: String?
+    var SHZH: String?
+    var YQPS: String?
+    var YQZL: String?
 }
 
 extension MaterialPower {
@@ -53,6 +77,37 @@ extension MaterialPower {
 //                    debugPrint(json.rawString())
                     
                     let t = WISValueResponse<String>(value: json.rawString()!, success: response.result.isSuccess)
+                    completionHandler(t)
+                    
+                }
+            case .Failure(let error):
+                debugPrint(error)
+            }
+        }
+    }
+    
+}
+
+extension DailyMaterialPower {
+
+    class func get(date date: String, lNo: String, completionHandler: WISValueResponse<JSON> -> Void) -> Void {
+        
+        let getURL = BaseURL + "/GetDailyMateralPower?date=\(date)&lNo=\(lNo)"
+        Alamofire.request(.POST, getURL).responseJSON { response in
+            switch response.result {
+            case .Success:
+                if let value = response.result.value {
+                    let json = JSON(value)
+                    
+                    let dailyMaterialPower = DailyMaterialPower.mj_objectWithKeyValues(json.rawString())
+                    
+                    for p in DailyMaterialPower().propertyNames() {
+                        debugPrint(p)
+                    }
+                    
+                    debugPrint(dailyMaterialPower.PJPB)
+                    
+                    let t = WISValueResponse<JSON>(value: json, success: response.result.isSuccess)
                     completionHandler(t)
                     
                 }

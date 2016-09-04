@@ -192,6 +192,7 @@ extension LeftMenuViewController: UITableViewDelegate, UITableViewDataSource {
                 WISClient.sharedInstance.drawerController?.closeDrawerAnimated(true, completion: nil)
                 
             case 1:
+                WISClient.sharedInstance.drawerController?.closeDrawerAnimated(true, completion: nil)
                 WISAlert.confirmOrCancel(title: "通知", message: "您确定要退出吗？", confirmTitle: "是的", cancelTitle: "取消", inViewController: self, withConfirmAction: { () -> Void in
                     // HUD 弹出有延时，待解决
                     SVProgressHUD.show()
@@ -200,9 +201,7 @@ extension LeftMenuViewController: UITableViewDelegate, UITableViewDataSource {
                         SVProgressHUD.dismiss()
                     })
                     
-                    }, cancelAction: {
-                        // 抽屉收回动画有延时，待解决
-                        WISClient.sharedInstance.drawerController?.closeDrawerAnimated(true, completion: nil)
+                    }, cancelAction: { () -> Void in
                 })
                 
             default:

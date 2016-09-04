@@ -34,7 +34,6 @@ private let selectedColor = UIColor.wisLogoColor()
 struct PagingMenuOptions: PagingMenuControllerCustomizable {
     
     var componentType: ComponentType {
-        
         return .All(menuOptions: MenuOptions(), pagingControllers: pagingControllers)
     }
     
@@ -151,6 +150,26 @@ class DataHomeViewController: UIViewController {
         
         let rightBarItem = UIBarButtonItem.init(barButtonSystemItem: .Search, target: self, action: #selector(self.dropDownDataSearchContent(_:)))
         self.navigationItem.rightBarButtonItem = rightBarItem
+
+        // Call Filter View
+        self.searchContentView = DataSearchContentView(frame: CGRectMake(0.0, 0.0, CGRectGetWidth(self.view.bounds), min(CGRectGetHeight(self.view.bounds) - 50, 450)), parentViewController: self)
+        
+        self.searchDropDownView.delegate = self
+        
+        // Customize Dropdown Style
+        self.searchDropDownView.closedScale = 1.0
+        self.searchDropDownView.blurRadius = 3
+        self.searchDropDownView.blackMaskAlpha = 0.2
+        self.searchDropDownView.animationDuration = 0.45
+        self.searchDropDownView.animationBounceHeight = 0.0
+        
+        self.searchDropDownView.contentBackgroundColor = UIColor.whiteColor()
+        
+        self.searchDropDownView.delegate = self
+        self.searchContentView?.delegate = self
+        
+        // Observing notifications
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.handleNotification(_:)), name: DataSearchNotification, object: nil)
         
         // Call Paging Menu
         let pagingMenuController = PagingMenuController(options: PagingMenuOptions())
@@ -161,27 +180,6 @@ class DataHomeViewController: UIViewController {
         addChildViewController(pagingMenuController)
         view.addSubview(pagingMenuController.view)
         pagingMenuController.didMoveToParentViewController(self)
-        
-        // Call Filter View
-        
-        self.searchContentView = DataSearchContentView(frame: CGRectMake(0.0, 0.0, CGRectGetWidth(self.view.bounds), min(CGRectGetHeight(self.view.bounds) - 50, 450)), parentViewController: self)
-        
-        self.searchDropDownView.delegate = self
-        
-        // Customize Dropdown Style
-        self.searchDropDownView.closedScale = 1.0
-        self.searchDropDownView.blurRadius = 3;
-        self.searchDropDownView.blackMaskAlpha = 0.2;
-        self.searchDropDownView.animationDuration = 0.45;
-        self.searchDropDownView.animationBounceHeight = 0.0;
-        
-        self.searchDropDownView.contentBackgroundColor = UIColor.whiteColor()
-        
-        self.searchDropDownView.delegate = self
-        self.searchContentView?.delegate = self
-        
-        // observing notifications
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.handleNotification(_:)), name: DataSearchNotification, object: nil)
     }
 
     override func didReceiveMemoryWarning() {
