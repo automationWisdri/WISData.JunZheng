@@ -8,6 +8,11 @@
 
 import UIKit
 
+#if !RX_NO_MODULE
+    import RxSwift
+    import RxCocoa
+#endif
+
 public let DataTableHeaderRowHeight: CGFloat = 60.0
 public let DataTableRowHeight: CGFloat = 30.0
 
@@ -22,6 +27,9 @@ class DataTableView: UITableView {
     // var headerString: String = EMPTY_STRING
     
     var viewModel: DataTableViewModel!
+    var title: String = ""
+    
+    var selectedIndexPath: BehaviorSubject<Int> = BehaviorSubject(value: -1)
     
     private let DataTableCellID = "DataTableCell"
     
@@ -33,15 +41,26 @@ class DataTableView: UITableView {
         self.registerNib(UINib(nibName: DataTableCellID, bundle: nil), forCellReuseIdentifier: DataTableCellID)
         
         // bind data
-        self.rx_setDelegate(self)
-            .addDisposableTo(viewModel.disposeBag)
-        
         self.viewModel.dataSource
             .configureCell = { [unowned self] (_, tableView, indexPath, element) in
             let cell = getCell(tableView, cell: DataTableCell.self, indexPath: indexPath)
             cell.dataTextView.text = self.viewModel.titleArray[indexPath.row]
             return cell
         }
+        
+        self
+            .rx_itemSelected
+            .map { indexPath in
+                return (indexPath, self.viewModel.dataSource.itemAtIndexPath(indexPath))
+            }
+            .subscribeNext { indexPath, model in
+                self.deselectRowAtIndexPath(indexPath, animated: true)
+                self.selectedIndexPath.onNext(indexPath.row)
+            }
+            .addDisposableTo(viewModel.disposeBag)
+        
+        self.rx_setDelegate(self)
+            .addDisposableTo(viewModel.disposeBag)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -63,7 +82,7 @@ class DataTableView: UITableView {
     }
 }
 
-// MARK: - UITableView Delegate & DataSource
+// MARK: - UITableView Delegate
 
 extension DataTableView: UITableViewDelegate {
     /*

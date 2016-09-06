@@ -17,6 +17,7 @@ def pods
     pod 'RxCocoa', '~> 2.6.0'
     pod 'RxDataSources'
     pod 'DeviceKit', '~> 0.3.0'
+    pod 'MJRefresh', '~> 3.1.0'
 end
 
 target 'WISData.JunZheng' do

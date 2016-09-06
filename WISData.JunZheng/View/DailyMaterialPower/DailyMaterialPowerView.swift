@@ -45,58 +45,61 @@ class DailyMaterialPowerView: UIView {
         
         dailyMaterialPowerTable.registerNib(UINib(nibName: dailyMaterialPowerCellID, bundle: nil), forCellReuseIdentifier: dailyMaterialPowerCellID)
         
-        dispatch_async(dispatch_get_main_queue()) {
-            self.getData()
-        }
+        self.getData()
+    }
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: DataSearchNotification, object: nil)
     }
     
     func getData() {
-        DailyMaterialPower.get(date: SearchParameter["date"]!, lNo: SearchParameter["lNo"]!) { (response: WISValueResponse<JSON>) in
-            if response.success {
-                self.dailyMaterialPowerContentJSON = response.value!
-                
-                // Daily Material Power part
-                
-                var i = 0
-                var j = 0
-                var key = EMPTY_STRING
-                for p in DailyMaterialPower().propertyNames() {
-                    if p == "Result" {
-                        continue
-                    } else {
-                        key = String(i) + String(j)
-                        let title = self.dailyMaterialPowerTitleJSON["title"][p].stringValue
-                        self.dailyMaterialPowerContent[key] = title
-                        debugPrint("key is \(key), and value is \(title)")
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+            DailyMaterialPower.get(date: SearchParameter["date"]!, lNo: SearchParameter["lNo"]!) { (response: WISValueResponse<JSON>) in
+                dispatch_async(dispatch_get_main_queue()) {
+                    if response.success {
+                        self.dailyMaterialPowerContentJSON = response.value!
                         
-                        j += 1
-                        key = String(i) + String(j)
-                        let content = self.dailyMaterialPowerContentJSON[p].stringValue
-                        self.dailyMaterialPowerContent[key] = content
-                        debugPrint("key is \(key), and value is \(content)")
-                        j += 1
+                        // Daily Material Power part
                         
-                        if j == 4 {
-                            i += 1
-                            j = 0
+                        var i = 0
+                        var j = 0
+                        var key = EMPTY_STRING
+                        for p in DailyMaterialPower().propertyNames() {
+                            if p == "Result" {
+                                continue
+                            } else {
+                                key = String(i) + String(j)
+                                let title = self.dailyMaterialPowerTitleJSON["title"][p].stringValue
+                                self.dailyMaterialPowerContent[key] = title
+                                debugPrint("key is \(key), and value is \(title)")
+                                
+                                j += 1
+                                key = String(i) + String(j)
+                                let content = self.dailyMaterialPowerContentJSON[p].stringValue
+                                self.dailyMaterialPowerContent[key] = content
+                                debugPrint("key is \(key), and value is \(content)")
+                                j += 1
+                                
+                                if j == 4 {
+                                    i += 1
+                                    j = 0
+                                }
+                                
+                            }
                         }
                         
+                        self.dailyMaterialPowerTable.reloadData()
+                        
+                    } else {
+                        wisError(response.message)
                     }
                 }
-                
-                self.dailyMaterialPowerTable.reloadData()
-                
-            } else {
-                wisError(response.message)
             }
         }
     }
     
     func handleNotification(notification: NSNotification) -> Void {
-        
-        dispatch_async(dispatch_get_main_queue()) {
-            self.getData()
-        }
+        getData()
     }
 
 }

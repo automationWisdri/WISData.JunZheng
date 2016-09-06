@@ -11,6 +11,8 @@
 		383995C01D7045A7002221F5 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383995BE1D7045A7002221F5 /* ViewModel.swift */; };
 		383995C11D7045A7002221F5 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383995BF1D7045A7002221F5 /* LoginViewModel.swift */; };
 		383995C61D7046D7002221F5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383995C51D7046D7002221F5 /* ViewController.swift */; };
+		383BEADA1D7E507A00463A11 /* WISRefreshFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383BEAD81D7E507A00463A11 /* WISRefreshFooter.swift */; };
+		383BEADB1D7E507A00463A11 /* WISRefreshHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383BEAD91D7E507A00463A11 /* WISRefreshHeader.swift */; };
 		387377401D7C1D6800AA2425 /* SearchPopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3873773F1D7C1D6800AA2425 /* SearchPopoverViewController.swift */; };
 		38AE580C1D796DE900B596E4 /* DataTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AE580B1D796DE900B596E4 /* DataTableViewModel.swift */; };
 		38B91EFD1D615EBE00EFD37E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B91EFC1D615EBE00EFD37E /* AppDelegate.swift */; };
@@ -98,6 +100,8 @@
 		383995BE1D7045A7002221F5 /* ViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		383995BF1D7045A7002221F5 /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		383995C51D7046D7002221F5 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		383BEAD81D7E507A00463A11 /* WISRefreshFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WISRefreshFooter.swift; sourceTree = "<group>"; };
+		383BEAD91D7E507A00463A11 /* WISRefreshHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WISRefreshHeader.swift; sourceTree = "<group>"; };
 		3873773F1D7C1D6800AA2425 /* SearchPopoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchPopoverViewController.swift; sourceTree = "<group>"; };
 		38AE580B1D796DE900B596E4 /* DataTableViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataTableViewModel.swift; sourceTree = "<group>"; };
 		38B91EF91D615EBE00EFD37E /* WISData.JunZheng.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WISData.JunZheng.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -224,6 +228,15 @@
 				383995C51D7046D7002221F5 /* ViewController.swift */,
 			);
 			path = BaseViewController;
+			sourceTree = "<group>";
+		};
+		383BEAD71D7E507A00463A11 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				383BEAD81D7E507A00463A11 /* WISRefreshFooter.swift */,
+				383BEAD91D7E507A00463A11 /* WISRefreshHeader.swift */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 		38B91EF01D615EBE00EFD37E = {
@@ -358,6 +371,7 @@
 		9FED66B61D6ADE3B00F42992 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				383BEAD71D7E507A00463A11 /* Common */,
 				9FED66D91D6C4E2800F42992 /* LeftView */,
 				9F0221A21D7021220056DDF5 /* DataTable */,
 				9FED66F91D6D83D300F42992 /* DataSearch */,
@@ -783,6 +797,7 @@
 				9F1B56ED1D74084A0013D239 /* WISUser.swift in Sources */,
 				9FED67021D6D83D300F42992 /* ShiftPickerContentView.swift in Sources */,
 				9FED67011D6D83D300F42992 /* DataSearchContentView.swift in Sources */,
+				383BEADB1D7E507A00463A11 /* WISRefreshHeader.swift in Sources */,
 				9FED66C71D6AEF6000F42992 /* MaterialPower.swift in Sources */,
 				9FED66C11D6AE18800F42992 /* WISDefine.swift in Sources */,
 				9FED66BF1D6ADFB500F42992 /* WISResponse.swift in Sources */,
@@ -792,6 +807,7 @@
 				9F1B85691D780CAE00AF7108 /* DailyMaterialPowerCell.swift in Sources */,
 				383995C11D7045A7002221F5 /* LoginViewModel.swift in Sources */,
 				9FED66D71D6C482C00F42992 /* UIColor+WIS.swift in Sources */,
+				383BEADA1D7E507A00463A11 /* WISRefreshFooter.swift in Sources */,
 				9F1B85651D77FE0C00AF7108 /* Operation.swift in Sources */,
 				387377401D7C1D6800AA2425 /* SearchPopoverViewController.swift in Sources */,
 				9FED66F81D6D71D200F42992 /* BoilerPurify.swift in Sources */,

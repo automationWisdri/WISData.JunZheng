@@ -20,7 +20,7 @@ public let DataTableColumnWidth: CGFloat = 70.0
 
 class FurnaceViewController: ViewController {
 
-    @IBOutlet weak var dataView: UIView!
+    @IBOutlet weak var dataView: UIScrollView!
     
     private var firstColumnView: UIView!
     private var scrollView: UIScrollView!
@@ -64,7 +64,7 @@ class FurnaceViewController: ViewController {
         let dataViewWidth = CURRENT_SCREEN_WIDTH
         let dataViewHeight = CURRENT_SCREEN_HEIGHT - navigationBarHeight - statusBarHeight - menuHeaderHeight
         
-        self.dataView.frame = CGRectMake(0, 0, dataViewWidth, dataViewHeight)
+        self.dataView.frame = CGRectZero//CGRectMake(0, 0, dataViewWidth, dataViewHeight)
         
         // 
         // TBC: how to get row count?
@@ -72,7 +72,7 @@ class FurnaceViewController: ViewController {
         let columnCount = Furnace().propertyNames().count - 1
         
         // Draw view for first column
-        firstColumnView = UIView(frame: CGRectMake(0, 0, FurnaceViewController.firstColumnViewWidth, dataViewHeight))
+        firstColumnView = UIView(frame: CGRectZero/*CGRectMake(0, 0, FurnaceViewController.firstColumnViewWidth, dataViewHeight)*/)
         firstColumnView.backgroundColor = UIColor.clearColor()
 //        headerView.userInteractionEnabled = true
         self.dataView.addSubview(firstColumnView)
@@ -106,13 +106,63 @@ class FurnaceViewController: ViewController {
             }
         }
         
+        // data binding
+        var selectedElement = firstColumnTableView.selectedIndexPath.asObservable()
+        
+        for tableView in columnTableView {
+            selectedElement = Observable.of(selectedElement, tableView.selectedIndexPath).merge()
+        }
+        
+        // unfinished - to implement later!!!
+        selectedElement
+            .subscribeNext { [unowned self] rowIndex -> () in
+            print("tapped row number: \(rowIndex)")
+            
+            // Read time of record
+            var time: String!
+            self.firstColumnTableView.viewModel.titleArraySubject.asObservable()
+                .subscribeNext { titleArray in
+                guard rowIndex > -1 && rowIndex < titleArray.count else { return }
+                time = titleArray[rowIndex] ?? ""
+            }.addDisposableTo(self.disposeBag)
+            
+        }.addDisposableTo(disposeBag)
+        
+        dataView.mj_header = WISRefreshHeader {[weak self] () -> () in
+            self?.headerRefresh()
+            }
+        
         // Get data for data table
         self.getData()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        arrangeFurnaceView(self).layoutIfNeeded()
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    private func headerRefresh() {
+        //if WISDataManager.sharedInstance().networkReachabilityStatus != .NotReachable {
+            // 如果有上拉“加载更多”正在执行，则取消它
+            if dataView.mj_footer != nil {
+                if dataView.mj_footer.isRefreshing() {
+                    dataView.mj_footer.endRefreshing()
+                }
+            }
+            
+            getData()
+            
+        //} else {
+        //    SVProgressHUD.setDefaultMaskType(.None)
+        //    SVProgressHUD.showErrorWithStatus(NSLocalizedString("Networking Not Reachable"))
+        //}
+        
+        dataView.mj_header.endRefreshing()
     }
     
     override func shouldAutorotate() -> Bool {
@@ -187,7 +237,8 @@ class FurnaceViewController: ViewController {
                                 
                             } else {
                                 // header
-                                let columnTitle: String = self.tableTitleJSON["title"][p].stringValue
+                                let columnTitle = self.tableTitleJSON["title"][p].stringValue
+                                self.columnTableView[tableColumnsCount].title = p
                                 self.columnTableView[tableColumnsCount].viewModel.headerString = columnTitle
                                 self.columnTableView[tableColumnsCount].viewModel.headerStringSubject
                                     .onNext(columnTitle)

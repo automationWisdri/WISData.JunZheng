@@ -17,7 +17,7 @@ import SVProgressHUD
 
 class BoilerPurifyViewController: ViewController {
 
-    @IBOutlet weak var dataView: UIView!
+    @IBOutlet weak var dataView: UIScrollView!
     
     private var firstColumnView: UIView!
     private var scrollView: UIScrollView!
@@ -101,13 +101,41 @@ class BoilerPurifyViewController: ViewController {
             }
         }
         
+        dataView.mj_header = WISRefreshHeader {[weak self] () -> () in
+            self?.headerRefresh()
+        }
+        
         // Get data for data table
         getData()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        arrangeBoilerPurifyView(self).layoutIfNeeded()
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    private func headerRefresh() {
+        //if WISDataManager.sharedInstance().networkReachabilityStatus != .NotReachable {
+        // 如果有上拉“加载更多”正在执行，则取消它
+        if dataView.mj_footer != nil {
+            if dataView.mj_footer.isRefreshing() {
+                dataView.mj_footer.endRefreshing()
+            }
+        }
+        
+        getData()
+        
+        //} else {
+        //    SVProgressHUD.setDefaultMaskType(.None)
+        //    SVProgressHUD.showErrorWithStatus(NSLocalizedString("Networking Not Reachable"))
+        //}
+        
+        dataView.mj_header.endRefreshing()
     }
     
     override func shouldAutorotate() -> Bool {
@@ -179,6 +207,7 @@ class BoilerPurifyViewController: ViewController {
                             } else {
                                 // header
                                 let columnTitle: String = self.tableTitleJSON["title"][p].stringValue
+                                self.columnTableView[tableColumnsCount].title = p
                                 self.columnTableView[tableColumnsCount].viewModel.headerString = columnTitle
                                 self.columnTableView[tableColumnsCount].viewModel.headerStringSubject
                                     .onNext(columnTitle)

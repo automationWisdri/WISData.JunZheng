@@ -222,6 +222,28 @@ class DataHomeViewController: UIViewController {
         return true
     }
     
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        if currentDevice.isPad {
+            return .All
+        } else {
+            return .AllButUpsideDown
+        }
+    }
+    
+//    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+//        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+//        if currentDevice.isPad {
+//            self.searchPopoverViewController?.dismissPopoverSearchContent(animated: false)
+//        } else {
+//            if self.searchDropDownView.isOpen {
+//                self.searchDropDownView.forceHide()
+//            }
+//        }
+//        
+//        let pagingMenuController = self.childViewControllers[0] as! PagingMenuController
+//        arrangePagingMenuView(pagingMenuController)//.layoutIfNeeded()
+//    }
+    
     override func willAnimateRotationToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
         if currentDevice.isPad {
             self.searchPopoverViewController?.dismissPopoverSearchContent(animated: false)
@@ -232,7 +254,7 @@ class DataHomeViewController: UIViewController {
         }
         
         let pagingMenuController = self.childViewControllers[0] as! PagingMenuController
-        arrangePagingMenuView(pagingMenuController).layoutIfNeeded()
+        arrangePagingMenuView(pagingMenuController)//.layoutIfNeeded()
     }
     
     deinit {
