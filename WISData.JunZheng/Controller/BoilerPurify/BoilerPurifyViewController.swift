@@ -179,24 +179,23 @@ class BoilerPurifyViewController: ViewController {
     func getData() {
         SVProgressHUD.show()
         
-        dispatch_async(dispatch_get_main_queue()) {
-            self.firstColumnTableView.viewModel.headerString = SearchParameter["date"]! + "\n" + getShiftName(SearchParameter["shiftNo"]!)[0]
-            var firstColumnTitleArray: [String] = []
-            for i in 0 ..< 8 {
-                firstColumnTitleArray.append(getShiftName(SearchParameter["shiftNo"]!)[i + 1])
-            }
-            self.firstColumnTableView.viewModel.titleArray = firstColumnTitleArray
-            self.firstColumnTableView.viewModel.titleArraySubject
-                .onNext(firstColumnTitleArray)
-            // self.firstColumnTableView.reloadData()
-        }
-        
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
             BoilerPurify.get(date: SearchParameter["date"]!, shiftNo: SearchParameter["shiftNo"]!, lNo: SearchParameter["lNo"]!) { (response: WISValueResponse<[JSON]>) in
                 
                 dispatch_async(dispatch_get_main_queue()) {
                     if response.success {
                         SVProgressHUD.dismiss()
+                        
+                        self.firstColumnTableView.viewModel.headerString = SearchParameter["date"]! + "\n" + getShiftName(SearchParameter["shiftNo"]!)[0]
+                        var firstColumnTitleArray: [String] = []
+                        for i in 0 ..< 8 {
+                            firstColumnTitleArray.append(getShiftName(SearchParameter["shiftNo"]!)[i + 1])
+                        }
+                        self.firstColumnTableView.viewModel.titleArray = firstColumnTitleArray
+                        self.firstColumnTableView.viewModel.titleArraySubject
+                            .onNext(firstColumnTitleArray)
+                        // self.firstColumnTableView.reloadData()
+                        
                         self.tableContentJSON = response.value!
                         // self.firstColumnTableView.reloadData()
                         
@@ -232,6 +231,7 @@ class BoilerPurifyViewController: ViewController {
                             }
                         }
                     } else {
+                        SVProgressHUD.dismiss()
                         wisError(response.message)
                     }
                 }

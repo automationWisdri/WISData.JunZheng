@@ -76,12 +76,14 @@ extension MaterialPower {
 //                    debugPrint("JSON: \(json)")
 //                    debugPrint(json.rawString())
                     
-                    let t = WISValueResponse<String>(value: json.rawString()!, success: response.result.isSuccess)
+                    let t = WISValueResponse<String>(value: json.rawString()!, success: false)
                     completionHandler(t)
                     
                 }
             case .Failure(let error):
                 debugPrint(error)
+                let t = WISValueResponse<String>(value: "", success: false)
+                completionHandler(t)
             }
         }
     }
@@ -107,12 +109,14 @@ extension DailyMaterialPower {
                     
                     debugPrint(dailyMaterialPower.PJPB)
                     
-                    let t = WISValueResponse<JSON>(value: json, success: response.result.isSuccess)
+                    let t = WISValueResponse<JSON>(value: json, success: true)
                     completionHandler(t)
                     
                 }
             case .Failure(let error):
                 debugPrint(error)
+                let t = WISValueResponse<JSON>(value: JSON.null, success: false)
+                completionHandler(t)
             }
         }
     }

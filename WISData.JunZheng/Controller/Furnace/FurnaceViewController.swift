@@ -206,20 +206,6 @@ class FurnaceViewController: ViewController {
     func getData() {
         SVProgressHUD.show()
         
-        dispatch_async(dispatch_get_main_queue()) {
-            self.firstColumnTableView.viewModel.headerString = SearchParameter["date"]! + "\n" + getShiftName(SearchParameter["shiftNo"]!)[0]
-            var firstColumnTitleArray: [String] = []
-            for i in 0 ..< 8 {
-                firstColumnTitleArray.append(getShiftName(SearchParameter["shiftNo"]!)[i + 1])
-            }
-            self.firstColumnTableView.viewModel.titleArray = firstColumnTitleArray
-            
-            self.firstColumnTableView.viewModel.titleArraySubject
-                .onNext(firstColumnTitleArray)
-            
-            // self.firstColumnTableView.reloadData()
-        }
-        
         // Put time consuming network request on global queue
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
             Furnace.get(date: SearchParameter["date"]!, shiftNo: SearchParameter["shiftNo"]!, lNo: SearchParameter["lNo"]!) { (response: WISValueResponse<[JSON]>) in
@@ -227,6 +213,18 @@ class FurnaceViewController: ViewController {
                 dispatch_async(dispatch_get_main_queue()) {
                     if response.success {
                         SVProgressHUD.dismiss()
+                        
+                        self.firstColumnTableView.viewModel.headerString = SearchParameter["date"]! + "\n" + getShiftName(SearchParameter["shiftNo"]!)[0]
+                        var firstColumnTitleArray: [String] = []
+                        for i in 0 ..< 8 {
+                            firstColumnTitleArray.append(getShiftName(SearchParameter["shiftNo"]!)[i + 1])
+                        }
+                        self.firstColumnTableView.viewModel.titleArray = firstColumnTitleArray
+                        self.firstColumnTableView.viewModel.titleArraySubject
+                            .onNext(firstColumnTitleArray)
+                        
+                        // self.firstColumnTableView.reloadData()
+                        
                         self.tableContentJSON = response.value!
                         // self.firstColumnTableView.reloadData()
                         
@@ -265,6 +263,7 @@ class FurnaceViewController: ViewController {
                         }
                         
                     } else {
+                        SVProgressHUD.dismiss()
                         wisError(response.message)
                     }
                 }

@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftyJSON
+import SVProgressHUD
 
 class DailyMaterialPowerView: UIView {
     
@@ -53,10 +54,14 @@ class DailyMaterialPowerView: UIView {
     }
     
     func getData() {
+        SVProgressHUD.show()
+        
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
             DailyMaterialPower.get(date: SearchParameter["date"]!, lNo: SearchParameter["lNo"]!) { (response: WISValueResponse<JSON>) in
                 dispatch_async(dispatch_get_main_queue()) {
                     if response.success {
+                        SVProgressHUD.dismiss()
+                        
                         self.dailyMaterialPowerContentJSON = response.value!
                         
                         // Daily Material Power part
@@ -91,6 +96,7 @@ class DailyMaterialPowerView: UIView {
                         self.dailyMaterialPowerTable.reloadData()
                         
                     } else {
+                        SVProgressHUD.dismiss()
                         wisError(response.message)
                     }
                 }
