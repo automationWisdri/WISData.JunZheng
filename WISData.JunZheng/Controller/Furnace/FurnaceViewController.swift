@@ -27,6 +27,8 @@ class FurnaceViewController: ViewController {
     private var firstColumnTableView: DataTableView!
     private var columnTableView = [DataTableView]()
     
+    private var noDataView: NoDataView!
+    
     private var rowCount: Int = 8
     
     private var tableContentJSON: Array = [JSON]()
@@ -41,6 +43,12 @@ class FurnaceViewController: ViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // initialize No data View
+        if self.noDataView == nil {
+            self.noDataView = (NSBundle.mainBundle().loadNibNamed("NoDataView", owner: self, options: nil).last as! NoDataView
+            )
+        }
         
         // Observing notifications
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.handleNotification(_:)), name: DataSearchNotification, object: nil)
@@ -199,12 +207,14 @@ class FurnaceViewController: ViewController {
             tableColumnsCount += 1
         }
         
+        furnaceViewController.noDataView.frame = furnaceViewController.dataView.frame
+        
         return furnaceViewController.view
     }
     
     
     func getData() {
-        SVProgressHUD.show()
+        SVProgressHUD.showWithStatus("数据获取中...")
         
         // Put time consuming network request on global queue
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
@@ -212,7 +222,10 @@ class FurnaceViewController: ViewController {
                 // To make sure UI refreshing task runs on main queue
                 dispatch_async(dispatch_get_main_queue()) {
                     if response.success {
-                        SVProgressHUD.dismiss()
+                        SVProgressHUD.showWithMaskType(.None)
+                        SVProgressHUD.showSuccessWithStatus("数据获取成功！")
+                        
+                        self.noDataView.removeFromSuperview()
                         
                         self.firstColumnTableView.viewModel.headerString = SearchParameter["date"]! + "\n" + getShiftName(SearchParameter["shiftNo"]!)[0]
                         var firstColumnTitleArray: [String] = []
@@ -263,7 +276,8 @@ class FurnaceViewController: ViewController {
                         }
                         
                     } else {
-                        SVProgressHUD.dismiss()
+                        self.noDataView.frame = self.dataView.frame
+                        self.dataView.addSubview(self.noDataView)
                         wisError(response.message)
                     }
                 }

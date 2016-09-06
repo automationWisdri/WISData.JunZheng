@@ -24,6 +24,8 @@ class BoilerPurifyViewController: ViewController {
     private var firstColumnTableView: DataTableView!
     private var columnTableView = [DataTableView]()
     
+    private var noDataView: NoDataView!
+    
     private let rowCount: Int = 8
     
     private var tableContentJSON: Array = [JSON]()
@@ -39,6 +41,12 @@ class BoilerPurifyViewController: ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // initialize No data View
+        if self.noDataView == nil {
+            self.noDataView = (NSBundle.mainBundle().loadNibNamed("NoDataView", owner: self, options: nil).last as! NoDataView
+            )
+        }
+        
         // Observing notifications
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.handleNotification(_:)), name: DataSearchNotification, object: nil)
         
@@ -172,19 +180,24 @@ class BoilerPurifyViewController: ViewController {
             tableColumnsCount += 1
         }
         
+        boilerPurifyViewController.noDataView.frame = boilerPurifyViewController.dataView.frame
+        
         return boilerPurifyViewController.view
     }
 
     
     func getData() {
-        SVProgressHUD.show()
+        SVProgressHUD.showWithStatus("数据获取中...")
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
             BoilerPurify.get(date: SearchParameter["date"]!, shiftNo: SearchParameter["shiftNo"]!, lNo: SearchParameter["lNo"]!) { (response: WISValueResponse<[JSON]>) in
                 
                 dispatch_async(dispatch_get_main_queue()) {
                     if response.success {
-                        SVProgressHUD.dismiss()
+                        SVProgressHUD.showWithMaskType(.None)
+                        SVProgressHUD.showSuccessWithStatus("数据获取成功！")
+                        
+                        self.noDataView.removeFromSuperview()
                         
                         self.firstColumnTableView.viewModel.headerString = SearchParameter["date"]! + "\n" + getShiftName(SearchParameter["shiftNo"]!)[0]
                         var firstColumnTitleArray: [String] = []
@@ -231,7 +244,8 @@ class BoilerPurifyViewController: ViewController {
                             }
                         }
                     } else {
-                        SVProgressHUD.dismiss()
+                        self.noDataView.frame = self.dataView.frame
+                        self.dataView.addSubview(self.noDataView)
                         wisError(response.message)
                     }
                 }

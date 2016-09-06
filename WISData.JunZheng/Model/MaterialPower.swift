@@ -102,7 +102,6 @@ extension DailyMaterialPower {
                     let json = JSON(value)
                     
                     let dailyMaterialPower = DailyMaterialPower.mj_objectWithKeyValues(json.rawString())
-                    
                     for p in DailyMaterialPower().propertyNames() {
                         debugPrint(p)
                     }
@@ -116,6 +115,7 @@ extension DailyMaterialPower {
             case .Failure(let error):
                 debugPrint(error)
                 let t = WISValueResponse<JSON>(value: JSON.null, success: false)
+                t.message = "网络连接失败"
                 completionHandler(t)
             }
         }

@@ -13,6 +13,8 @@
 		383995C61D7046D7002221F5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383995C51D7046D7002221F5 /* ViewController.swift */; };
 		383BEADA1D7E507A00463A11 /* WISRefreshFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383BEAD81D7E507A00463A11 /* WISRefreshFooter.swift */; };
 		383BEADB1D7E507A00463A11 /* WISRefreshHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383BEAD91D7E507A00463A11 /* WISRefreshHeader.swift */; };
+		383BEADF1D7EB16B00463A11 /* NoDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383BEADE1D7EB16B00463A11 /* NoDataView.swift */; };
+		383BEAE61D7EB1C600463A11 /* NoDataView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 383BEAE51D7EB1C600463A11 /* NoDataView.xib */; };
 		387377401D7C1D6800AA2425 /* SearchPopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3873773F1D7C1D6800AA2425 /* SearchPopoverViewController.swift */; };
 		38AE580C1D796DE900B596E4 /* DataTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AE580B1D796DE900B596E4 /* DataTableViewModel.swift */; };
 		38B91EFD1D615EBE00EFD37E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B91EFC1D615EBE00EFD37E /* AppDelegate.swift */; };
@@ -102,6 +104,8 @@
 		383995C51D7046D7002221F5 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		383BEAD81D7E507A00463A11 /* WISRefreshFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WISRefreshFooter.swift; sourceTree = "<group>"; };
 		383BEAD91D7E507A00463A11 /* WISRefreshHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WISRefreshHeader.swift; sourceTree = "<group>"; };
+		383BEADE1D7EB16B00463A11 /* NoDataView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoDataView.swift; sourceTree = "<group>"; };
+		383BEAE51D7EB1C600463A11 /* NoDataView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoDataView.xib; sourceTree = "<group>"; };
 		3873773F1D7C1D6800AA2425 /* SearchPopoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchPopoverViewController.swift; sourceTree = "<group>"; };
 		38AE580B1D796DE900B596E4 /* DataTableViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataTableViewModel.swift; sourceTree = "<group>"; };
 		38B91EF91D615EBE00EFD37E /* WISData.JunZheng.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WISData.JunZheng.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -239,6 +243,15 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
+		383BEADD1D7EB13B00463A11 /* NoDataView */ = {
+			isa = PBXGroup;
+			children = (
+				383BEADE1D7EB16B00463A11 /* NoDataView.swift */,
+				383BEAE51D7EB1C600463A11 /* NoDataView.xib */,
+			);
+			path = NoDataView;
+			sourceTree = "<group>";
+		};
 		38B91EF01D615EBE00EFD37E = {
 			isa = PBXGroup;
 			children = (
@@ -371,6 +384,7 @@
 		9FED66B61D6ADE3B00F42992 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				383BEADD1D7EB13B00463A11 /* NoDataView */,
 				383BEAD71D7E507A00463A11 /* Common */,
 				9FED66D91D6C4E2800F42992 /* LeftView */,
 				9F0221A21D7021220056DDF5 /* DataTable */,
@@ -619,6 +633,7 @@
 				9FED66CF1D6B51D900F42992 /* Image.xcassets in Resources */,
 				9FED66EA1D6D382500F42992 /* LaunchScreen.storyboard in Resources */,
 				9F1B57041D7472B30013D239 /* DataTableCell.xib in Resources */,
+				383BEAE61D7EB1C600463A11 /* NoDataView.xib in Resources */,
 				9FED66ED1D6D4B8400F42992 /* Furnace.storyboard in Resources */,
 				38B91EFF1D615EBE00EFD37E /* Assets.xcassets in Resources */,
 				9FED67071D6D967100F42992 /* DatePickerView.xib in Resources */,
@@ -789,6 +804,7 @@
 				9F1618BC1D6E89900063B772 /* LeftMenuViewController.swift in Sources */,
 				38AE580C1D796DE900B596E4 /* DataTableViewModel.swift in Sources */,
 				9FED66C51D6AE6FC00F42992 /* DataHomeViewController.swift in Sources */,
+				383BEADF1D7EB16B00463A11 /* NoDataView.swift in Sources */,
 				9FED66E61D6CAE4200F42992 /* MaterialPowerViewController.swift in Sources */,
 				9F6733E81D7C6EF600AB6C89 /* UITextView+WIS.swift in Sources */,
 				383995C01D7045A7002221F5 /* ViewModel.swift in Sources */,

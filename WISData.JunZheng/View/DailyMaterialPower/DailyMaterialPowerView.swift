@@ -54,13 +54,14 @@ class DailyMaterialPowerView: UIView {
     }
     
     func getData() {
-        SVProgressHUD.show()
+        SVProgressHUD.showWithStatus("数据获取中...")
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
             DailyMaterialPower.get(date: SearchParameter["date"]!, lNo: SearchParameter["lNo"]!) { (response: WISValueResponse<JSON>) in
                 dispatch_async(dispatch_get_main_queue()) {
                     if response.success {
-                        SVProgressHUD.dismiss()
+                        SVProgressHUD.showWithMaskType(.None)
+                        SVProgressHUD.showSuccessWithStatus("数据获取成功！")
                         
                         self.dailyMaterialPowerContentJSON = response.value!
                         
@@ -89,14 +90,12 @@ class DailyMaterialPowerView: UIView {
                                     i += 1
                                     j = 0
                                 }
-                                
                             }
                         }
                         
                         self.dailyMaterialPowerTable.reloadData()
                         
                     } else {
-                        SVProgressHUD.dismiss()
                         wisError(response.message)
                     }
                 }

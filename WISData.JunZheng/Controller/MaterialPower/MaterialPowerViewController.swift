@@ -14,6 +14,8 @@ class MaterialPowerViewController: UIViewController {
     // @IBOutlet weak var dataTextView: UITextView!
     @IBOutlet weak var dataView: UIScrollView!
     
+    private var noDataView: NoDataView!
+    
     class func instantiateFromStoryboard() -> MaterialPowerViewController {
         let storyboard = UIStoryboard(name: "MaterialPower", bundle: nil)
         return storyboard.instantiateViewControllerWithIdentifier(String(self)) as! MaterialPowerViewController
@@ -23,6 +25,12 @@ class MaterialPowerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // initialize No data View
+        if self.noDataView == nil {
+            self.noDataView = (NSBundle.mainBundle().loadNibNamed("NoDataView", owner: self, options: nil).last as! NoDataView
+            )
+        }
         
         if self.dailyMaterialPowerView == nil {
             self.dailyMaterialPowerView = (NSBundle.mainBundle().loadNibNamed("DailyMaterialPowerView", owner: self, options: nil).last as! DailyMaterialPowerView
@@ -109,6 +117,9 @@ class MaterialPowerViewController: UIViewController {
         
         materialPowerViewController.dataView.frame = CGRectMake(0, 0, dataViewWidth, dataViewHeight)
         materialPowerViewController.dailyMaterialPowerView!.frame = CGRectMake(0.0, 0.0, self.dataView.bounds.size.width/*CURRENT_SCREEN_WIDTH*/, 185)
+        
+        materialPowerViewController.noDataView.frame = materialPowerViewController.dataView.frame
+        
         return materialPowerViewController.view
     }
 

@@ -39,5 +39,4 @@ class DataSearchButtonView: UIView {
         print(okButton.frame)
         print(cancelButton.frame)
     }
-    
 }

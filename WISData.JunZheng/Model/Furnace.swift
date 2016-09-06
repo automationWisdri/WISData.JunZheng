@@ -95,6 +95,7 @@ extension Furnace {
                     
                     guard json["Result"] == 1 else {
                         let t = WISValueResponse<[JSON]>(value: [JSON.null], success: false)
+                        t.message = "服务器请求失败"
                         completionHandler(t)
                         return
                     }
@@ -110,6 +111,7 @@ extension Furnace {
             case .Failure(let error):
                 debugPrint(error)
                 let t = WISValueResponse<[JSON]>(value: [JSON.null], success: false)
+                t.message = "网络连接失败"
                 completionHandler(t)
             }
         }
