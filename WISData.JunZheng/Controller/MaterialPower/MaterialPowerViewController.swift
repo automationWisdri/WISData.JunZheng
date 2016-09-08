@@ -11,7 +11,10 @@ import SwiftyJSON
 
 class MaterialPowerViewController: UIViewController {
     
+    // @IBOutlet weak var dataTextView: UITextView!
     @IBOutlet weak var dataView: UIScrollView!
+    
+    private var noDataView: NoDataView!
     
     class func instantiateFromStoryboard() -> MaterialPowerViewController {
         let storyboard = UIStoryboard(name: "MaterialPower", bundle: nil)
@@ -29,7 +32,15 @@ class MaterialPowerViewController: UIViewController {
         
         // Observing notifications
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.handleNotification(_:)), name: DataSearchNotification, object: nil)
+        // initialize No data View
+        if self.noDataView == nil {
+            self.noDataView = (NSBundle.mainBundle().loadNibNamed("NoDataView", owner: self, options: nil).last as! NoDataView
+            )
+        }
         
+        dataView.mj_header = WISRefreshHeader {[weak self] () -> () in
+            self?.headerRefresh()
+        }
         //
         // Daily Material Power View Section
         //
@@ -170,6 +181,31 @@ class MaterialPowerViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    private func headerRefresh() {
+        //if WISDataManager.sharedInstance().networkReachabilityStatus != .NotReachable {
+        // 如果有上拉“加载更多”正在执行，则取消它
+        if dataView.mj_footer != nil {
+            if dataView.mj_footer.isRefreshing() {
+                dataView.mj_footer.endRefreshing()
+            }
+        }
+        
+        getDailyMaterialPowerData()
+        getMaterialPowerData()
+        getOperationData()
+        
+        dispatch_group_notify(getDataGroup, dispatch_get_main_queue()) {
+            self.arrangeMaterialPowerView(self).layoutIfNeeded()
+        }
+        
+        //} else {
+        //    SVProgressHUD.setDefaultMaskType(.None)
+        //    SVProgressHUD.showErrorWithStatus(NSLocalizedString("Networking Not Reachable"))
+        //}
+        
+        dataView.mj_header.endRefreshing()
     }
     
     override func shouldAutorotate() -> Bool {

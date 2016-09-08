@@ -88,7 +88,7 @@ extension MaterialPower {
                 }
             case .Failure(let error):
                 debugPrint(error)
-                let t = WISValueResponse<String>(value: "", success: false)
+                let t = WISValueResponse<JSON>(value: JSON.null, success: false)
                 completionHandler(t)
             }
         }

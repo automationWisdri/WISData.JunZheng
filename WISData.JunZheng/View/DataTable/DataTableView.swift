@@ -28,6 +28,9 @@ class DataTableView: UITableView {
     
     var viewModel: DataTableViewModel!
     private var rowInfo: [Int]?
+    var title: String = ""
+    
+    var selectedIndexPath: BehaviorSubject<Int> = BehaviorSubject(value: -1)
     
     private let DataTableCellID = "DataTableCell"
     
