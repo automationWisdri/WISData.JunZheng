@@ -9,7 +9,7 @@
 import UIKit
 
 public let DataTableHeaderRowHeight: CGFloat = 60.0
-public let DataTableRowHeight: CGFloat = 30.0
+public let DataTableBaseRowHeight: CGFloat = 30.0
 
 protocol DataTableViewDelegate {
     func dataTableViewContentOffSet(contentOffSet: CGPoint)
@@ -22,11 +22,18 @@ class DataTableView: UITableView {
     // var headerString: String = EMPTY_STRING
     
     var viewModel: DataTableViewModel!
+    private var rowInfo: [Int]?
     
     private let DataTableCellID = "DataTableCell"
     
-    override init(frame: CGRect, style: UITableViewStyle) {
+    init(frame: CGRect, style: UITableViewStyle, rowInfo: [Int]?) {
         super.init(frame: frame, style:style)
+        
+        if let _ = rowInfo {
+            self.rowInfo = rowInfo
+        } else {
+            self.rowHeight = DataTableBaseRowHeight
+        }
         
         self.viewModel = DataTableViewModel(sourceTableView: self)
         setupViews()
@@ -55,7 +62,7 @@ class DataTableView: UITableView {
         self.backgroundColor = UIColor.clearColor()
         self.separatorStyle = .None
         self.bounces = false
-        self.rowHeight = DataTableRowHeight
+        
     }
     
     func setTableViewContentOffSet(contentOffset:CGPoint) {
@@ -79,6 +86,28 @@ extension DataTableView: UITableViewDelegate {
         return cell
     }
     */
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        
+        guard let rowCount = self.rowInfo?.count else {
+            return DataTableBaseRowHeight
+        }
+        
+        if rowCount == 0 {
+            return DataTableBaseRowHeight
+        }
+        
+        var row = 0
+        for i in 0 ..< rowCount {
+            if indexPath.row == i {
+                row = i
+                break
+            } else {
+                continue
+            }
+        }
+        return CGFloat(self.rowInfo![row]) * DataTableBaseRowHeight
+    }
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UITableViewHeaderFooterView(frame: CGRectMake (0, 0, self.frame.width, DataTableHeaderRowHeight))

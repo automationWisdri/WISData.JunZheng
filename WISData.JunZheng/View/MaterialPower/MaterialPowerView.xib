@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" restorationIdentifier="MaterialPowerView" id="iN0-l3-epB" customClass="MaterialPowerView" customModule="WISData_JunZheng" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="300" height="200"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sEP-EX-LDh">
+                    <rect key="frame" x="0.0" y="35" width="300" height="165"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="    原料消耗" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hpv-dA-7Ob">
+                    <rect key="frame" x="0.0" y="0.0" width="300" height="35"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="35" id="38K-hc-Viz"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="hpv-dA-7Ob" secondAttribute="trailing" id="7ap-3z-KHL"/>
+                <constraint firstItem="sEP-EX-LDh" firstAttribute="top" secondItem="hpv-dA-7Ob" secondAttribute="bottom" id="F78-oZ-AgR"/>
+                <constraint firstAttribute="trailing" secondItem="sEP-EX-LDh" secondAttribute="trailing" id="TAW-e2-zKQ"/>
+                <constraint firstItem="sEP-EX-LDh" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="bvt-FA-TRg"/>
+                <constraint firstItem="hpv-dA-7Ob" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="fWA-k2-iSW"/>
+                <constraint firstAttribute="bottom" secondItem="sEP-EX-LDh" secondAttribute="bottom" id="kXA-XM-21v"/>
+                <constraint firstItem="hpv-dA-7Ob" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="pAK-x2-Xts"/>
+                <constraint firstItem="sEP-EX-LDh" firstAttribute="top" secondItem="hpv-dA-7Ob" secondAttribute="bottom" id="vot-ya-8sU"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="dataView" destination="sEP-EX-LDh" id="95a-WS-eVe"/>
+                <outlet property="viewTitleLabel" destination="hpv-dA-7Ob" id="pwx-ZU-DQD"/>
+            </connections>
+            <point key="canvasLocation" x="413" y="307"/>
+        </view>
+    </objects>
+</document>

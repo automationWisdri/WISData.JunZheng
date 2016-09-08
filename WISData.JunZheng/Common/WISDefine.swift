@@ -40,10 +40,12 @@ var STATUS_BAR_HEIGHT: CGFloat {
         return Device().isPad ? UIApplication.sharedApplication().statusBarFrame.height : CGFloat(0.0)
     }
 }
+
 let EMPTY_STRING = ""
 let SEPARATOR_HEIGHT = 1.0 / UIScreen.mainScreen().scale
 
 var SearchParameter: Dictionary = ["date": "", "shiftNo": "2", "lNo": "2"]
+let DJName = ["1# 电极", "2# 电极", "3# 电极"]
 
 ///---------
 /// App Info
