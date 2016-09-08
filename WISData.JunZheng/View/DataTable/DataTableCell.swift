@@ -16,7 +16,8 @@ class DataTableCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         alignTextVerticalInTextView(self.dataTextView)
-        userInteractionEnabled = false
+        dataTextView.userInteractionEnabled = false
+        self.userInteractionEnabled = true
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

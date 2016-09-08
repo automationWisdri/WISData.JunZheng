@@ -93,16 +93,26 @@ extension Furnace {
                 if let value = response.result.value {
                     let json = JSON(value)
                     
+                    guard json["Result"] == 1 else {
+                        let t = WISValueResponse<[JSON]>(value: [JSON.null], success: false)
+                        t.message = "服务器请求失败"
+                        completionHandler(t)
+                        return
+                    }
+                    
                     if let furnaceArray = Furnace.mj_objectArrayWithKeyValuesArray(json["Infos"].rawString()) {
                         for furnace in furnaceArray {
                             //                            debugPrint(furnace.Id)
                         }
                     }
-                    let t = WISValueResponse<[JSON]>(value: json["Infos"].arrayValue, success: response.result.isSuccess)
+                    let t = WISValueResponse<[JSON]>(value: json["Infos"].arrayValue, success: true)
                     completionHandler(t)
                 }
             case .Failure(let error):
                 debugPrint(error)
+                let t = WISValueResponse<[JSON]>(value: [JSON.null], success: false)
+                t.message = "网络连接失败"
+                completionHandler(t)
             }
         }
     }

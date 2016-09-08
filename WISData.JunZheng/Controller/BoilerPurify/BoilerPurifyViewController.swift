@@ -17,12 +17,14 @@ import SVProgressHUD
 
 class BoilerPurifyViewController: ViewController {
 
-    @IBOutlet weak var dataView: UIView!
+    @IBOutlet weak var dataView: UIScrollView!
     
     private var firstColumnView: UIView!
     private var scrollView: UIScrollView!
     private var firstColumnTableView: DataTableView!
     private var columnTableView = [DataTableView]()
+    
+    private var noDataView: NoDataView!
     
     private let rowCount: Int = 8
     
@@ -39,6 +41,12 @@ class BoilerPurifyViewController: ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // initialize No data View
+        if self.noDataView == nil {
+            self.noDataView = (NSBundle.mainBundle().loadNibNamed("NoDataView", owner: self, options: nil).last as! NoDataView
+            )
+        }
+        
         // Observing notifications
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.handleNotification(_:)), name: DataSearchNotification, object: nil)
         
@@ -101,13 +109,41 @@ class BoilerPurifyViewController: ViewController {
             }
         }
         
+        dataView.mj_header = WISRefreshHeader {[weak self] () -> () in
+            self?.headerRefresh()
+        }
+        
         // Get data for data table
         getData()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        arrangeBoilerPurifyView(self).layoutIfNeeded()
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    private func headerRefresh() {
+        //if WISDataManager.sharedInstance().networkReachabilityStatus != .NotReachable {
+        // 如果有上拉“加载更多”正在执行，则取消它
+        if dataView.mj_footer != nil {
+            if dataView.mj_footer.isRefreshing() {
+                dataView.mj_footer.endRefreshing()
+            }
+        }
+        
+        getData()
+        
+        //} else {
+        //    SVProgressHUD.setDefaultMaskType(.None)
+        //    SVProgressHUD.showErrorWithStatus(NSLocalizedString("Networking Not Reachable"))
+        //}
+        
+        dataView.mj_header.endRefreshing()
     }
     
     override func shouldAutorotate() -> Bool {
@@ -144,31 +180,35 @@ class BoilerPurifyViewController: ViewController {
             tableColumnsCount += 1
         }
         
+        boilerPurifyViewController.noDataView.frame = boilerPurifyViewController.dataView.frame
+        
         return boilerPurifyViewController.view
     }
 
     
     func getData() {
-        SVProgressHUD.show()
-        
-        dispatch_async(dispatch_get_main_queue()) {
-            self.firstColumnTableView.viewModel.headerString = SearchParameter["date"]! + "\n" + getShiftName(SearchParameter["shiftNo"]!)[0]
-            var firstColumnTitleArray: [String] = []
-            for i in 0 ..< 8 {
-                firstColumnTitleArray.append(getShiftName(SearchParameter["shiftNo"]!)[i + 1])
-            }
-            self.firstColumnTableView.viewModel.titleArray = firstColumnTitleArray
-            self.firstColumnTableView.viewModel.titleArraySubject
-                .onNext(firstColumnTitleArray)
-            // self.firstColumnTableView.reloadData()
-        }
+        SVProgressHUD.showWithStatus("数据获取中...")
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
             BoilerPurify.get(date: SearchParameter["date"]!, shiftNo: SearchParameter["shiftNo"]!, lNo: SearchParameter["lNo"]!) { (response: WISValueResponse<[JSON]>) in
                 
                 dispatch_async(dispatch_get_main_queue()) {
                     if response.success {
-                        SVProgressHUD.dismiss()
+                        SVProgressHUD.showWithMaskType(.None)
+                        SVProgressHUD.showSuccessWithStatus("数据获取成功！")
+                        
+                        self.noDataView.removeFromSuperview()
+                        
+                        self.firstColumnTableView.viewModel.headerString = SearchParameter["date"]! + "\n" + getShiftName(SearchParameter["shiftNo"]!)[0]
+                        var firstColumnTitleArray: [String] = []
+                        for i in 0 ..< 8 {
+                            firstColumnTitleArray.append(getShiftName(SearchParameter["shiftNo"]!)[i + 1])
+                        }
+                        self.firstColumnTableView.viewModel.titleArray = firstColumnTitleArray
+                        self.firstColumnTableView.viewModel.titleArraySubject
+                            .onNext(firstColumnTitleArray)
+                        // self.firstColumnTableView.reloadData()
+                        
                         self.tableContentJSON = response.value!
                         // self.firstColumnTableView.reloadData()
                         
@@ -179,6 +219,7 @@ class BoilerPurifyViewController: ViewController {
                             } else {
                                 // header
                                 let columnTitle: String = self.tableTitleJSON["title"][p].stringValue
+                                self.columnTableView[tableColumnsCount].title = p
                                 self.columnTableView[tableColumnsCount].viewModel.headerString = columnTitle
                                 self.columnTableView[tableColumnsCount].viewModel.headerStringSubject
                                     .onNext(columnTitle)
@@ -203,6 +244,8 @@ class BoilerPurifyViewController: ViewController {
                             }
                         }
                     } else {
+                        self.noDataView.frame = self.dataView.frame
+                        self.dataView.addSubview(self.noDataView)
                         wisError(response.message)
                     }
                 }

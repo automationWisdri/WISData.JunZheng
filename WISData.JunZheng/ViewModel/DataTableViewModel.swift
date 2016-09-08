@@ -42,15 +42,6 @@ class DataTableViewModel: ViewModel {
             .bindTo(tableView.rx_itemsWithDataSource(dataSource))
             .addDisposableTo(disposeBag)
         
-        tableView
-            .rx_itemSelected
-            .subscribeOn(MainScheduler.instance)
-            .map { indexPath in
-                return (indexPath, dataSource.itemAtIndexPath(indexPath))
-            }
-            .subscribeNext { indexPath, model in
-                // do something
-            }
-            .addDisposableTo(disposeBag)
+
     }
 }
