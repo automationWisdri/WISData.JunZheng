@@ -85,13 +85,13 @@ class BoilerPurifyViewController: ViewController {
         self.dataView.addSubview(firstColumnView)
         
         // Draw first column table
-        firstColumnTableView = DataTableView(frame: firstColumnView.bounds, style: .Plain)
+        firstColumnTableView = DataTableView(frame: firstColumnView.bounds, style: .Plain, rowInfo: nil)
         firstColumnTableView.dataTableDelegate = self
         firstColumnView.addSubview(firstColumnTableView)
         
         // Draw view for data table
         scrollView = UIScrollView(frame: CGRectMake (BoilerPurifyViewController.firstColumnViewWidth, 0, dataViewWidth - BoilerPurifyViewController.firstColumnViewWidth, dataViewHeight))
-        scrollView.contentSize = CGSizeMake(CGFloat(columnCount) * DataTableColumnWidth, CGFloat(rowCount) * DataTableRowHeight)
+        scrollView.contentSize = CGSizeMake(CGFloat(columnCount) * DataTableColumnWidth, CGFloat(rowCount) * DataTableBaseRowHeight)
         scrollView.showsHorizontalScrollIndicator = true
         scrollView.showsVerticalScrollIndicator = true
         scrollView.bounces = true
@@ -105,7 +105,7 @@ class BoilerPurifyViewController: ViewController {
             if p == "Id" {
                 continue
             } else {
-                let tempColumnTableView = DataTableView(frame: CGRectMake(CGFloat(tableColumnsCount) * DataTableColumnWidth, 0, DataTableColumnWidth, dataViewHeight), style: .Plain)
+                let tempColumnTableView = DataTableView(frame: CGRectMake(CGFloat(tableColumnsCount) * DataTableColumnWidth, 0, DataTableColumnWidth, dataViewHeight), style: .Plain, rowInfo: nil)
                 self.columnTableView.append(tempColumnTableView)
                 self.columnTableView[tableColumnsCount].dataTableDelegate = self
                 self.scrollView.addSubview(self.columnTableView[tableColumnsCount])

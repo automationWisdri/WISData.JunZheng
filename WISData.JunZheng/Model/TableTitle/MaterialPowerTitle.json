@@ -1,7 +1,7 @@
 {
   "title": {
   	"BQCL"				:	"标前产量\n(t)",
-	"GYD"				:	"工艺电\n(KWh)",
+	"GYD"				:	"工艺电\n(kWh)",
 	"JHHZL"				:	"净化灰重量\n(t)",
 	"JTZH"				:	"焦炭总耗\n(t)",
 	"LTGDT"				:	"兰碳成分\n固定碳\n(%)",
@@ -15,13 +15,13 @@
 	"SHGS"				:	"石灰成分\n过烧\n(%)",
 	"SHSS"				:	"石灰成分\n生烧\n(%)",
 	"SHZH"				:	"石灰总耗\n(t)",
-	"SwithTimeReasons":[{
+	"SwithTimeReasons":{
 		"CutHour"		:	"停电时间\n时",
 		"CutMinute"		:	"停电时间\n分",
 		"OnHour"		:	"送电时间\n时",
 		"OnMinute"		:	"送电时间\n分",
 		"Reason"		:	"停电原因"
-		}],
+		},
 	"WYMGDT"			:	"无烟煤成分\n固定碳\n(%)",
 	"WYMHF"				:	"无烟煤成分\n灰分\n(%)",
 	"WYMHFF"			:	"无烟煤成分\n挥发份\n(%)",

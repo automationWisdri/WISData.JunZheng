@@ -22,57 +22,160 @@ class MaterialPowerViewController: UIViewController {
     }
 
     private var dailyMaterialPowerView: DailyMaterialPowerView?
+    private var materialPowerView: MaterialPowerView?
+    private var operationView: OperationView?
+    
+    private let getDataGroup = dispatch_group_create()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Observing notifications
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.handleNotification(_:)), name: DataSearchNotification, object: nil)
         // initialize No data View
         if self.noDataView == nil {
             self.noDataView = (NSBundle.mainBundle().loadNibNamed("NoDataView", owner: self, options: nil).last as! NoDataView
             )
         }
         
+        dataView.mj_header = WISRefreshHeader {[weak self] () -> () in
+            self?.headerRefresh()
+        }
+        //
+        // Daily Material Power View Section
+        //
         if self.dailyMaterialPowerView == nil {
             self.dailyMaterialPowerView = (NSBundle.mainBundle().loadNibNamed("DailyMaterialPowerView", owner: self, options: nil).last as! DailyMaterialPowerView
             )
         }
-        
-        self.dataView.addSubview(dailyMaterialPowerView!)
-        
-        dataView.mj_header = WISRefreshHeader {[weak self] () -> () in
-            self?.headerRefresh()
+        getDailyMaterialPowerData()
+
+        //
+        // Material Power View Section
+        //
+        if self.materialPowerView == nil {
+            self.materialPowerView = (NSBundle.mainBundle().loadNibNamed("MaterialPowerView", owner: self, options: nil).last as! MaterialPowerView
+            )
         }
+        getMaterialPowerData()
         
-//        MaterialPower.get(date: "2016/8/15", shiftNo: "1", lNo: "1") { (response: WISValueResponse<String>) in
-//            if response.success {
-////                SVProgressHUD.showSuccessWithStatus("登录成功")
-//                
-//                self.dataTextView.text = response.value
-//            } else {
-//                wisError(response.message)
-//            }
-//        }
-        
-        
-//        Operation.get(date: "2016/8/31", shiftNo: "1", lNo: "2") { (response: WISValueResponse<String>) in
-//            if response.success {
-//                self.dataTextView.text = response.value
-//            } else {
-//                wisError(response.message)
-//            }
-//        }
+        //
+        // Operation View Section
+        //
+        if self.operationView == nil {
+            self.operationView = (NSBundle.mainBundle().loadNibNamed("OperationView", owner: self, options: nil).last as! OperationView
+            )
+        }
+        getOperationData()
+
     }
     
     override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
         
-//        self.dailyMaterialPowerView!.frame = CGRectMake(0.0, 0.0, self.dataView.bounds.size.width/*CURRENT_SCREEN_WIDTH*/, 185)
-//        // CURRENT_SCREEN_WIDTH return incorrect value. Why?
-//        print("dailyMaterialPowerView width: \(self.dailyMaterialPowerView?.frame.size.width)")
-//        print("current screen width: \(CURRENT_SCREEN_WIDTH)")
-//        print("dataView width: \(self.dataView.bounds.size.width)")
+        dispatch_group_notify(getDataGroup, dispatch_get_main_queue()) {
+            super.viewWillAppear(animated)
+            self.arrangeMaterialPowerView(self).layoutIfNeeded()
+        }
+
+    }
+    
+    func handleNotification(notification: NSNotification) -> Void {
         
-        arrangeMaterialPowerView(self).layoutIfNeeded()
+        getDailyMaterialPowerData()
+        getMaterialPowerData()
+        getOperationData()
+        
+        dispatch_group_notify(getDataGroup, dispatch_get_main_queue()) {
+            self.arrangeMaterialPowerView(self).layoutIfNeeded()
+        }
+    }
+    
+    func getDailyMaterialPowerData() {
+        
+        dispatch_group_enter(getDataGroup)
+        
+        DailyMaterialPower.get(date: SearchParameter["date"]!, lNo: SearchParameter["lNo"]!) { (response: WISValueResponse<JSON>) in
+            if response.success {
+                self.dailyMaterialPowerView!.dailyMaterialPowerContentJSON = response.value!
+                self.dailyMaterialPowerView!.drawTable()
+                self.dataView.addSubview(self.dailyMaterialPowerView!)
+            } else {
+                wisError(response.message)
+            }
+            dispatch_group_leave(self.getDataGroup)
+        }
+        
+    }
+    
+    func getMaterialPowerData() {
+        
+        dispatch_group_enter(getDataGroup)
+        
+        MaterialPower.get(date: SearchParameter["date"]!, shiftNo: SearchParameter["shiftNo"]!, lNo: SearchParameter["lNo"]!) { (response: WISValueResponse<JSON>) in
+            if response.success {
+                //                debugPrint(response.value)
+                let tableContentJSON = response.value!["MaterialPower"]
+                self.materialPowerView!.tableContentJSON = tableContentJSON
+                
+                let switchContentJSON = tableContentJSON["SwithTimeReasons"].arrayValue
+                self.materialPowerView!.switchContentJSON = switchContentJSON
+                
+                var switchRowCount = 0
+                if switchContentJSON.count > 1 {
+                    switchRowCount = switchContentJSON.count
+                } else {
+                    switchRowCount = 1
+                }
+                let viewHeight = CGFloat(switchRowCount) * DataTableBaseRowHeight + 60 + 35
+                self.materialPowerView!.viewHeight = viewHeight
+                
+                self.materialPowerView!.drawTable(switchRowCount, viewHeight: viewHeight)
+                self.dataView.addSubview(self.materialPowerView!)
+                
+            } else {
+                wisError(response.message)
+            }
+            
+            dispatch_group_leave(self.getDataGroup)
+        }
+    }
+    
+    func getOperationData() {
+        
+        dispatch_group_enter(getDataGroup)
+        
+        Operation.get(date: SearchParameter["date"]!, shiftNo: SearchParameter["shiftNo"]!, lNo: SearchParameter["lNo"]!) { (response: WISValueResponse<JSON>) in
+            if response.success {
+                debugPrint(response.value!)
+                let tableContentJSON = response.value!["Infos"].arrayValue
+                print(tableContentJSON)
+                self.operationView!.tableContentJSON = tableContentJSON
+                
+                var switchRowCount = [Int]()
+                for i in 0 ..< tableContentJSON.count {
+                    let switchContentJSON = tableContentJSON[i]["SwitchTimes"].arrayValue
+                    self.operationView!.switchContentJSON.append(switchContentJSON)
+                    
+                    if switchContentJSON.count > 1 {
+                        switchRowCount.append(switchContentJSON.count)
+                    } else {
+                        switchRowCount.append(1)
+                    }
+                }
+                var totalRowCount = 0
+                for count in switchRowCount {
+                    totalRowCount += count
+                }
+                let viewHeight = CGFloat(totalRowCount) * DataTableBaseRowHeight + 60 + 35
+                self.operationView!.viewHeight = viewHeight
+                self.operationView!.drawTable(switchRowCount, viewHeight: viewHeight)
+                self.dataView.addSubview(self.operationView!)
+            } else {
+                wisError(response.message)
+            }
+            
+            dispatch_group_leave(self.getDataGroup)
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -89,7 +192,13 @@ class MaterialPowerViewController: UIViewController {
             }
         }
         
-        dailyMaterialPowerView!.getData()
+        getDailyMaterialPowerData()
+        getMaterialPowerData()
+        getOperationData()
+        
+        dispatch_group_notify(getDataGroup, dispatch_get_main_queue()) {
+            self.arrangeMaterialPowerView(self).layoutIfNeeded()
+        }
         
         //} else {
         //    SVProgressHUD.setDefaultMaskType(.None)
@@ -116,22 +225,16 @@ class MaterialPowerViewController: UIViewController {
         let dataViewHeight = CURRENT_SCREEN_HEIGHT - navigationBarHeight - statusBarHeight - menuHeaderHeight
         
         materialPowerViewController.dataView.frame = CGRectMake(0, 0, dataViewWidth, dataViewHeight)
-        materialPowerViewController.dailyMaterialPowerView!.frame = CGRectMake(0.0, 0.0, self.dataView.bounds.size.width/*CURRENT_SCREEN_WIDTH*/, 185)
-        
-        materialPowerViewController.noDataView.frame = materialPowerViewController.dataView.frame
+        materialPowerViewController.dailyMaterialPowerView!.frame = CGRectMake(0.0, 0.0, self.dataView.bounds.size.width/*CURRENT_SCREEN_WIDTH*/, self.dailyMaterialPowerView!.viewHeight)
+        materialPowerViewController.materialPowerView!.frame = CGRectMake(0.0, self.dailyMaterialPowerView!.viewHeight, self.dataView.bounds.size.width, self.materialPowerView!.viewHeight!)
+        materialPowerViewController.operationView!.frame = CGRectMake(0.0, self.dailyMaterialPowerView!.viewHeight + self.materialPowerView!.viewHeight!, self.dataView.bounds.size.width, self.operationView!.viewHeight!)
+        materialPowerViewController.dataView.contentSize = CGSizeMake(dataViewWidth, (self.dailyMaterialPowerView!.viewHeight + self.materialPowerView!.viewHeight! + self.operationView!.viewHeight!))
         
         return materialPowerViewController.view
     }
-
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: DataSearchNotification, object: nil)
     }
-    */
 
 }

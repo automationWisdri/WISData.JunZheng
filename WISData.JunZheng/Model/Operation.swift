@@ -31,7 +31,7 @@ class SwitchTime: NSObject, PropertyNames {
 
 extension Operation {
     
-    class func get(date date: String, shiftNo: String, lNo: String, completionHandler: WISValueResponse<String> -> Void) -> Void {
+    class func get(date date: String, shiftNo: String, lNo: String, completionHandler: WISValueResponse<JSON> -> Void) -> Void {
         
         let getURL = BaseURL + "/GetDJOperation?date=\(date)&shiftNo=\(shiftNo)&lNo=\(lNo)"
         Alamofire.request(.POST, getURL).responseJSON { response in
@@ -40,7 +40,7 @@ extension Operation {
                 if let value = response.result.value {
                     let json = JSON(value)
                     
-                    let t = WISValueResponse<String>(value: json.rawString()!, success: response.result.isSuccess)
+                    let t = WISValueResponse<JSON>(value: json, success: response.result.isSuccess)
                     completionHandler(t)
                     
                 }

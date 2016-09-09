@@ -65,7 +65,7 @@ class DailyMaterialPower: NSObject, PropertyNames {
 
 extension MaterialPower {
     
-    class func get(date date: String, shiftNo: String, lNo: String, completionHandler: WISValueResponse<String> -> Void) -> Void {
+    class func get(date date: String, shiftNo: String, lNo: String, completionHandler: WISValueResponse<JSON> -> Void) -> Void {
         
         let getURL = BaseURL + "/GetMaterialPower?date=\(date)&shiftNo=\(shiftNo)&lNo=\(lNo)"
         Alamofire.request(.POST, getURL).responseJSON { response in
@@ -76,13 +76,19 @@ extension MaterialPower {
 //                    debugPrint("JSON: \(json)")
 //                    debugPrint(json.rawString())
                     
-                    let t = WISValueResponse<String>(value: json.rawString()!, success: false)
+                    // switchCount is one by default
+                    var switchCount = 1
+                    if let str = SwitchTimeReason.mj_objectArrayWithKeyValuesArray(json["SwithTimeReasons"].rawString()!) {
+                        switchCount = str.count
+                    }
+                    
+                    let t = WISValueResponse<JSON>(value: json, success: response.result.isSuccess)
                     completionHandler(t)
                     
                 }
             case .Failure(let error):
                 debugPrint(error)
-                let t = WISValueResponse<String>(value: "", success: false)
+                let t = WISValueResponse<JSON>(value: JSON.null, success: false)
                 completionHandler(t)
             }
         }

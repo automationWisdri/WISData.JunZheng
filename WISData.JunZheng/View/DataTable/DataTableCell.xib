@@ -33,7 +33,6 @@
                     <constraint firstAttribute="bottom" secondItem="HHd-8l-93d" secondAttribute="bottom" id="ETD-dS-T9R"/>
                     <constraint firstItem="HHd-8l-93d" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="GcR-aN-vWZ"/>
                     <constraint firstAttribute="trailing" secondItem="xwb-Da-CdQ" secondAttribute="trailing" id="anZ-Q6-B3O"/>
-                    <constraint firstItem="HHd-8l-93d" firstAttribute="top" secondItem="xwb-Da-CdQ" secondAttribute="bottom" id="cJ3-s0-GYg"/>
                     <constraint firstAttribute="trailing" secondItem="HHd-8l-93d" secondAttribute="trailing" id="q3b-dx-vzy"/>
                     <constraint firstItem="xwb-Da-CdQ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="wzC-tf-YbY"/>
                     <constraint firstItem="HHd-8l-93d" firstAttribute="top" secondItem="xwb-Da-CdQ" secondAttribute="bottom" id="xOh-bi-FlK"/>

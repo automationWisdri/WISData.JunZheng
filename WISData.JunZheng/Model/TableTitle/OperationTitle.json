@@ -4,11 +4,11 @@
 	"JHL"			:	"加糊量\n(Kg)",
 	"No"			:	"",
 	"PB"			:	"配比",
-	"SwitchTimes":[{
+	"SwitchTimes":{
 		"HZGD"		:	"糊柱高度\n(m)",
 		"Hour"		:	"开停时间\n时",
 		"Minute"	:	"开停时间\n分",
-		}],
+		},
 	"YFCS"			:	"压放次数",
 	"YFL"			:	"压放量\n(mm)"
   }

@@ -18,16 +18,13 @@ class DailyMaterialPowerView: UIView {
     
     private var dailyMaterialPowerContent = [String : String]()
     private var dailyMaterialPowerTitleJSON = JSON.null
-    private var dailyMaterialPowerContentJSON = JSON.null
-    
-    private var dailyMaterialPower = DailyMaterialPower()
+    var dailyMaterialPowerContentJSON = JSON.null
+
+    var viewHeight: CGFloat = 185
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        // Observing notifications
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.handleNotification(_:)), name: DataSearchNotification, object: nil)
-        
+
         // Get table column title
         if let path = NSBundle.mainBundle().pathForResource("MaterialPowerTitle", ofType: "json") {
             let data = NSData(contentsOfFile: path)
@@ -45,67 +42,42 @@ class DailyMaterialPowerView: UIView {
         dailyMaterialPowerTable.scrollsToTop = false
         
         dailyMaterialPowerTable.registerNib(UINib(nibName: dailyMaterialPowerCellID, bundle: nil), forCellReuseIdentifier: dailyMaterialPowerCellID)
-        
-        self.getData()
+
     }
     
-    deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: DataSearchNotification, object: nil)
-    }
-    
-    func getData() {
-        SVProgressHUD.showWithStatus("数据获取中...")
+    func drawTable() {
         
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
-            DailyMaterialPower.get(date: SearchParameter["date"]!, lNo: SearchParameter["lNo"]!) { (response: WISValueResponse<JSON>) in
-                dispatch_async(dispatch_get_main_queue()) {
-                    if response.success {
-                        SVProgressHUD.showWithMaskType(.None)
-                        SVProgressHUD.showSuccessWithStatus("数据获取成功！")
-                        
-                        self.dailyMaterialPowerContentJSON = response.value!
-                        
-                        // Daily Material Power part
-                        
-                        var i = 0
-                        var j = 0
-                        var key = EMPTY_STRING
-                        for p in DailyMaterialPower().propertyNames() {
-                            if p == "Result" {
-                                continue
-                            } else {
-                                key = String(i) + String(j)
-                                let title = self.dailyMaterialPowerTitleJSON["title"][p].stringValue
-                                self.dailyMaterialPowerContent[key] = title
-                                debugPrint("key is \(key), and value is \(title)")
-                                
-                                j += 1
-                                key = String(i) + String(j)
-                                let content = self.dailyMaterialPowerContentJSON[p].stringValue
-                                self.dailyMaterialPowerContent[key] = content
-                                debugPrint("key is \(key), and value is \(content)")
-                                j += 1
-                                
-                                if j == 4 {
-                                    i += 1
-                                    j = 0
-                                }
-                            }
-                        }
-                        
-                        self.dailyMaterialPowerTable.reloadData()
-                        
-                    } else {
-                        wisError(response.message)
-                    }
+        var i = 0
+        var j = 0
+        var key = EMPTY_STRING
+        
+        for p in DailyMaterialPower().propertyNames() {
+            if p == "Result" {
+                continue
+            } else {
+                key = String(i) + String(j)
+                let tempTitle = self.dailyMaterialPowerTitleJSON["title"][p].stringValue
+                let title = tempTitle.stringByReplacingOccurrencesOfString("\n", withString: " ")
+                self.dailyMaterialPowerContent[key] = title
+                
+                j += 1
+                key = String(i) + String(j)
+                let content = self.dailyMaterialPowerContentJSON[p].stringValue
+                self.dailyMaterialPowerContent[key] = content
+                j += 1
+                
+                if j == 4 {
+                    i += 1
+                    j = 0
                 }
+                
             }
         }
+        
+        self.dailyMaterialPowerTable.reloadData()
+
     }
-    
-    func handleNotification(notification: NSNotification) -> Void {
-        getData()
-    }
+
 
 }
 
@@ -151,5 +123,11 @@ extension DailyMaterialPowerView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 35
+    }
+    
+    func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        view.tintColor = UIColor.wisGrayColor().colorWithAlphaComponent(0.3)
+        let headerView = view as! UITableViewHeaderFooterView
+        headerView.textLabel?.font = UIFont.systemFontOfSize(16)
     }
 }
