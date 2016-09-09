@@ -28,6 +28,7 @@ class FurnaceViewController: ViewController {
     private var columnTableView = [DataTableView]()
     
     private var noDataView: NoDataView!
+    private var hasRefreshedData = false
     
     private var rowCount: Int = 8
     
@@ -49,6 +50,8 @@ class FurnaceViewController: ViewController {
             self.noDataView = (NSBundle.mainBundle().loadNibNamed("NoDataView", owner: self, options: nil).last as! NoDataView
             )
         }
+        
+        self.hasRefreshedData = false
         
         // Observing notifications
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.handleNotification(_:)), name: DataSearchNotification, object: nil)
@@ -114,39 +117,62 @@ class FurnaceViewController: ViewController {
             }
         }
         
-        // data binding
+        // To get data row selected and segue to the dataDetailViewController
         var selectedElement = firstColumnTableView.selectedIndexPath.asObservable()
         
         for tableView in columnTableView {
             selectedElement = Observable.of(selectedElement, tableView.selectedIndexPath).merge()
         }
         
-        // unfinished - to implement later!!!
+        var dataTitle: String = EMPTY_STRING        // title in the center of navigationbar in dataDetailView
+        var dataContents: [String: String] = [:]    // data contents in dataDetailView
+        
+        //
         selectedElement
             .subscribeNext { [unowned self] rowIndex -> () in
-            print("tapped row number: \(rowIndex)")
-            
-            // Read time of record
-            var time: String!
-            self.firstColumnTableView.viewModel.titleArraySubject.asObservable()
-                .subscribeNext { titleArray in
-                guard rowIndex > -1 && rowIndex < titleArray.count else { return }
-                time = titleArray[rowIndex] ?? ""
-            }.addDisposableTo(self.disposeBag)
-            
-        }.addDisposableTo(disposeBag)
+                print("tapped row number: \(rowIndex)")
+                
+                // Read title of record
+                self.firstColumnTableView.viewModel.titleArraySubject
+                    .asObservable()
+                    .subscribeNext { titleArray in
+                        guard rowIndex > -1 && rowIndex < titleArray.count else { return }
+                        dataTitle = titleArray[rowIndex] ?? ""
+                    }.addDisposableTo(self.disposeBag)
+                
+                var columnTitle: String?
+                // Read detail data with title
+                for column in self.columnTableView {
+                    column.viewModel.titleArraySubject
+                    .asObservable()
+                    .subscribeNext { data in
+                        guard rowIndex > -1 && rowIndex < data.count else { return }
+                        columnTitle = self.tableTitleJSON["title"][column.title].stringValue ?? ""
+                        dataContents[columnTitle!] = data[rowIndex] ?? ""
+                    }.addDisposableTo(self.disposeBag)
+                }
+                
+                // DataDetailViewController.performPushToDataDetailViewController(self, title: dataTitle, dataContents: dataContents, animated: true)
+                
+            }.addDisposableTo(disposeBag)
         
         dataView.mj_header = WISRefreshHeader {[weak self] () -> () in
             self?.headerRefresh()
             }
         
         // Get data for data table
-        self.getData()
+        // self.getData()
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         arrangeFurnaceView(self).layoutIfNeeded()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        // Get data for data table
+        if !hasRefreshedData { getData() }
     }
     
     override func didReceiveMemoryWarning() {
@@ -274,10 +300,12 @@ class FurnaceViewController: ViewController {
                                 tableColumnsCount += 1
                             }
                         }
+                        self.hasRefreshedData = true
                         
                     } else {
                         self.noDataView.frame = self.dataView.frame
                         self.dataView.addSubview(self.noDataView)
+                        self.hasRefreshedData = false
                         wisError(response.message)
                     }
                 }

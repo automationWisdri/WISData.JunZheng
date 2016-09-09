@@ -9,12 +9,14 @@
 import UIKit
 
 class NoDataView: UIView {
-    @IBOutlet weak var hintLabel: UILabel!
+    @IBOutlet weak var hintTextView: UITextView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.hintLabel.textColor = UIColor.darkGrayColor()
-        self.hintLabel.text = "数据获取失败！请检查网络连接与查询设置"
+        self.hintTextView.textColor = UIColor.darkGrayColor()
+        self.hintTextView.text = "数据获取失败！\n请检查网络连接与查询设置"
+        self.hintTextView.userInteractionEnabled = false
+        self.hintTextView.scrollsToTop = false
         // self.backgroundColor = UIColor.lightTextColor()
     }
 }

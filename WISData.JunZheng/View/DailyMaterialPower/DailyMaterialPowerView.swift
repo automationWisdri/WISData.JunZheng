@@ -121,7 +121,7 @@ extension DailyMaterialPowerView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell = getCell(tableView, cell: DailyMaterialPowerCell.self, indexPath: indexPath)
+        let cell = getTableViewCell(tableView, cell: DailyMaterialPowerCell.self, indexPath: indexPath)
         var key = EMPTY_STRING
         
         switch indexPath.row {

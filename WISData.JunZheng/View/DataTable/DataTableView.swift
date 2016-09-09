@@ -43,8 +43,12 @@ class DataTableView: UITableView {
         // bind data
         self.viewModel.dataSource
             .configureCell = { [unowned self] (_, tableView, indexPath, element) in
-            let cell = getCell(tableView, cell: DataTableCell.self, indexPath: indexPath)
-            cell.dataTextView.text = self.viewModel.titleArray[indexPath.row]
+            let cell = getTableViewCell(tableView, cell: DataTableCell.self, indexPath: indexPath)
+            self.viewModel.titleArraySubject
+                .subscribeNext { titleArray in
+                    cell.dataTextView.text = indexPath.row < titleArray.count ? titleArray[indexPath.row] : ""
+                }
+                .addDisposableTo(self.viewModel.disposeBag)
             return cell
         }
         

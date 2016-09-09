@@ -92,7 +92,7 @@ extension LeftMenuViewController: UITableViewDelegate, UITableViewDataSource {
         
         switch indexPath.section {
         case 0:
-            let cell = getCell(tableView, cell: LeftUserHeadCell.self, indexPath: indexPath)
+            let cell = getTableViewCell(tableView, cell: LeftUserHeadCell.self, indexPath: indexPath)
             
             cell.avatarImageView.image = UIImage(named: "default_avatar_60")
             cell.userNameLabel.text = (NSUserDefaults.standardUserDefaults().objectForKey("username") as! String)
@@ -101,7 +101,7 @@ extension LeftMenuViewController: UITableViewDelegate, UITableViewDataSource {
         
         case 1:
             
-            let cell = getCell(tableView, cell: LeftMenuCell.self, indexPath: indexPath)
+            let cell = getTableViewCell(tableView, cell: LeftMenuCell.self, indexPath: indexPath)
             
             cell.annotationLabel.text = "\(indexPath.row + 1)#炉"
             cell.menuIconImageView.image = UIImage.imageUsedTemplateMode("icon_house")
@@ -110,7 +110,7 @@ extension LeftMenuViewController: UITableViewDelegate, UITableViewDataSource {
             
         case 2:
             
-            let cell = getCell(tableView, cell: LeftMenuCell.self, indexPath: indexPath)
+            let cell = getTableViewCell(tableView, cell: LeftMenuCell.self, indexPath: indexPath)
             cell.annotationLabel.text = ["关于", "退出"][indexPath.row]
             let names = ["icon_about", "icon_logout"]
             cell.menuIconImageView.image = UIImage.imageUsedTemplateMode(names[indexPath.row])
@@ -197,6 +197,7 @@ extension LeftMenuViewController: UITableViewDelegate, UITableViewDataSource {
                     // HUD 弹出有延时，待解决
                     SVProgressHUD.show()
                     delay(0.5, work: {
+                        User.storeRecentUserName("")
                         WISCommon.currentAppDelegate.window?.rootViewController = LoginViewController()
                         SVProgressHUD.dismiss()
                     })

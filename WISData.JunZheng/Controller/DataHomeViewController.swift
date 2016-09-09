@@ -212,6 +212,12 @@ class DataHomeViewController: UIViewController {
         // observing notifications
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.handleNotification(_:)), name: DataSearchNotification, object: nil)
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        let pagingMenuController = self.childViewControllers[0] as! PagingMenuController
+        arrangePagingMenuView(pagingMenuController).layoutIfNeeded()
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -254,7 +260,7 @@ class DataHomeViewController: UIViewController {
         }
         
         let pagingMenuController = self.childViewControllers[0] as! PagingMenuController
-        arrangePagingMenuView(pagingMenuController)//.layoutIfNeeded()
+        arrangePagingMenuView(pagingMenuController).layoutIfNeeded()
     }
     
     deinit {

@@ -85,8 +85,12 @@ func dateFormatterGetHour(date: NSDate) -> String {
  
  - returns: 传入Cell类型的 实例对象
  */
-func getCell<T: UITableViewCell>(tableView: UITableView, cell: T.Type, indexPath:NSIndexPath) -> T {
+func getTableViewCell<T: UITableViewCell>(tableView: UITableView, cell: T.Type, indexPath:NSIndexPath) -> T {
     return tableView.dequeueReusableCellWithIdentifier("\(cell)", forIndexPath: indexPath) as! T
+}
+
+func getCollectionViewCell<T: UICollectionViewCell>(collectionView: UICollectionView, cell: T.Type, indexPath:NSIndexPath) -> T {
+    return collectionView.dequeueReusableCellWithReuseIdentifier("\(cell)", forIndexPath: indexPath) as! T
 }
 
 func getShiftName(shiftNo: String) -> [String] {

@@ -11,21 +11,21 @@
             <rect key="frame" x="0.0" y="0.0" width="346" height="350"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="数据获取失败！请检查网络连接" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xJC-vC-S3k">
-                    <rect key="frame" x="45" y="142" width="256" height="65"/>
-                    <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="17"/>
-                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                    <nil key="highlightedColor"/>
-                </label>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" text="Row 1 Row 2" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="fbn-CJ-MVq">
+                    <rect key="frame" x="53" y="145" width="240" height="59"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                </textView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="xJC-vC-S3k" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Kah-Dz-fhi"/>
-                <constraint firstItem="xJC-vC-S3k" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="heJ-1U-Aqj"/>
+                <constraint firstItem="fbn-CJ-MVq" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="SpP-d1-i5i"/>
+                <constraint firstItem="fbn-CJ-MVq" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="wEA-OK-lsw"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="hintLabel" destination="xJC-vC-S3k" id="PP2-CT-3ZL"/>
+                <outlet property="hintTextView" destination="fbn-CJ-MVq" id="ke6-nK-T1i"/>
             </connections>
             <point key="canvasLocation" x="322" y="109"/>
         </view>

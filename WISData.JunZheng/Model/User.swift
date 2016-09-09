@@ -53,7 +53,10 @@ extension User {
     private static let userNameKey = "username"
     
     class func obtainRecentUserName() -> String? {
-        return NSUserDefaults.standardUserDefaults().objectForKey(userNameKey) as? String
+        guard let userName = NSUserDefaults.standardUserDefaults().objectForKey(userNameKey) as? String else {
+            return nil
+        }
+        return userName != "" ? userName : nil
     }
     
     class func storeRecentUserName(userName: String) -> () {

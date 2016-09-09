@@ -50,6 +50,11 @@ class LoginViewController: ViewController {
             //
         }
         
+        print("oritentation is portrait: \(self.interfaceOrientation.isPortrait)")
+        print("width: \(CURRENT_SCREEN_WIDTH) - height: \(CURRENT_SCREEN_HEIGHT)")
+        print("view frame: \(self.view.frame)")
+        print("view bounds: \(self.view.bounds)")
+        
         self.backgroundImageView = UIImageView(image: UIImage(named: "login_background"))
         self.backgroundImageView!.frame = self.view.frame
         self.backgroundImageView!.contentMode = .ScaleToFill

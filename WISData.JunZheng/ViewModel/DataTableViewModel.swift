@@ -17,11 +17,11 @@ import UIKit
 class DataTableViewModel: ViewModel {
     weak var tableView: DataTableView!
     
-    var titleArray: [String] = []
     var headerString: String = EMPTY_STRING
+    var titleArray: [String] = []
     
-    var titleArraySubject: BehaviorSubject<[String]> = BehaviorSubject(value: [])
     var headerStringSubject: BehaviorSubject<String> = BehaviorSubject(value: EMPTY_STRING)
+    var titleArraySubject: BehaviorSubject<[String]> = BehaviorSubject(value: [])
     
     let dataSource = RxTableViewSectionedReloadDataSource<SectionModel<String, String>>()
     
@@ -33,7 +33,7 @@ class DataTableViewModel: ViewModel {
         // use local variable to avoid reference cycle.
         let dataSource = self.dataSource        
         
-        let tableViewItems = Observable.combineLatest(titleArraySubject, headerStringSubject) {titleArray, headerString in
+        let tableViewItems = Observable.combineLatest(headerStringSubject, titleArraySubject) {headerString, titleArray in
             return [SectionModel(model: headerString, items: titleArray)]
         }
         
@@ -41,7 +41,5 @@ class DataTableViewModel: ViewModel {
             .subscribeOn(MainScheduler.instance)
             .bindTo(tableView.rx_itemsWithDataSource(dataSource))
             .addDisposableTo(disposeBag)
-        
-
     }
 }

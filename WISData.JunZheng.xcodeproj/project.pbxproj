@@ -16,11 +16,16 @@
 		383BEADF1D7EB16B00463A11 /* NoDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383BEADE1D7EB16B00463A11 /* NoDataView.swift */; };
 		383BEAE61D7EB1C600463A11 /* NoDataView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 383BEAE51D7EB1C600463A11 /* NoDataView.xib */; };
 		387377401D7C1D6800AA2425 /* SearchPopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3873773F1D7C1D6800AA2425 /* SearchPopoverViewController.swift */; };
+		3887E9DA1D80FAE6008D795D /* DataDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3887E9D91D80FAE6008D795D /* DataDetailCell.xib */; };
+		389B90BD1D7FB48F006BB318 /* DataDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 389B90BC1D7FB48F006BB318 /* DataDetailViewModel.swift */; };
 		38AE580C1D796DE900B596E4 /* DataTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AE580B1D796DE900B596E4 /* DataTableViewModel.swift */; };
 		38B91EFD1D615EBE00EFD37E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B91EFC1D615EBE00EFD37E /* AppDelegate.swift */; };
 		38B91EFF1D615EBE00EFD37E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 38B91EFE1D615EBE00EFD37E /* Assets.xcassets */; };
 		38B91F0D1D615EBE00EFD37E /* WISData_JunZhengTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B91F0C1D615EBE00EFD37E /* WISData_JunZhengTests.swift */; };
 		38B91F181D615EBE00EFD37E /* WISData_JunZhengUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B91F171D615EBE00EFD37E /* WISData_JunZhengUITests.swift */; };
+		38C503FB1D7FA628003479CC /* DataDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C503FA1D7FA628003479CC /* DataDetailViewController.swift */; };
+		38C503FD1D7FA65E003479CC /* DataDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38C503FC1D7FA65E003479CC /* DataDetail.storyboard */; };
+		38C504011D7FA9B2003479CC /* DataDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C503FF1D7FA9B2003479CC /* DataDetailCell.swift */; };
 		38C6345D1D72D79D00F64312 /* UserTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C6345C1D72D79D00F64312 /* UserTestCase.swift */; };
 		9F0221A41D7021220056DDF5 /* DataTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F0221A31D7021220056DDF5 /* DataTableView.swift */; };
 		9F0221A61D731BD10056DDF5 /* PropertyNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F0221A51D731BD10056DDF5 /* PropertyNames.swift */; };
@@ -107,6 +112,8 @@
 		383BEADE1D7EB16B00463A11 /* NoDataView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoDataView.swift; sourceTree = "<group>"; };
 		383BEAE51D7EB1C600463A11 /* NoDataView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoDataView.xib; sourceTree = "<group>"; };
 		3873773F1D7C1D6800AA2425 /* SearchPopoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchPopoverViewController.swift; sourceTree = "<group>"; };
+		3887E9D91D80FAE6008D795D /* DataDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DataDetailCell.xib; sourceTree = "<group>"; };
+		389B90BC1D7FB48F006BB318 /* DataDetailViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataDetailViewModel.swift; sourceTree = "<group>"; };
 		38AE580B1D796DE900B596E4 /* DataTableViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataTableViewModel.swift; sourceTree = "<group>"; };
 		38B91EF91D615EBE00EFD37E /* WISData.JunZheng.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WISData.JunZheng.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		38B91EFC1D615EBE00EFD37E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -118,6 +125,9 @@
 		38B91F131D615EBE00EFD37E /* WISData.JunZhengUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WISData.JunZhengUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		38B91F171D615EBE00EFD37E /* WISData_JunZhengUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WISData_JunZhengUITests.swift; sourceTree = "<group>"; };
 		38B91F191D615EBE00EFD37E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		38C503FA1D7FA628003479CC /* DataDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataDetailViewController.swift; sourceTree = "<group>"; };
+		38C503FC1D7FA65E003479CC /* DataDetail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DataDetail.storyboard; sourceTree = "<group>"; };
+		38C503FF1D7FA9B2003479CC /* DataDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataDetailCell.swift; sourceTree = "<group>"; };
 		38C6345C1D72D79D00F64312 /* UserTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTestCase.swift; sourceTree = "<group>"; };
 		78AE207EADF7187B33449098 /* Pods-WISData.JunZheng.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WISData.JunZheng.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WISData.JunZheng/Pods-WISData.JunZheng.debug.xcconfig"; sourceTree = "<group>"; };
 		910DA158BC71010D9A619915 /* Pods_WISData_JunZhengTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WISData_JunZhengTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -214,6 +224,7 @@
 				383995BD1D7045A7002221F5 /* BaseViewModel */,
 				383995BF1D7045A7002221F5 /* LoginViewModel.swift */,
 				38AE580B1D796DE900B596E4 /* DataTableViewModel.swift */,
+				389B90BC1D7FB48F006BB318 /* DataDetailViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -310,6 +321,24 @@
 			path = WISData.JunZhengUITests;
 			sourceTree = "<group>";
 		};
+		38C503F91D7FA4B0003479CC /* DataDetail */ = {
+			isa = PBXGroup;
+			children = (
+				38C503FA1D7FA628003479CC /* DataDetailViewController.swift */,
+				38C503FC1D7FA65E003479CC /* DataDetail.storyboard */,
+			);
+			path = DataDetail;
+			sourceTree = "<group>";
+		};
+		38C503FE1D7FA990003479CC /* DataDetailCell */ = {
+			isa = PBXGroup;
+			children = (
+				38C503FF1D7FA9B2003479CC /* DataDetailCell.swift */,
+				3887E9D91D80FAE6008D795D /* DataDetailCell.xib */,
+			);
+			path = DataDetailCell;
+			sourceTree = "<group>";
+		};
 		9F0221A21D7021220056DDF5 /* DataTable */ = {
 			isa = PBXGroup;
 			children = (
@@ -384,6 +413,7 @@
 		9FED66B61D6ADE3B00F42992 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				38C503FE1D7FA990003479CC /* DataDetailCell */,
 				383BEADD1D7EB13B00463A11 /* NoDataView */,
 				383BEAD71D7E507A00463A11 /* Common */,
 				9FED66D91D6C4E2800F42992 /* LeftView */,
@@ -414,6 +444,7 @@
 		9FED66BB1D6ADE6300F42992 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				38C503F91D7FA4B0003479CC /* DataDetail */,
 				9F1B70AE1D76FC80007304F9 /* About */,
 				383995C41D7046D7002221F5 /* BaseViewController */,
 				9FED66EB1D6D4B6500F42992 /* Furnace */,
@@ -632,6 +663,7 @@
 				9FED66F41D6D70BE00F42992 /* BoilerPurify.storyboard in Resources */,
 				9FED66CF1D6B51D900F42992 /* Image.xcassets in Resources */,
 				9FED66EA1D6D382500F42992 /* LaunchScreen.storyboard in Resources */,
+				3887E9DA1D80FAE6008D795D /* DataDetailCell.xib in Resources */,
 				9F1B57041D7472B30013D239 /* DataTableCell.xib in Resources */,
 				383BEAE61D7EB1C600463A11 /* NoDataView.xib in Resources */,
 				9FED66ED1D6D4B8400F42992 /* Furnace.storyboard in Resources */,
@@ -639,6 +671,7 @@
 				9FED67071D6D967100F42992 /* DatePickerView.xib in Resources */,
 				9F1B70AB1D76EC7B007304F9 /* BoilerPurifyTitle.json in Resources */,
 				9F1B70B11D76FC80007304F9 /* About.storyboard in Resources */,
+				38C503FD1D7FA65E003479CC /* DataDetail.storyboard in Resources */,
 				9FED67001D6D83D300F42992 /* DataSearchButtonView.xib in Resources */,
 				9F1B85621D77D2B500AF7108 /* MaterialPowerTitle.json in Resources */,
 				9F6733EA1D7C74C300AB6C89 /* DailyMaterialPowerView.xib in Resources */,
@@ -797,6 +830,7 @@
 				9F1618BE1D6F18710063B772 /* WISClient.swift in Sources */,
 				9F0221A41D7021220056DDF5 /* DataTableView.swift in Sources */,
 				9FED67051D6D85B100F42992 /* UIView+WIS.swift in Sources */,
+				38C503FB1D7FA628003479CC /* DataDetailViewController.swift in Sources */,
 				9FED66DF1D6C7C2E00F42992 /* NSObject+WIS.swift in Sources */,
 				9FED67091D6D96BA00F42992 /* DatePickerView.swift in Sources */,
 				9F1B70AD1D76F804007304F9 /* WISAlert.swift in Sources */,
@@ -817,7 +851,9 @@
 				9FED66C71D6AEF6000F42992 /* MaterialPower.swift in Sources */,
 				9FED66C11D6AE18800F42992 /* WISDefine.swift in Sources */,
 				9FED66BF1D6ADFB500F42992 /* WISResponse.swift in Sources */,
+				389B90BD1D7FB48F006BB318 /* DataDetailViewModel.swift in Sources */,
 				9FED66F11D6D4C4700F42992 /* Furnace.swift in Sources */,
+				38C504011D7FA9B2003479CC /* DataDetailCell.swift in Sources */,
 				9FED66F61D6D70F800F42992 /* BoilerPurifyViewController.swift in Sources */,
 				383995C61D7046D7002221F5 /* ViewController.swift in Sources */,
 				9F1B85691D780CAE00AF7108 /* DailyMaterialPowerCell.swift in Sources */,
