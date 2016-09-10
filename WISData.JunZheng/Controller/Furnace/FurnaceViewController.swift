@@ -188,7 +188,6 @@ class FurnaceViewController: ViewController {
                     dataView.mj_footer.endRefreshing()
                 }
             }
-            
             getData()
             
         //} else {
@@ -203,8 +202,23 @@ class FurnaceViewController: ViewController {
         return true
     }
     
-    override func willAnimateRotationToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
-        arrangeFurnaceView(self).layoutIfNeeded()
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        if currentDevice.isPad {
+            return .All
+        } else {
+            return .AllButUpsideDown
+        }
+    }
+    
+    override func preferredInterfaceOrientationForPresentation() -> UIInterfaceOrientation {
+        return .Portrait
+    }
+    
+    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+        coordinator.animateAlongsideTransition({ [unowned self] _ in
+            self.arrangeFurnaceView(self)
+        }, completion:nil)
     }
     
     deinit {
@@ -248,7 +262,7 @@ class FurnaceViewController: ViewController {
                 // To make sure UI refreshing task runs on main queue
                 dispatch_async(dispatch_get_main_queue()) {
                     if response.success {
-                        SVProgressHUD.showWithMaskType(.None)
+                        SVProgressHUD.setDefaultMaskType(.None)
                         SVProgressHUD.showSuccessWithStatus("数据获取成功！")
                         
                         self.noDataView.removeFromSuperview()

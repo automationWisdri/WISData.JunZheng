@@ -198,6 +198,11 @@ extension LeftMenuViewController: UITableViewDelegate, UITableViewDataSource {
                     SVProgressHUD.show()
                     delay(0.5, work: {
                         User.storeRecentUserName("")
+                        if !currentDevice.isPad {
+                            UIDevice.currentDevice().setValue(NSNumber.init(long: UIDeviceOrientation.Portrait.rawValue), forKey: "orientation")
+                        }
+                        print("oritentation is portrait: \(self.interfaceOrientation.isPortrait)")
+                        print("width: \(CURRENT_SCREEN_WIDTH) - height: \(CURRENT_SCREEN_HEIGHT)")
                         WISCommon.currentAppDelegate.window?.rootViewController = LoginViewController()
                         SVProgressHUD.dismiss()
                     })
@@ -212,6 +217,5 @@ extension LeftMenuViewController: UITableViewDelegate, UITableViewDataSource {
         default:
             return
         }
-    }
-        
+    } 
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -28,7 +28,6 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="hpv-dA-7Ob" secondAttribute="trailing" id="7ap-3z-KHL"/>
-                <constraint firstItem="sEP-EX-LDh" firstAttribute="top" secondItem="hpv-dA-7Ob" secondAttribute="bottom" id="F78-oZ-AgR"/>
                 <constraint firstAttribute="trailing" secondItem="sEP-EX-LDh" secondAttribute="trailing" id="TAW-e2-zKQ"/>
                 <constraint firstItem="sEP-EX-LDh" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="bvt-FA-TRg"/>
                 <constraint firstItem="hpv-dA-7Ob" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="fWA-k2-iSW"/>

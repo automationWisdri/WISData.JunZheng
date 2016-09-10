@@ -37,13 +37,8 @@ class LoginViewController: ViewController {
         super.viewDidLoad()
         
         if !Device().isPad {
-            UIApplication.sharedApplication().setStatusBarOrientation(.Portrait, animated: false)
-        }
-        
-        // self.interfaceOrientation has been deprecated on iOS 8 and later version of iOS.
-        // should find a better way to solve this.
-        if !Device().isPad {
-        self.view.frame = self.interfaceOrientation == .Portrait ?
+            // to figure out the orentation of an iPhone is now vertical or horizontal
+        self.view.frame = self.traitCollection.verticalSizeClass == .Regular ?
             CGRectMake(0, 0, CURRENT_SCREEN_WIDTH, CURRENT_SCREEN_HEIGHT)
             : CGRectMake(0, 0, CURRENT_SCREEN_HEIGHT, CURRENT_SCREEN_WIDTH)
         } else {
@@ -305,23 +300,32 @@ class LoginViewController: ViewController {
     }
     
     override func shouldAutorotate() -> Bool {
-        return Device().isPad
+        return currentDevice.isPad
     }
     
     override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return Device().isPad ? .All : .Portrait
+        return currentDevice.isPad ? .All : .Portrait
     }
     
-    override func willAnimateRotationToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
-        self.view.frame = CGRectMake(0, 0, CURRENT_SCREEN_WIDTH, CURRENT_SCREEN_HEIGHT)
-        self.backgroundImageView!.frame = self.view.frame
-        contentView!.frame = self.view.frame
-        print(self.view.frame)
-        self.view.layoutIfNeeded()
+    override func preferredInterfaceOrientationForPresentation() -> UIInterfaceOrientation {
+        return .Portrait
+    }
+    
+    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        coordinator.animateAlongsideTransition({ [unowned self] _ in
+            self.view.frame = CGRectMake(0, 0, CURRENT_SCREEN_WIDTH, CURRENT_SCREEN_HEIGHT)
+            self.backgroundImageView!.frame = self.view.frame
+            self.contentView!.frame = self.view.frame
+        }) { _ in
+            // do nothing
+        }
+        
+        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
     }
     
     
     override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
         UIView.animateWithDuration(1) { () -> Void in
             self.contentView!.alpha = 1
         }
@@ -329,7 +333,6 @@ class LoginViewController: ViewController {
 //            self.backgroundImageView?.frame = CGRectMake(-1*( 1000 - SCREEN_WIDTH )/2, 0, SCREEN_HEIGHT+500, SCREEN_HEIGHT+500)
 //        }
     }
-
 }
 
 extension LoginViewController: UITextFieldDelegate {

@@ -32,7 +32,6 @@ class MaterialPowerView: UIView {
         // View setup
         self.backgroundColor = UIColor.clearColor()
         self.viewTitleLabel.backgroundColor = UIColor.wisGrayColor().colorWithAlphaComponent(0.3)
-        
     }
     
     func drawTable(switchRowCount: Int, viewHeight: CGFloat) {

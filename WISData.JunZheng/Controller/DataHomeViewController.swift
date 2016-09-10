@@ -236,21 +236,11 @@ class DataHomeViewController: UIViewController {
         }
     }
     
-//    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-//        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
-//        if currentDevice.isPad {
-//            self.searchPopoverViewController?.dismissPopoverSearchContent(animated: false)
-//        } else {
-//            if self.searchDropDownView.isOpen {
-//                self.searchDropDownView.forceHide()
-//            }
-//        }
-//        
-//        let pagingMenuController = self.childViewControllers[0] as! PagingMenuController
-//        arrangePagingMenuView(pagingMenuController)//.layoutIfNeeded()
-//    }
+    override func preferredInterfaceOrientationForPresentation() -> UIInterfaceOrientation {
+        return .Portrait
+    }
     
-    override func willAnimateRotationToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
+    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         if currentDevice.isPad {
             self.searchPopoverViewController?.dismissPopoverSearchContent(animated: false)
         } else {
@@ -259,8 +249,11 @@ class DataHomeViewController: UIViewController {
             }
         }
         
-        let pagingMenuController = self.childViewControllers[0] as! PagingMenuController
-        arrangePagingMenuView(pagingMenuController).layoutIfNeeded()
+        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+        coordinator.animateAlongsideTransition({ [unowned self] _ in
+            let pagingMenuController = self.childViewControllers[0] as! PagingMenuController
+            self.arrangePagingMenuView(pagingMenuController)
+        }, completion:nil)
     }
     
     deinit {

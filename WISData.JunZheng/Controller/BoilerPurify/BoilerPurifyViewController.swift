@@ -199,9 +199,25 @@ class BoilerPurifyViewController: ViewController {
         return true
     }
     
-    override func willAnimateRotationToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
-        arrangeBoilerPurifyView(self).layoutIfNeeded()
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        if currentDevice.isPad {
+            return .All
+        } else {
+            return .AllButUpsideDown
+        }
     }
+    
+    override func preferredInterfaceOrientationForPresentation() -> UIInterfaceOrientation {
+        return .Portrait
+    }
+    
+    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+        coordinator.animateAlongsideTransition({ [unowned self] _ in
+            self.arrangeBoilerPurifyView(self)
+        }, completion:nil)
+    }
+
     
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(self, name: DataSearchNotification, object: nil)
@@ -243,7 +259,7 @@ class BoilerPurifyViewController: ViewController {
                 
                 dispatch_async(dispatch_get_main_queue()) {
                     if response.success {
-                        SVProgressHUD.showWithMaskType(.None)
+                        SVProgressHUD.setDefaultMaskType(.None)
                         SVProgressHUD.showSuccessWithStatus("数据获取成功！")
                         
                         self.noDataView.removeFromSuperview()

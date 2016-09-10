@@ -39,6 +39,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window!.makeKeyAndVisible()
         
         if User.obtainRecentUserName() == nil {
+            if !currentDevice.isPad {
+                UIApplication.sharedApplication().setStatusBarOrientation(.Portrait, animated: false)
+            }
+            // no effect if you don't rotate statusbar 2016.09.10
+            // UIDevice.currentDevice().setValue(NSNumber.init(long: UIDeviceOrientation.Portrait.rawValue), forKey: "orientation")
             self.window!.rootViewController = LoginViewController()
         } else {
             startMainStory()

@@ -80,7 +80,6 @@ class MaterialPowerViewController: UIViewController {
     }
     
     func handleNotification(notification: NSNotification) -> Void {
-        
         getDailyMaterialPowerData()
         getMaterialPowerData()
         getOperationData()
@@ -212,8 +211,23 @@ class MaterialPowerViewController: UIViewController {
         return true
     }
     
-    override func willAnimateRotationToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
-        arrangeMaterialPowerView(self).layoutIfNeeded()
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        if currentDevice.isPad {
+            return .All
+        } else {
+            return .AllButUpsideDown
+        }
+    }
+    
+    override func preferredInterfaceOrientationForPresentation() -> UIInterfaceOrientation {
+        return .Portrait
+    }
+    
+    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+        coordinator.animateAlongsideTransition({ [unowned self] _ in
+            self.arrangeMaterialPowerView(self)
+        }, completion:nil)
     }
     
     private func arrangeMaterialPowerView(materialPowerViewController: MaterialPowerViewController) -> UIView {
@@ -225,9 +239,9 @@ class MaterialPowerViewController: UIViewController {
         let dataViewHeight = CURRENT_SCREEN_HEIGHT - navigationBarHeight - statusBarHeight - menuHeaderHeight
         
         materialPowerViewController.dataView.frame = CGRectMake(0, 0, dataViewWidth, dataViewHeight)
-        materialPowerViewController.dailyMaterialPowerView!.frame = CGRectMake(0.0, 0.0, self.dataView.bounds.size.width/*CURRENT_SCREEN_WIDTH*/, self.dailyMaterialPowerView!.viewHeight)
-        materialPowerViewController.materialPowerView!.frame = CGRectMake(0.0, self.dailyMaterialPowerView!.viewHeight, self.dataView.bounds.size.width, self.materialPowerView!.viewHeight!)
-        materialPowerViewController.operationView!.frame = CGRectMake(0.0, self.dailyMaterialPowerView!.viewHeight + self.materialPowerView!.viewHeight!, self.dataView.bounds.size.width, self.operationView!.viewHeight!)
+        materialPowerViewController.dailyMaterialPowerView!.frame = CGRectMake(0.0, 0.0, /*self.dataView.bounds.size.width*/ dataViewWidth, self.dailyMaterialPowerView!.viewHeight)
+        materialPowerViewController.materialPowerView!.frame = CGRectMake(0.0, self.dailyMaterialPowerView!.viewHeight, /*self.dataView.bounds.size.width*/ dataViewWidth, self.materialPowerView!.viewHeight!)
+        materialPowerViewController.operationView!.frame = CGRectMake(0.0, self.dailyMaterialPowerView!.viewHeight + self.materialPowerView!.viewHeight!, /*self.dataView.bounds.size.width*/ dataViewWidth, self.operationView!.viewHeight!)
         materialPowerViewController.dataView.contentSize = CGSizeMake(dataViewWidth, (self.dailyMaterialPowerView!.viewHeight + self.materialPowerView!.viewHeight! + self.operationView!.viewHeight!))
         
         return materialPowerViewController.view

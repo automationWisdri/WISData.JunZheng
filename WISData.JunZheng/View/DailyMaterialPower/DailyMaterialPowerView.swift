@@ -42,7 +42,6 @@ class DailyMaterialPowerView: UIView {
         dailyMaterialPowerTable.scrollsToTop = false
         
         dailyMaterialPowerTable.registerNib(UINib(nibName: dailyMaterialPowerCellID, bundle: nil), forCellReuseIdentifier: dailyMaterialPowerCellID)
-
     }
     
     func drawTable() {
@@ -75,10 +74,7 @@ class DailyMaterialPowerView: UIView {
         }
         
         self.dailyMaterialPowerTable.reloadData()
-
     }
-
-
 }
 
 extension DailyMaterialPowerView: UITableViewDelegate, UITableViewDataSource {
