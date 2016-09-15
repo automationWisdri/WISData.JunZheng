@@ -60,5 +60,6 @@ let APP_NAME_CHN = ""
 
 class WISCommon {
     static let currentAppDelegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    static let additionalHeightInView: CGFloat = CGFloat(30.0)
 }
 

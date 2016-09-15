@@ -111,7 +111,6 @@ extension DataTableView: UITableViewDelegate {
     */
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        
         guard let rowCount = self.rowInfo?.count else {
             return DataTableBaseRowHeight
         }
@@ -130,6 +129,10 @@ extension DataTableView: UITableViewDelegate {
             }
         }
         return CGFloat(self.rowInfo![row]) * DataTableBaseRowHeight
+    }
+    
+    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return self.tableView(tableView, heightForRowAtIndexPath: indexPath)
     }
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

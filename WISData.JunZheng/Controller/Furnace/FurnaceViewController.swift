@@ -32,7 +32,7 @@ class FurnaceViewController: ViewController {
     
     private var rowCount: Int = 8
     
-    private var tableContentJSON: Array = [JSON]()
+    private var tableContentJSON: [JSON] = []
     private var tableTitleJSON = JSON.null
     
     private static let firstColumnViewWidth: CGFloat = 95
@@ -241,13 +241,15 @@ class FurnaceViewController: ViewController {
         furnaceViewController.scrollView.frame = CGRectMake(FurnaceViewController.firstColumnViewWidth, 0, dataViewWidth - FurnaceViewController.firstColumnViewWidth, dataViewHeight)
         
         // Draw data table
-        var tableColumnsCount = 0
-        for view in self.columnTableView {
-            view.frame = CGRectMake(CGFloat(tableColumnsCount) * DataTableColumnWidth, 0, DataTableColumnWidth, dataViewHeight)
-            tableColumnsCount += 1
-        }
+//        var tableColumnsCount = 0
+//        for view in self.columnTableView {
+//            view.frame = CGRectMake(CGFloat(tableColumnsCount) * DataTableColumnWidth, 0, DataTableColumnWidth, dataViewHeight)
+//            tableColumnsCount += 1
+//        }
         
-        furnaceViewController.noDataView.frame = furnaceViewController.dataView.frame
+        if furnaceViewController.view.subviews.contains(furnaceViewController.noDataView) {
+            furnaceViewController.noDataView.frame = furnaceViewController.dataView.frame
+        }
         
         return furnaceViewController.view
     }
@@ -260,7 +262,7 @@ class FurnaceViewController: ViewController {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
             Furnace.get(date: SearchParameter["date"]!, shiftNo: SearchParameter["shiftNo"]!, lNo: SearchParameter["lNo"]!) { (response: WISValueResponse<[JSON]>) in
                 // To make sure UI refreshing task runs on main queue
-                dispatch_async(dispatch_get_main_queue()) {
+                // dispatch_async(dispatch_get_main_queue()) {
                     if response.success {
                         SVProgressHUD.setDefaultMaskType(.None)
                         SVProgressHUD.showSuccessWithStatus("数据获取成功！")
@@ -297,7 +299,7 @@ class FurnaceViewController: ViewController {
                                 var contentArray: [String] = []
                                 
                                 for j in 0 ..< self.tableContentJSON.count {
-                                    let content = self.tableContentJSON[j][p].stringValue
+                                    let content = self.tableContentJSON[j][p].stringValue.trimNumberFromFractionalPart(2)
                                     contentArray.append(content)
                                 }
                                 if self.tableContentJSON.count < self.rowCount {
@@ -323,7 +325,7 @@ class FurnaceViewController: ViewController {
                         wisError(response.message)
                     }
                 }
-            }
+            // }
         }
     }
     

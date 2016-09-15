@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftyJSON
+import SVProgressHUD
 
 class MaterialPowerViewController: UIViewController {
     
@@ -15,6 +16,7 @@ class MaterialPowerViewController: UIViewController {
     @IBOutlet weak var dataView: UIScrollView!
     
     private var noDataView: NoDataView!
+    private var hasRefreshedData: Bool!
     
     class func instantiateFromStoryboard() -> MaterialPowerViewController {
         let storyboard = UIStoryboard(name: "MaterialPower", bundle: nil)
@@ -24,8 +26,6 @@ class MaterialPowerViewController: UIViewController {
     private var dailyMaterialPowerView: DailyMaterialPowerView?
     private var materialPowerView: MaterialPowerView?
     private var operationView: OperationView?
-    
-    private let getDataGroup = dispatch_group_create()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +41,9 @@ class MaterialPowerViewController: UIViewController {
         dataView.mj_header = WISRefreshHeader {[weak self] () -> () in
             self?.headerRefresh()
         }
+        
+        self.hasRefreshedData = false
+        
         //
         // Daily Material Power View Section
         //
@@ -48,8 +51,6 @@ class MaterialPowerViewController: UIViewController {
             self.dailyMaterialPowerView = (NSBundle.mainBundle().loadNibNamed("DailyMaterialPowerView", owner: self, options: nil).last as! DailyMaterialPowerView
             )
         }
-        getDailyMaterialPowerData()
-
         //
         // Material Power View Section
         //
@@ -57,8 +58,6 @@ class MaterialPowerViewController: UIViewController {
             self.materialPowerView = (NSBundle.mainBundle().loadNibNamed("MaterialPowerView", owner: self, options: nil).last as! MaterialPowerView
             )
         }
-        getMaterialPowerData()
-        
         //
         // Operation View Section
         //
@@ -66,53 +65,46 @@ class MaterialPowerViewController: UIViewController {
             self.operationView = (NSBundle.mainBundle().loadNibNamed("OperationView", owner: self, options: nil).last as! OperationView
             )
         }
-        getOperationData()
-
     }
     
     override func viewWillAppear(animated: Bool) {
-        
-        dispatch_group_notify(getDataGroup, dispatch_get_main_queue()) {
-            super.viewWillAppear(animated)
-            self.arrangeMaterialPowerView(self).layoutIfNeeded()
-        }
-
+        super.viewWillAppear(animated)
+        arrangeMaterialPowerView(self).layoutIfNeeded()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        // Get data for data table
+        if !hasRefreshedData { getData() }
     }
     
     func handleNotification(notification: NSNotification) -> Void {
-        getDailyMaterialPowerData()
-        getMaterialPowerData()
-        getOperationData()
-        
-        dispatch_group_notify(getDataGroup, dispatch_get_main_queue()) {
-            self.arrangeMaterialPowerView(self).layoutIfNeeded()
-        }
+        getData()
     }
     
-    func getDailyMaterialPowerData() {
-        
-        dispatch_group_enter(getDataGroup)
+    func getDailyMaterialPowerData(completionHandler: (Bool, String) -> Void) {
         
         DailyMaterialPower.get(date: SearchParameter["date"]!, lNo: SearchParameter["lNo"]!) { (response: WISValueResponse<JSON>) in
+ 
             if response.success {
                 self.dailyMaterialPowerView!.dailyMaterialPowerContentJSON = response.value!
-                self.dailyMaterialPowerView!.drawTable()
+                self.dailyMaterialPowerView?.viewHeight = DailyMaterialPowerView.defaultViewHeight
+                self.dailyMaterialPowerView!.initialDrawTable()
                 self.dataView.addSubview(self.dailyMaterialPowerView!)
             } else {
-                wisError(response.message)
+                self.dailyMaterialPowerView?.removeFromSuperview()
+                self.dailyMaterialPowerView?.viewHeight = CGFloat(0)
             }
-            dispatch_group_leave(self.getDataGroup)
+            completionHandler(response.success, response.message)
         }
-        
     }
     
-    func getMaterialPowerData() {
-        
-        dispatch_group_enter(getDataGroup)
+    func getMaterialPowerData(completionHandler: (Bool, String) -> Void) {
         
         MaterialPower.get(date: SearchParameter["date"]!, shiftNo: SearchParameter["shiftNo"]!, lNo: SearchParameter["lNo"]!) { (response: WISValueResponse<JSON>) in
+            
             if response.success {
-                //                debugPrint(response.value)
+                // debugPrint(response.value)
                 let tableContentJSON = response.value!["MaterialPower"]
                 self.materialPowerView!.tableContentJSON = tableContentJSON
                 
@@ -128,20 +120,18 @@ class MaterialPowerViewController: UIViewController {
                 let viewHeight = CGFloat(switchRowCount) * DataTableBaseRowHeight + 60 + 35
                 self.materialPowerView!.viewHeight = viewHeight
                 
-                self.materialPowerView!.drawTable(switchRowCount, viewHeight: viewHeight)
+                self.materialPowerView!.initialDrawTable(switchRowCount, viewHeight: viewHeight)
                 self.dataView.addSubview(self.materialPowerView!)
                 
             } else {
-                wisError(response.message)
+                self.materialPowerView?.removeFromSuperview()
+                self.materialPowerView?.viewHeight = CGFloat(0.0)
             }
-            
-            dispatch_group_leave(self.getDataGroup)
+            completionHandler(response.success, response.message)
         }
     }
     
-    func getOperationData() {
-        
-        dispatch_group_enter(getDataGroup)
+    func getOperationData(completionHandler: (Bool, String) -> Void) {
         
         Operation.get(date: SearchParameter["date"]!, shiftNo: SearchParameter["shiftNo"]!, lNo: SearchParameter["lNo"]!) { (response: WISValueResponse<JSON>) in
             if response.success {
@@ -151,6 +141,7 @@ class MaterialPowerViewController: UIViewController {
                 self.operationView!.tableContentJSON = tableContentJSON
                 
                 var switchRowCount = [Int]()
+                self.operationView?.switchContentJSON.removeAll()
                 for i in 0 ..< tableContentJSON.count {
                     let switchContentJSON = tableContentJSON[i]["SwitchTimes"].arrayValue
                     self.operationView!.switchContentJSON.append(switchContentJSON)
@@ -161,19 +152,100 @@ class MaterialPowerViewController: UIViewController {
                         switchRowCount.append(1)
                     }
                 }
-                var totalRowCount = 0
-                for count in switchRowCount {
-                    totalRowCount += count
-                }
+                
+                let totalRowCount = switchRowCount.reduce(0, combine: + )
+                
                 let viewHeight = CGFloat(totalRowCount) * DataTableBaseRowHeight + 60 + 35
                 self.operationView!.viewHeight = viewHeight
-                self.operationView!.drawTable(switchRowCount, viewHeight: viewHeight)
+                self.operationView!.initialDrawTable(switchRowCount, viewHeight: viewHeight)
                 self.dataView.addSubview(self.operationView!)
             } else {
-                wisError(response.message)
+                self.operationView?.removeFromSuperview()
+                self.operationView?.viewHeight = CGFloat(0.0)
             }
-            
-            dispatch_group_leave(self.getDataGroup)
+            completionHandler(response.success, response.message)
+        }
+    }
+    
+    func getData() {
+        SVProgressHUD.showWithStatus("数据获取中...")
+        
+        let groupQueue = dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
+        let questGroup = dispatch_group_create()
+        
+        enum RequestTableType {
+            case DailyMaterialPower(Bool)
+            case MaterialPower(Bool)
+            case Operation(Bool)
+        }
+        
+        struct questResult {
+            let success: Bool
+            let message: String
+            let requestType: RequestTableType
+        }
+        
+        var result: [questResult] = []
+        
+        weak var weakSelf = self
+        
+        dispatch_group_enter(questGroup)
+        dispatch_async(groupQueue) {
+            weakSelf!.getDailyMaterialPowerData() { success, message in
+                result.append(questResult(success:success, message: message, requestType: .DailyMaterialPower(success)))
+                dispatch_group_leave(questGroup)
+            }
+        }
+        
+        dispatch_group_enter(questGroup)
+        dispatch_async(groupQueue) {
+            weakSelf!.getMaterialPowerData() { success, message in
+                result.append(questResult(success:success, message: message, requestType: .MaterialPower(success)))
+                dispatch_group_leave(questGroup)
+            }
+        }
+        
+        dispatch_group_enter(questGroup)
+        dispatch_async(groupQueue) {
+            weakSelf!.getOperationData() { success, message in
+                result.append(questResult(success:success, message: message, requestType: .Operation(success)))
+                dispatch_group_leave(questGroup)
+            }
+        }
+        
+        dispatch_group_notify(questGroup, dispatch_get_main_queue()) {
+            let failedResult = result.filter { !$0.success }
+            if failedResult.count >= 3 {
+                self.noDataView.frame = self.dataView.frame
+                self.dataView.addSubview(self.noDataView)
+                wisError(result[0].message)
+                self.hasRefreshedData = false
+            } else {
+                self.noDataView.removeFromSuperview()
+                
+                if failedResult.count <= 0{
+                    SVProgressHUD.setDefaultMaskType(.None)
+                    SVProgressHUD.showSuccessWithStatus("数据获取成功！")
+                    self.hasRefreshedData = true
+                } else {
+                    var hintString = ""
+                    for res in result {
+                        switch res.requestType {
+                        case .DailyMaterialPower(let success):
+                                hintString += success ? "" : "全天消耗数据获取失败\n"
+                        case .MaterialPower(let success):
+                            hintString += success ? "" : "原料消耗数据获取失败\n"
+                        case .Operation(let success):
+                            hintString += success ? "" : "电极操作数据获取失败\n"
+                        }
+                    }
+                    SVProgressHUD.setDefaultMaskType(.None)
+                    SVProgressHUD.showInfoWithStatus(hintString + "请再次刷新")
+
+                    self.hasRefreshedData = false
+                }
+            }
+            self.arrangeMaterialPowerView(self).layoutIfNeeded()
         }
     }
 
@@ -190,14 +262,7 @@ class MaterialPowerViewController: UIViewController {
                 dataView.mj_footer.endRefreshing()
             }
         }
-        
-        getDailyMaterialPowerData()
-        getMaterialPowerData()
-        getOperationData()
-        
-        dispatch_group_notify(getDataGroup, dispatch_get_main_queue()) {
-            self.arrangeMaterialPowerView(self).layoutIfNeeded()
-        }
+        getData()
         
         //} else {
         //    SVProgressHUD.setDefaultMaskType(.None)
@@ -239,10 +304,20 @@ class MaterialPowerViewController: UIViewController {
         let dataViewHeight = CURRENT_SCREEN_HEIGHT - navigationBarHeight - statusBarHeight - menuHeaderHeight
         
         materialPowerViewController.dataView.frame = CGRectMake(0, 0, dataViewWidth, dataViewHeight)
+        //
+        // arrange daily material power view
         materialPowerViewController.dailyMaterialPowerView!.frame = CGRectMake(0.0, 0.0, /*self.dataView.bounds.size.width*/ dataViewWidth, self.dailyMaterialPowerView!.viewHeight)
-        materialPowerViewController.materialPowerView!.frame = CGRectMake(0.0, self.dailyMaterialPowerView!.viewHeight, /*self.dataView.bounds.size.width*/ dataViewWidth, self.materialPowerView!.viewHeight!)
-        materialPowerViewController.operationView!.frame = CGRectMake(0.0, self.dailyMaterialPowerView!.viewHeight + self.materialPowerView!.viewHeight!, /*self.dataView.bounds.size.width*/ dataViewWidth, self.operationView!.viewHeight!)
-        materialPowerViewController.dataView.contentSize = CGSizeMake(dataViewWidth, (self.dailyMaterialPowerView!.viewHeight + self.materialPowerView!.viewHeight! + self.operationView!.viewHeight!))
+        materialPowerViewController.dailyMaterialPowerView?.arrangeDailyMaterialPowerSubView(self.materialPowerView!.viewHeight)
+        //
+        // arrange material power view
+        materialPowerViewController.materialPowerView!.frame = CGRectMake(0.0, self.dailyMaterialPowerView!.viewHeight, /*self.dataView.bounds.size.width*/ dataViewWidth, self.materialPowerView!.viewHeight)
+        materialPowerViewController.materialPowerView?.arrangeMaterialPowerSubView(self.materialPowerView!.viewHeight)
+        
+        materialPowerViewController.operationView!.frame = CGRectMake(0.0, self.dailyMaterialPowerView!.viewHeight + self.materialPowerView!.viewHeight, /*self.dataView.bounds.size.width*/ dataViewWidth, self.operationView!.viewHeight)
+        materialPowerViewController.operationView!.arrangeOperationSubView(self.operationView!.viewHeight)
+        
+        
+        materialPowerViewController.dataView.contentSize = CGSizeMake(dataViewWidth, (self.dailyMaterialPowerView!.viewHeight + self.materialPowerView!.viewHeight + self.operationView!.viewHeight + WISCommon.additionalHeightInView))
         
         return materialPowerViewController.view
     }

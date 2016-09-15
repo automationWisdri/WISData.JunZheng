@@ -20,7 +20,9 @@ class DailyMaterialPowerView: UIView {
     private var dailyMaterialPowerTitleJSON = JSON.null
     var dailyMaterialPowerContentJSON = JSON.null
 
-    var viewHeight: CGFloat = 185
+    static let defaultViewHeight = CGFloat(185)
+    
+    var viewHeight: CGFloat = CGFloat(185)
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -44,8 +46,7 @@ class DailyMaterialPowerView: UIView {
         dailyMaterialPowerTable.registerNib(UINib(nibName: dailyMaterialPowerCellID, bundle: nil), forCellReuseIdentifier: dailyMaterialPowerCellID)
     }
     
-    func drawTable() {
-        
+    func initialDrawTable() {
         var i = 0
         var j = 0
         var key = EMPTY_STRING
@@ -61,7 +62,7 @@ class DailyMaterialPowerView: UIView {
                 
                 j += 1
                 key = String(i) + String(j)
-                let content = self.dailyMaterialPowerContentJSON[p].stringValue
+                let content = self.dailyMaterialPowerContentJSON[p].stringValue.trimNumberFromFractionalPart(2)
                 self.dailyMaterialPowerContent[key] = content
                 j += 1
                 
@@ -69,11 +70,16 @@ class DailyMaterialPowerView: UIView {
                     i += 1
                     j = 0
                 }
-                
             }
         }
         
-        self.dailyMaterialPowerTable.reloadData()
+        dispatch_async(dispatch_get_main_queue()) {
+            self.dailyMaterialPowerTable.reloadData()
+        }
+    }
+    
+    func arrangeDailyMaterialPowerSubView(viewHeight: CGFloat) {
+        // do nothing so far
     }
 }
 

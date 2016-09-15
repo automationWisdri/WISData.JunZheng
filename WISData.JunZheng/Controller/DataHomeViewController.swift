@@ -37,6 +37,10 @@ struct PagingMenuOptions: PagingMenuControllerCustomizable {
         return .All(menuOptions: MenuOptions(), pagingControllers: pagingControllers)
     }
     
+    var lazyLoadingPage: LazyLoadingPage {
+        return .One
+    }
+    
     var scrollEnabled: Bool {
         return false
     }

@@ -24,7 +24,7 @@ class MaterialPowerView: UIView {
     private var tableTitleJSON = JSON.null
     var tableContentJSON = JSON.null
     var switchContentJSON = [JSON]()
-    var viewHeight: CGFloat?
+    var viewHeight: CGFloat = CGFloat(0.0)
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -34,7 +34,7 @@ class MaterialPowerView: UIView {
         self.viewTitleLabel.backgroundColor = UIColor.wisGrayColor().colorWithAlphaComponent(0.3)
     }
     
-    func drawTable(switchRowCount: Int, viewHeight: CGFloat) {
+    func initialDrawTable(switchRowCount: Int, viewHeight: CGFloat) {
 
         self.switchRowCount = switchRowCount
         // Get table column title
@@ -99,6 +99,18 @@ class MaterialPowerView: UIView {
         
         fillDataTableContent()
     }
+    
+    func arrangeMaterialPowerSubView(viewHeight: CGFloat) {
+        // Define the table dimensions
+        let dataViewWidth = CURRENT_SCREEN_WIDTH
+        let dataViewHeight = viewHeight
+        let firstColumnViewWidth: CGFloat = 90
+        
+        guard let scrollView = self.scrollView else {
+            return
+        }
+        scrollView.frame = CGRectMake(firstColumnViewWidth, 0, dataViewWidth - firstColumnViewWidth, dataViewHeight)
+    }
 
     private func fillDataTableContent() {
         
@@ -119,13 +131,12 @@ class MaterialPowerView: UIView {
                 self.columnTableView[tableColumnsCount].viewModel.headerString = columnTitle
                 // content
                 var contentArray: [String] = []
-                
-                let content = self.tableContentJSON[p].stringValue
+                let content = self.tableContentJSON[p].stringValue.trimNumberFromFractionalPart(2)
                 contentArray.append(content)
 
                 self.columnTableView[tableColumnsCount].viewModel.titleArray = contentArray
                 self.columnTableView[tableColumnsCount].viewModel.titleArraySubject.onNext(contentArray)
-                self.columnTableView[tableColumnsCount].reloadData()
+                // self.columnTableView[tableColumnsCount].reloadData()
                 tableColumnsCount += 1
             }
         }
@@ -149,7 +160,6 @@ class MaterialPowerView: UIView {
             tableColumnsCount += 1
         }
     }
-
 }
 
 // MARK: - Extension

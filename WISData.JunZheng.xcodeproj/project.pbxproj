@@ -379,8 +379,8 @@
 		9F1B70AE1D76FC80007304F9 /* About */ = {
 			isa = PBXGroup;
 			children = (
-				9F1B70AF1D76FC80007304F9 /* About.storyboard */,
 				9F1B70B01D76FC80007304F9 /* AboutViewController.swift */,
+				9F1B70AF1D76FC80007304F9 /* About.storyboard */,
 			);
 			path = About;
 			sourceTree = "<group>";
@@ -1055,6 +1055,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.wisdri.WISData.JunZheng;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 			};
 			name = Release;
 		};

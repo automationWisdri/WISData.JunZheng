@@ -40,12 +40,22 @@ extension Operation {
                 if let value = response.result.value {
                     let json = JSON(value)
                     
-                    let t = WISValueResponse<JSON>(value: json, success: response.result.isSuccess)
+                    guard json["Result"] == 1 else {
+                        let t = WISValueResponse<JSON>(value: JSON.null, success: false)
+                        t.message = "服务器请求失败"
+                        completionHandler(t)
+                        return
+                    }
+                    
+                    let t = WISValueResponse<JSON>(value: json, success: true)
                     completionHandler(t)
                     
                 }
             case .Failure(let error):
                 debugPrint(error)
+                let t = WISValueResponse<JSON>(value: JSON.null, success: false)
+                t.message = "网络连接失败"
+                completionHandler(t)
             }
         }
     }

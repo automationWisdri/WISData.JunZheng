@@ -24,7 +24,7 @@ class OperationView: UIView {
     private var tableTitleJSON = JSON.null
     var tableContentJSON = [JSON]()
     var switchContentJSON = [[JSON]]()
-    var viewHeight: CGFloat?
+    var viewHeight: CGFloat = CGFloat(0.0)
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -32,15 +32,12 @@ class OperationView: UIView {
         // Basic setup
         self.backgroundColor = UIColor.clearColor()
         self.viewTitleLabel.backgroundColor = UIColor.wisGrayColor().colorWithAlphaComponent(0.3)
-
     }
     
-    func drawTable(switchRowCount: [Int], viewHeight: CGFloat) {
-        
+    func initialDrawTable(switchRowCount: [Int], viewHeight: CGFloat) {
         self.switchRowCount = switchRowCount
-        for count in self.switchRowCount {
-            self.totalRowCount += count
-        }
+        self.totalRowCount = switchRowCount.reduce(0, combine: + )
+        
         // Get table column title
         if let path = NSBundle.mainBundle().pathForResource("OperationTitle", ofType: "json") {
             let data = NSData(contentsOfFile: path)
@@ -71,7 +68,7 @@ class OperationView: UIView {
         
         // Draw view for data table
         scrollView = UIScrollView(frame: CGRectMake (firstColumnViewWidth, 0, dataViewWidth - firstColumnViewWidth, dataViewHeight))
-        scrollView.contentSize = CGSizeMake(CGFloat(totalColumnCount) * DataTableColumnWidth, CGFloat(totalRowCount) * DataTableBaseRowHeight)
+        scrollView.contentSize = CGSizeMake(CGFloat(totalColumnCount) * DataTableColumnWidth, DataTableHeaderRowHeight + CGFloat(totalRowCount) * DataTableBaseRowHeight)
         scrollView.showsHorizontalScrollIndicator = true
         scrollView.showsVerticalScrollIndicator = true
         scrollView.bounces = false
@@ -80,6 +77,7 @@ class OperationView: UIView {
         self.dataView.addSubview(scrollView)
         
         // Draw data table
+        self.columnTableView.removeAll()
         var tableColumnsCount = 0
         for p in Operation().propertyNames() {
             if p == "No" || p == "SwitchTimes" {
@@ -104,6 +102,18 @@ class OperationView: UIView {
         fillDataTableContent()
     }
     
+    func arrangeOperationSubView(viewHeight: CGFloat) {
+        // Define the table dimensions
+        let dataViewWidth = CURRENT_SCREEN_WIDTH
+        let dataViewHeight = viewHeight
+        let firstColumnViewWidth: CGFloat = 90
+        
+        guard let scrollView = self.scrollView else {
+            return
+        }
+        scrollView.frame = CGRectMake(firstColumnViewWidth, 0, dataViewWidth - firstColumnViewWidth, dataViewHeight)
+    }
+    
     private func fillDataTableContent() {
         
         firstColumnTableView.viewModel.headerString = SearchParameter["date"]! + "\n" + getShiftName(SearchParameter["shiftNo"]!)[0]
@@ -124,7 +134,7 @@ class OperationView: UIView {
                 var contentArray: [String] = []
                 
                 for j in 0 ..< self.tableContentJSON.count {
-                    let content = self.tableContentJSON[j][p].stringValue
+                    let content = self.tableContentJSON[j][p].stringValue.trimNumberFromFractionalPart(2)
                     contentArray.append(content)
                 }
                 

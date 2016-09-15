@@ -76,19 +76,27 @@ extension MaterialPower {
 //                    debugPrint("JSON: \(json)")
 //                    debugPrint(json.rawString())
                     
+                    guard json["Result"] == 1 else {
+                        let t = WISValueResponse<JSON>(value: JSON.null, success: false)
+                        t.message = "服务器请求失败"
+                        completionHandler(t)
+                        return
+                    }
+                    
                     // switchCount is one by default
                     var switchCount = 1
                     if let str = SwitchTimeReason.mj_objectArrayWithKeyValuesArray(json["SwithTimeReasons"].rawString()!) {
                         switchCount = str.count
                     }
                     
-                    let t = WISValueResponse<JSON>(value: json, success: response.result.isSuccess)
+                    let t = WISValueResponse<JSON>(value: json, success: true)
                     completionHandler(t)
                     
                 }
             case .Failure(let error):
                 debugPrint(error)
                 let t = WISValueResponse<JSON>(value: JSON.null, success: false)
+                t.message = "网络连接失败"
                 completionHandler(t)
             }
         }
@@ -106,6 +114,13 @@ extension DailyMaterialPower {
             case .Success:
                 if let value = response.result.value {
                     let json = JSON(value)
+                    
+                    guard json["Result"] == 1 else {
+                        let t = WISValueResponse<JSON>(value: JSON.null, success: false)
+                        t.message = "服务器请求失败"
+                        completionHandler(t)
+                        return
+                    }
                     
                     let dailyMaterialPower = DailyMaterialPower.mj_objectWithKeyValues(json.rawString())
                     for p in DailyMaterialPower().propertyNames() {

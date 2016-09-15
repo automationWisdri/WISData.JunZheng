@@ -6,8 +6,8 @@
 	"PB"			:	"配比",
 	"SwitchTimes":{
 		"HZGD"		:	"糊柱高度\n(m)",
-		"Hour"		:	"开停时间\n时",
-		"Minute"	:	"开停时间\n分",
+		"Hour"		:	"开停时间\n(时)",
+		"Minute"	:	"开停时间\n(分)",
 		},
 	"YFCS"			:	"压放次数",
 	"YFL"			:	"压放量\n(mm)"
