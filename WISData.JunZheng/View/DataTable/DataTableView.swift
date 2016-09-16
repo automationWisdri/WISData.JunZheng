@@ -82,7 +82,9 @@ class DataTableView: UITableView {
         // self.delegate = self
         // self.dataSource = self
         self.showsVerticalScrollIndicator = false
-        self.backgroundColor = UIColor.clearColor()
+        self.backgroundColor = UIColor.whiteColor()
+        self.scrollsToTop = false
+        self.opaque = true
         self.separatorStyle = .None
         self.bounces = false
         
@@ -131,9 +133,11 @@ extension DataTableView: UITableViewDelegate {
         return CGFloat(self.rowInfo![row]) * DataTableBaseRowHeight
     }
     
+    /*
     func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return self.tableView(tableView, heightForRowAtIndexPath: indexPath)
     }
+    */
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UITableViewHeaderFooterView(frame: CGRectMake (0, 0, self.frame.width, DataTableHeaderRowHeight))
@@ -143,7 +147,7 @@ extension DataTableView: UITableViewDelegate {
         headerTextView.text = self.viewModel.headerString
         headerTextView.textColor = UIColor.blackColor()
         headerTextView.font = wisFont(12)
-        headerTextView.backgroundColor = UIColor.clearColor()
+        headerTextView.backgroundColor = UIColor.wisGroupHeaderColor()
         headerTextView.textAlignment = .Center
         //
         // Text vertical center align is not stable, TBC.

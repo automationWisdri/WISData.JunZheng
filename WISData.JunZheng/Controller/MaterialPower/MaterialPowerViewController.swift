@@ -296,29 +296,33 @@ class MaterialPowerViewController: UIViewController {
     }
     
     private func arrangeMaterialPowerView(materialPowerViewController: MaterialPowerViewController) -> UIView {
-        let navigationBarHeight = self.navigationController?.navigationBar.bounds.height ?? CGFloat(40.0)
-        let statusBarHeight = STATUS_BAR_HEIGHT
-        let menuHeaderHeight = CGFloat(35.0)
         
-        let dataViewWidth = CURRENT_SCREEN_WIDTH
-        let dataViewHeight = CURRENT_SCREEN_HEIGHT - navigationBarHeight - statusBarHeight - menuHeaderHeight
-        
-        materialPowerViewController.dataView.frame = CGRectMake(0, 0, dataViewWidth, dataViewHeight)
-        //
-        // arrange daily material power view
-        materialPowerViewController.dailyMaterialPowerView!.frame = CGRectMake(0.0, 0.0, /*self.dataView.bounds.size.width*/ dataViewWidth, self.dailyMaterialPowerView!.viewHeight)
-        materialPowerViewController.dailyMaterialPowerView?.arrangeDailyMaterialPowerSubView(self.materialPowerView!.viewHeight)
-        //
-        // arrange material power view
-        materialPowerViewController.materialPowerView!.frame = CGRectMake(0.0, self.dailyMaterialPowerView!.viewHeight, /*self.dataView.bounds.size.width*/ dataViewWidth, self.materialPowerView!.viewHeight)
-        materialPowerViewController.materialPowerView?.arrangeMaterialPowerSubView(self.materialPowerView!.viewHeight)
-        
-        materialPowerViewController.operationView!.frame = CGRectMake(0.0, self.dailyMaterialPowerView!.viewHeight + self.materialPowerView!.viewHeight, /*self.dataView.bounds.size.width*/ dataViewWidth, self.operationView!.viewHeight)
-        materialPowerViewController.operationView!.arrangeOperationSubView(self.operationView!.viewHeight)
-        
-        
-        materialPowerViewController.dataView.contentSize = CGSizeMake(dataViewWidth, (self.dailyMaterialPowerView!.viewHeight + self.materialPowerView!.viewHeight + self.operationView!.viewHeight + WISCommon.additionalHeightInView))
-        
+        if materialPowerViewController.view.subviews.contains(materialPowerViewController.noDataView) {
+            materialPowerViewController.noDataView.frame = materialPowerViewController.dataView.frame
+        } else {
+            let navigationBarHeight = self.navigationController?.navigationBar.bounds.height ?? CGFloat(40.0)
+            let statusBarHeight = STATUS_BAR_HEIGHT
+            let menuHeaderHeight = CGFloat(35.0)
+            
+            let dataViewWidth = CURRENT_SCREEN_WIDTH
+            let dataViewHeight = CURRENT_SCREEN_HEIGHT - navigationBarHeight - statusBarHeight - menuHeaderHeight
+            
+            materialPowerViewController.dataView.frame = CGRectMake(0, 0, dataViewWidth, dataViewHeight)
+            //
+            // arrange daily material power view
+            materialPowerViewController.dailyMaterialPowerView!.frame = CGRectMake(0.0, 0.0, /*self.dataView.bounds.size.width*/ dataViewWidth, self.dailyMaterialPowerView!.viewHeight)
+            materialPowerViewController.dailyMaterialPowerView?.arrangeDailyMaterialPowerSubView(self.materialPowerView!.viewHeight)
+            //
+            // arrange material power view
+            materialPowerViewController.materialPowerView!.frame = CGRectMake(0.0, self.dailyMaterialPowerView!.viewHeight, /*self.dataView.bounds.size.width*/ dataViewWidth, self.materialPowerView!.viewHeight)
+            materialPowerViewController.materialPowerView?.arrangeMaterialPowerSubView(self.materialPowerView!.viewHeight)
+            
+            materialPowerViewController.operationView!.frame = CGRectMake(0.0, self.dailyMaterialPowerView!.viewHeight + self.materialPowerView!.viewHeight, /*self.dataView.bounds.size.width*/ dataViewWidth, self.operationView!.viewHeight)
+            materialPowerViewController.operationView!.arrangeOperationSubView(self.operationView!.viewHeight)
+            
+            
+            materialPowerViewController.dataView.contentSize = CGSizeMake(dataViewWidth, (self.dailyMaterialPowerView!.viewHeight + self.materialPowerView!.viewHeight + self.operationView!.viewHeight + WISCommon.additionalHeightInView))
+        }
         return materialPowerViewController.view
     }
     

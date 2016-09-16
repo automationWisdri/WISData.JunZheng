@@ -80,7 +80,7 @@ class BoilerPurifyViewController: ViewController {
         
         // Draw view for first column
         firstColumnView = UIView(frame: CGRectMake(0, 0, BoilerPurifyViewController.firstColumnViewWidth, dataViewHeight))
-        firstColumnView.backgroundColor = UIColor.clearColor()
+        firstColumnView.backgroundColor = UIColor.whiteColor()
         //        headerView.userInteractionEnabled = true
         self.dataView.addSubview(firstColumnView)
         
@@ -96,7 +96,7 @@ class BoilerPurifyViewController: ViewController {
         scrollView.showsVerticalScrollIndicator = true
         scrollView.bounces = true
         scrollView.delegate = self
-        scrollView.backgroundColor = UIColor.clearColor()
+        scrollView.backgroundColor = UIColor.whiteColor()
         self.dataView.addSubview(scrollView)
         
         // Draw data table
@@ -224,28 +224,31 @@ class BoilerPurifyViewController: ViewController {
     }
     
     private func arrangeBoilerPurifyView(boilerPurifyViewController: BoilerPurifyViewController) -> UIView {
-        let navigationBarHeight = self.navigationController?.navigationBar.bounds.height ?? CGFloat(40.0)
-        let statusBarHeight = STATUS_BAR_HEIGHT
-        let menuHeaderHeight = CGFloat(35.0)
         
-        let dataViewWidth = CURRENT_SCREEN_WIDTH
-        let dataViewHeight = CURRENT_SCREEN_HEIGHT - navigationBarHeight - statusBarHeight - menuHeaderHeight
-        
-        boilerPurifyViewController.dataView.frame = CGRectMake(0, 0, dataViewWidth, dataViewHeight)
-        
-        boilerPurifyViewController.firstColumnView.frame = CGRectMake(0, 0, BoilerPurifyViewController.firstColumnViewWidth, dataViewHeight)
-        boilerPurifyViewController.firstColumnTableView.frame = firstColumnView.bounds
-        
-        boilerPurifyViewController.scrollView.frame = CGRectMake(BoilerPurifyViewController.firstColumnViewWidth, 0, dataViewWidth - BoilerPurifyViewController.firstColumnViewWidth, dataViewHeight)
-        
-        // Draw data table
-//        var tableColumnsCount = 0
-//        for view in self.columnTableView {
-//            view.frame = CGRectMake(CGFloat(tableColumnsCount) * DataTableColumnWidth, 0, DataTableColumnWidth, dataViewHeight)
-//            tableColumnsCount += 1
-//        }
-        
-        boilerPurifyViewController.noDataView.frame = boilerPurifyViewController.dataView.frame
+        if boilerPurifyViewController.view.subviews.contains(boilerPurifyViewController.noDataView) {
+            boilerPurifyViewController.noDataView.frame = boilerPurifyViewController.dataView.frame
+        } else {
+            let navigationBarHeight = self.navigationController?.navigationBar.bounds.height ?? CGFloat(40.0)
+            let statusBarHeight = STATUS_BAR_HEIGHT
+            let menuHeaderHeight = CGFloat(35.0)
+            
+            let dataViewWidth = CURRENT_SCREEN_WIDTH
+            let dataViewHeight = CURRENT_SCREEN_HEIGHT - navigationBarHeight - statusBarHeight - menuHeaderHeight
+            
+            // boilerPurifyViewController.dataView.frame = CGRectMake(0, 0, dataViewWidth, dataViewHeight)
+            
+            boilerPurifyViewController.firstColumnView.frame = CGRectMake(0, 0, BoilerPurifyViewController.firstColumnViewWidth, dataViewHeight)
+            boilerPurifyViewController.firstColumnTableView.frame = firstColumnView.bounds
+            
+            boilerPurifyViewController.scrollView.frame = CGRectMake(BoilerPurifyViewController.firstColumnViewWidth, 0, dataViewWidth - BoilerPurifyViewController.firstColumnViewWidth, dataViewHeight)
+            
+            // Draw data table
+            //        var tableColumnsCount = 0
+            //        for view in self.columnTableView {
+            //            view.frame = CGRectMake(CGFloat(tableColumnsCount) * DataTableColumnWidth, 0, DataTableColumnWidth, dataViewHeight)
+            //            tableColumnsCount += 1
+            //        }
+        }
         
         return boilerPurifyViewController.view
     }
@@ -263,6 +266,10 @@ class BoilerPurifyViewController: ViewController {
                         SVProgressHUD.showSuccessWithStatus("数据获取成功！")
                         
                         self.noDataView.removeFromSuperview()
+                        
+                        self.dataView.addSubview(self.firstColumnView)
+                        self.firstColumnView.addSubview(self.firstColumnTableView)
+                        self.dataView.addSubview(self.scrollView)
                         
                         self.firstColumnTableView.viewModel.headerString = SearchParameter["date"]! + "\n" + getShiftName(SearchParameter["shiftNo"]!)[0]
                         var firstColumnTitleArray: [String] = []
@@ -313,6 +320,11 @@ class BoilerPurifyViewController: ViewController {
                     } else {
                         self.noDataView.frame = self.dataView.frame
                         self.dataView.addSubview(self.noDataView)
+                        
+                        self.firstColumnView.removeFromSuperview()
+                        self.firstColumnTableView.removeFromSuperview()
+                        self.scrollView.removeFromSuperview()
+                        
                         self.hasRefreshedData = false
                         wisError(response.message)
                     }

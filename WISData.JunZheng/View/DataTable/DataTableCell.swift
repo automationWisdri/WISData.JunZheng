@@ -17,6 +17,8 @@ class DataTableCell: UITableViewCell {
         // Initialization code
         alignTextVerticalInTextView(self.dataTextView)
         dataTextView.userInteractionEnabled = false
+        dataTextView.backgroundColor = UIColor.whiteColor()
+        self.opaque = true
         self.userInteractionEnabled = true
     }
 

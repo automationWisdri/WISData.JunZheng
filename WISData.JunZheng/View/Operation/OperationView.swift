@@ -30,7 +30,7 @@ class OperationView: UIView {
         super.awakeFromNib()
         
         // Basic setup
-        self.backgroundColor = UIColor.clearColor()
+        self.backgroundColor = UIColor.whiteColor()
         self.viewTitleLabel.backgroundColor = UIColor.wisGrayColor().colorWithAlphaComponent(0.3)
     }
     
@@ -57,7 +57,7 @@ class OperationView: UIView {
         
         // Draw view for first column
         firstColumnView = UIView(frame: CGRectMake(0, 0, firstColumnViewWidth, dataViewHeight))
-        firstColumnView.backgroundColor = UIColor.clearColor()
+        firstColumnView.backgroundColor = UIColor.whiteColor()
         //        headerView.userInteractionEnabled = true
         self.dataView.addSubview(firstColumnView)
         
@@ -73,7 +73,7 @@ class OperationView: UIView {
         scrollView.showsVerticalScrollIndicator = true
         scrollView.bounces = false
         scrollView.delegate = self
-        scrollView.backgroundColor = UIColor.clearColor()
+        scrollView.backgroundColor = UIColor.whiteColor()
         self.dataView.addSubview(scrollView)
         
         // Draw data table

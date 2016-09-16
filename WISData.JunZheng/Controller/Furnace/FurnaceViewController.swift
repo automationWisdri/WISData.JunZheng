@@ -84,7 +84,7 @@ class FurnaceViewController: ViewController {
         
         // Draw view for first column
         firstColumnView = UIView(frame: CGRectZero/*CGRectMake(0, 0, FurnaceViewController.firstColumnViewWidth, dataViewHeight)*/)
-        firstColumnView.backgroundColor = UIColor.clearColor()
+        firstColumnView.backgroundColor = UIColor.whiteColor()
 //        headerView.userInteractionEnabled = true
         self.dataView.addSubview(firstColumnView)
         
@@ -100,7 +100,7 @@ class FurnaceViewController: ViewController {
         scrollView.showsVerticalScrollIndicator = true
         scrollView.bounces = true
         scrollView.delegate = self
-        scrollView.backgroundColor = UIColor.clearColor()
+        scrollView.backgroundColor = UIColor.whiteColor()
         self.dataView.addSubview(scrollView)
 
         // Draw data table
@@ -226,34 +226,34 @@ class FurnaceViewController: ViewController {
     }
     
     private func arrangeFurnaceView(furnaceViewController: FurnaceViewController) -> UIView {
-        let navigationBarHeight = self.navigationController?.navigationBar.bounds.height ?? CGFloat(40.0)
-        let statusBarHeight = STATUS_BAR_HEIGHT
-        let menuHeaderHeight = CGFloat(35.0)
-        
-        let dataViewWidth = CURRENT_SCREEN_WIDTH
-        let dataViewHeight = CURRENT_SCREEN_HEIGHT - navigationBarHeight - statusBarHeight - menuHeaderHeight
-        
-        furnaceViewController.dataView.frame = CGRectMake(0, 0, dataViewWidth, dataViewHeight)
-
-        furnaceViewController.firstColumnView.frame = CGRectMake(0, 0, FurnaceViewController.firstColumnViewWidth, dataViewHeight)
-        furnaceViewController.firstColumnTableView.frame = firstColumnView.bounds
-        
-        furnaceViewController.scrollView.frame = CGRectMake(FurnaceViewController.firstColumnViewWidth, 0, dataViewWidth - FurnaceViewController.firstColumnViewWidth, dataViewHeight)
-        
-        // Draw data table
-//        var tableColumnsCount = 0
-//        for view in self.columnTableView {
-//            view.frame = CGRectMake(CGFloat(tableColumnsCount) * DataTableColumnWidth, 0, DataTableColumnWidth, dataViewHeight)
-//            tableColumnsCount += 1
-//        }
         
         if furnaceViewController.view.subviews.contains(furnaceViewController.noDataView) {
             furnaceViewController.noDataView.frame = furnaceViewController.dataView.frame
+        } else {
+            let navigationBarHeight = self.navigationController?.navigationBar.bounds.height ?? CGFloat(40.0)
+            let statusBarHeight = STATUS_BAR_HEIGHT
+            let menuHeaderHeight = CGFloat(35.0)
+            
+            let dataViewWidth = CURRENT_SCREEN_WIDTH
+            let dataViewHeight = CURRENT_SCREEN_HEIGHT - navigationBarHeight - statusBarHeight - menuHeaderHeight
+            
+            // furnaceViewController.dataView.frame = CGRectMake(0, 0, dataViewWidth, dataViewHeight)
+            
+            furnaceViewController.firstColumnView.frame = CGRectMake(0, 0, FurnaceViewController.firstColumnViewWidth, dataViewHeight)
+            furnaceViewController.firstColumnTableView.frame = firstColumnView.bounds
+            
+            furnaceViewController.scrollView.frame = CGRectMake(FurnaceViewController.firstColumnViewWidth, 0, dataViewWidth - FurnaceViewController.firstColumnViewWidth, dataViewHeight)
+            
+            // Draw data table
+            //        var tableColumnsCount = 0
+            //        for view in self.columnTableView {
+            //            view.frame = CGRectMake(CGFloat(tableColumnsCount) * DataTableColumnWidth, 0, DataTableColumnWidth, dataViewHeight)
+            //            tableColumnsCount += 1
+            //        }
         }
         
         return furnaceViewController.view
     }
-    
     
     func getData() {
         SVProgressHUD.showWithStatus("数据获取中...")
@@ -268,6 +268,10 @@ class FurnaceViewController: ViewController {
                         SVProgressHUD.showSuccessWithStatus("数据获取成功！")
                         
                         self.noDataView.removeFromSuperview()
+                        
+                        self.dataView.addSubview(self.firstColumnView)
+                        self.firstColumnView.addSubview(self.firstColumnTableView)
+                        self.dataView.addSubview(self.scrollView)
                         
                         self.firstColumnTableView.viewModel.headerString = SearchParameter["date"]! + "\n" + getShiftName(SearchParameter["shiftNo"]!)[0]
                         var firstColumnTitleArray: [String] = []
@@ -320,7 +324,14 @@ class FurnaceViewController: ViewController {
                         
                     } else {
                         self.noDataView.frame = self.dataView.frame
+                        
+                        self.firstColumnView.removeFromSuperview()
+                        self.firstColumnTableView.removeFromSuperview()
+                        self.scrollView.removeFromSuperview()
+                        
                         self.dataView.addSubview(self.noDataView)
+                        
+                        
                         self.hasRefreshedData = false
                         wisError(response.message)
                     }

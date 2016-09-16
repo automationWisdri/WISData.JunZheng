@@ -131,6 +131,8 @@ class DataHomeViewController: UIViewController {
     
     var baseTitle = "电石炉生产数据"
     
+    private var pagingMenuController: PagingMenuController!
+    
     // for drop down search view
     var searchDropDownView: LMDropdownView = LMDropdownView()   // For iPhone and iPod
     var searchContentView: DataSearchContentView?
@@ -168,7 +170,7 @@ class DataHomeViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = rightBarItem
         
         // Call Paging Menu
-        let pagingMenuController = PagingMenuController(options: PagingMenuOptions())
+        self.pagingMenuController = PagingMenuController(options: PagingMenuOptions())
         pagingMenuController.delegate = self
         
         arrangePagingMenuView(pagingMenuController)
@@ -219,8 +221,8 @@ class DataHomeViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        let pagingMenuController = self.childViewControllers[0] as! PagingMenuController
-        arrangePagingMenuView(pagingMenuController).layoutIfNeeded()
+        // let pagingMenuController = self.childViewControllers[0] as! PagingMenuController
+        arrangePagingMenuView(pagingMenuController)
     }
 
     override func didReceiveMemoryWarning() {
@@ -255,8 +257,8 @@ class DataHomeViewController: UIViewController {
         
         super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
         coordinator.animateAlongsideTransition({ [unowned self] _ in
-            let pagingMenuController = self.childViewControllers[0] as! PagingMenuController
-            self.arrangePagingMenuView(pagingMenuController)
+            // let pagingMenuController = self.childViewControllers[0] as! PagingMenuController
+            self.arrangePagingMenuView(self.pagingMenuController)
         }, completion:nil)
     }
     
@@ -272,6 +274,7 @@ class DataHomeViewController: UIViewController {
         let pageHeight = CURRENT_SCREEN_HEIGHT - navigationBarHeight! - statusBarHeight
         
         pagingMenuController.view.frame = CGRectMake(0, navigationBarHeight! + statusBarHeight, pageWidth, pageHeight)
+        self.view.frame = CGRectMake(0, 0, pageWidth, pageHeight + navigationBarHeight! + statusBarHeight)
         
         return pagingMenuController.view
     }

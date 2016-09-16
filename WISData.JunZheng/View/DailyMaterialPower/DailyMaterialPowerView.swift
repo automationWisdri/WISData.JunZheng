@@ -35,7 +35,7 @@ class DailyMaterialPowerView: UIView {
             dailyMaterialPowerTitleJSON = JSON.null
         }
         
-        self.backgroundColor = UIColor.clearColor()
+        self.backgroundColor = UIColor.whiteColor()
         
         dailyMaterialPowerTable.dataSource = self
         dailyMaterialPowerTable.delegate = self
