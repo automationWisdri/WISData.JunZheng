@@ -278,6 +278,9 @@ class LoginViewController: ViewController {
                 let hour = dateFormatterGetHour(now)
                 SearchParameter["shiftNo"] = getShiftNo(hour)
                 
+                // 重新登录后，默认显示 1#炉 的生产数据
+                SearchParameter["lNo"] = "1"
+                
                 delay(0.25, work: {
                     WISCommon.currentAppDelegate.startMainStory()
                 })

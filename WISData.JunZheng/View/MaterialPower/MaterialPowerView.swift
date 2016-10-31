@@ -67,7 +67,7 @@ class MaterialPowerView: UIView {
         
         // Draw view for data table
         scrollView = UIScrollView(frame: CGRectMake (firstColumnViewWidth, 0, dataViewWidth - firstColumnViewWidth, dataViewHeight))
-        scrollView.contentSize = CGSizeMake(CGFloat(totalColumnCount) * DataTableColumnWidth, CGFloat(switchRowCount) * DataTableBaseRowHeight)
+        scrollView.contentSize = CGSizeMake(CGFloat(totalColumnCount) * WISCommon.DataTableColumnWidth, CGFloat(switchRowCount) * DataTableBaseRowHeight)
         scrollView.showsHorizontalScrollIndicator = true
         scrollView.showsVerticalScrollIndicator = true
         scrollView.bounces = false
@@ -81,7 +81,7 @@ class MaterialPowerView: UIView {
             if p == "Remark" || p == "SwithTimeReasons" {
                 continue
             } else {
-                let tempColumnTableView = DataTableView(frame: CGRectMake(CGFloat(tableColumnsCount) * DataTableColumnWidth, 0, DataTableColumnWidth, dataViewHeight), style: .Plain, rowInfo: [switchRowCount])
+                let tempColumnTableView = DataTableView(frame: CGRectMake(CGFloat(tableColumnsCount) * WISCommon.DataTableColumnWidth, 0, WISCommon.DataTableColumnWidth, dataViewHeight), style: .Plain, rowInfo: [switchRowCount])
                 self.columnTableView.append(tempColumnTableView)
                 self.columnTableView[tableColumnsCount].dataTableDelegate = self
                 self.scrollView.addSubview(self.columnTableView[tableColumnsCount])
@@ -90,7 +90,7 @@ class MaterialPowerView: UIView {
         }
         
         for _ in SwitchTimeReason().propertyNames() {
-            let tempColumnTableView = DataTableView(frame: CGRectMake(CGFloat(tableColumnsCount) * DataTableColumnWidth, 0, DataTableColumnWidth, dataViewHeight), style: .Plain, rowInfo: nil)
+            let tempColumnTableView = DataTableView(frame: CGRectMake(CGFloat(tableColumnsCount) * WISCommon.DataTableColumnWidth, 0, WISCommon.DataTableColumnWidth, dataViewHeight), style: .Plain, rowInfo: nil)
             self.columnTableView.append(tempColumnTableView)
             self.columnTableView[tableColumnsCount].dataTableDelegate = self
             self.scrollView.addSubview(self.columnTableView[tableColumnsCount])

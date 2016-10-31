@@ -16,7 +16,7 @@ import SVProgressHUD
 #endif
 
 
-public let DataTableColumnWidth: CGFloat = 70.0
+//public let DataTableColumnWidth: CGFloat = 70.0
 
 class FurnaceViewController: ViewController {
 
@@ -35,7 +35,7 @@ class FurnaceViewController: ViewController {
     private var tableContentJSON: [JSON] = []
     private var tableTitleJSON = JSON.null
     
-    private static let firstColumnViewWidth: CGFloat = 95
+//    private static let firstColumnViewWidth: CGFloat = 95
     
     class func instantiateFromStoryboard() -> FurnaceViewController {
         let storyboard = UIStoryboard(name: "Furnace", bundle: nil)
@@ -94,8 +94,8 @@ class FurnaceViewController: ViewController {
         firstColumnView.addSubview(firstColumnTableView)
         
         // Draw view for data table
-        scrollView = UIScrollView(frame: CGRectMake (FurnaceViewController.firstColumnViewWidth, 0, dataViewWidth - FurnaceViewController.firstColumnViewWidth, dataViewHeight))
-        scrollView.contentSize = CGSizeMake(CGFloat(columnCount) * DataTableColumnWidth, CGFloat(rowCount) * DataTableBaseRowHeight)
+        scrollView = UIScrollView(frame: CGRectMake (WISCommon.firstColumnViewWidth, 0, dataViewWidth - WISCommon.firstColumnViewWidth, dataViewHeight))
+        scrollView.contentSize = CGSizeMake(CGFloat(columnCount) * WISCommon.DataTableColumnWidth, CGFloat(rowCount) * DataTableBaseRowHeight)
         scrollView.showsHorizontalScrollIndicator = true
         scrollView.showsVerticalScrollIndicator = true
         scrollView.bounces = true
@@ -109,7 +109,7 @@ class FurnaceViewController: ViewController {
             if p == "Id" {
                 continue
             } else {
-                let tempColumnTableView = DataTableView(frame: CGRectMake(CGFloat(tableColumnsCount) * DataTableColumnWidth, 0, DataTableColumnWidth, dataViewHeight), style: .Plain, rowInfo: nil)
+                let tempColumnTableView = DataTableView(frame: CGRectMake(CGFloat(tableColumnsCount) * WISCommon.DataTableColumnWidth, 0, WISCommon.DataTableColumnWidth, dataViewHeight), style: .Plain, rowInfo: nil)
                 self.columnTableView.append(tempColumnTableView)
                 self.columnTableView[tableColumnsCount].dataTableDelegate = self
                 self.scrollView.addSubview(self.columnTableView[tableColumnsCount])
@@ -130,7 +130,7 @@ class FurnaceViewController: ViewController {
         //
         selectedElement
             .subscribeNext { [unowned self] rowIndex -> () in
-                print("tapped row number: \(rowIndex)")
+//                print("tapped row number: \(rowIndex)")
                 
                 // Read title of record
                 self.firstColumnTableView.viewModel.titleArraySubject
@@ -239,10 +239,10 @@ class FurnaceViewController: ViewController {
             
             // furnaceViewController.dataView.frame = CGRectMake(0, 0, dataViewWidth, dataViewHeight)
             
-            furnaceViewController.firstColumnView.frame = CGRectMake(0, 0, FurnaceViewController.firstColumnViewWidth, dataViewHeight)
+            furnaceViewController.firstColumnView.frame = CGRectMake(0, 0, WISCommon.firstColumnViewWidth, dataViewHeight)
             furnaceViewController.firstColumnTableView.frame = firstColumnView.bounds
             
-            furnaceViewController.scrollView.frame = CGRectMake(FurnaceViewController.firstColumnViewWidth, 0, dataViewWidth - FurnaceViewController.firstColumnViewWidth, dataViewHeight)
+            furnaceViewController.scrollView.frame = CGRectMake(WISCommon.firstColumnViewWidth, 0, dataViewWidth - WISCommon.firstColumnViewWidth, dataViewHeight)
             
             // Draw data table
             //        var tableColumnsCount = 0

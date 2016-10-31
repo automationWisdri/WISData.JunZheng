@@ -12,9 +12,8 @@ import LMDropdownView
 import SVProgressHUD
 import DrawerController
 
-public let DataSearchNotification = "DataSearchNotification"
-
 // MARK: - Paging Menu Configuration
+
 private var pagingControllers: [UIViewController] {
     let furnaceViewController = FurnaceViewController.instantiateFromStoryboard()
     let boilerPurifyPowerViewController = BoilerPurifyViewController.instantiateFromStoryboard()
@@ -88,39 +87,6 @@ struct PagingMenuOptions: PagingMenuControllerCustomizable {
         var displayMode: MenuItemDisplayMode {
             let title = MenuItemText(text: menuTitle, color: color, selectedColor: selectedColor, font: font, selectedFont: selectedFont)
             return .Text(title: title)
-        }
-    }
-}
-
-enum ShiftType: Int {
-
-    case MorningShift = 0
-    case MiddleShift = 1
-    case NightShift = 2
-    
-    static let count: Int = {
-        return 3
-    }()
-    
-    var stringOfType: String {
-        switch self {
-        case .MorningShift:
-            return "早班"
-        case .MiddleShift:
-            return "中班"
-        case .NightShift:
-            return "晚班"
-        }
-    }
-    
-    var getShiftNoForSearch: String {
-        switch self {
-        case .MorningShift:
-            return "2"
-        case .MiddleShift:
-            return "3"
-        case .NightShift:
-            return "1"
         }
     }
 }

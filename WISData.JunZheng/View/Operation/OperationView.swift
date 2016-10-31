@@ -49,14 +49,15 @@ class OperationView: UIView {
         // Define the table dimensions
         let dataViewWidth = CURRENT_SCREEN_WIDTH
         let dataViewHeight = viewHeight
-        let firstColumnViewWidth: CGFloat = 90
+//        let firstColumnViewWidth: CGFloat = 90
         
+        // -2 是因为 KEY "No" 和 "SwitchTimes" 不作为表格列名
         let opColumnCount = Operation().propertyNames().count - 2
         let switchColumnCount = SwitchTime().propertyNames().count
         let totalColumnCount = opColumnCount + switchColumnCount
         
         // Draw view for first column
-        firstColumnView = UIView(frame: CGRectMake(0, 0, firstColumnViewWidth, dataViewHeight))
+        firstColumnView = UIView(frame: CGRectMake(0, 0, WISCommon.firstColumnViewWidth, dataViewHeight))
         firstColumnView.backgroundColor = UIColor.whiteColor()
         //        headerView.userInteractionEnabled = true
         self.dataView.addSubview(firstColumnView)
@@ -67,8 +68,8 @@ class OperationView: UIView {
         firstColumnView.addSubview(firstColumnTableView)
         
         // Draw view for data table
-        scrollView = UIScrollView(frame: CGRectMake (firstColumnViewWidth, 0, dataViewWidth - firstColumnViewWidth, dataViewHeight))
-        scrollView.contentSize = CGSizeMake(CGFloat(totalColumnCount) * DataTableColumnWidth, DataTableHeaderRowHeight + CGFloat(totalRowCount) * DataTableBaseRowHeight)
+        scrollView = UIScrollView(frame: CGRectMake (WISCommon.firstColumnViewWidth, 0, dataViewWidth - WISCommon.firstColumnViewWidth, dataViewHeight))
+        scrollView.contentSize = CGSizeMake(CGFloat(totalColumnCount) * WISCommon.DataTableColumnWidth, DataTableHeaderRowHeight + CGFloat(totalRowCount) * DataTableBaseRowHeight)
         scrollView.showsHorizontalScrollIndicator = true
         scrollView.showsVerticalScrollIndicator = true
         scrollView.bounces = false
@@ -78,12 +79,13 @@ class OperationView: UIView {
         
         // Draw data table
         self.columnTableView.removeAll()
+        
         var tableColumnsCount = 0
         for p in Operation().propertyNames() {
             if p == "No" || p == "SwitchTimes" {
                 continue
             } else {
-                let tempColumnTableView = DataTableView(frame: CGRectMake(CGFloat(tableColumnsCount) * DataTableColumnWidth, 0, DataTableColumnWidth, dataViewHeight), style: .Plain, rowInfo: switchRowCount)
+                let tempColumnTableView = DataTableView(frame: CGRectMake(CGFloat(tableColumnsCount) * WISCommon.DataTableColumnWidth, 0, WISCommon.DataTableColumnWidth, dataViewHeight), style: .Plain, rowInfo: switchRowCount)
                 self.columnTableView.append(tempColumnTableView)
                 self.columnTableView[tableColumnsCount].dataTableDelegate = self
                 self.scrollView.addSubview(self.columnTableView[tableColumnsCount])
@@ -92,7 +94,7 @@ class OperationView: UIView {
         }
         
         for _ in SwitchTime().propertyNames() {
-            let tempColumnTableView = DataTableView(frame: CGRectMake(CGFloat(tableColumnsCount) * DataTableColumnWidth, 0, DataTableColumnWidth, dataViewHeight), style: .Plain, rowInfo: nil)
+            let tempColumnTableView = DataTableView(frame: CGRectMake(CGFloat(tableColumnsCount) * WISCommon.DataTableColumnWidth, 0, WISCommon.DataTableColumnWidth, dataViewHeight), style: .Plain, rowInfo: nil)
             self.columnTableView.append(tempColumnTableView)
             self.columnTableView[tableColumnsCount].dataTableDelegate = self
             self.scrollView.addSubview(self.columnTableView[tableColumnsCount])
@@ -106,12 +108,33 @@ class OperationView: UIView {
         // Define the table dimensions
         let dataViewWidth = CURRENT_SCREEN_WIDTH
         let dataViewHeight = viewHeight
-        let firstColumnViewWidth: CGFloat = 90
+//        let firstColumnViewWidth: CGFloat = 90
+        
+        
         
         guard let scrollView = self.scrollView else {
             return
         }
-        scrollView.frame = CGRectMake(firstColumnViewWidth, 0, dataViewWidth - firstColumnViewWidth, dataViewHeight)
+        scrollView.frame = CGRectMake(WISCommon.firstColumnViewWidth, 0, dataViewWidth - WISCommon.firstColumnViewWidth, dataViewHeight)
+        
+        /*
+         * Issue 1 中的 4# 问题，暂未解决
+         
+        let opColumnCount = Operation().propertyNames().count - 2
+        let switchColumnCount = SwitchTime().propertyNames().count
+        let totalColumnCount = opColumnCount + switchColumnCount
+         
+        if ( dataViewWidth - WISCommon.firstColumnViewWidth ) > CGFloat(totalColumnCount) * WISCommon.DataTableColumnWidth {
+            // 重绘表格
+            let dataTableColumnWidth: CGFloat = ( dataViewWidth - WISCommon.firstColumnViewWidth) / CGFloat(totalColumnCount)
+            
+            let subviews = scrollView.subviews as! [DataTableView]
+            for subview in subviews {
+                subview.bounds.size = CGSize(width: dataTableColumnWidth, height: dataViewHeight)
+                subview.layoutIfNeeded()
+            }
+        }
+        */
     }
     
     private func fillDataTableContent() {

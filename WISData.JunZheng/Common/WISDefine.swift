@@ -44,8 +44,43 @@ var STATUS_BAR_HEIGHT: CGFloat {
 let EMPTY_STRING = ""
 let SEPARATOR_HEIGHT = 1.0 / UIScreen.mainScreen().scale
 
-var SearchParameter: Dictionary = ["date": "", "shiftNo": "2", "lNo": "2"]
+var SearchParameter: Dictionary = ["date": "", "shiftNo": "2", "lNo": ""]
 let DJName = ["1# 电极", "2# 电极", "3# 电极"]
+
+let DataSearchNotification = "DataSearchNotification"
+
+enum ShiftType: Int {
+    
+    case MorningShift = 0
+    case MiddleShift = 1
+    case NightShift = 2
+    
+    static let count: Int = {
+        return 3
+    }()
+    
+    var stringOfType: String {
+        switch self {
+        case .MorningShift:
+            return "早班"
+        case .MiddleShift:
+            return "中班"
+        case .NightShift:
+            return "晚班"
+        }
+    }
+    
+    var getShiftNoForSearch: String {
+        switch self {
+        case .MorningShift:
+            return "2"
+        case .MiddleShift:
+            return "3"
+        case .NightShift:
+            return "1"
+        }
+    }
+}
 
 ///---------
 /// App Info
@@ -55,11 +90,14 @@ let APP_VERSION = NSBundle.mainBundle().infoDictionary!["CFBundleShortVersionStr
 let APP_BUILD = NSBundle.mainBundle().infoDictionary!["CFBundleVersion"]
 
 let APP_NAME_ENU = "WISData"
-let APP_NAME_CHN = ""
+let APP_NAME_CHN = "生产数据"
 
 
 class WISCommon {
     static let currentAppDelegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     static let additionalHeightInView: CGFloat = CGFloat(30.0)
+    
+    static let DataTableColumnWidth: CGFloat = CGFloat(75.0)
+    static let firstColumnViewWidth: CGFloat = CGFloat(95.0)
 }
 

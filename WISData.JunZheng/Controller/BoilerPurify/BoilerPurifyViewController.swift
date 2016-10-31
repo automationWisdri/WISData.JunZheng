@@ -91,7 +91,7 @@ class BoilerPurifyViewController: ViewController {
         
         // Draw view for data table
         scrollView = UIScrollView(frame: CGRectMake (BoilerPurifyViewController.firstColumnViewWidth, 0, dataViewWidth - BoilerPurifyViewController.firstColumnViewWidth, dataViewHeight))
-        scrollView.contentSize = CGSizeMake(CGFloat(columnCount) * DataTableColumnWidth, CGFloat(rowCount) * DataTableBaseRowHeight)
+        scrollView.contentSize = CGSizeMake(CGFloat(columnCount) * WISCommon.DataTableColumnWidth, CGFloat(rowCount) * DataTableBaseRowHeight)
         scrollView.showsHorizontalScrollIndicator = true
         scrollView.showsVerticalScrollIndicator = true
         scrollView.bounces = true
@@ -105,7 +105,7 @@ class BoilerPurifyViewController: ViewController {
             if p == "Id" {
                 continue
             } else {
-                let tempColumnTableView = DataTableView(frame: CGRectMake(CGFloat(tableColumnsCount) * DataTableColumnWidth, 0, DataTableColumnWidth, dataViewHeight), style: .Plain, rowInfo: nil)
+                let tempColumnTableView = DataTableView(frame: CGRectMake(CGFloat(tableColumnsCount) * WISCommon.DataTableColumnWidth, 0, WISCommon.DataTableColumnWidth, dataViewHeight), style: .Plain, rowInfo: nil)
                 self.columnTableView.append(tempColumnTableView)
                 self.columnTableView[tableColumnsCount].dataTableDelegate = self
                 self.scrollView.addSubview(self.columnTableView[tableColumnsCount])
@@ -126,7 +126,7 @@ class BoilerPurifyViewController: ViewController {
         //
         selectedElement
             .subscribeNext { [unowned self] rowIndex -> () in
-                print("tapped row number: \(rowIndex)")
+//                print("tapped row number: \(rowIndex)")
                 
                 // Read title of record
                 self.firstColumnTableView.viewModel.titleArraySubject

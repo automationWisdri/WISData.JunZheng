@@ -60,7 +60,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func startMainStory() {
+        // 获得当前时间，并转化格式
         SearchParameter["date"] = dateFormatterForSearch(NSDate())
+        
+        // 判断 UserDefaults 中是否储存了当前炉号，如果没储存，默认显示 1#炉 的生产数据
+        if let lNo = NSUserDefaults.standardUserDefaults().objectForKey("lNo") as? String {
+            SearchParameter["lNo"] = lNo
+        } else {
+            SearchParameter["lNo"] = "1"
+        }
         
         let centerNav = UINavigationController(rootViewController: DataHomeViewController())
         let leftViewController = LeftMenuViewController()

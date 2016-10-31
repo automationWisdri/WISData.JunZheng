@@ -160,17 +160,18 @@ extension LeftMenuViewController: UITableViewDelegate, UITableViewDataSource {
             
         case Section.Plant.rawValue:
             
-            print("did select row: \(indexPath.row)")
-            
-            if (indexPath.row == selectedMenuItem) {
-                return
+            if ((WISClient.sharedInstance.centerNavigation?.topViewController?.isKindOfClass(AboutViewController)) == true) {
+                WISClient.sharedInstance.centerNavigation?.popViewControllerAnimated(true)
+            } else {
+                if (indexPath.row == selectedMenuItem) {
+                    return
+                }
             }
             
             selectedMenuItem = indexPath.row
-            
             SearchParameter["lNo"] = String(indexPath.row + 1)
-            
-            print(SearchParameter)
+            NSUserDefaults.standardUserDefaults().setObject(SearchParameter["lNo"], forKey: "lNo")
+
             let notification = NSNotification(name: DataSearchNotification, object: nil)
             NSNotificationCenter.defaultCenter().postNotification(notification)
             
@@ -188,7 +189,11 @@ extension LeftMenuViewController: UITableViewDelegate, UITableViewDataSource {
                 // Push 后导航栏的透明度变了，待解决
                 let aboutStoryboard = UIStoryboard(name: "About", bundle: nil)
                 let aboutViewController = aboutStoryboard.instantiateInitialViewController()!
-                WISClient.sharedInstance.centerNavigation?.pushViewController(aboutViewController, animated: true)
+
+                if ((WISClient.sharedInstance.centerNavigation?.topViewController?.isKindOfClass(AboutViewController)) == false) {
+                    WISClient.sharedInstance.centerNavigation?.pushViewController(aboutViewController, animated: true)
+                }
+                
                 WISClient.sharedInstance.drawerController?.closeDrawerAnimated(true, completion: nil)
                 
             case 1:
@@ -201,8 +206,10 @@ extension LeftMenuViewController: UITableViewDelegate, UITableViewDataSource {
                         if !currentDevice.isPad {
                             UIDevice.currentDevice().setValue(NSNumber.init(long: UIDeviceOrientation.Portrait.rawValue), forKey: "orientation")
                         }
-                        print("oritentation is portrait: \(self.interfaceOrientation.isPortrait)")
-                        print("width: \(CURRENT_SCREEN_WIDTH) - height: \(CURRENT_SCREEN_HEIGHT)")
+//                        print("oritentation is portrait: \(self.interfaceOrientation.isPortrait)")
+//                        print("width: \(CURRENT_SCREEN_WIDTH) - height: \(CURRENT_SCREEN_HEIGHT)")
+                        // 退出后，将默认炉号改为 1#
+                        NSUserDefaults.standardUserDefaults().setObject("1", forKey: "lNo")
                         WISCommon.currentAppDelegate.window?.rootViewController = LoginViewController()
                         SVProgressHUD.dismiss()
                     })

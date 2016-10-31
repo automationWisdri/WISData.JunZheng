@@ -24,7 +24,7 @@ class SearchPopoverViewController: ViewController {
     func dismissPopoverSearchContent(animated animated: Bool = true) -> Void {
         dispatch_async(dispatch_get_main_queue()) {
             self.dismissViewControllerAnimated(animated) {
-                print("关闭查询菜单")
+//                print("关闭查询菜单")
             }
         }
     }
