@@ -20,6 +20,7 @@ class AboutViewController: UIViewController {
 
     @IBOutlet weak var aboutTextView: UITextView!
     @IBOutlet weak var aboutTextViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var aboutTextViewTopConstraint: NSLayoutConstraint!
     
     @IBOutlet private weak var copyrightLabel: UILabel!
 
@@ -28,10 +29,8 @@ class AboutViewController: UIViewController {
         super.viewDidLoad()
 
         title = "关于"
-
-        appLogoImageViewTopConstraint.constant = Ruler.iPhoneVertical(50, 70, 90, 110).value
-        appNameLabelTopConstraint.constant = Ruler.iPhoneVertical(20, 30, 30, 30).value
-
+        
+        setSubViewConstraints()
         appNameLabel.textColor = UIColor.wisLogoColor()
         
         let infoDictionary = NSBundle.mainBundle().infoDictionary
@@ -45,6 +44,29 @@ class AboutViewController: UIViewController {
         #endif
         
         self.appVersionLabel.text = app_version
+    }
+    
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return .All
+    }
+    
+    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        coordinator.animateAlongsideTransition({ _ in
+            self.setSubViewConstraints()
+        }, completion: nil)
+    }
+    
+    private func setSubViewConstraints() {
+        if self.traitCollection.verticalSizeClass == .Regular {
+            appLogoImageViewTopConstraint.constant = Ruler.iPhoneVertical(50, 70, 90, 110).value
+            appNameLabelTopConstraint.constant = Ruler.iPhoneVertical(20, 30, 30, 30).value
+            aboutTextViewTopConstraint.constant = Ruler.iPhoneVertical(50, 70, 90, 110).value
+            
+        } else {
+            appLogoImageViewTopConstraint.constant = Ruler.iPhoneVertical(10, 20, 40, 40).value
+            appNameLabelTopConstraint.constant = Ruler.iPhoneVertical(5, 15, 15, 15).value
+            aboutTextViewTopConstraint.constant = Ruler.iPhoneVertical(10, 15, 15, 25).value
+        }
     }
 
 }
