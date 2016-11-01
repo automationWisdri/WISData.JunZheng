@@ -47,7 +47,7 @@ class FurnaceViewController: ViewController {
         
         // initialize No data View
         if self.noDataView == nil {
-            self.noDataView = (NSBundle.mainBundle().loadNibNamed("NoDataView", owner: self, options: nil).last as! NoDataView
+            self.noDataView = (NSBundle.mainBundle().loadNibNamed("NoDataView", owner: self, options: nil)!.last as! NoDataView
             )
         }
         
