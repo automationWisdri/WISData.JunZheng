@@ -1,0 +1,75 @@
+PODS:
+  - Alamofire (3.5.1)
+  - DeviceKit (0.3.5)
+  - DrawerController (2.0.0):
+    - DrawerController/Core (= 2.0.0)
+    - DrawerController/DrawerVisualStates (= 2.0.0)
+  - DrawerController/Core (2.0.0)
+  - DrawerController/DrawerVisualStates (2.0.0):
+    - DrawerController/Core
+  - FXBlurView (1.6.4)
+  - KeyboardMan (0.7.0)
+  - LMDropdownView (1.0.3)
+  - MJExtension (3.0.13)
+  - MJRefresh (3.1.12)
+  - PagingMenuController (1.2.0)
+  - Ruler (0.8.0)
+  - RxCocoa (2.6.0):
+    - RxSwift (~> 2.5)
+  - RxDataSources (0.9):
+    - RxCocoa (~> 2.2)
+    - RxSwift (~> 2.2)
+  - RxSwift (2.6.0)
+  - SnapKit (0.22.0)
+  - SVProgressHUD (2.0.3)
+  - SwiftyJSON (2.3.3)
+
+DEPENDENCIES:
+  - Alamofire (~> 3.5)
+  - DeviceKit (from `https://github.com/dennisweissmann/DeviceKit.git`, branch `swift-2.3-unsupported`)
+  - DrawerController (~> 2.0)
+  - FXBlurView
+  - KeyboardMan (~> 0.7.0)
+  - LMDropdownView
+  - MJExtension
+  - MJRefresh (~> 3.1.0)
+  - PagingMenuController (~> 1.2.0)
+  - Ruler (~> 0.8)
+  - RxCocoa (~> 2.6)
+  - RxDataSources (~> 0.9)
+  - RxSwift (~> 2.6)
+  - SnapKit (~> 0.22.0)
+  - SVProgressHUD
+  - SwiftyJSON (~> 2.3.1)
+
+EXTERNAL SOURCES:
+  DeviceKit:
+    :branch: swift-2.3-unsupported
+    :git: https://github.com/dennisweissmann/DeviceKit.git
+
+CHECKOUT OPTIONS:
+  DeviceKit:
+    :commit: ce47728d13129d0a126901a589c12ddfdfcb3d32
+    :git: https://github.com/dennisweissmann/DeviceKit.git
+
+SPEC CHECKSUMS:
+  Alamofire: 0dfba1184a543e2aa160f4e39cac4e8aba48d223
+  DeviceKit: c6946cf7abb41940214aa4618e6191ff865568c0
+  DrawerController: c23e650b135c2192a598d0d1d14c6f4e716ea143
+  FXBlurView: db786c2561cb49a09ae98407f52460096ab8a44f
+  KeyboardMan: b26dcfe0e784906c04991e5a1d96838d29aae490
+  LMDropdownView: f03fadfe65908c735580f63d04c47e6d7c5325f3
+  MJExtension: 5932755f451458eefa24239358817f8d291240c7
+  MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
+  PagingMenuController: a2ee82351f712be10ff31e59c11221a04fcc8a73
+  Ruler: 5e38ff92c4ce5a96af66eb8a3bc0f17c7a5c1cd9
+  RxCocoa: 89ab00d5753502520227940e3a0e0a0413683c6b
+  RxDataSources: e169bba94a7be584df7c1e1487fa56edc8753ae6
+  RxSwift: 77f3a0b15324baa7a1c9bfa9f199648a82424e26
+  SnapKit: 0dd2fd157330f1ea11fd84da13e6be8a7a22bae0
+  SVProgressHUD: b0830714205bea1317ea1a2ebc71e5633af334d4
+  SwiftyJSON: 0fd0a115a3c0c09b277d2ab801df154902b942c3
+
+PODFILE CHECKSUM: e0078be1b98a980534bd3bc50dcf973cdd18a70e
+
+COCOAPODS: 1.1.1

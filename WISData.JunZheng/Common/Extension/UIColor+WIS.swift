@@ -15,11 +15,11 @@ func createImageWithColor(color:UIColor) -> UIImage{
 func createImageWithColor(color:UIColor,size:CGSize) -> UIImage {
     let rect = CGRectMake(0, 0, size.width, size.height)
     UIGraphicsBeginImageContext(rect.size);
-    let context = UIGraphicsGetCurrentContext();
+    let context = UIGraphicsGetCurrentContext()!;
     CGContextSetFillColorWithColor(context, color.CGColor);
     CGContextFillRect(context, rect);
     
-    let theImage = UIGraphicsGetImageFromCurrentImageContext();
+    let theImage = UIGraphicsGetImageFromCurrentImageContext()!;
     UIGraphicsEndImageContext();
     return theImage;
 }

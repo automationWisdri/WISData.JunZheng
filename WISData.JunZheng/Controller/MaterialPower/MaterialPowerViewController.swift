@@ -34,7 +34,7 @@ class MaterialPowerViewController: UIViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.handleNotification(_:)), name: DataSearchNotification, object: nil)
         // initialize No data View
         if self.noDataView == nil {
-            self.noDataView = (NSBundle.mainBundle().loadNibNamed("NoDataView", owner: self, options: nil).last as! NoDataView
+            self.noDataView = (NSBundle.mainBundle().loadNibNamed("NoDataView", owner: self, options: nil)!.last as! NoDataView
             )
         }
         
@@ -48,21 +48,21 @@ class MaterialPowerViewController: UIViewController {
         // Daily Material Power View Section
         //
         if self.dailyMaterialPowerView == nil {
-            self.dailyMaterialPowerView = (NSBundle.mainBundle().loadNibNamed("DailyMaterialPowerView", owner: self, options: nil).last as! DailyMaterialPowerView
+            self.dailyMaterialPowerView = (NSBundle.mainBundle().loadNibNamed("DailyMaterialPowerView", owner: self, options: nil)!.last as! DailyMaterialPowerView
             )
         }
         //
         // Material Power View Section
         //
         if self.materialPowerView == nil {
-            self.materialPowerView = (NSBundle.mainBundle().loadNibNamed("MaterialPowerView", owner: self, options: nil).last as! MaterialPowerView
+            self.materialPowerView = (NSBundle.mainBundle().loadNibNamed("MaterialPowerView", owner: self, options: nil)!.last as! MaterialPowerView
             )
         }
         //
         // Operation View Section
         //
         if self.operationView == nil {
-            self.operationView = (NSBundle.mainBundle().loadNibNamed("OperationView", owner: self, options: nil).last as! OperationView
+            self.operationView = (NSBundle.mainBundle().loadNibNamed("OperationView", owner: self, options: nil)!.last as! OperationView
             )
         }
     }
