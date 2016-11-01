@@ -61,7 +61,7 @@ class DataSearchContentView: UIView {
         //
         // ** Shift selection
         if self.shiftPickerContentView == nil {
-            self.shiftPickerContentView = NSBundle.mainBundle().loadNibNamed(self.ShiftPickerContentViewID, owner: self, options: nil).last as! ShiftPickerContentView
+            self.shiftPickerContentView = NSBundle.mainBundle().loadNibNamed(self.ShiftPickerContentViewID, owner: self, options: nil)!.last as! ShiftPickerContentView
         }
         self.shiftPickerContentView!.frame = CGRectMake(0.0, 0.0, refFrame.size.width, self.shiftPickerContentView!.viewHeight)
 //        self.shiftPickerContentView.bindData(currentGroupSelection)
@@ -69,7 +69,7 @@ class DataSearchContentView: UIView {
         // add date picker
         if self.datePickerView == nil {
             let datePickerViewHeight: CGFloat = 180
-            self.datePickerView = NSBundle.mainBundle().loadNibNamed(self.DatePickerViewID, owner: self, options: nil).last as! DatePickerView
+            self.datePickerView = NSBundle.mainBundle().loadNibNamed(self.DatePickerViewID, owner: self, options: nil)!.last as! DatePickerView
             self.datePickerView.frame =  CGRectMake(refFrame.origin.x, shiftPickerContentView!.viewHeight - 1, refFrame.size.width, datePickerViewHeight)
         }
         

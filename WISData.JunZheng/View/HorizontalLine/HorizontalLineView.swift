@@ -52,7 +52,7 @@ class HorizontalLineView: UIView {
 
         lineColor.setStroke()
 
-        let context = UIGraphicsGetCurrentContext()
+        let context = UIGraphicsGetCurrentContext()!
 
         CGContextSetLineWidth(context, lineWidth)
 
