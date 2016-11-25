@@ -53,7 +53,7 @@ struct PagingMenuOptions: PagingMenuControllerCustomizable {
             return .Underline(height: 1.5, color: UIColor.wisLogoColor(), horizontalPadding: 1.5, verticalPadding: 1.5)
         }
         var height: CGFloat {
-            return 35
+            return WISCommon.pageMenuHeaderHeight
         }
         var itemsOptions: [MenuItemViewCustomizable] {
             return [FurnaceMenuItem(), BoilerPurifyMenuItem(), MaterialPowerMenuItem()]

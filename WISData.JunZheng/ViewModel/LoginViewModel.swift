@@ -53,7 +53,7 @@ class LoginViewModel: ViewModel {
         let userNameAndPassword = Observable.combineLatest(input.userName, input.password) { ($0, $1) }
 
         userNameAndPassword.subscribeNext {
-            print("userName: \($0.0), password: \($0.1)")
+            debugPrint("userName: \($0.0), password: \($0.1)")
         }
         
         loginPhase = BehaviorSubject<LoginPhase<String>>(value: LoginPhase.StandBy)
