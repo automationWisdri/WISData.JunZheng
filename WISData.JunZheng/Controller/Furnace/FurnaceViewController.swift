@@ -65,15 +65,10 @@ class FurnaceViewController: ViewController {
         }
         
         // Define the table dimensions
-        // 
-        // TBC: handle screen rotation!!!!!
         //
-        let navigationBarHeight = self.navigationController?.navigationBar.bounds.height ?? CGFloat(40.0)
-        let statusBarHeight = STATUS_BAR_HEIGHT
-        let menuHeaderHeight = CGFloat(35.0)
-        
+        let navigationBarHeight = self.navigationController?.navigationBar.bounds.height ?? NAVIGATION_BAR_HEIGHT
         let dataViewWidth = CURRENT_SCREEN_WIDTH
-        let dataViewHeight = CURRENT_SCREEN_HEIGHT - navigationBarHeight - statusBarHeight - menuHeaderHeight
+        let dataViewHeight = CURRENT_SCREEN_HEIGHT - navigationBarHeight - STATUS_BAR_HEIGHT - WISCommon.pageMenuHeaderHeight
         
         self.dataView.frame = CGRectZero//CGRectMake(0, 0, dataViewWidth, dataViewHeight)
         
@@ -230,15 +225,15 @@ class FurnaceViewController: ViewController {
         if furnaceViewController.view.subviews.contains(furnaceViewController.noDataView) {
             furnaceViewController.noDataView.frame = furnaceViewController.dataView.frame
         } else {
-            let navigationBarHeight = self.navigationController?.navigationBar.bounds.height ?? CGFloat(40.0)
-            let statusBarHeight = STATUS_BAR_HEIGHT
-            let menuHeaderHeight = CGFloat(35.0)
-            
+            let navigationBarHeight = self.navigationController?.navigationBar.bounds.height ?? NAVIGATION_BAR_HEIGHT
             let dataViewWidth = CURRENT_SCREEN_WIDTH
-            let dataViewHeight = CURRENT_SCREEN_HEIGHT - navigationBarHeight - statusBarHeight - menuHeaderHeight
+            let dataTableHeight = CGFloat(rowCount) * DataTableBaseRowHeight + DataTableHeaderRowHeight
+            let blankScreenHeight = CURRENT_SCREEN_HEIGHT - navigationBarHeight - STATUS_BAR_HEIGHT - WISCommon.pageMenuHeaderHeight
+            let dataViewHeight = dataTableHeight > blankScreenHeight ? dataTableHeight : blankScreenHeight
             
-            // furnaceViewController.dataView.frame = CGRectMake(0, 0, dataViewWidth, dataViewHeight)
-            
+            furnaceViewController.dataView.frame = CGRectMake(0, 0, dataViewWidth, dataViewHeight)
+            furnaceViewController.dataView.contentSize = CGSizeMake(dataViewWidth, dataViewHeight)
+
             furnaceViewController.firstColumnView.frame = CGRectMake(0, 0, WISCommon.firstColumnViewWidth, dataViewHeight)
             furnaceViewController.firstColumnTableView.frame = firstColumnView.bounds
             

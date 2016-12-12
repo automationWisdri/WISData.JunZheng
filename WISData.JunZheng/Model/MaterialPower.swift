@@ -122,12 +122,12 @@ extension DailyMaterialPower {
                         return
                     }
                     
-                    let dailyMaterialPower = DailyMaterialPower.mj_objectWithKeyValues(json.rawString())
-                    for p in DailyMaterialPower().propertyNames() {
-                        debugPrint(p)
-                    }
-                    
-                    debugPrint(dailyMaterialPower.PJPB)
+//                    let dailyMaterialPower = DailyMaterialPower.mj_objectWithKeyValues(json.rawString())
+//                    for p in DailyMaterialPower().propertyNames() {
+//                        debugPrint(p)
+//                    }
+//                    
+//                    debugPrint(dailyMaterialPower.PJPB)
                     
                     let t = WISValueResponse<JSON>(value: json, success: true)
                     completionHandler(t)

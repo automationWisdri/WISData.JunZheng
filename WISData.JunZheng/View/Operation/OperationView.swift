@@ -24,7 +24,7 @@ class OperationView: UIView {
     private var tableTitleJSON = JSON.null
     var tableContentJSON = [JSON]()
     var switchContentJSON = [[JSON]]()
-    var viewHeight: CGFloat = CGFloat(0.0)
+    var viewHeight: CGFloat = CGFloat(35.0)
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -48,8 +48,9 @@ class OperationView: UIView {
         
         // Define the table dimensions
         let dataViewWidth = CURRENT_SCREEN_WIDTH
-        let dataViewHeight = viewHeight
+        let dataViewHeight = viewHeight - WISCommon.viewHeaderTitleHeight
 //        let firstColumnViewWidth: CGFloat = 90
+        
         
         // -2 是因为 KEY "No" 和 "SwitchTimes" 不作为表格列名
         let opColumnCount = Operation().propertyNames().count - 2
@@ -72,7 +73,7 @@ class OperationView: UIView {
         scrollView.contentSize = CGSizeMake(CGFloat(totalColumnCount) * WISCommon.DataTableColumnWidth, DataTableHeaderRowHeight + CGFloat(totalRowCount) * DataTableBaseRowHeight)
         scrollView.showsHorizontalScrollIndicator = true
         scrollView.showsVerticalScrollIndicator = true
-        scrollView.bounces = false
+        scrollView.bounces = true
         scrollView.delegate = self
         scrollView.backgroundColor = UIColor.whiteColor()
         self.dataView.addSubview(scrollView)
@@ -107,11 +108,9 @@ class OperationView: UIView {
     func arrangeOperationSubView(viewHeight: CGFloat) {
         // Define the table dimensions
         let dataViewWidth = CURRENT_SCREEN_WIDTH
-        let dataViewHeight = viewHeight
+        let dataViewHeight = viewHeight - WISCommon.viewHeaderTitleHeight
 //        let firstColumnViewWidth: CGFloat = 90
-        
-        
-        
+
         guard let scrollView = self.scrollView else {
             return
         }
