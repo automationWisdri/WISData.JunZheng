@@ -14,7 +14,7 @@ class NoDataView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.hintTextView.textColor = UIColor.darkGrayColor()
-        self.hintTextView.text = "数据获取失败！\n请检查网络连接与查询设置"
+        self.hintTextView.text = "数据获取失败\n请检查网络连接与查询设置"
         self.hintTextView.userInteractionEnabled = false
         self.hintTextView.scrollsToTop = false
         // self.backgroundColor = UIColor.lightTextColor()

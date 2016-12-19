@@ -97,7 +97,7 @@ let APP_NAME_CHN = "生产数据"
 
 class WISCommon {
     static let currentAppDelegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-    //static let additionalHeightInView: CGFloat = CGFloat(30.0)
+    static let additionalHeightInView: CGFloat = CGFloat(30.0)
     
     static let DataTableColumnWidth: CGFloat = CGFloat(80.0)
     static let firstColumnViewWidth: CGFloat = CGFloat(95.0)
