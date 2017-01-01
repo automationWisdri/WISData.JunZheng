@@ -89,7 +89,7 @@ class DataTableView: UITableView {
         self.bounces = false
     }
     
-    func setTableViewContentOffSet(contentOffset:CGPoint) {
+    func setTableViewContentOffSet(contentOffset: CGPoint) {
         self.setContentOffset(contentOffset, animated: false)
     }
 }
@@ -168,10 +168,12 @@ extension DataTableView: UITableViewDelegate {
 }
 
 // MARK: - UIScrollView delegate
+
 extension DataTableView: UIScrollViewDelegate {
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
         dataTableDelegate?.dataTableViewContentOffSet(scrollView.contentOffset)
     }
+
 }
 

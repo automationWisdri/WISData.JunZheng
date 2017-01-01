@@ -239,12 +239,12 @@ class FurnaceViewController: ViewController {
             
             furnaceViewController.scrollView.frame = CGRectMake(WISCommon.firstColumnViewWidth, 0, dataViewWidth - WISCommon.firstColumnViewWidth, dataViewHeight)
             
-            // Draw data table
-            //        var tableColumnsCount = 0
-            //        for view in self.columnTableView {
-            //            view.frame = CGRectMake(CGFloat(tableColumnsCount) * DataTableColumnWidth, 0, DataTableColumnWidth, dataViewHeight)
-            //            tableColumnsCount += 1
-            //        }
+            // 需要重新指定 DataTableView 的 frame，否则横屏切换为竖屏后，下方显示不全
+            var tableColumnsCount = 0
+            for tableView in self.columnTableView {
+                tableView.frame = CGRectMake(CGFloat(tableColumnsCount) * WISCommon.DataTableColumnWidth, 0, WISCommon.DataTableColumnWidth, dataViewHeight)
+                tableColumnsCount += 1
+            }
         }
         
         return furnaceViewController.view
