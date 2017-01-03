@@ -232,20 +232,20 @@ class BoilerPurifyViewController: ViewController {
             let dataViewWidth = CURRENT_SCREEN_WIDTH
             let dataTableHeight = CGFloat(rowCount) * DataTableBaseRowHeight + DataTableHeaderRowHeight
             let blankScreenHeight = CURRENT_SCREEN_HEIGHT - navigationBarHeight - STATUS_BAR_HEIGHT - WISCommon.pageMenuHeaderHeight
-            let dataViewHeight = dataTableHeight > blankScreenHeight ? dataTableHeight : blankScreenHeight
+//            let dataViewHeight = dataTableHeight > blankScreenHeight ? dataTableHeight : blankScreenHeight
             
-            boilerPurifyViewController.dataView.frame = CGRectMake(0, 0, CURRENT_SCREEN_WIDTH, dataViewHeight)
-            boilerPurifyViewController.dataView.contentSize = CGSizeMake(CURRENT_SCREEN_WIDTH, dataViewHeight)
+            boilerPurifyViewController.dataView.frame = CGRectMake(0, 0, CURRENT_SCREEN_WIDTH, blankScreenHeight)
+            boilerPurifyViewController.dataView.contentSize = CGSizeMake(CURRENT_SCREEN_WIDTH, dataTableHeight)
             
-            boilerPurifyViewController.firstColumnView.frame = CGRectMake(0, 0, WISCommon.firstColumnViewWidth, dataViewHeight)
+            boilerPurifyViewController.firstColumnView.frame = CGRectMake(0, 0, WISCommon.firstColumnViewWidth, blankScreenHeight)
             boilerPurifyViewController.firstColumnTableView.frame = firstColumnView.bounds
             
-            boilerPurifyViewController.scrollView.frame = CGRectMake(WISCommon.firstColumnViewWidth, 0, dataViewWidth - WISCommon.firstColumnViewWidth, dataViewHeight)
+            boilerPurifyViewController.scrollView.frame = CGRectMake(WISCommon.firstColumnViewWidth, 0, dataViewWidth - WISCommon.firstColumnViewWidth, blankScreenHeight)
             
             // 需要重新指定 DataTableView 的 frame，否则横屏切换为竖屏后，下方显示不全
             var tableColumnsCount = 0
             for tableView in self.columnTableView {
-                tableView.frame = CGRectMake(CGFloat(tableColumnsCount) * WISCommon.DataTableColumnWidth, 0, WISCommon.DataTableColumnWidth, dataViewHeight)
+                tableView.frame = CGRectMake(CGFloat(tableColumnsCount) * WISCommon.DataTableColumnWidth, 0, WISCommon.DataTableColumnWidth, blankScreenHeight)
                 tableColumnsCount += 1
             }
         }
@@ -374,4 +374,21 @@ extension BoilerPurifyViewController: UIScrollViewDelegate {
         //        let p: CGPoint = scrollView.contentOffset
         //        print(NSStringFromCGPoint(p))
     }
+    
+//    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+//        var responder = self.nextResponder()
+//        
+//        while (responder != nil && !(responder!.isKindOfClass(DataTableView))) {
+//            responder = responder!.nextResponder()
+//            debugPrint(responder)
+//        }
+//        
+//        if responder == nil {
+//            super.touchesBegan(touches, withEvent: event)
+//        } else if responder!.isKindOfClass(DataTableView) {
+//            responder!.touchesBegan(touches, withEvent: event)
+//        } else {
+//            super.touchesBegan(touches, withEvent: event)
+//        }
+//    }
 }

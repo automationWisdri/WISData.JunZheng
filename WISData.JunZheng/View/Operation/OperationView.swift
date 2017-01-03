@@ -109,7 +109,6 @@ class OperationView: UIView {
         // Define the table dimensions
         let dataViewWidth = CURRENT_SCREEN_WIDTH
         let dataViewHeight = viewHeight - WISCommon.viewHeaderTitleHeight
-//        let firstColumnViewWidth: CGFloat = 90
 
         guard let scrollView = self.scrollView else {
             return

@@ -297,7 +297,7 @@ class MaterialPowerViewController: UIViewController {
         super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
         coordinator.animateAlongsideTransition({ [unowned self] _ in
             self.arrangeMaterialPowerView(self)
-        }, completion:nil)
+        }, completion: nil)
     }
     
     private func arrangeMaterialPowerView(materialPowerViewController: MaterialPowerViewController) -> UIView {
@@ -320,8 +320,8 @@ class MaterialPowerViewController: UIViewController {
             materialPowerViewController.materialPowerView?.arrangeMaterialPowerSubView(self.materialPowerView!.viewHeight)
             //
             // arrange operation view
-            materialPowerViewController.operationView!.frame = CGRectMake(0.0, self.dailyMaterialPowerView!.viewHeight + self.materialPowerView!.viewHeight, dataViewWidth, self.operationView!.viewHeight)
-            materialPowerViewController.operationView!.arrangeOperationSubView(self.operationView!.viewHeight)
+            materialPowerViewController.operationView!.frame = CGRectMake(0.0, self.dailyMaterialPowerView!.viewHeight + self.materialPowerView!.viewHeight, dataViewWidth, self.operationView!.viewHeight + WISCommon.additionalHeightInView)
+            materialPowerViewController.operationView!.arrangeOperationSubView(self.operationView!.viewHeight + WISCommon.additionalHeightInView)
             
             materialPowerViewController.dataView.contentSize = CGSizeMake(dataViewWidth, (self.dailyMaterialPowerView!.viewHeight + self.materialPowerView!.viewHeight + self.operationView!.viewHeight + WISCommon.additionalHeightInView))
         }
