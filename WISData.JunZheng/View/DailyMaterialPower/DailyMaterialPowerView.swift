@@ -39,7 +39,7 @@ class DailyMaterialPowerView: UIView {
         
         dailyMaterialPowerTable.dataSource = self
         dailyMaterialPowerTable.delegate = self
-        dailyMaterialPowerTable.estimatedRowHeight = 30
+        dailyMaterialPowerTable.estimatedRowHeight = DataTableBaseRowHeight
         dailyMaterialPowerTable.separatorStyle = .None
         dailyMaterialPowerTable.scrollsToTop = false
         
@@ -116,7 +116,7 @@ extension DailyMaterialPowerView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 30
+        return DataTableBaseRowHeight
     }
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -124,7 +124,7 @@ extension DailyMaterialPowerView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 35
+        return WISCommon.viewHeaderTitleHeight
     }
     
     func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {

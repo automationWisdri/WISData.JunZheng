@@ -24,7 +24,7 @@ class MaterialPowerView: UIView {
     private var tableTitleJSON = JSON.null
     var tableContentJSON = JSON.null
     var switchContentJSON = [JSON]()
-    var viewHeight: CGFloat = CGFloat(0.0)
+    var viewHeight: CGFloat = CGFloat(35.0)
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -47,15 +47,17 @@ class MaterialPowerView: UIView {
         
         // Define the table dimensions
         let dataViewWidth = CURRENT_SCREEN_WIDTH
-        let dataViewHeight = viewHeight
-        let firstColumnViewWidth: CGFloat = 90
+        let dataViewHeight = viewHeight - WISCommon.viewHeaderTitleHeight
+//        let firstColumnViewWidth: CGFloat = 90
 
+        // -2 是因为 KEY "No" 和 "SwithTimeReasons" 不作为表格列名
         let mpColumnCount = MaterialPower().propertyNames().count - 2
+        // 电极切换数据
         let switchColumnCount = SwitchTimeReason().propertyNames().count
         let totalColumnCount = mpColumnCount + switchColumnCount
         
         // Draw view for first column
-        firstColumnView = UIView(frame: CGRectMake(0, 0, firstColumnViewWidth, dataViewHeight))
+        firstColumnView = UIView(frame: CGRectMake(0, 0, WISCommon.firstColumnViewWidth, dataViewHeight))
         firstColumnView.backgroundColor = UIColor.whiteColor()
         //        headerView.userInteractionEnabled = true
         self.dataView.addSubview(firstColumnView)
@@ -66,11 +68,11 @@ class MaterialPowerView: UIView {
         firstColumnView.addSubview(firstColumnTableView)
         
         // Draw view for data table
-        scrollView = UIScrollView(frame: CGRectMake (firstColumnViewWidth, 0, dataViewWidth - firstColumnViewWidth, dataViewHeight))
+        scrollView = UIScrollView(frame: CGRectMake (WISCommon.firstColumnViewWidth, 0, dataViewWidth - WISCommon.firstColumnViewWidth, dataViewHeight))
         scrollView.contentSize = CGSizeMake(CGFloat(totalColumnCount) * WISCommon.DataTableColumnWidth, CGFloat(switchRowCount) * DataTableBaseRowHeight)
         scrollView.showsHorizontalScrollIndicator = true
         scrollView.showsVerticalScrollIndicator = true
-        scrollView.bounces = false
+        scrollView.bounces = true
         scrollView.delegate = self
         scrollView.backgroundColor = UIColor.whiteColor()
         self.dataView.addSubview(scrollView)
@@ -103,13 +105,13 @@ class MaterialPowerView: UIView {
     func arrangeMaterialPowerSubView(viewHeight: CGFloat) {
         // Define the table dimensions
         let dataViewWidth = CURRENT_SCREEN_WIDTH
-        let dataViewHeight = viewHeight
-        let firstColumnViewWidth: CGFloat = 90
+        let dataViewHeight = viewHeight - WISCommon.viewHeaderTitleHeight
+//        let firstColumnViewWidth: CGFloat = 90
         
         guard let scrollView = self.scrollView else {
             return
         }
-        scrollView.frame = CGRectMake(firstColumnViewWidth, 0, dataViewWidth - firstColumnViewWidth, dataViewHeight)
+        scrollView.frame = CGRectMake(WISCommon.firstColumnViewWidth, 0, dataViewWidth - WISCommon.firstColumnViewWidth, dataViewHeight)
     }
 
     private func fillDataTableContent() {

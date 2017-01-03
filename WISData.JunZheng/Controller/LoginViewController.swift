@@ -45,10 +45,10 @@ class LoginViewController: ViewController {
             //
         }
         
-        print("oritentation is portrait: \(self.interfaceOrientation.isPortrait)")
-        print("width: \(CURRENT_SCREEN_WIDTH) - height: \(CURRENT_SCREEN_HEIGHT)")
-        print("view frame: \(self.view.frame)")
-        print("view bounds: \(self.view.bounds)")
+        debugPrint("oritentation is portrait: \(UIDeviceOrientationIsPortrait(UIDevice.currentDevice().orientation))")
+        debugPrint("width: \(CURRENT_SCREEN_WIDTH) - height: \(CURRENT_SCREEN_HEIGHT)")
+        debugPrint("view frame: \(self.view.frame)")
+        debugPrint("view bounds: \(self.view.bounds)")
         
         self.backgroundImageView = UIImageView(image: UIImage(named: "login_background"))
         self.backgroundImageView!.frame = self.view.frame
@@ -200,7 +200,7 @@ class LoginViewController: ViewController {
             // do nothing
         #else
             keyboardMan.animateWhenKeyboardAppear = { [weak self] appearPostIndex, keyboardHeight, keyboardHeightIncrement in
-                print("appear \(appearPostIndex), \(keyboardHeight), \(keyboardHeightIncrement)")
+                debugPrint("appear \(appearPostIndex), \(keyboardHeight), \(keyboardHeightIncrement)")
                 if let strongSelf = self {
                     
                     strongSelf.view.frame.origin.y -= keyboardHeightIncrement
@@ -210,7 +210,7 @@ class LoginViewController: ViewController {
             }
             
             keyboardMan.animateWhenKeyboardDisappear = { [weak self] keyboardHeight in
-                print("disappear \(keyboardHeight)\n")
+                debugPrint("disappear \(keyboardHeight)\n")
                 if let strongSelf = self {
                     strongSelf.view.frame.origin.y += keyboardHeight
                     strongSelf.view.frame.size.height -= keyboardHeight
@@ -339,19 +339,19 @@ class LoginViewController: ViewController {
 }
 
 extension LoginViewController: UITextFieldDelegate {
-    // The "next" button doesn't work till now.
+    
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         
         if (textField == self.userNameTextField) {
             self.passwordTextField!.becomeFirstResponder()
-            return true
+            return false
         }
         else if (textField == self.passwordTextField) {
             self.passwordTextField!.resignFirstResponder()
             self.viewModel?.loginWith(userName: (self.viewModel?.validatedUserName)!, password: (self.viewModel?.validatedPassword)!)
-            return true
-        } else {
             return false
         }
+        
+        return true
     }
 }

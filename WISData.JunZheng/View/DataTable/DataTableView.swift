@@ -35,7 +35,7 @@ class DataTableView: UITableView {
     private let DataTableCellID = "DataTableCell"
     
     init(frame: CGRect, style: UITableViewStyle, rowInfo: [Int]?) {
-        super.init(frame: frame, style:style)
+        super.init(frame: frame, style: style)
         
         if let _ = rowInfo {
             self.rowInfo = rowInfo
@@ -87,10 +87,9 @@ class DataTableView: UITableView {
         self.opaque = true
         self.separatorStyle = .None
         self.bounces = false
-        
     }
     
-    func setTableViewContentOffSet(contentOffset:CGPoint) {
+    func setTableViewContentOffSet(contentOffset: CGPoint) {
         self.setContentOffset(contentOffset, animated: false)
     }
 }
@@ -165,13 +164,16 @@ extension DataTableView: UITableViewDelegate {
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return DataTableHeaderRowHeight
     }
+
 }
 
 // MARK: - UIScrollView delegate
+
 extension DataTableView: UIScrollViewDelegate {
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
         dataTableDelegate?.dataTableViewContentOffSet(scrollView.contentOffset)
     }
+
 }
 

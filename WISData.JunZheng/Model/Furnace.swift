@@ -100,11 +100,11 @@ extension Furnace {
                         return
                     }
                     
-                    if let furnaceArray = Furnace.mj_objectArrayWithKeyValuesArray(json["Infos"].rawString()) {
-                        for furnace in furnaceArray {
-                            //                            debugPrint(furnace.Id)
-                        }
-                    }
+//                    if let furnaceArray = Furnace.mj_objectArrayWithKeyValuesArray(json["Infos"].rawString()) {
+//                        for furnace in furnaceArray {
+//                            debugPrint(furnace.Id)
+//                        }
+//                    }
                     let t = WISValueResponse<[JSON]>(value: json["Infos"].arrayValue, success: true)
                     completionHandler(t)
                 }
