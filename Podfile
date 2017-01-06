@@ -2,7 +2,7 @@ platform :ios, '8.0'
 use_frameworks!
 
 def pods
-    pod 'Alamofire', '~> 3.5'           #swift3v3.0
+    pod 'Alamofire', '~> 3.5'           #swift3v4.0
     pod 'SwiftyJSON', '~> 2.3.1'        #swift3v3.0
     pod 'DrawerController', '~> 2.0'    #swift3v3.0
     pod 'SVProgressHUD'

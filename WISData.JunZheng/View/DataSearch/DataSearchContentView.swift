@@ -63,10 +63,11 @@ class DataSearchContentView: UIView {
         //
 
         // When the device is not iPad and is in landscape orientation, the devicePortrait is false
-        // While the UIViewController.interfaceOrientation is deprecated, don't know how to easily get the orientation
         var devicePortrait = true
-        if currentDevice.isPad == false && UIDeviceOrientationIsLandscape(UIDevice.currentDevice().orientation) {
+        if currentDevice.isPad == false && self.parentViewController!.traitCollection.verticalSizeClass == .Compact {
             devicePortrait = false
+        } else {
+            devicePortrait = true
         }
         
         // ** Shift selection
