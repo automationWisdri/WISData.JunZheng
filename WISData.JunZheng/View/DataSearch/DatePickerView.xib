@@ -1,8 +1,12 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -11,11 +15,8 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="180"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="dSM-iz-f9Y" customClass="Da">
+                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="dSM-iz-f9Y">
                     <rect key="frame" x="0.0" y="35" width="600" height="145"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="145" id="rYR-nF-Iuy"/>
-                    </constraints>
                     <date key="date" timeIntervalSinceReferenceDate="493721369.34449601">
                         <!--2016-08-24 08:49:29 +0000-->
                     </date>
@@ -30,12 +31,13 @@
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="dSM-iz-f9Y" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="31I-DP-ELP"/>
                 <constraint firstItem="XHx-0O-NJ5" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="8J4-bd-xL3"/>
                 <constraint firstItem="XHx-0O-NJ5" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Qss-sY-1UV"/>
                 <constraint firstAttribute="trailing" secondItem="XHx-0O-NJ5" secondAttribute="trailing" id="UZK-Qs-4Ze"/>
+                <constraint firstAttribute="bottom" secondItem="dSM-iz-f9Y" secondAttribute="bottom" id="lRX-Bi-8SA"/>
                 <constraint firstItem="dSM-iz-f9Y" firstAttribute="top" secondItem="XHx-0O-NJ5" secondAttribute="bottom" id="ocC-US-cvi"/>
                 <constraint firstAttribute="trailing" secondItem="dSM-iz-f9Y" secondAttribute="trailing" id="vrf-Ph-49H"/>
             </constraints>

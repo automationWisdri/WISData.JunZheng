@@ -21,6 +21,7 @@ class AboutViewController: UIViewController {
     @IBOutlet weak var aboutTextView: UITextView!
     @IBOutlet weak var aboutTextViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var aboutTextViewTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var aboutTextViewWidthConstraint: NSLayoutConstraint!
     
     @IBOutlet private weak var copyrightLabel: UILabel!
 
@@ -66,6 +67,19 @@ class AboutViewController: UIViewController {
             appLogoImageViewTopConstraint.constant = Ruler.iPhoneVertical(10, 20, 40, 40).value
             appNameLabelTopConstraint.constant = Ruler.iPhoneVertical(5, 15, 15, 15).value
             aboutTextViewTopConstraint.constant = Ruler.iPhoneVertical(10, 15, 15, 25).value
+        }
+        
+        if currentDevice.isPad {
+            aboutTextView.font = UIFont.systemFontOfSize(18.0)
+            aboutTextViewWidthConstraint.constant = Ruler.iPad(600, 600).value
+        } else {
+            if self.traitCollection.verticalSizeClass == .Regular {
+                aboutTextViewWidthConstraint.constant = Ruler.iPhoneHorizontal(260, 280, 300).value
+                aboutTextViewHeightConstraint.constant = Ruler.iPhoneVertical(160, 160, 150, 150).value
+            } else {
+                aboutTextViewWidthConstraint.constant = Ruler.iPhoneHorizontal(520, 560, 600).value
+                aboutTextViewHeightConstraint.constant = Ruler.iPhoneVertical(80, 80, 70, 70).value
+            }
         }
     }
 

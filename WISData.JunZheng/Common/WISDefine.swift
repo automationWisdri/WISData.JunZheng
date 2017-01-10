@@ -41,6 +41,8 @@ var STATUS_BAR_HEIGHT: CGFloat {
     }
 }
 
+var NAVIGATION_BAR_HEIGHT: CGFloat = 40.0
+
 let EMPTY_STRING = ""
 let SEPARATOR_HEIGHT = 1.0 / UIScreen.mainScreen().scale
 
@@ -97,7 +99,9 @@ class WISCommon {
     static let currentAppDelegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     static let additionalHeightInView: CGFloat = CGFloat(30.0)
     
-    static let DataTableColumnWidth: CGFloat = CGFloat(75.0)
+    static let DataTableColumnWidth: CGFloat = CGFloat(80.0)
     static let firstColumnViewWidth: CGFloat = CGFloat(95.0)
+    static let pageMenuHeaderHeight: CGFloat = CGFloat(35.0)
+    static let viewHeaderTitleHeight: CGFloat = CGFloat(35.0)
 }
 

@@ -65,15 +65,10 @@ class FurnaceViewController: ViewController {
         }
         
         // Define the table dimensions
-        // 
-        // TBC: handle screen rotation!!!!!
         //
-        let navigationBarHeight = self.navigationController?.navigationBar.bounds.height ?? CGFloat(40.0)
-        let statusBarHeight = STATUS_BAR_HEIGHT
-        let menuHeaderHeight = CGFloat(35.0)
-        
+        let navigationBarHeight = self.navigationController?.navigationBar.bounds.height ?? NAVIGATION_BAR_HEIGHT
         let dataViewWidth = CURRENT_SCREEN_WIDTH
-        let dataViewHeight = CURRENT_SCREEN_HEIGHT - navigationBarHeight - statusBarHeight - menuHeaderHeight
+        let dataViewHeight = CURRENT_SCREEN_HEIGHT - navigationBarHeight - STATUS_BAR_HEIGHT - WISCommon.pageMenuHeaderHeight
         
         self.dataView.frame = CGRectZero//CGRectMake(0, 0, dataViewWidth, dataViewHeight)
         
@@ -230,26 +225,26 @@ class FurnaceViewController: ViewController {
         if furnaceViewController.view.subviews.contains(furnaceViewController.noDataView) {
             furnaceViewController.noDataView.frame = furnaceViewController.dataView.frame
         } else {
-            let navigationBarHeight = self.navigationController?.navigationBar.bounds.height ?? CGFloat(40.0)
-            let statusBarHeight = STATUS_BAR_HEIGHT
-            let menuHeaderHeight = CGFloat(35.0)
-            
+            let navigationBarHeight = self.navigationController?.navigationBar.bounds.height ?? NAVIGATION_BAR_HEIGHT
             let dataViewWidth = CURRENT_SCREEN_WIDTH
-            let dataViewHeight = CURRENT_SCREEN_HEIGHT - navigationBarHeight - statusBarHeight - menuHeaderHeight
+            let dataTableHeight = CGFloat(rowCount) * DataTableBaseRowHeight + DataTableHeaderRowHeight
+            let blankScreenHeight = CURRENT_SCREEN_HEIGHT - navigationBarHeight - STATUS_BAR_HEIGHT - WISCommon.pageMenuHeaderHeight
+//            let dataViewHeight = dataTableHeight > blankScreenHeight ? dataTableHeight : blankScreenHeight
             
-            // furnaceViewController.dataView.frame = CGRectMake(0, 0, dataViewWidth, dataViewHeight)
-            
-            furnaceViewController.firstColumnView.frame = CGRectMake(0, 0, WISCommon.firstColumnViewWidth, dataViewHeight)
+            furnaceViewController.dataView.frame = CGRectMake(0, 0, dataViewWidth, blankScreenHeight)
+            furnaceViewController.dataView.contentSize = CGSizeMake(dataViewWidth, dataTableHeight)
+
+            furnaceViewController.firstColumnView.frame = CGRectMake(0, 0, WISCommon.firstColumnViewWidth, blankScreenHeight)
             furnaceViewController.firstColumnTableView.frame = firstColumnView.bounds
             
-            furnaceViewController.scrollView.frame = CGRectMake(WISCommon.firstColumnViewWidth, 0, dataViewWidth - WISCommon.firstColumnViewWidth, dataViewHeight)
+            furnaceViewController.scrollView.frame = CGRectMake(WISCommon.firstColumnViewWidth, 0, dataViewWidth - WISCommon.firstColumnViewWidth, blankScreenHeight)
             
-            // Draw data table
-            //        var tableColumnsCount = 0
-            //        for view in self.columnTableView {
-            //            view.frame = CGRectMake(CGFloat(tableColumnsCount) * DataTableColumnWidth, 0, DataTableColumnWidth, dataViewHeight)
-            //            tableColumnsCount += 1
-            //        }
+            // 需要重新指定 DataTableView 的 frame，否则横屏切换为竖屏后，下方显示不全
+            var tableColumnsCount = 0
+            for tableView in self.columnTableView {
+                tableView.frame = CGRectMake(CGFloat(tableColumnsCount) * WISCommon.DataTableColumnWidth, 0, WISCommon.DataTableColumnWidth, blankScreenHeight)
+                tableColumnsCount += 1
+            }
         }
         
         return furnaceViewController.view

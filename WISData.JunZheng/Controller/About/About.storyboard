@@ -1,9 +1,12 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="B7e-qT-n3V">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="B7e-qT-n3V">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--About View Controller-->
@@ -15,50 +18,51 @@
                         <viewControllerLayoutGuide type="bottom" id="DBV-iO-pWY"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="EZp-Kz-Rn6">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="生产数据平台" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="STw-iV-6mk">
-                                <rect key="frame" x="232" y="119" width="138" height="28"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="生产数据管理" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="STw-iV-6mk">
+                                <rect key="frame" x="118" y="119" width="140" height="28"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="23"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version 0.5.1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YGt-Mh-BQL">
-                                <rect key="frame" x="261" y="155" width="80" height="17"/>
+                                <rect key="frame" x="148" y="155" width="80" height="17"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
-                                <color key="textColor" red="0.60000002379999995" green="0.60000002379999995" blue="0.60000002379999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.60000002379999995" green="0.60000002379999995" blue="0.60000002379999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Copyright © 2016 Wisdri." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rHG-mc-O86">
-                                <rect key="frame" x="229" y="570" width="142" height="15"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Copyright © 2017 WISDRI." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rHG-mc-O86">
+                                <rect key="frame" x="114" y="637" width="146.5" height="15"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
-                                <color key="textColor" red="0.60000002379999995" green="0.60000002379999995" blue="0.60000002379999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.60000002379999995" green="0.60000002379999995" blue="0.60000002379999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_wisdri_logo" translatesAutoresizingMaskIntoConstraints="NO" id="gjf-PL-dZm">
-                                <rect key="frame" x="199" y="40" width="203" height="60"/>
+                                <rect key="frame" x="86" y="40" width="203" height="60"/>
                             </imageView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" editable="NO" text="中冶南方生产数据平台借助移动互联网技术，让生产管理人员更便捷的获取生产数据，提高管理效率。" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lUp-YN-szW">
-                                <rect key="frame" x="30" y="222" width="540" height="60"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="生产数据管理平台让生产管理人员更便捷的获取生产数据，提高管理效率，优化生产过程。  中冶南方致力于为用户提供专业、全面、独特的工业解决方案。针对用户在生产过程、能源消耗、产品质量等方面的需要，提供安全、可靠、定制化的数据管理方案。" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lUp-YN-szW">
+                                <rect key="frame" x="27.5" y="222" width="320" height="130"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="130" id="XcZ-cT-YEy"/>
+                                    <constraint firstAttribute="width" constant="320" id="hax-5L-O4G"/>
+                                </constraints>
+                                <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="lUp-YN-szW" firstAttribute="centerX" secondItem="EZp-Kz-Rn6" secondAttribute="centerX" id="8WI-cN-uMf"/>
                             <constraint firstItem="YGt-Mh-BQL" firstAttribute="centerX" secondItem="STw-iV-6mk" secondAttribute="centerX" id="AiP-6p-eVX"/>
                             <constraint firstItem="YGt-Mh-BQL" firstAttribute="top" secondItem="STw-iV-6mk" secondAttribute="bottom" constant="8" id="GeV-CJ-x86"/>
                             <constraint firstItem="gjf-PL-dZm" firstAttribute="top" secondItem="3gP-F0-Md3" secondAttribute="bottom" constant="20" id="Vkq-1i-06m"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="lUp-YN-szW" secondAttribute="trailing" constant="10" id="cJI-w2-dkb"/>
                             <constraint firstItem="DBV-iO-pWY" firstAttribute="top" secondItem="rHG-mc-O86" secondAttribute="bottom" constant="15" id="fNe-iK-rJq"/>
-                            <constraint firstItem="lUp-YN-szW" firstAttribute="leading" secondItem="EZp-Kz-Rn6" secondAttribute="leadingMargin" constant="10" id="gpw-MB-ZZE"/>
                             <constraint firstAttribute="centerX" secondItem="rHG-mc-O86" secondAttribute="centerX" id="hSy-Fg-9yg"/>
                             <constraint firstItem="STw-iV-6mk" firstAttribute="centerX" secondItem="gjf-PL-dZm" secondAttribute="centerX" constant="0.5" id="oa7-44-D2a"/>
-                            <constraint firstItem="lUp-YN-szW" firstAttribute="centerX" secondItem="EZp-Kz-Rn6" secondAttribute="centerX" id="r1Z-Af-aGB"/>
                             <constraint firstAttribute="centerX" secondItem="gjf-PL-dZm" secondAttribute="centerX" id="yZr-p4-Cz5"/>
                             <constraint firstItem="lUp-YN-szW" firstAttribute="top" secondItem="YGt-Mh-BQL" secondAttribute="bottom" constant="50" id="zDy-sX-W5O"/>
                             <constraint firstItem="STw-iV-6mk" firstAttribute="top" secondItem="gjf-PL-dZm" secondAttribute="bottom" constant="19" id="zqS-j4-rlV"/>
@@ -67,7 +71,9 @@
                     <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <connections>
                         <outlet property="aboutTextView" destination="lUp-YN-szW" id="CeB-BP-hcn"/>
+                        <outlet property="aboutTextViewHeightConstraint" destination="XcZ-cT-YEy" id="PwQ-MM-Dtf"/>
                         <outlet property="aboutTextViewTopConstraint" destination="zDy-sX-W5O" id="eaC-Ws-CrL"/>
+                        <outlet property="aboutTextViewWidthConstraint" destination="hax-5L-O4G" id="fUt-6w-22X"/>
                         <outlet property="appLogoImageView" destination="gjf-PL-dZm" id="AW5-AD-adp"/>
                         <outlet property="appLogoImageViewTopConstraint" destination="Vkq-1i-06m" id="09g-hB-T64"/>
                         <outlet property="appNameLabel" destination="STw-iV-6mk" id="647-u7-H7H"/>
@@ -78,7 +84,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1FF-09-HTp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3727" y="797"/>
+            <point key="canvasLocation" x="3725.5999999999999" y="796.55172413793105"/>
         </scene>
     </scenes>
     <resources>

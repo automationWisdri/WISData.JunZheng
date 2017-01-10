@@ -82,6 +82,7 @@ class MaterialPowerViewController: UIViewController {
         getData()
     }
     
+    // “全天消耗” View，获取数据并初始化
     func getDailyMaterialPowerData(completionHandler: (Bool, String) -> Void) {
         
         DailyMaterialPower.get(date: SearchParameter["date"]!, lNo: SearchParameter["lNo"]!) { (response: WISValueResponse<JSON>) in
@@ -99,6 +100,7 @@ class MaterialPowerViewController: UIViewController {
         }
     }
     
+    // “原料消耗” View，获取数据并初始化
     func getMaterialPowerData(completionHandler: (Bool, String) -> Void) {
         
         MaterialPower.get(date: SearchParameter["date"]!, shiftNo: SearchParameter["shiftNo"]!, lNo: SearchParameter["lNo"]!) { (response: WISValueResponse<JSON>) in
@@ -117,7 +119,7 @@ class MaterialPowerViewController: UIViewController {
                 } else {
                     switchRowCount = 1
                 }
-                let viewHeight = CGFloat(switchRowCount) * DataTableBaseRowHeight + 60 + 35
+                let viewHeight = CGFloat(switchRowCount) * DataTableBaseRowHeight + DataTableHeaderRowHeight + WISCommon.viewHeaderTitleHeight
                 self.materialPowerView!.viewHeight = viewHeight
                 
                 self.materialPowerView!.initialDrawTable(switchRowCount, viewHeight: viewHeight)
@@ -131,13 +133,14 @@ class MaterialPowerViewController: UIViewController {
         }
     }
     
+    // “电极操作” View，获取数据并初始化
     func getOperationData(completionHandler: (Bool, String) -> Void) {
         
         Operation.get(date: SearchParameter["date"]!, shiftNo: SearchParameter["shiftNo"]!, lNo: SearchParameter["lNo"]!) { (response: WISValueResponse<JSON>) in
             if response.success {
-                debugPrint(response.value!)
+//                debugPrint(response.value!)
                 let tableContentJSON = response.value!["Infos"].arrayValue
-                print(tableContentJSON)
+//                print(tableContentJSON)
                 self.operationView!.tableContentJSON = tableContentJSON
                 
                 var switchRowCount = [Int]()
@@ -155,10 +158,12 @@ class MaterialPowerViewController: UIViewController {
                 
                 let totalRowCount = switchRowCount.reduce(0, combine: + )
                 
-                let viewHeight = CGFloat(totalRowCount) * DataTableBaseRowHeight + 60 + 35
+                let viewHeight = CGFloat(totalRowCount) * DataTableBaseRowHeight + DataTableHeaderRowHeight + WISCommon.viewHeaderTitleHeight
                 self.operationView!.viewHeight = viewHeight
+                
                 self.operationView!.initialDrawTable(switchRowCount, viewHeight: viewHeight)
                 self.dataView.addSubview(self.operationView!)
+                
             } else {
                 self.operationView?.removeFromSuperview()
                 self.operationView?.viewHeight = CGFloat(0.0)
@@ -192,7 +197,7 @@ class MaterialPowerViewController: UIViewController {
         dispatch_group_enter(questGroup)
         dispatch_async(groupQueue) {
             weakSelf!.getDailyMaterialPowerData() { success, message in
-                result.append(questResult(success:success, message: message, requestType: .DailyMaterialPower(success)))
+                result.append(questResult(success: success, message: message, requestType: .DailyMaterialPower(success)))
                 dispatch_group_leave(questGroup)
             }
         }
@@ -200,7 +205,7 @@ class MaterialPowerViewController: UIViewController {
         dispatch_group_enter(questGroup)
         dispatch_async(groupQueue) {
             weakSelf!.getMaterialPowerData() { success, message in
-                result.append(questResult(success:success, message: message, requestType: .MaterialPower(success)))
+                result.append(questResult(success: success, message: message, requestType: .MaterialPower(success)))
                 dispatch_group_leave(questGroup)
             }
         }
@@ -292,7 +297,7 @@ class MaterialPowerViewController: UIViewController {
         super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
         coordinator.animateAlongsideTransition({ [unowned self] _ in
             self.arrangeMaterialPowerView(self)
-        }, completion:nil)
+        }, completion: nil)
     }
     
     private func arrangeMaterialPowerView(materialPowerViewController: MaterialPowerViewController) -> UIView {
@@ -300,26 +305,23 @@ class MaterialPowerViewController: UIViewController {
         if materialPowerViewController.view.subviews.contains(materialPowerViewController.noDataView) {
             materialPowerViewController.noDataView.frame = materialPowerViewController.dataView.frame
         } else {
-            let navigationBarHeight = self.navigationController?.navigationBar.bounds.height ?? CGFloat(40.0)
-            let statusBarHeight = STATUS_BAR_HEIGHT
-            let menuHeaderHeight = CGFloat(35.0)
-            
+            let navigationBarHeight = self.navigationController?.navigationBar.bounds.height ?? NAVIGATION_BAR_HEIGHT
             let dataViewWidth = CURRENT_SCREEN_WIDTH
-            let dataViewHeight = CURRENT_SCREEN_HEIGHT - navigationBarHeight - statusBarHeight - menuHeaderHeight
+            let dataViewHeight = CURRENT_SCREEN_HEIGHT - navigationBarHeight - STATUS_BAR_HEIGHT - WISCommon.pageMenuHeaderHeight
             
             materialPowerViewController.dataView.frame = CGRectMake(0, 0, dataViewWidth, dataViewHeight)
             //
             // arrange daily material power view
-            materialPowerViewController.dailyMaterialPowerView!.frame = CGRectMake(0.0, 0.0, /*self.dataView.bounds.size.width*/ dataViewWidth, self.dailyMaterialPowerView!.viewHeight)
-            materialPowerViewController.dailyMaterialPowerView?.arrangeDailyMaterialPowerSubView(self.materialPowerView!.viewHeight)
+            materialPowerViewController.dailyMaterialPowerView!.frame = CGRectMake(0.0, 0.0, dataViewWidth, self.dailyMaterialPowerView!.viewHeight)
+            //materialPowerViewController.dailyMaterialPowerView?.arrangeDailyMaterialPowerSubView(self.materialPowerView!.viewHeight)
             //
             // arrange material power view
-            materialPowerViewController.materialPowerView!.frame = CGRectMake(0.0, self.dailyMaterialPowerView!.viewHeight, /*self.dataView.bounds.size.width*/ dataViewWidth, self.materialPowerView!.viewHeight)
+            materialPowerViewController.materialPowerView!.frame = CGRectMake(0.0, self.dailyMaterialPowerView!.viewHeight, dataViewWidth, self.materialPowerView!.viewHeight)
             materialPowerViewController.materialPowerView?.arrangeMaterialPowerSubView(self.materialPowerView!.viewHeight)
-            
-            materialPowerViewController.operationView!.frame = CGRectMake(0.0, self.dailyMaterialPowerView!.viewHeight + self.materialPowerView!.viewHeight, /*self.dataView.bounds.size.width*/ dataViewWidth, self.operationView!.viewHeight)
-            materialPowerViewController.operationView!.arrangeOperationSubView(self.operationView!.viewHeight)
-            
+            //
+            // arrange operation view
+            materialPowerViewController.operationView!.frame = CGRectMake(0.0, self.dailyMaterialPowerView!.viewHeight + self.materialPowerView!.viewHeight, dataViewWidth, self.operationView!.viewHeight + WISCommon.additionalHeightInView)
+            materialPowerViewController.operationView!.arrangeOperationSubView(self.operationView!.viewHeight + WISCommon.additionalHeightInView)
             
             materialPowerViewController.dataView.contentSize = CGSizeMake(dataViewWidth, (self.dailyMaterialPowerView!.viewHeight + self.materialPowerView!.viewHeight + self.operationView!.viewHeight + WISCommon.additionalHeightInView))
         }
