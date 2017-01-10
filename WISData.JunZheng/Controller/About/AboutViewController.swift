@@ -59,9 +59,9 @@ class AboutViewController: UIViewController {
     
     private func setSubViewConstraints() {
         if self.traitCollection.verticalSizeClass == .Regular {
-            appLogoImageViewTopConstraint.constant = Ruler.iPhoneVertical(50, 70, 90, 110).value
+            appLogoImageViewTopConstraint.constant = Ruler.iPhoneVertical(30, 40, 50, 70).value
             appNameLabelTopConstraint.constant = Ruler.iPhoneVertical(20, 30, 30, 30).value
-            aboutTextViewTopConstraint.constant = Ruler.iPhoneVertical(50, 70, 90, 110).value
+            aboutTextViewTopConstraint.constant = Ruler.iPhoneVertical(40, 40, 50, 70).value
             
         } else {
             appLogoImageViewTopConstraint.constant = Ruler.iPhoneVertical(10, 20, 40, 40).value
@@ -74,8 +74,8 @@ class AboutViewController: UIViewController {
             aboutTextViewWidthConstraint.constant = Ruler.iPad(600, 600).value
         } else {
             if self.traitCollection.verticalSizeClass == .Regular {
-                aboutTextViewWidthConstraint.constant = Ruler.iPhoneHorizontal(260, 280, 300).value
-                aboutTextViewHeightConstraint.constant = Ruler.iPhoneVertical(160, 160, 150, 150).value
+                aboutTextViewWidthConstraint.constant = Ruler.iPhoneHorizontal(270, 290, 310).value
+                aboutTextViewHeightConstraint.constant = Ruler.iPhoneVertical(190, 190, 180, 180).value
             } else {
                 aboutTextViewWidthConstraint.constant = Ruler.iPhoneHorizontal(520, 560, 600).value
                 aboutTextViewHeightConstraint.constant = Ruler.iPhoneVertical(80, 80, 70, 70).value

@@ -22,13 +22,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="生产数据管理" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="STw-iV-6mk">
-                                <rect key="frame" x="118" y="119" width="140" height="28"/>
+                                <rect key="frame" x="118" y="120" width="140" height="28"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="23"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version 0.5.1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YGt-Mh-BQL">
-                                <rect key="frame" x="148" y="155" width="80" height="17"/>
+                                <rect key="frame" x="148" y="156" width="80" height="17"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
                                 <color key="textColor" red="0.60000002379999995" green="0.60000002379999995" blue="0.60000002379999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -42,15 +42,18 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_wisdri_logo" translatesAutoresizingMaskIntoConstraints="NO" id="gjf-PL-dZm">
                                 <rect key="frame" x="86" y="40" width="203" height="60"/>
                             </imageView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="生产数据管理平台让生产管理人员更便捷的获取生产数据，提高管理效率，优化生产过程。  中冶南方致力于为用户提供专业、全面、独特的工业解决方案。针对用户在生产过程、能源消耗、产品质量等方面的需要，提供安全、可靠、定制化的数据管理方案。" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lUp-YN-szW">
-                                <rect key="frame" x="27.5" y="222" width="320" height="130"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="justified" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lUp-YN-szW">
+                                <rect key="frame" x="27.5" y="213" width="320" height="150"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="130" id="XcZ-cT-YEy"/>
+                                    <constraint firstAttribute="height" constant="150" id="XcZ-cT-YEy"/>
                                     <constraint firstAttribute="width" constant="320" id="hax-5L-O4G"/>
                                 </constraints>
-                                <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
+                                <string key="text">生产数据管理平台让生产管理人员更便捷的获取生产数据，提高管理效率，优化生产过程。
+
+中冶南方致力于为用户提供专业、全面、独特的工业解决方案。针对用户在生产过程、能源消耗、产品质量等方面的需要，提供安全、可靠、定制化的数据管理方案。</string>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                         </subviews>
@@ -64,8 +67,8 @@
                             <constraint firstAttribute="centerX" secondItem="rHG-mc-O86" secondAttribute="centerX" id="hSy-Fg-9yg"/>
                             <constraint firstItem="STw-iV-6mk" firstAttribute="centerX" secondItem="gjf-PL-dZm" secondAttribute="centerX" constant="0.5" id="oa7-44-D2a"/>
                             <constraint firstAttribute="centerX" secondItem="gjf-PL-dZm" secondAttribute="centerX" id="yZr-p4-Cz5"/>
-                            <constraint firstItem="lUp-YN-szW" firstAttribute="top" secondItem="YGt-Mh-BQL" secondAttribute="bottom" constant="50" id="zDy-sX-W5O"/>
-                            <constraint firstItem="STw-iV-6mk" firstAttribute="top" secondItem="gjf-PL-dZm" secondAttribute="bottom" constant="19" id="zqS-j4-rlV"/>
+                            <constraint firstItem="lUp-YN-szW" firstAttribute="top" secondItem="YGt-Mh-BQL" secondAttribute="bottom" constant="40" id="zDy-sX-W5O"/>
+                            <constraint firstItem="STw-iV-6mk" firstAttribute="top" secondItem="gjf-PL-dZm" secondAttribute="bottom" constant="20" id="zqS-j4-rlV"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" top="YES"/>
