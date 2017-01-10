@@ -73,7 +73,13 @@ class AboutViewController: UIViewController {
             aboutTextView.font = UIFont.systemFontOfSize(18.0)
             aboutTextViewWidthConstraint.constant = Ruler.iPad(600, 600).value
         } else {
-            aboutTextViewWidthConstraint.constant = Ruler.iPhoneHorizontal(260, 280, 300).value
+            if self.traitCollection.verticalSizeClass == .Regular {
+                aboutTextViewWidthConstraint.constant = Ruler.iPhoneHorizontal(260, 280, 300).value
+                aboutTextViewHeightConstraint.constant = Ruler.iPhoneVertical(160, 160, 150, 150).value
+            } else {
+                aboutTextViewWidthConstraint.constant = Ruler.iPhoneHorizontal(520, 560, 600).value
+                aboutTextViewHeightConstraint.constant = Ruler.iPhoneVertical(80, 80, 70, 70).value
+            }
         }
     }
 
