@@ -184,7 +184,7 @@ class LoginViewController: ViewController {
         let footLabel = UILabel()
         footLabel.alpha = 0.8
         footLabel.font = wisFont(12)
-        footLabel.text = "© 2016 WISDRI"
+        footLabel.text = "© 2017 WISDRI"
         footLabel.textColor = UIColor.wisLogoColor()
         
         contentView!.addSubview(footLabel)
