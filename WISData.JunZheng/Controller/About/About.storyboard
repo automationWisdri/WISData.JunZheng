@@ -22,13 +22,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="生产数据管理" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="STw-iV-6mk">
-                                <rect key="frame" x="118" y="120" width="140" height="28"/>
+                                <rect key="frame" x="118" y="116" width="140" height="28"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="23"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version 0.5.1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YGt-Mh-BQL">
-                                <rect key="frame" x="148" y="156" width="80" height="17"/>
+                                <rect key="frame" x="148" y="152" width="80" height="17"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
                                 <color key="textColor" red="0.60000002379999995" green="0.60000002379999995" blue="0.60000002379999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -40,10 +40,14 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_wisdri_logo" translatesAutoresizingMaskIntoConstraints="NO" id="gjf-PL-dZm">
-                                <rect key="frame" x="86" y="40" width="203" height="60"/>
+                                <rect key="frame" x="82.5" y="40" width="210" height="56"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="210" id="258-l6-STc"/>
+                                    <constraint firstAttribute="height" constant="56" id="5Up-hV-Ups"/>
+                                </constraints>
                             </imageView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="justified" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lUp-YN-szW">
-                                <rect key="frame" x="27.5" y="213" width="320" height="150"/>
+                                <rect key="frame" x="27.5" y="209" width="320" height="150"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="150" id="XcZ-cT-YEy"/>
@@ -91,6 +95,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="icon_wisdri_logo" width="203" height="60"/>
+        <image name="icon_wisdri_logo" width="1536" height="413"/>
     </resources>
 </document>
