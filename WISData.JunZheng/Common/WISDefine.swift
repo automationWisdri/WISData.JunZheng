@@ -12,7 +12,7 @@ import DeviceKit
 ///---------
 /// Common
 ///---------
-let BaseURL = "http://service.wisdriis.com:9090/MyService.svc"
+let BaseURL = "http://service.wisdriis.com:9090/MyService.svc" //"http://120.27.145.72:9090/MyService.svc"
 let currentDevice = Device()
 
 var CURRENT_SCREEN_WIDTH: CGFloat {
@@ -42,6 +42,12 @@ var STATUS_BAR_HEIGHT: CGFloat {
 }
 
 var NAVIGATION_BAR_HEIGHT: CGFloat = 40.0
+
+// In some case (Minimized an ongoing phone call view, for example), the origin point of the root view 
+// moves downward for 20pt. And that is what ROOTVIEW_Y_OFFSET stands for.
+var ROOTVIEW_Y_OFFSET: CGFloat {
+    return (WISClient.sharedInstance.drawerController?.view.frame.origin.y ?? CGFloat(0.0))!
+}
 
 let EMPTY_STRING = ""
 let SEPARATOR_HEIGHT = 1.0 / UIScreen.mainScreen().scale
@@ -80,6 +86,19 @@ enum ShiftType: Int {
             return "3"
         case .NightShift:
             return "1"
+        }
+    }
+    
+    static func getShiftType(shiftNo: Int) -> ShiftType {
+        switch shiftNo {
+        case 2:
+            return .MorningShift
+        case 3:
+            return .MiddleShift
+        case 1:
+            return .NightShift
+        default:
+            return .NightShift
         }
     }
 }

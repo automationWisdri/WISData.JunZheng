@@ -35,6 +35,8 @@ class OperationView: UIView {
     }
     
     func initialDrawTable(switchRowCount: [Int], viewHeight: CGFloat) {
+        self.dataView.removeAllSubviews()
+        
         self.switchRowCount = switchRowCount
         self.totalRowCount = switchRowCount.reduce(0, combine: + )
         

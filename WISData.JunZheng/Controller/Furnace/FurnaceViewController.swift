@@ -319,7 +319,7 @@ class FurnaceViewController: ViewController {
                         
                     } else {
                         self.noDataView.frame = self.dataView.frame
-                        
+                        self.noDataView.hintTextView.text = response.message
                         self.firstColumnView.removeFromSuperview()
                         self.firstColumnTableView.removeFromSuperview()
                         self.scrollView.removeFromSuperview()

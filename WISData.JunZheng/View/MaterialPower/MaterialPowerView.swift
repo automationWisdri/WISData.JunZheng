@@ -35,7 +35,7 @@ class MaterialPowerView: UIView {
     }
     
     func initialDrawTable(switchRowCount: Int, viewHeight: CGFloat) {
-
+        self.dataView.removeAllSubviews()
         self.switchRowCount = switchRowCount
         // Get table column title
         if let path = NSBundle.mainBundle().pathForResource("MaterialPowerTitle", ofType: "json") {

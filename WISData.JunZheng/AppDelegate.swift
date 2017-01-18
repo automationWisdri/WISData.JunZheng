@@ -59,9 +59,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         SVProgressHUD.setDefaultMaskType(.Clear)
     }
     
-    func startMainStory() {
+    func initialDefaultSearchParameter() {
+        let dateForSearch = NSDate.today.dateByAddingTimeInterval(-16*60*60)
         // 获得当前时间，并转化格式
-        SearchParameter["date"] = dateFormatterForSearch(NSDate())
+        SearchParameter["date"] = dateFormatterForSearch(dateForSearch)
         
         // 判断 UserDefaults 中是否储存了当前炉号，如果没储存，默认显示 1#炉 的生产数据
         if let lNo = NSUserDefaults.standardUserDefaults().objectForKey("lNo") as? String {
@@ -69,6 +70,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } else {
             SearchParameter["lNo"] = "1"
         }
+        
+        // 获取班次号
+        SearchParameter["shiftNo"] = getShiftNo(dateFormatterGetHour(dateForSearch))
+    }
+    
+    func startMainStory() {
+        initialDefaultSearchParameter()
         
         let centerNav = UINavigationController(rootViewController: DataHomeViewController())
         let leftViewController = LeftMenuViewController()

@@ -319,6 +319,7 @@ class BoilerPurifyViewController: ViewController {
                         
                     } else {
                         self.noDataView.frame = self.dataView.frame
+                        self.noDataView.hintTextView.text = response.message
                         self.dataView.addSubview(self.noDataView)
                         
                         self.firstColumnView.removeFromSuperview()
