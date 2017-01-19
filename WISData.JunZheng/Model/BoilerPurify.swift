@@ -72,7 +72,7 @@ extension BoilerPurify {
                 debugPrint(error)
                 debugPrint("\nError Description: " + error.localizedDescription)
                 let t = WISValueResponse<[JSON]>(value: [JSON.null], success: false)
-                t.message = error.localizedDescription + "\n请检查设备的网络设置。"
+                t.message = error.localizedDescription + "\n请检查设备的网络设置, 然后下拉页面刷新。"
                 completionHandler(t)
             }
         }
