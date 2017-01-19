@@ -86,16 +86,17 @@ class MaterialPowerViewController: UIViewController {
     func getDailyMaterialPowerData(completionHandler: (Bool, String) -> Void) {
         
         DailyMaterialPower.get(date: SearchParameter["date"]!, lNo: SearchParameter["lNo"]!) { (response: WISValueResponse<JSON>) in
- 
+            self.dailyMaterialPowerView?.removeFromSuperview()
             if response.success {
                 self.dailyMaterialPowerView!.dailyMaterialPowerContentJSON = response.value!
                 self.dailyMaterialPowerView?.viewHeight = DailyMaterialPowerView.defaultViewHeight
                 self.dailyMaterialPowerView!.initialDrawTable()
                 self.dataView.addSubview(self.dailyMaterialPowerView!)
+            
             } else {
-                self.dailyMaterialPowerView?.removeFromSuperview()
                 self.dailyMaterialPowerView?.viewHeight = CGFloat(0)
             }
+            
             completionHandler(response.success, response.message)
         }
     }
@@ -104,7 +105,7 @@ class MaterialPowerViewController: UIViewController {
     func getMaterialPowerData(completionHandler: (Bool, String) -> Void) {
         
         MaterialPower.get(date: SearchParameter["date"]!, shiftNo: SearchParameter["shiftNo"]!, lNo: SearchParameter["lNo"]!) { (response: WISValueResponse<JSON>) in
-            
+            self.materialPowerView?.removeFromSuperview()
             if response.success {
                 // debugPrint(response.value)
                 let tableContentJSON = response.value!["MaterialPower"]
@@ -126,9 +127,9 @@ class MaterialPowerViewController: UIViewController {
                 self.dataView.addSubview(self.materialPowerView!)
                 
             } else {
-                self.materialPowerView?.removeFromSuperview()
                 self.materialPowerView?.viewHeight = CGFloat(0.0)
             }
+            
             completionHandler(response.success, response.message)
         }
     }
@@ -137,6 +138,7 @@ class MaterialPowerViewController: UIViewController {
     func getOperationData(completionHandler: (Bool, String) -> Void) {
         
         Operation.get(date: SearchParameter["date"]!, shiftNo: SearchParameter["shiftNo"]!, lNo: SearchParameter["lNo"]!) { (response: WISValueResponse<JSON>) in
+            self.operationView?.removeFromSuperview()
             if response.success {
 //                debugPrint(response.value!)
                 let tableContentJSON = response.value!["Infos"].arrayValue
@@ -165,7 +167,6 @@ class MaterialPowerViewController: UIViewController {
                 self.dataView.addSubview(self.operationView!)
                 
             } else {
-                self.operationView?.removeFromSuperview()
                 self.operationView?.viewHeight = CGFloat(0.0)
             }
             completionHandler(response.success, response.message)
@@ -222,13 +223,15 @@ class MaterialPowerViewController: UIViewController {
             let failedResult = result.filter { !$0.success }
             if failedResult.count >= 3 {
                 self.noDataView.frame = self.dataView.frame
+                self.noDataView.hintTextView.text = result[0].message
                 self.dataView.addSubview(self.noDataView)
                 wisError(result[0].message)
                 self.hasRefreshedData = false
+                
             } else {
                 self.noDataView.removeFromSuperview()
                 
-                if failedResult.count <= 0{
+                if failedResult.count <= 0 {
                     SVProgressHUD.setDefaultMaskType(.None)
                     SVProgressHUD.showSuccessWithStatus("数据获取成功！")
                     self.hasRefreshedData = true
@@ -237,15 +240,15 @@ class MaterialPowerViewController: UIViewController {
                     for res in result {
                         switch res.requestType {
                         case .DailyMaterialPower(let success):
-                                hintString += success ? "" : "全天消耗数据获取失败\n"
+                                hintString += success ? "" : "全天消耗数据获取失败,\n"
                         case .MaterialPower(let success):
-                            hintString += success ? "" : "原料消耗数据获取失败\n"
+                            hintString += success ? "" : "原料消耗数据获取失败,\n"
                         case .Operation(let success):
-                            hintString += success ? "" : "电极操作数据获取失败\n"
+                            hintString += success ? "" : "电极操作数据获取失败,\n"
                         }
                     }
                     SVProgressHUD.setDefaultMaskType(.None)
-                    SVProgressHUD.showInfoWithStatus(hintString + "请再次刷新")
+                    SVProgressHUD.showInfoWithStatus(hintString + "请尝试再次刷新。")
 
                     self.hasRefreshedData = false
                 }

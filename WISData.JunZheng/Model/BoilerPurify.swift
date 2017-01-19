@@ -48,7 +48,7 @@ extension BoilerPurify {
     class func get(date date: String, shiftNo: String, lNo: String, completionHandler: WISValueResponse<[JSON]> -> Void) -> Void {
         
         let getURL = BaseURL + "/GetGJState?date=\(date)&shiftNo=\(shiftNo)&lNo=\(lNo)"
-        Alamofire.request(.POST, getURL).responseJSON { response in
+        HTTPManager.sharedInstance.request(.POST, getURL).responseJSON { response in
             switch response.result {
             case .Success:
                 if let value = response.result.value {
@@ -56,7 +56,7 @@ extension BoilerPurify {
                     
                     guard json["Result"] == 1 else {
                         let t = WISValueResponse<[JSON]>(value: [JSON.null], success: false)
-                        t.message = "服务器请求失败"
+                        t.message = "未检索到所需数据, \n请修改查询条件后重试。"
                         completionHandler(t)
                         return
                     }
@@ -67,10 +67,12 @@ extension BoilerPurify {
                     let t = WISValueResponse<[JSON]>(value: json["Infos"].arrayValue, success: true)
                     completionHandler(t)
                 }
+                
             case .Failure(let error):
                 debugPrint(error)
+                debugPrint("\nError Description: " + error.localizedDescription)
                 let t = WISValueResponse<[JSON]>(value: [JSON.null], success: false)
-                t.message = "网络连接失败"
+                t.message = error.localizedDescription + "\n请检查设备的网络设置, 然后下拉页面刷新。"
                 completionHandler(t)
             }
         }

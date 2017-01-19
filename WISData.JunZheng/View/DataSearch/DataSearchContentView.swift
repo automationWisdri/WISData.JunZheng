@@ -79,10 +79,18 @@ class DataSearchContentView: UIView {
         } else {
             self.shiftPickerContentView!.frame = CGRectMake(0.0, 0.0, refFrame.size.width / 2, shiftPickerContentViewHeight)
         }
-//        self.shiftPickerContentView.bindData(currentGroupSelection)
+        self.shiftPickerContentView.bindData(ShiftType.getShiftType(Int(SearchParameter["shiftNo"]!)!))
         
         // add date picker
         self.datePickerView = NSBundle.mainBundle().loadNibNamed(self.DatePickerViewID, owner: self, options: nil)!.last as! DatePickerView
+        // set default date and upper limit
+        let searchDateString = SearchParameter["date"]!
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy/MM/dd"
+        let searchDate = dateFormatter.dateFromString(searchDateString)!
+        let maximumDate = NSDate.today
+        self.datePickerView.searchDatePicker.date = searchDate
+        self.datePickerView.searchDatePicker.maximumDate = maximumDate
         
         if devicePortrait {
             self.datePickerView.frame =  CGRectMake(refFrame.origin.x, shiftPickerContentView!.viewHeight - 1, refFrame.size.width, datePickerViewHeight)

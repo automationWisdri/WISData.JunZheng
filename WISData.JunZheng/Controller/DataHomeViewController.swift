@@ -239,7 +239,9 @@ class DataHomeViewController: UIViewController {
         let pageWidth = CURRENT_SCREEN_WIDTH
         let pageHeight = CURRENT_SCREEN_HEIGHT - navigationBarHeight! - statusBarHeight
         
-        pagingMenuController.view.frame = CGRectMake(0, navigationBarHeight! + statusBarHeight, pageWidth, pageHeight)
+        let drawerViewYOffset = ROOTVIEW_Y_OFFSET
+        
+        pagingMenuController.view.frame = CGRectMake(0, navigationBarHeight! + statusBarHeight - drawerViewYOffset, pageWidth, pageHeight)
         self.view.frame = CGRectMake(0, 0, pageWidth, pageHeight + navigationBarHeight! + statusBarHeight)
         
         return pagingMenuController.view

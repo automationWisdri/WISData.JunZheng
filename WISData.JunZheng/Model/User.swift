@@ -17,9 +17,8 @@ class User {
 extension User {
     
     class func login(username username: String, password: String, completionHandler: WISValueResponse<String> -> Void) -> Request {
-        
         let loginURL = BaseURL + "/LogIn?userName=\(username)&passWord=\(password)"
-        return Alamofire.request(.POST, loginURL).responseJSON { response in
+        return HTTPManager.sharedInstance.request(.POST, loginURL).responseJSON { response in
             /*
              * For test
             
@@ -43,7 +42,7 @@ extension User {
                 }
             case .Failure(let error):
                 debugPrint(error)
-                completionHandler(WISValueResponse(success: false, message: "登录失败"))
+                completionHandler(WISValueResponse(success: false, message: error.localizedDescription + "\n请检查设备的网络设置。"))
             }
         }
     }

@@ -273,10 +273,10 @@ class LoginViewController: ViewController {
                 SVProgressHUD.showSuccessWithStatus("登录成功")
                 User.storeRecentUserName((self.userNameTextField?.text)!)
                 
-                let now = NSDate()
-                SearchParameter["date"] = dateFormatterForSearch(now)
-                let hour = dateFormatterGetHour(now)
-                SearchParameter["shiftNo"] = getShiftNo(hour)
+//                let now = NSDate()
+//                SearchParameter["date"] = dateFormatterForSearch(now)
+//                let hour = dateFormatterGetHour(now)
+//                SearchParameter["shiftNo"] = getShiftNo(hour)
                 
                 // 重新登录后，默认显示 1#炉 的生产数据
                 SearchParameter["lNo"] = "1"

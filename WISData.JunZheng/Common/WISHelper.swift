@@ -108,10 +108,10 @@ func getShiftName(shiftNo: String) -> [String] {
 
 func getShiftNo(hour: String) -> String {
     let hour: Int = Int(hour)!
-    
-    if hour < 8 { return "1" }
-    else if hour >= 8 && hour < 16 { return "2" }
-    else { return "3"}
+    // 总是获得当前查询时间对应的班次
+    if hour < 8 { return ShiftType.NightShift.getShiftNoForSearch }
+    else if hour >= 8 && hour < 16 { return ShiftType.MorningShift.getShiftNoForSearch }
+    else { return ShiftType.MiddleShift.getShiftNoForSearch}
 }
 
 func dispatch_sync_safely_main_queue(block: () -> ()) {
